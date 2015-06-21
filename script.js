@@ -4,7 +4,16 @@ app.controller("SampleCtrl", function($scope, $firebaseArray) {
   var ref = new Firebase("https://blinding-torch-6662.firebaseio.com/messages");
 
   $scope.messages = $firebaseArray(ref);
-  $scope.messageTypes = [1, 2, 3];
+  $scope.messageTypes = [{
+  	id: 1,
+  	value: "Very well"
+  }, { 
+  	id: 2,
+  	value: "To improve"
+  }, { 
+  	id: 3,
+  	value: "Action Items"
+  }];
 
   $scope.addMessage = function() {
     $scope.messages.$add({
