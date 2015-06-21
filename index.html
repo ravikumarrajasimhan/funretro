@@ -16,9 +16,13 @@
 	      <li class="message" ng-class="{'flip': isEditing, 'bg-yellow': isEditing}" ng-repeat="message in messages | filter: {type: {id: type.id}} | orderBy: 'votes':true">
 	      	<div class="message-body">
 	        	<span ng-show="!isEditing">{{message.text}}</span>
-	        	<a ng-show="!isEditing" href="javascript:void(0)" ng-click="messages.$remove(message)">✘</a>
-	        	<a href="javascript:void(0)" ng-click="isEditing = isEditing ? false : true;">✎</a>
-	        	<input ng-show="isEditing" ng-model="message.text" ng-change="messages.$save(message)" />
+	        	
+	        	<a ng-show="!isEditing" href="javascript:void(0)" ng-click="isEditing = true;">✎</a>
+	        	<div class="editing" ng-show="isEditing">
+	        		<textarea ng-model="message.text" ng-change="messages.$save(message)"></textarea>
+	        		<a href="javascript:void(0)" ng-click="messages.$remove(message)">✘</a>
+	        		<button ng-click="isEditing = false;">Done</button>
+	        	</div>
 	        </div>
 	        <div ng-show="!isEditing" class="votes">
 	        	<a ng-hide="alreadyVoted(message.$id)" href="javascript:void(0)" ng-click="addVote(message.$id, message.votes)">✔</a>
