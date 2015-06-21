@@ -6,15 +6,24 @@
 	<script src="script.js"></script>
   </head>
   <body ng-controller="SampleCtrl">
-    <ul>
-      <li ng-repeat="message in messages">
-        <input ng-model="message.text" ng-change="messages.$save(message)" />
-        <button ng-click="messages.$remove(message)">Delete Message</button>
-      </li>
-    </ul>
-
+  	<div ng-repeat="type in messageTypes">
+	  	<h1>Lista {{type}}</h1>
+	    <ul>
+	      <li ng-repeat="message in messages | filter: {type: type}">
+	      	<strong>{{ message.votes }} Votes</strong>
+	        <button ng-click="addVote(message.$id, message.votes)">+ 1</button>
+	        <input ng-model="message.text" ng-change="messages.$save(message)" />
+	        <button ng-click="messages.$remove(message)">Delete Message</button>
+	      </li>
+	    </ul>
+    </div>
     <form ng-submit="addMessage()">
       <input ng-model="newMessageText" />
+      <select ng-model="newMessageType">
+	      <option>1</option>
+	      <option>2</option>
+	      <option>3</option>
+      </select>
       <button type="submit">Add Message</button>
     </form>
   </body>
