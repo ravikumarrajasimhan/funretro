@@ -23,7 +23,7 @@ ul.column_1 li {
 	background: #4DB6AC;
 }
 
-ul.column_1 .votes {
+ul.column_1 .votes, ul.column_1 textarea {
 	background: #009688;
 }
 
@@ -31,7 +31,7 @@ ul.column_2 li {
 	background: #e57373;
 }
 
-ul.column_2 .votes {
+ul.column_2 .votes, ul.column_2 textarea {
 	background: #ef5350;
 }
 
@@ -39,7 +39,7 @@ ul.column_3 li {
 	background: #BA68C8;
 }
 
-ul.column_3 .votes {
+ul.column_3 .votes, ul.column_3 textarea {
 	background: #AB47BC;
 }
 
@@ -81,8 +81,10 @@ h2 a {
 	color: #00bcd4;
 }
 
-.message-body a {
-	float: right;
+.message-body > a {
+	position: absolute;
+	right: 0.5em;
+  	top: 0.5em;
 }
 
 .editing {
@@ -97,7 +99,11 @@ h2 a {
 	width: 100%;
 	font-size: 16px;
   	height: 5.8em;
-  	border: 1px solid #eee;
+  	padding: 0.5em;
+  	border: none;
+  	resize: none;
+  	color: white;
+  	outline: none;
 }
 
 .message button {
