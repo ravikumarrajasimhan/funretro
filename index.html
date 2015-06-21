@@ -12,8 +12,8 @@
   <body ng-controller="SampleCtrl">
   	<header><h1>Firedeaz</h1></header>
   	<div class="message-list" ng-repeat="type in messageTypes">
-	  	<h2>{{type.value}}<a ng-click="addNew(type)" href="javascript:void(0)">+</a></h2>
-	    <ul>
+	    <ul class="column column_{{ type.id }}">
+	      <h2>{{type.value}}<a ng-click="addNew(type)" href="javascript:void(0)">+</a></h2>
 	      <li class="message" ng-class="{'flip': isEditing, 'bg-navy': isEditing}" ng-repeat="message in messages | filter: {type: {id: type.id}} | orderBy: 'votes':true">
 	      	<div class="message-body">
 	        	<span ng-show="!isEditing">{{message.text}}</span>
