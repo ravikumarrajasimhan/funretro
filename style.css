@@ -19,3 +19,9 @@ h1 {
 	margin-bottom: 1em;
 	padding: 0.7em;
 }
+
+a {
+	cursor: pointer;
+	text-decoration: none;
+	float: right;
+}

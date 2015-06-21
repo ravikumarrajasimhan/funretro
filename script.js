@@ -20,4 +20,8 @@ app.controller("SampleCtrl", function($scope, $firebaseArray) {
   		localStorage.setItem(key, 1);
   	}
   }
+
+  $scope.alreadyVoted = function(key) {
+  	return localStorage.getItem(key);
+  }
 });
