@@ -27,7 +27,7 @@
     </div>
     <div>
 	   	<form ng-submit="addMessage()">
-	      <input ng-model="newMessageText" />
+	      <textarea ng-model="newMessageText"></textarea> 
 	      <select ng-model="newMessageType" ng-options="type as type.value for type in messageTypes"></select>
 	      <button type="submit">Add Message</button>
 	    </form>
