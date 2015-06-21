@@ -15,14 +15,6 @@ app.controller("SampleCtrl", function($scope, $firebaseArray) {
   	value: "Action Items"
   }];
 
-  $scope.addMessage = function() {
-    $scope.messages.$add({
-      text: $scope.newMessageText,
-      type: $scope.newMessageType,
-      votes: 0
-    });
-  };
-
   $scope.addVote = function(key, votes) {
   	if(!localStorage.getItem(key)) {
   		ref.child(key).update({ votes: votes + 1});
@@ -32,5 +24,13 @@ app.controller("SampleCtrl", function($scope, $firebaseArray) {
 
   $scope.alreadyVoted = function(key) {
   	return localStorage.getItem(key);
+  }
+
+  $scope.addNew = function(type) {
+  	$scope.messages.$add({
+      text: '',
+      type: type,
+      votes: 0
+    });
   }
 });

@@ -11,16 +11,16 @@
   </head>
   <body ng-controller="SampleCtrl">
   	<div class="message-list" ng-repeat="type in messageTypes">
-	  	<h1>{{type.value}}</h1>
+	  	<h1>{{type.value}}<a ng-click="addNew(type)" href="javascript:void(0)">+</a></h1>
 	    <ul>
-	      <li class="message" ng-class="{'flip': isEditing, 'bg-yellow': isEditing}" ng-repeat="message in messages | filter: {type: {id: type.id}} | orderBy: 'votes':true">
+	      <li class="message" ng-class="{'flip': isEditing, 'bg-navy': isEditing}" ng-repeat="message in messages | filter: {type: {id: type.id}} | orderBy: 'votes':true">
 	      	<div class="message-body">
 	        	<span ng-show="!isEditing">{{message.text}}</span>
 	        	
-	        	<a ng-show="!isEditing" href="javascript:void(0)" ng-click="isEditing = true;">✎</a>
+	        	<a ng-show="!isEditing" href="javascript:void(0)" ng-click="isEditing = true;" class="olive">✎</a>
 	        	<div class="editing" ng-show="isEditing">
 	        		<textarea ng-model="message.text" ng-change="messages.$save(message)"></textarea>
-	        		<a href="javascript:void(0)" ng-click="messages.$remove(message)">✘</a>
+	        		<a class="lime" href="javascript:void(0)" ng-click="messages.$remove(message)">✘</a>
 	        		<button ng-click="isEditing = false;">Done</button>
 	        	</div>
 	        </div>
@@ -30,13 +30,6 @@
 	        </div>
 	      </li>
 	    </ul>
-    </div>
-    <div>
-	   	<form ng-submit="addMessage()">
-	      <textarea ng-model="newMessageText"></textarea> 
-	      <select ng-model="newMessageType" ng-options="type as type.value for type in messageTypes"></select>
-	      <button type="submit">Add Message</button>
-	    </form>
     </div>
   </body>
 </html>
