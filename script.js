@@ -22,6 +22,12 @@ app.controller("SampleCtrl", function($scope, $firebaseArray) {
   	}
   }
 
+  $scope.deleteMessage = function(message) {
+  	if(confirm('Are you sure you want to delete?')) {
+  		$scope.messages.$remove(message);
+  	}
+  }
+
   $scope.alreadyVoted = function(key) {
   	return localStorage.getItem(key);
   }

@@ -10,23 +10,24 @@
 	<script src="script.js"></script>
   </head>
   <body ng-controller="SampleCtrl">
+  	<header><h1>Firedeaz</h1></header>
   	<div class="message-list" ng-repeat="type in messageTypes">
-	  	<h1>{{type.value}}<a ng-click="addNew(type)" href="javascript:void(0)">+</a></h1>
+	  	<h2>{{type.value}}<a ng-click="addNew(type)" href="javascript:void(0)">+</a></h2>
 	    <ul>
 	      <li class="message" ng-class="{'flip': isEditing, 'bg-navy': isEditing}" ng-repeat="message in messages | filter: {type: {id: type.id}} | orderBy: 'votes':true">
 	      	<div class="message-body">
 	        	<span ng-show="!isEditing">{{message.text}}</span>
 	        	
-	        	<a ng-show="!isEditing" href="javascript:void(0)" ng-click="isEditing = true;" class="olive">✎</a>
+	        	<a ng-show="!isEditing" href="javascript:void(0)" ng-click="isEditing = true;">✎</a>
 	        	<div class="editing" ng-show="isEditing">
 	        		<textarea ng-model="message.text" ng-change="messages.$save(message)"></textarea>
-	        		<a class="lime" href="javascript:void(0)" ng-click="messages.$remove(message)">✘</a>
+	        		<a href="javascript:void(0)" ng-click="deleteMessage(message)">✘</a>
 	        		<button ng-click="isEditing = false;">Done</button>
 	        	</div>
 	        </div>
 	        <div ng-show="!isEditing" class="votes">
-	        	<a ng-hide="alreadyVoted(message.$id)" href="javascript:void(0)" ng-click="addVote(message.$id, message.votes)">✔</a>
-	        	<strong>{{ message.votes }} votes</strong>
+	        	<a ng-hide="alreadyVoted(message.$id)" href="javascript:void(0)" ng-click="addVote(message.$id, message.votes)"><img src="like.png" /></a>
+	        	<strong>+ {{ message.votes }}</strong>
 	        </div>
 	      </li>
 	    </ul>
