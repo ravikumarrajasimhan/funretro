@@ -1,0 +1,21 @@
+body {
+	font-size: 16px; 
+}
+
+h1 {
+	padding-left: 1.25em;
+}
+
+.message-list {
+	width: 30%;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.message {
+	background: #eee;
+	display: block;
+	height: 2em;
+	margin-bottom: 1em;
+	padding: 0.7em;
+}
