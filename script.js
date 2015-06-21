@@ -6,7 +6,7 @@ app.controller("SampleCtrl", function($scope, $firebaseArray) {
   $scope.messages = $firebaseArray(ref);
   $scope.messageTypes = [{
   	id: 1,
-  	value: "Very well"
+  	value: "Went well"
   }, { 
   	id: 2,
   	value: "To improve"
