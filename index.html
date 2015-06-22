@@ -16,10 +16,11 @@
 	      <h2>{{type.value}}<a ng-click="addNew(type)" href="javascript:void(0)">+</a></h2>
 	      <li class="message" ng-class="{'flip': isEditing, 'bg-navy': isEditing}" ng-repeat="message in messages | filter: {type: {id: type.id}} | orderBy: 'votes':true">
 	      	<div class="message-body">
-	        	<span ng-show="!isEditing">{{message.text}}</span>
-	        	
-	        	<a ng-show="!isEditing" href="javascript:void(0)" ng-click="isEditing = true;">✎</a>
-	        	<div class="editing" ng-show="isEditing">
+	      		<div ng-show="!isEditing">
+	        		<span >{{message.text}}</span>
+	        		<a href="javascript:void(0)" ng-click="isEditing = true;">✎</a>
+	        	</div>
+	        	<div ng-show="isEditing" class="editing">
 	        		<textarea ng-model="message.text" ng-change="messages.$save(message)"></textarea>
 	        		<a href="javascript:void(0)" ng-click="deleteMessage(message)">✘</a>
 	        		<button ng-click="isEditing = false;">Done</button>
