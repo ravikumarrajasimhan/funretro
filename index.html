@@ -9,8 +9,9 @@
 	<script src="https://cdn.firebase.com/libs/angularfire/1.1.1/angularfire.min.js"></script>
 	<script src="script.js"></script>
   </head>
-  <body ng-controller="SampleCtrl">
+  <body ng-controller="MainCtrl">
   	<header><h1>Firedeaz</h1></header>
+
   	<div class="message-list" ng-repeat="type in messageTypes">
 	    <ul class="column column_{{ type.id }}">
 	      <h2>{{type.value}}<a ng-click="addNew(type)" href="javascript:void(0)">+</a></h2>
