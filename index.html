@@ -19,7 +19,7 @@
 	      <li class="message" ng-class="{'flip': isEditing, 'bg-navy': isEditing}" ng-repeat="message in messages | filter: {type: {id: type.id}} | orderBy: 'votes':true">
 	      	<div class="front">
 		      	<div class="message-body">
-	        		<span >{{message.text}}</span>
+	        		<span>{{message.text}}</span>
 	        		<a href="javascript:void(0)" ng-click="isEditing = true;">✎</a>
 		        </div>
 		        <div class="votes">
