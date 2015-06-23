@@ -16,24 +16,26 @@
   	<div class="message-list" ng-repeat="type in messageTypes">
 	    <ul class="column column_{{ type.id }}">
 	      <h2>{{type.value}}<a ng-click="addNew(type)" href="javascript:void(0)">+</a></h2>
-	      <li class="message" ng-class="{'flip': isEditing, 'bg-navy': isEditing}" ng-repeat="message in messages | filter: {type: {id: type.id}} | orderBy: 'votes':true">
-	      	<div class="front">
-		      	<div class="message-body">
-	        		<span>{{message.text}}</span>
-	        		<a href="javascript:void(0)" ng-click="isEditing = true;">✎</a>
+	      <li class="message" ng-class="{'flip': isEditing, 'bg-navy': isEditing}" ng-repeat="message in messages | filter: {type: {id: type.id}} | orderBy: 'votes':true" ng-style="{'top': $index * 150 + 150 + 'px'}">
+	      	<div class="hacker">
+		      	<div class="front">
+			      	<div class="message-body">
+		        		<span>{{message.text}}</span>
+		        		<a href="javascript:void(0)" ng-click="isEditing = true;">✎</a>
+			        </div>
+			        <div class="votes">
+			        	<a ng-hide="alreadyVoted(message.$id)" href="javascript:void(0)" ng-click="addVote(message.$id, message.votes)"><img src="like.png" /></a>
+			        	<strong>+ {{ message.votes }}</strong>
+			        </div>
 		        </div>
-		        <div class="votes">
-		        	<a ng-hide="alreadyVoted(message.$id)" href="javascript:void(0)" ng-click="addVote(message.$id, message.votes)"><img src="like.png" /></a>
-		        	<strong>+ {{ message.votes }}</strong>
-		        </div>
-	        </div>
-	        <div class="back">
-	        	<div class="message-body">
-		        	<div class="editing">
-		        		<textarea ng-model="message.text" ng-change="messages.$save(message)"></textarea>
-		        		<a href="javascript:void(0)" ng-click="deleteMessage(message)">✘</a>
-		        		<button ng-click="isEditing = false;">Done</button>
-		        	</div>
+		        <div class="back">
+		        	<div class="message-body">
+			        	<div class="editing">
+			        		<textarea ng-model="message.text" ng-change="messages.$save(message)"></textarea>
+			        		<a href="javascript:void(0)" ng-click="deleteMessage(message)">✘</a>
+			        		<button ng-click="isEditing = false;">Done</button>
+			        	</div>
+			        </div>
 		        </div>
 	        </div>
 	      </li>
