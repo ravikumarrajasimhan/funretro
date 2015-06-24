@@ -59,11 +59,11 @@ ul.column_3 .votes {
     -webkit-transform-style: preserve-3d;
     -moz-transform-style: preserve-3d;
     -o-transform-style: preserve-3d;
-    -webkit-transition: 0.6s;
-    -moz-transition: 0.6s;
-    -ms-transition: 0.6s;
-    -o-transition: 0.6s;
-    transition: 0.6s;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
     background: transparent;
     display: block;
 	height: 128px;
@@ -72,9 +72,9 @@ ul.column_3 .votes {
 	border-radius: 2px;
 	position: absolute;
 
-	-webkit-transition: top 0.5s ease-in-out;
-	-moz-transition: top 0.5s ease-in-out;
-	transition: top 0.5s ease-in-out;	
+	-webkit-transition: top 0.3s ease-in-out;
+	-moz-transition: top 0.3s ease-in-out;
+	transition: top 0.3s ease-in-out;	
 }
 
 .message .front {
