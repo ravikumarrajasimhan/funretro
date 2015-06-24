@@ -15,7 +15,7 @@
   	<div class="message-list" ng-repeat="type in messageTypes">
 	    <ul class="column column_{{ type.id }}">
 	      <h2>{{type.value}}<a ng-click="addNew(type)" href="javascript:void(0)">+</a></h2>
-	      <li class="message" ng-class="{'flip': isEditing, 'bg-navy': isEditing}" ng-repeat="message in messages | filter: {type: {id: type.id}}" ng-style="{'top': getHeight(message, $index) }">
+	      <li class="message" ng-class="{'flip': isEditing}" ng-repeat="message in messages | filter: {type: {id: type.id}}" ng-style="{'top': getHeight(message, $index) }">
 	      	<div class="hacker">
 		      	<div class="front">
 			      	<div class="message-body">
