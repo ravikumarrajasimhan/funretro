@@ -62,6 +62,10 @@ app.controller("MainCtrl", ["$firebaseArray", '$scope', '$filter', function($fir
   	return localStorage.getItem(key);
   }
 
+  $scope.focusElement = function(id) {
+    $('#' + id).find('textarea').focus();
+  };
+
   $scope.addNew = function(type) {
   	$scope.messages.$add({
       text: '',
@@ -71,7 +75,7 @@ app.controller("MainCtrl", ["$firebaseArray", '$scope', '$filter', function($fir
     }).then(function(ref) {
       var id = ref.key();
       angular.element($('#' + id)).scope().isEditing = true;
-      $('#' + id + " textarea").focus();
+      $('#' + id).find('textarea').focus();
 
       calculateAllHeights($scope.messages);  
     });

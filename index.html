@@ -21,7 +21,7 @@
 		      	<div class="front">
 			      	<div class="message-body">
 		        		<span>{{message.text}}</span>
-		        		<a href="javascript:void(0)" ng-click="isEditing = true;">✎</a>
+		        		<a href="javascript:void(0)" ng-click="isEditing = true; focusElement(message.$id);">✎</a>
 			        </div>
 			        <div class="votes">
 			        	<a ng-hide="alreadyVoted(message.$id)" href="javascript:void(0)" ng-click="addVote(message.$id, message.votes)"><img src="like.png" /></a>
