@@ -68,7 +68,11 @@ app.controller("MainCtrl", ["$firebaseArray", '$scope', '$filter', function($fir
       type: type,
       date: Firebase.ServerValue.TIMESTAMP,
       votes: 0
-    }).then(function() {
+    }).then(function(ref) {
+      var id = ref.key();
+      angular.element($('#' + id)).scope().isEditing = true;
+      $('#' + id + " textarea").focus();
+
       calculateAllHeights($scope.messages);  
     });
   }
