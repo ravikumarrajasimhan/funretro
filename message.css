@@ -45,33 +45,32 @@ ul.column_3 .votes {
 	text-align: right;
 	padding: 0.5em;
 	right: 0;
-	top: 98px;
+	top: 81px;
 	position: absolute;
 }
 
 .message {
-    perspective: 500;
-    -webkit-perspective: 500;
-    -moz-perspective: 500;
-    -ms-perspective: 500;
-    -o-perspective: 500;
-    transform-style: preserve-3d;
-    -webkit-transform-style: preserve-3d;
-    -moz-transform-style: preserve-3d;
-    -o-transform-style: preserve-3d;
-    -webkit-transition: 0.3s;
-    -moz-transition: 0.3s;
-    -ms-transition: 0.3s;
-    -o-transition: 0.3s;
-    transition: 0.3s;
-    background: transparent;
-    display: block;
-	height: 128px;
+  perspective: 500;
+  -webkit-perspective: 500;
+  -moz-perspective: 500;
+  -ms-perspective: 500;
+  -o-perspective: 500;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+  background: transparent;
+  display: block;
+	height: 110px;
 	width: 27%;
 	margin-bottom: 1em;
 	border-radius: 2px;
 	position: absolute;
-
 	-webkit-transition: top 0.3s ease-in-out;
 	-moz-transition: top 0.3s ease-in-out;
 	transition: top 0.3s ease-in-out;	

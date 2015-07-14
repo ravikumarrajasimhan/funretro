@@ -1,16 +1,18 @@
 body {
-	font-size: 16px; 
+	font-size: 14px; 
 	color: #555;
 	font-family: Roboto, sans-serif;
 	margin: 0;
 }
 
 h1 {
+	margin: 0.4em 0;
 	padding-left: 0.5em;
 }
 
 h2 a {
 	margin-left: 10px;
+	color: #00bcd4;
 }
 
 a {
@@ -33,8 +35,8 @@ a:hover {
     transition: 0.3s;
 }
 
-h2 a {
-	color: #00bcd4;
+h2 {
+	margin-bottom: 0;
 }
 
 img {
@@ -90,7 +92,7 @@ textarea {
 	font-family: Roboto, sans-serif;
 	width: 100%;
 	font-size: 14px;
-  	height: 8em;
+  	height: 6.9em;
   	padding: 0.5em;
   	border: none;
   	resize: none;

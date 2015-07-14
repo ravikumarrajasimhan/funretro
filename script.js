@@ -13,7 +13,7 @@ app.controller("MainCtrl", ["$firebaseArray", '$scope', '$filter', function($fir
         return item.type.id === message.type.id;
       });
 
-      message.currentHeight = filtered.indexOf(message) * 150 + 150 + 'px';
+      message.currentHeight = filtered.indexOf(message) * 125 + 120 + 'px';
       $scope.messages.$save(message);
     });
   }
