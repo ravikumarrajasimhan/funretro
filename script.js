@@ -52,7 +52,7 @@ app.controller("MainCtrl", ["$firebaseArray", '$scope', '$filter', function($fir
 
   $scope.getHeight = function(message, index) {
     if(!message.currentHeight) {
-      return index * 150 + 150 + 'px';
+      return index * 125 + 120 + 'px';
     } else {
       return message.currentHeight;
     }
