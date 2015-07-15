@@ -91,6 +91,7 @@ input {
 	width: 50px;
 	margin-top: 5px;
 	background: #00C853;
+	margin-left: 0;
 }
 
 textarea {
