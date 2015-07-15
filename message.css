@@ -28,15 +28,22 @@ ul.column_3 .votes {
 	vertical-align: top;
 }
 
+.text {
+  white-space: pre; 
+  word-break: break-word; 
+  padding-right: 15px;
+}
+
 .message-body {
-	height: 5.6em;
+	height: 6.3em;
 	padding: 0.5em;
+  /*overflow: scroll;*/
 }
 
 .message-body a {
 	position: absolute;
-	right: 0.3em;
-  	top: 0.5em;
+	right: 0.5em;
+  top: 0.4em;
 }
 
 .votes {

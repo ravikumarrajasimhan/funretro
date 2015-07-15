@@ -20,7 +20,7 @@
 	      	<div class="hacker">
 		      	<div class="front">
 			      	<div class="message-body">
-		        		<div style="white-space: pre;">{{message.text}}</div>
+		        		<div class="text">{{message.text}}</div>
 		        		<a href="javascript:void(0)" ng-click="isEditing = true; focusElement(message.$id);">✎</a>
 			        </div>
 			        <div class="votes">
@@ -31,7 +31,7 @@
 		        <div class="back">
 		        	<div class="message-body">
 			        	<div class="editing">
-			        		<textarea ng-model="message.text" ng-change="messages.$save(message)"></textarea>
+			        		<textarea maxlength="195" ng-model="message.text" ng-change="messages.$save(message)"></textarea>
 			        		<a href="javascript:void(0)" ng-click="deleteMessage(message)">✘</a>
 			        		<button ng-click="isEditing = false;">Done</button>
 			        	</div>
