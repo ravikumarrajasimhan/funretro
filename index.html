@@ -11,7 +11,7 @@
 	<script src="script.js"></script>
   </head>
   <body ng-controller="MainCtrl">
-  	<header><h1>Firedeaz</h1></header>
+  	<header><h1>Firedeaz - {{boardId}}</h1></header>
 
   	<div class="message-list" ng-repeat="type in messageTypes">
 	    <ul class="column column_{{ type.id }}">
