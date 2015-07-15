@@ -66,6 +66,10 @@ app.controller("MainCtrl", ["$firebaseArray", '$scope', '$filter', function($fir
     $('#' + id).find('textarea').focus();
   };
 
+  $scope.createNewBoard = function() {
+    window.location.href = "http://glauberramos.github.com/firedeaz/#" + $scope.newBoardId;
+  };
+
   $scope.addNew = function(type) {
   	$scope.messages.$add({
       text: '',

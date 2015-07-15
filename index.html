@@ -4,6 +4,7 @@
   	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
   	<link rel="stylesheet" type="text/css" href="base.css">
   	<link rel="stylesheet" type="text/css" href="message.css">
+  	<link rel="stylesheet" type="text/css" href="header.css">
 	<script src="angular.min.js"></script>
 	<script src="zepto.min.js"></script>
 	<script src="firebase.js"></script>
@@ -11,7 +12,14 @@
 	<script src="script.js"></script>
   </head>
   <body ng-controller="MainCtrl">
-  	<header><h1>Firedeaz - {{boardId}}</h1></header>
+  	<header>
+  		<h1>Firedeaz - {{boardId}}</h1>
+		<span>
+			www.firedeaz.com/#
+			<input ng-model="newBoardId" placeholder="board name"></input>
+			<button ng-click="createNewBoard()">Create new board</button>
+		</span>
+  	</header>
 
   	<div class="message-list" ng-repeat="type in messageTypes">
 	    <ul class="column column_{{ type.id }}">

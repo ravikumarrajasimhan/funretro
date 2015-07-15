@@ -1,0 +1,16 @@
+header { 
+	display: block;
+	color: white;
+}
+
+header h1 {
+	float: left;
+	margin: 0.2em;
+	padding-left: 0.5em;
+}
+
+header span {
+	float: right;
+	margin: 0.7em;
+	font-size: 0.9em;
+}
