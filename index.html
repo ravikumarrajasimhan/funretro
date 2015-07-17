@@ -20,8 +20,8 @@
 			<button ng-disabled="newBoardId == null" ng-click="createNewBoard()">Create new board</button>
 		</span>
   	</header>
-
-  	<div class="message-list" ng-repeat="type in messageTypes">
+	<h1 ng-show="boardId == ''">Invalid Board<small>Choose a name to insert after ♯ in the url</small></h1>
+  	<div ng-show="boardId != ''" class="message-list" ng-repeat="type in messageTypes">
 	    <ul class="column column_{{ type.id }}">
 	      <h2>{{type.value}}<a ng-click="addNew(type)" href="javascript:void(0)">+</a></h2>
 	      <li id="{{ message.$id }}" enter-click class="message" ng-class="{'flip': isEditing}" ng-repeat="message in messages | filter: {type: {id: type.id}}" ng-style="{'top': getHeight(message, $index) }">

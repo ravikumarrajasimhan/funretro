@@ -54,6 +54,17 @@ header {
   padding-right: 24px;
 }
 
+small {
+	color: #999;
+	margin-left: 1em;
+	font-size: .8em;
+}
+
+h1 {
+	margin-left: 1.5em;
+	margin-top: 2em;
+}
+
 button {
 	border: 10px;
 	box-sizing: border-box;
