@@ -72,6 +72,12 @@ button {
 	border-radius: 2px;
 }
 
+button:disabled {
+	cursor: default;
+	background: #009EB2;
+  	color: rgb(4, 134, 150);
+}
+
 input {
 	background: white;
 	border: 1px solid #eee;

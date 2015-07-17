@@ -15,9 +15,9 @@
   	<header>
   		<h1>Firedeaz - {{boardId}}</h1>
 		<span>
-			www.firedeaz.com/#
+			glauberramos.github.io/firedeaz/#
 			<input ng-model="newBoardId" placeholder="board name"></input>
-			<button ng-click="createNewBoard()">Create new board</button>
+			<button ng-disabled="newBoardId == null" ng-click="createNewBoard()">Create new board</button>
 		</span>
   	</header>
 
