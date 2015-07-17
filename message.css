@@ -29,9 +29,8 @@ ul.column_3 .votes {
 }
 
 .text {
-  white-space: pre; 
+  white-space: pre-line; 
   word-break: break-word; 
-  white-space: normal;
   padding-right: 15px;
 }
 
