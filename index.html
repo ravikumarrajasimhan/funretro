@@ -21,33 +21,32 @@
 		</span>
   	</header>
 	<h1 ng-show="boardId == ''">Invalid Board<small>Choose a name to insert after ♯ in the url</small></h1>
-  	<div ng-show="boardId != ''" class="message-list" ng-repeat="type in messageTypes">
+  	
+  	<span ng-show="boardId != ''" class="message-list" ng-repeat="type in messageTypes">
 	    <ul class="column column_{{ type.id }}">
 	      <h2>{{type.value}}<a ng-click="addNew(type)" href="javascript:void(0)">+</a></h2>
 	      <li id="{{ message.$id }}" enter-click class="message" ng-class="{'flip': isEditing}" ng-repeat="message in messages | filter: {type: {id: type.id}}" ng-style="{'top': getHeight(message, $index) }">
-	      	<div class="hacker">
-		      	<div class="front">
-			      	<div class="message-body">
-		        		<div class="text">{{message.text}}</div>
-		        		<a href="javascript:void(0)" ng-click="isEditing = true; focusElement(message.$id);">✎</a>
-			        </div>
-			        <div class="votes">
-			        	<a ng-hide="alreadyVoted(message.$id)" href="javascript:void(0)" ng-click="addVote(message.$id, message.votes)"><img src="like.png" /></a>
-			        	<strong>+ {{ message.votes }}</strong>
-			        </div>
+	      	<div class="front">
+		      	<div class="message-body">
+	        		<div class="text">{{message.text}}</div>
+	        		<a href="javascript:void(0)" ng-click="isEditing = true; focusElement(message.$id);">✎</a>
 		        </div>
-		        <div class="back">
-		        	<div class="message-body">
-			        	<div class="editing">
-			        		<textarea maxlength="195" ng-model="message.text" ng-change="messages.$save(message)"></textarea>
-			        		<a href="javascript:void(0)" ng-click="deleteMessage(message)">✘</a>
-			        		<button ng-click="isEditing = false;">Done</button>
-			        	</div>
-			        </div>
+		        <div class="votes">
+		        	<a ng-hide="alreadyVoted(message.$id)" href="javascript:void(0)" ng-click="addVote(message.$id, message.votes)"><img src="like.png" /></a>
+		        	<strong>+ {{ message.votes }}</strong>
+		        </div>
+	        </div>
+	        <div class="back">
+	        	<div class="message-body">
+		        	<div class="editing">
+		        		<textarea maxlength="195" ng-model="message.text" ng-change="messages.$save(message)"></textarea>
+		        		<a href="javascript:void(0)" ng-click="deleteMessage(message)">✘</a>
+		        		<button ng-click="isEditing = false;">Done</button>
+		        	</div>
 		        </div>
 	        </div>
 	      </li>
 	    </ul>
-    </div>
+    </span>
   </body>
 </html>

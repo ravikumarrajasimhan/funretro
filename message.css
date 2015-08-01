@@ -25,7 +25,8 @@ ul.column_3 .votes {
 .message-list {
 	width: 29%;
 	display: inline-block;
-	vertical-align: top;
+  float: left;
+  vertical-align: top;
 }
 
 .text {
