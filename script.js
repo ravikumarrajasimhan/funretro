@@ -1,11 +1,25 @@
-var app = angular.module("sampleApp", ['firebase']);
+var app = angular.module("sampleApp", ['firebase', 'ngDialog']);
 
-app.controller("MainCtrl", ["$firebaseArray", '$scope', '$filter', '$window', 
-  function($firebaseArray, $scope, $filter, $window) {
+app.controller("MainCtrl", ["$firebaseArray", '$scope', '$filter', '$window', 'ngDialog',
+  function($firebaseArray, $scope, $filter, $window, ngDialog) {
     var ref = new Firebase("https://blinding-torch-6662.firebaseio.com/messages");
+
+    var ref2 = new Firebase("https://blinding-torch-6662.firebaseio.com/boards");
+    $scope.boards = $firebaseArray(ref2);
 
     $scope.boardId = $window.location.hash.substring(1) || 'test';
     $scope.messages = $firebaseArray(ref.orderByChild("board").equalTo($scope.boardId));
+
+    $scope.board = $firebaseArray(ref2.orderByChild("boardId").equalTo($scope.boardId));
+
+    $scope.board.$loaded().then(function() {
+      if($scope.board.length === 0) {
+        $scope.boards.$add({
+          boardId: $scope.boardId,
+          columns: $scope.messageTypes
+        });
+      }  
+    });
 
     function calculateAllHeights(messages) {
       var orderedArray = $filter('orderBy')(messages, ['-votes', 'date']);
@@ -43,6 +57,70 @@ app.controller("MainCtrl", ["$firebaseArray", '$scope', '$filter', '$window',
       calculateAllHeights($scope.messages);
     }
 
+    $scope.openDialogColumn = function() {
+      ngDialog.open({
+        template: 'addNewColumn',
+        className: 'ngdialog-theme-plain',
+        scope: $scope
+      });
+    }
+
+    $scope.openDialogBoard = function() {
+      ngDialog.open({
+        template: 'addNewBoard',
+        className: 'ngdialog-theme-plain',
+        scope: $scope
+      });
+    }
+
+    $scope.closeDialog = function() {
+      ngDialog.closeAll();
+    }
+
+    $scope.addNewColumn = function(name) {
+      var board = $scope.boards.$getRecord($scope.board[0].$id);
+      board.columns.push({
+        value: name,
+        id: $scope.getNextId()
+      });
+
+      $scope.boards.$save(board).then(function(ref) {
+        ngDialog.closeAll();
+      });
+    }
+
+    $scope.getNextId = function() {
+      return $scope.board[0].columns[$scope.board[0].columns.length -1].id + 1;
+    }
+
+    $scope.changeColumnName = function(id, newName) {
+      var board = $scope.boards.$getRecord($scope.board[0].$id);
+      board.columns[id - 1].value = newName;
+
+      $scope.boards.$save(board).then(function(ref) {
+        ngDialog.closeAll();
+      });
+    };
+
+    $scope.deleteLastColumn = function() {
+      var board = $scope.boards.$getRecord($scope.board[0].$id);
+      board.columns.pop();
+
+      $scope.boards.$save(board);
+    };
+
+    $scope.showRemoveColumn = function(id) {
+      var board = $scope.boards.$getRecord($scope.board[0].$id);
+
+      if(board.columns.length === id) {
+        if(board.columns.length > 3) {
+          return true;
+        }
+      }
+
+      return false;
+    };
+
     $scope.deleteMessage = function(message) {
     	if(confirm('Are you sure you want to delete this note?')) {
     		$scope.messages.$remove(message).then(function() {
@@ -67,8 +145,9 @@ app.controller("MainCtrl", ["$firebaseArray", '$scope', '$filter', '$window',
       $('#' + id).find('textarea').focus();
     };
 
-    $scope.createNewBoard = function() {
-      window.location.href = "http://glauberramos.github.com/firedeaz/#" + $scope.newBoardId;
+    $scope.createNewBoard = function(board) {
+      window.location.href = window.location.origin + "/#" + board;
+      ngDialog.closeAll();
     };
 
     $scope.addNew = function(type) {
@@ -90,6 +169,17 @@ app.controller("MainCtrl", ["$firebaseArray", '$scope', '$filter', '$window',
     $($window).bind('hashchange', function () {
       $scope.boardId = $window.location.hash.substring(1);
       $scope.messages = $firebaseArray(ref.orderByChild("board").equalTo($scope.boardId));
+      $scope.board = $firebaseArray(ref2.orderByChild("boardId").equalTo($scope.boardId));
+
+      $scope.board.$loaded().then(function() {
+        if($scope.board.length === 0) {
+          $scope.boards.$add({
+            boardId: $scope.boardId,
+            columns: $scope.messageTypes
+          });
+        }  
+      });
+      
     });
   }]
 );

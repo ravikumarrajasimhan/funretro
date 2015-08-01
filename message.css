@@ -22,8 +22,27 @@ ul.column_3 .votes {
 	background: #AB47BC;
 }
 
+ul.column_4 .front, ul.column_4 .back {
+  background: #64B5F6;
+}
+
+ul.column_4 .votes {
+  background: #039BE5;
+}
+
+ul.column_5 .front, ul.column_5 .back {
+  background: #FFD54F;
+}
+
+ul.column_5 .votes {
+  background: #FFC107;
+}
+
 .message-list {
-	width: 29%;
+  margin-left: 10px;
+}
+
+.message-list {
 	display: inline-block;
   float: left;
   vertical-align: top;
@@ -74,7 +93,6 @@ ul.column_3 .votes {
   background: transparent;
   display: block;
 	height: 110px;
-	width: 27%;
 	margin-bottom: 1em;
 	border-radius: 2px;
 	position: absolute;

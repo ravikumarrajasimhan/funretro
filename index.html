@@ -5,27 +5,38 @@
   	<link rel="stylesheet" type="text/css" href="base.css">
   	<link rel="stylesheet" type="text/css" href="message.css">
   	<link rel="stylesheet" type="text/css" href="header.css">
+  	<link rel="stylesheet" type="text/css" href="ngDialog-theme-default.min.css">
+  	<link rel="stylesheet" type="text/css" href="ngDialog-theme-plain.min.css">
+  	<link rel="stylesheet" type="text/css" href="ngDialog.min.css">
+  	<link rel="stylesheet" type="text/css" href="colors.min.css">
 	<script src="angular.min.js"></script>
 	<script src="zepto.min.js"></script>
 	<script src="firebase.js"></script>
 	<script src="angularfire.min.js"></script>
+	<script src="ngDialog.min.js"></script>
 	<script src="script.js"></script>
   </head>
   <body ng-controller="MainCtrl">
   	<header>
   		<h1>Firedeaz - {{boardId}}</h1>
 		<span>
-			glauberramos.github.io/firedeaz/#
-			<input ng-model="newBoardId" placeholder="board name"></input>
-			<button ng-disabled="newBoardId == null" ng-click="createNewBoard()">Create new board</button>
+			<button ng-show="board[0].columns.length < 5" ng-click="openDialogColumn()">Add new column</button>
+			<button ng-click="openDialogBoard()">Create new board</button>
 		</span>
   	</header>
 	<h1 ng-show="boardId == ''">Invalid Board<small>Choose a name to insert after ♯ in the url</small></h1>
-  	
-  	<span ng-show="boardId != ''" class="message-list" ng-repeat="type in messageTypes">
+  	<span ng-show="boardId != ''" class="message-list" style="width: {{ 100 / board[0].columns.length - 1 }}%" ng-repeat="type in board[0].columns">
 	    <ul class="column column_{{ type.id }}">
-	      <h2>{{type.value}}<a ng-click="addNew(type)" href="javascript:void(0)">+</a></h2>
-	      <li id="{{ message.$id }}" enter-click class="message" ng-class="{'flip': isEditing}" ng-repeat="message in messages | filter: {type: {id: type.id}}" ng-style="{'top': getHeight(message, $index) }">
+	      <h2>
+	      	<a class="controls delete" ng-show="showRemoveColumn(type.id) && !editing" href="javascript:void(0)" ng-click="deleteLastColumn()">✖</a>
+	      	<a class="controls edit" ng-show="!editing" href="javascript:void(0)" ng-click="editing = true; newName=type.value;">✎</a>
+	      	<span ng-show="!editing">{{type.value}}</span>
+	      	<input id="new_name_{{ type.id }}" ng-model="newName" ng-show="editing"></input>
+	      	<button ng-click="changeColumnName(type.id, newName)" ng-show="editing">Save</button>
+	      	<button ng-show="editing" ng-click="editing=false;">Cancel</button>
+	      	<a ng-show="!editing" ng-click="addNew(type)" href="javascript:void(0)">+</a>
+	      </h2>
+	      <li id="{{ message.$id }}" enter-click class="message" style="width: {{ 100 / board[0].columns.length - 1}}%" ng-class="{'flip': isEditing}" ng-repeat="message in messages | filter: {type: {id: type.id}}" ng-style="{'top': getHeight(message, $index) }">
 	      	<div class="front">
 		      	<div class="message-body">
 	        		<div class="text">{{message.text}}</div>
@@ -40,7 +51,7 @@
 	        	<div class="message-body">
 		        	<div class="editing">
 		        		<textarea maxlength="195" ng-model="message.text" ng-change="messages.$save(message)"></textarea>
-		        		<a href="javascript:void(0)" ng-click="deleteMessage(message)">✘</a>
+		        		<a href="javascript:void(0)" ng-click="deleteMessage(message)">✖</a>
 		        		<button ng-click="isEditing = false;">Done</button>
 		        	</div>
 		        </div>
@@ -49,4 +60,14 @@
 	    </ul>
     </span>
   </body>
+  <script type="text/ng-template" id="addNewColumn">
+	<h1>New column</h1>
+	<input ng-model="newColumn" type="text"></input>
+	<button ng-click="addNewColumn(newColumn); newColumn='';">Add</button>
+  </script>
+  <script type="text/ng-template" id="addNewBoard">
+	<h1>New board</h1>
+	<input ng-model="newBoard" type="text"></input>
+	<button ng-click="createNewBoard(newBoard); newBoard='';">Create</button>
+  </script>
 </html>
