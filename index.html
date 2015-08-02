@@ -28,10 +28,10 @@
   	<span ng-show="boardId != ''" class="message-list" style="width: {{ 100 / board[0].columns.length - 1 }}%" ng-repeat="type in board[0].columns">
 	    <ul class="column column_{{ type.id }}">
 	      <a class="controls delete" ng-show="showRemoveColumn(type.id) && !editing" href="javascript:void(0)" ng-click="deleteLastColumn()">✖</a>
-	      <h2 ng-click="editing = true; newName=type.value;">
-	      	<span ng-show="!editing">{{type.value}}</span>
-	      	<a ng-show="!editing" ng-click="addNew(type)" href="javascript:void(0)">+</a>
+	      <h2 ng-show="!editing" ng-click="editing = true; newName=type.value;">
+	      	{{type.value}}
 	      </h2>
+	      <a ng-show="!editing" class="add" ng-click="addNew(type)" href="javascript:void(0)">+</a>
 	      <div class="editing-column">
 	      	  <input id="new_name_{{ type.id }}" ng-model="newName" ng-show="editing"></input>
 		      <button ng-click="changeColumnName(type.id, newName)" ng-show="editing" class="success-button">Save</button>

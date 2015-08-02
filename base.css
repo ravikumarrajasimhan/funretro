@@ -5,8 +5,10 @@ body {
 	margin: 0;
 }
 
-h2 a {
+.add {
 	margin-left: 10px;
+	font-size: 1.5em;
+	font-weight: bold;
 	color: #00bcd4;
 }
 
@@ -34,6 +36,10 @@ h2 {
     width: 50px;
     background: #00C853;
     vertical-align: top;
+}
+
+.editing-column {
+	margin-top: 2em;
 }
 
 .editing-column input {
