@@ -147,7 +147,7 @@ app.controller("MainCtrl", ["$firebaseArray", '$scope', '$filter', '$window', 'n
     };
 
     $scope.createNewBoard = function(board) {
-      window.location.href = window.location.origin + "/#" + board;
+      window.location.href = window.location.origin + window.location.pahtname + "#" + board;
       ngDialog.closeAll();
     };
 
