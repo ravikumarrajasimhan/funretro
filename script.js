@@ -103,10 +103,11 @@ app.controller("MainCtrl", ["$firebaseArray", '$scope', '$filter', '$window', 'n
     };
 
     $scope.deleteLastColumn = function() {
-      var board = $scope.boards.$getRecord($scope.board[0].$id);
-      board.columns.pop();
-
-      $scope.boards.$save(board);
+      if(confirm('Are you sure you want to delete this column?')) {
+        var board = $scope.boards.$getRecord($scope.board[0].$id);
+        board.columns.pop();
+        $scope.boards.$save(board);
+      }
     };
 
     $scope.showRemoveColumn = function(id) {
