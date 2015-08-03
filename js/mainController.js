@@ -1,6 +1,6 @@
-var app = angular.module("fireideaz", ['firebase', 'ngDialog']);
+angular.module("fireideaz", ['firebase', 'ngDialog'])
 
-app.controller("MainCtrl", ["$firebaseArray", '$scope', '$filter', '$window', 'ngDialog',
+.controller("MainCtrl", ["$firebaseArray", '$scope', '$filter', '$window', 'ngDialog',
   function($firebaseArray, $scope, $filter, $window, ngDialog) {
     var ref = new Firebase("https://blinding-torch-6662.firebaseio.com/messages");
 
@@ -73,22 +73,6 @@ app.controller("MainCtrl", ["$firebaseArray", '$scope', '$filter', '$window', 'n
       });
     }
 
-    $scope.closeDialog = function() {
-      ngDialog.closeAll();
-    }
-
-    $scope.addNewColumn = function(name) {
-      var board = $scope.boards.$getRecord($scope.board[0].$id);
-      board.columns.push({
-        value: name,
-        id: $scope.getNextId()
-      });
-
-      $scope.boards.$save(board).then(function(ref) {
-        ngDialog.closeAll();
-      });
-    }
-
     $scope.getNextId = function() {
       return $scope.board[0].columns[$scope.board[0].columns.length -1].id + 1;
     }
@@ -146,11 +130,6 @@ app.controller("MainCtrl", ["$firebaseArray", '$scope', '$filter', '$window', 'n
       $('#' + id).find('textarea').focus();
     };
 
-    $scope.createNewBoard = function(board) {
-      window.location.href = window.location.origin + window.location.pathname + "#" + board;
-      ngDialog.closeAll();
-    };
-
     $scope.addNew = function(type) {
     	$scope.messages.$add({
         text: '',
@@ -180,7 +159,6 @@ app.controller("MainCtrl", ["$firebaseArray", '$scope', '$filter', '$window', 'n
           });
         }  
       });
-      
     });
   }]
 );

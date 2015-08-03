@@ -5,7 +5,7 @@ angular
 		return {
 			templateUrl: '../newColumnDialog.html',
 			restrict: 'E',
-			controller: 'MainCtrl'
+			controller: 'DialogCtrl'
 		};
 	}
 ]);

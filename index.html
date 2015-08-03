@@ -14,7 +14,8 @@
 	<script src="js/vendor/firebase.js"></script>
 	<script src="js/vendor/angularfire.min.js"></script>
 	<script src="js/vendor/ngDialog.min.js"></script>
-	<script src="js/script.js"></script>
+	<script src="js/mainController.js"></script>
+	<script src="js/dialogController.js"></script>
 	<script src="js/newBoardDialog.js"></script>
 	<script src="js/newColumnDialog.js"></script>
   </head>
@@ -47,7 +48,7 @@
 		        		<a href="javascript:void(0)" ng-click="isEditing = true; focusElement(message.$id);">✎</a>
 			        </div>
 			        <div class="votes">
-			        	<a ng-hide="alreadyVoted(message.$id)" href="javascript:void(0)" ng-click="addVote(message.$id, message.votes)"><img src="like.png" /></a>
+			        	<a ng-hide="alreadyVoted(message.$id)" href="javascript:void(0)" ng-click="addVote(message.$id, message.votes)"><img src="img/like.png" /></a>
 			        	<strong>+ {{ message.votes }}</strong>
 			        </div>
 		        </div>

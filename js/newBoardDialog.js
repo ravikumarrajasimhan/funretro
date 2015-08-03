@@ -5,7 +5,7 @@ angular
 		return {
 			templateUrl: '../newBoardDialog.html',
 			restrict: 'E',
-			controller: 'MainCtrl'
+			controller: 'DialogCtrl'
 		};
 	}
 ]);
