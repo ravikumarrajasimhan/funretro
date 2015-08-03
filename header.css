@@ -6,6 +6,8 @@ header {
 header h1 {
 	float: left;
 	margin: 0.2em;
+	margin-top: 0.35em;
+    font-size: 1.7em;
 }
 
 header span {
