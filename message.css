@@ -11,7 +11,7 @@ ul.column_2 .front, ul.column_2 .back {
 }
 
 ul.column_2 .votes {
-	background: #e53935;
+	background: #ef5350;
 }
 
 ul.column_3 .front, ul.column_3 .back {
@@ -31,11 +31,11 @@ ul.column_4 .votes {
 }
 
 ul.column_5 .front, ul.column_5 .back {
-  background: #FFD54F;
+  background: #FFCA28;
 }
 
 ul.column_5 .votes {
-  background: #FFC107;
+  background: #FFB300;
 }
 
 .message-list {
