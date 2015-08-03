@@ -1,4 +1,4 @@
-var app = angular.module("sampleApp", ['firebase', 'ngDialog']);
+var app = angular.module("fireideaz", ['firebase', 'ngDialog']);
 
 app.controller("MainCtrl", ["$firebaseArray", '$scope', '$filter', '$window', 'ngDialog',
   function($firebaseArray, $scope, $filter, $window, ngDialog) {
@@ -184,17 +184,3 @@ app.controller("MainCtrl", ["$firebaseArray", '$scope', '$filter', '$window', 'n
     });
   }]
 );
-
-app.directive('enterClick', function () {
-  return {
-    restrict: 'A',
-    link: function (scope, elem, attrs) {
-      elem.bind('keydown', function(event) {
-        if (event.keyCode === 13 && event.shiftKey) {
-          event.preventDefault();
-          $(elem[0]).find('button').click();
-        }
-      });
-    }
-  }
-});
