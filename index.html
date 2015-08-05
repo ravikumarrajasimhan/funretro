@@ -42,7 +42,7 @@
 			      <button ng-click="changeColumnName(type.id, newName)" ng-show="editing" class="success-button">Save</button>
 		      	  <a ng-show="editing" class="blue" ng-click="editing=false;">Cancel</a>
 	      	  </div>
-		      <li id="{{ message.$id }}" enter-click class="message" style="width: {{ 100 / board[0].columns.length - 2.2}}%" ng-class="{'flip': isEditing}" ng-repeat="message in messages | filter: {type: {id: type.id}}" ng-style="{'top': getHeight(message, $index) }">
+		      <li id="{{ message.$id }}" enter-click class="message" ng-class="{'flip': isEditing}" ng-repeat="message in messages | filter: {type: {id: type.id}}" ng-style="{'top': getHeight(message, $index) }">
 		      	<div class="front">
 			      	<div class="message-body">
 		        		<div class="text">{{message.text}}</div>
