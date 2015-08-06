@@ -38,6 +38,14 @@ ul.column_5 .votes {
   background: #FFB300;
 }
 
+ul.column_6 .front, ul.column_6 .back {
+  background: #FFA000;
+}
+
+ul.column_6 .votes {
+  background: #F57C00;
+}
+
 .message-list {
   margin-left: 10px;
 }
