@@ -15,9 +15,6 @@
 	<script src="js/vendor/angularfire.min.js"></script>
 	<script src="js/vendor/ngDialog.min.js"></script>
 	<script src="js/mainController.js"></script>
-	<script src="js/dialogController.js"></script>
-	<script src="js/newBoardDialog.js"></script>
-	<script src="js/newColumnDialog.js"></script>
 	<script src="js/enterClick.js"></script>
   </head>
   <body ng-controller="MainCtrl">
@@ -67,6 +64,15 @@
 	    </span>
     </span>
   </body>
-  <new-column-dialog></new-column-dialog>
-  <new-board-dialog></new-board-dialog>
+  <script type="text/ng-template" id="addNewColumn">
+	<h1>New column</h1>
+	<input ng-model="newColumn" type="text"></input>
+	<button ng-click="addNewColumn(newColumn); newColumn='';">Add</button>
+  </script>
+  <script type="text/ng-template" id="addNewBoard">
+	<h1>New board</h1>
+	<p>Try to use a name without spaces, example: <strong>board123</strong></p>
+	<input ng-model="newBoard" ng-change="boardNameChanged(newBoard)" type="text" placeholder="Board name"></input>
+	<button ng-click="createNewBoard(newBoard); newBoard='';">Create</button>
+  </script>
 </html>

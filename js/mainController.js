@@ -12,6 +12,10 @@ angular.module("fireideaz", ['firebase', 'ngDialog'])
 
     $scope.board = $firebaseArray(ref2.orderByChild("boardId").equalTo($scope.boardId));
 
+    $scope.boardNameChanged = function(boardName) {
+      $scope.newBoard = boardName.toLowerCase().replace(/\s+/g,'');
+    }
+
     $scope.board.$loaded().then(function() {
       if($scope.board.length === 0) {
         $scope.boards.$add({
@@ -20,6 +24,23 @@ angular.module("fireideaz", ['firebase', 'ngDialog'])
         });
       }  
     });
+
+    $scope.createNewBoard = function(board) {
+      window.location.href = window.location.origin + window.location.pathname + "#" + board;
+      ngDialog.closeAll();
+    };
+
+    $scope.addNewColumn = function(name) {
+      var board = $scope.boards.$getRecord($scope.board[0].$id);
+      board.columns.push({
+        value: name,
+        id: $scope.getNextId()
+      });
+
+      $scope.boards.$save(board).then(function(ref) {
+        ngDialog.closeAll();
+      });
+    };
 
     function calculateAllHeights(messages) {
       var orderedArray = $filter('orderBy')(messages, ['-votes', 'date']);
