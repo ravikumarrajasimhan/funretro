@@ -71,8 +71,8 @@
   </script>
   <script type="text/ng-template" id="addNewBoard">
 	<h1>New board</h1>
-	<p>Try to use a name without spaces, example: <strong>board123</strong></p>
-	<input ng-model="newBoard" ng-change="boardNameChanged(newBoard)" type="text" placeholder="Board name"></input>
-	<button ng-click="createNewBoard(newBoard); newBoard='';">Create</button>
+	<p>Board name example: <strong>team-board-123</strong></p>
+	<input ng-model="newBoard.name" ng-change="boardNameChanged()" type="text" placeholder="Board name"></input>
+	<button ng-click="createNewBoard(); newBoard.name='';">Create</button>
   </script>
 </html>

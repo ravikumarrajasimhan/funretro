@@ -12,8 +12,12 @@ angular.module("fireideaz", ['firebase', 'ngDialog'])
 
     $scope.board = $firebaseArray(ref2.orderByChild("boardId").equalTo($scope.boardId));
 
-    $scope.boardNameChanged = function(boardName) {
-      $scope.newBoard = boardName.toLowerCase().replace(/\s+/g,'');
+    $scope.newBoard = {
+      name: ''
+    };
+
+    $scope.boardNameChanged = function() {
+      $scope.newBoard.name = $scope.newBoard.name.replace(/\s+/g,'');
     }
 
     $scope.board.$loaded().then(function() {
