@@ -51,9 +51,8 @@ ul.column_6 .votes {
 }
 
 .message-list {
-  display: inline-block;
-  float: left;
-  vertical-align: top;
+  flex-grow: 1;
+  flex-basis: 0;
 }
 
 .text {
