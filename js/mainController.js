@@ -29,8 +29,8 @@ angular.module("fireideaz", ['firebase', 'ngDialog'])
       }  
     });
 
-    $scope.createNewBoard = function(board) {
-      window.location.href = window.location.origin + window.location.pathname + "#" + board;
+    $scope.createNewBoard = function() {
+      window.location.href = window.location.origin + window.location.pathname + "#" + $scope.newBoard.name;
       ngDialog.closeAll();
     };
 
