@@ -1,7 +1,7 @@
 angular
   .module('fireideaz')
-  .controller('MainCtrl', ['$firebaseArray', '$scope', '$filter', '$window', 'ngDialog', 'Utils', 'Auth',
-    function($firebaseArray, $scope, $filter, $window, ngDialog, utils, auth) {
+  .controller('MainCtrl', ['$firebaseArray', '$scope', '$filter', '$window', 'Utils', 'Auth',
+    function($firebaseArray, $scope, $filter, $window, utils, auth) {
       var messagesRef = new Firebase("https://firedeaztest.firebaseio.com/messages");
       var boardRef = new Firebase("https://firedeaztest.firebaseio.com/boards");
       
@@ -46,7 +46,7 @@ angular
           });
 
           window.location.href = window.location.origin + window.location.pathname + "#" + newUser;
-          ngDialog.closeAll();
+          utils.closeAll();
 
           $scope.newBoard.name = '';
         }
@@ -62,7 +62,7 @@ angular
         });
 
         $scope.boards.$save(board).then(function() {
-          ngDialog.closeAll();
+          utils.closeAll();
         });
       };
 
@@ -87,28 +87,12 @@ angular
         calculateAllHeights($scope.messages);
       }
 
-      $scope.openDialogColumn = function() {
-        ngDialog.open({
-          template: 'addNewColumn',
-          className: 'ngdialog-theme-plain',
-          scope: $scope
-        });
-      }
-
-      $scope.openDialogBoard = function() {
-        ngDialog.open({
-          template: 'addNewBoard',
-          className: 'ngdialog-theme-plain',
-          scope: $scope
-        });
-      }
-
       $scope.changeColumnName = function(id, newName) {
         var board = $scope.boards.$getRecord($scope.board[0].$id);
         board.columns[id - 1].value = newName;
 
         $scope.boards.$save(board).then(function() {
-          ngDialog.closeAll();
+          utils.closeAll();
         });
       };
 

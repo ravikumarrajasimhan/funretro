@@ -1,6 +1,6 @@
 angular
   .module('fireideaz')
-  .service('Utils', function () {
+  .service('Utils', ['ngDialog', function (ngDialog) {
     function createUserId() {
       var text = "";
       var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -53,6 +53,26 @@ angular
       return board.columns[board.columns.length -1].id + 1;
     }
 
+    function openDialogColumn(element) {
+      ngDialog.open({
+        template: 'addNewColumn',
+        className: 'ngdialog-theme-plain',
+        scope: element
+      });
+    }
+
+    function openDialogBoard(element) {
+      ngDialog.open({
+        template: 'addNewBoard',
+        className: 'ngdialog-theme-plain',
+        scope: element
+      });
+    }
+
+    function closeAll() {
+      ngDialog.closeAll();
+    }
+
     return {
       createUserId: createUserId,
       getHeight: getHeight,
@@ -60,6 +80,9 @@ angular
       focusElement: focusElement,
       messageTypes: messageTypes,
       showRemoveColumn: showRemoveColumn,
-      getNextId: getNextId
+      getNextId: getNextId,
+      openDialogColumn: openDialogColumn,
+      openDialogBoard: openDialogBoard,
+      closeAll: closeAll
     };
-  });
+  }]);
