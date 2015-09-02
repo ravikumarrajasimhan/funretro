@@ -55,18 +55,6 @@ angular
         auth.createUserAndLog(newUser, callback);
       };
 
-      $scope.addNewColumn = function(name) {
-        var board = $scope.boards.$getRecord($scope.userId);
-        board.columns.push({
-          value: name,
-          id: utils.getNextId($scope.board)
-        });
-
-        $scope.boards.$save(board).then(function() {
-          utils.closeAll();
-        });
-      };
-
       function calculateAllHeights(messages) {
         var orderedArray = $filter('orderBy')(messages, ['-votes', 'date']);
          orderedArray.forEach(function(message) {
@@ -84,12 +72,25 @@ angular
         calculateAllHeights($scope.messages);
       }
 
-      $scope.changeColumnName = function(id, newName) {
-        boardRef.child($scope.userId).child('columns').child(id - 1).update({
-          id: id,
-          value: newName
-        });
+      $scope.addNewColumn = function(name) {
+        $scope.board.columns[utils.getNextId($scope.board) - 1] = {
+          value: name,
+          id: utils.getNextId($scope.board)
+        };
 
+        boardRef.child($scope.userId).child('columns').set(utils.toObject($scope.board.columns));
+
+        utils.closeAll();
+      };
+
+      $scope.changeColumnName = function(id, newName) {
+        $scope.board.columns[id - 1] = {
+          value: newName,
+          id: id
+        };
+
+        boardRef.child($scope.userId).child('columns').set(utils.toObject($scope.board.columns));
+        
         utils.closeAll();
       };
 

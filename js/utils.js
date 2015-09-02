@@ -63,6 +63,16 @@ angular
       ngDialog.closeAll();
     }
 
+    function toObject(arr) {
+      var rv = {};
+      for (var i = 0; i < arr.length; ++i)
+        rv[i] = {
+          id: arr[i].id,
+          value: arr[i].value,
+        };
+      return rv;
+    }
+
     return {
       createUserId: createUserId,
       getHeight: getHeight,
@@ -72,6 +82,7 @@ angular
       getNextId: getNextId,
       openDialogColumn: openDialogColumn,
       openDialogBoard: openDialogBoard,
-      closeAll: closeAll
+      closeAll: closeAll,
+      toObject: toObject
     };
   }]);
