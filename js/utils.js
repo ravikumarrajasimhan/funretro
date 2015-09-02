@@ -49,12 +49,17 @@ angular
       return false;
     };
 
+    function getNextId(board) {
+      return board.columns[board.columns.length -1].id + 1;
+    }
+
     return {
       createUserId: createUserId,
       getHeight: getHeight,
       alreadyVoted: alreadyVoted,
       focusElement: focusElement,
       messageTypes: messageTypes,
-      showRemoveColumn: showRemoveColumn
+      showRemoveColumn: showRemoveColumn,
+      getNextId: getNextId
     };
   });

@@ -73,7 +73,7 @@ angular
         var board = $scope.boards.$getRecord($scope.board[0].$id);
         board.columns.push({
           value: name,
-          id: $scope.getNextId()
+          id: utils.getNextId($scope.board[0])
         });
 
         $scope.boards.$save(board).then(function() {
@@ -116,10 +116,6 @@ angular
           className: 'ngdialog-theme-plain',
           scope: $scope
         });
-      }
-
-      $scope.getNextId = function() {
-        return $scope.board[0].columns[$scope.board[0].columns.length -1].id + 1;
       }
 
       $scope.changeColumnName = function(id, newName) {
