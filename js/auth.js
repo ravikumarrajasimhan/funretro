@@ -17,6 +17,7 @@ angular
     };
 
     function logUser(user, callback) {
+      mainRef.unauth();
       mainRef.authWithPassword({
         email    : user + '@fireideaz.com',
         password : user
@@ -24,7 +25,6 @@ angular
         if (error) {
           console.log('Log user failed: ', error);
         } else {
-          console.log('user logged: ', authData);
           callback(authData);
         }
       });
