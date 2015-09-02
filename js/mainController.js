@@ -14,9 +14,7 @@ angular
         $scope.messages = $firebaseArray(messagesRef.orderByChild("user_id").equalTo($scope.userId));
         $scope.board = $firebaseArray(boardRef.orderByChild("user_id").equalTo($scope.userId));
 
-        $scope.newBoard = {
-          name: ''
-        };  
+        $scope.newBoard = { name: '' };  
 
         $scope.board.$loaded().then(function() {
           $scope.boardId = $scope.board[0].boardId;
