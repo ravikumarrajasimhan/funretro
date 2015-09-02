@@ -56,7 +56,7 @@ angular
       };
 
       $scope.addNewColumn = function(name) {
-        var board = $scope.boards.$getRecord($scope.board.$id);
+        var board = $scope.boards.$getRecord($scope.userId);
         board.columns.push({
           value: name,
           id: utils.getNextId($scope.board)
@@ -85,7 +85,7 @@ angular
       }
 
       $scope.changeColumnName = function(id, newName) {
-        var board = $scope.boards.$getRecord($scope.board.$id);
+        var board = $scope.boards.$getRecord($scope.userId);
         board.columns[id - 1].value = newName;
 
         $scope.boards.$save(board).then(function() {
@@ -95,7 +95,7 @@ angular
 
       $scope.deleteLastColumn = function() {
         if(confirm('Are you sure you want to delete this column?')) {
-          var board = $scope.boards.$getRecord($scope.board.$id);
+          var board = $scope.boards.$getRecord($scope.userId);
           board.columns.pop();
           $scope.boards.$save(board);
         }
