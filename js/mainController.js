@@ -16,9 +16,9 @@ angular
 
         $scope.boards = $firebaseArray(boardRef);
         $scope.messages = $firebaseArray(messagesRef.orderByChild("user_id").equalTo($scope.userId));
-        var boardRef = boardRef.child($scope.userId);
+        var board = boardRef.child($scope.userId);
 
-        boardRef.on("value", function(board) {
+        board.on("value", function(board) {
           $scope.board = board.val();
           $scope.boardId = board.val().boardId;
         }, function (error) {
@@ -85,12 +85,12 @@ angular
       }
 
       $scope.changeColumnName = function(id, newName) {
-        var board = $scope.boards.$getRecord($scope.userId);
-        board.columns[id - 1].value = newName;
-
-        $scope.boards.$save(board).then(function() {
-          utils.closeAll();
+        boardRef.child($scope.userId).child('columns').child(id - 1).update({
+          id: id,
+          value: newName
         });
+
+        utils.closeAll();
       };
 
       $scope.deleteLastColumn = function() {
