@@ -24,7 +24,8 @@ angular
         if (error) {
           console.log('Log user failed: ', error);
         } else {
-          callback();
+          console.log('user logged: ', authData);
+          callback(authData);
         }
       });
     };

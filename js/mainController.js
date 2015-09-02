@@ -37,11 +37,12 @@ angular
         var newUser = utils.createUserId();
         $scope.userId = newUser;
 
-        var callback = function() {
+        var callback = function(userData) {
           var board = new Firebase("https://firedeaztest.firebaseio.com/boards/" + newUser);
           board.set({
             boardId: $scope.newBoard.name,
-            columns: $scope.messageTypes
+            columns: $scope.messageTypes,
+            user_id: userData.uid
           });
 
           window.location.href = window.location.origin + window.location.pathname + "#" + newUser;
