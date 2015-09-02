@@ -11,16 +11,7 @@ angular
         if (error) {
           console.log('Create user failed: ', error);
         } else {
-          mainRef.authWithPassword({
-            email    : newUser + '@fireideaz.com',
-            password : newUser
-          }, function(error, authData) {
-            if (error) {
-              console.log('Log user failed: ', error);
-            } else {
-              callback();
-            }
-          });
+          logUser(newUser, callback);
         }
       });
     };
