@@ -159,7 +159,9 @@ angular.module("fireideaz", ['firebase', 'ngDialog'])
     	$scope.messages.$add({
         text: '',
         board: $scope.boardId,
-        type: type,
+        type: {
+          id: type.id
+        },
         date: Firebase.ServerValue.TIMESTAMP,
         votes: 0
       }).then(function(ref) {
