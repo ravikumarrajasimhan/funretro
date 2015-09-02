@@ -38,7 +38,7 @@ angular
         $scope.userId = newUser;
 
         var callback = function(userData) {
-          var board = new Firebase("https://firedeaztest.firebaseio.com/boards/" + newUser);
+          var board = new Firebase("https://firedeaztest.firebaseio.com/boards/" + $scope.userId);
           board.set({
             boardId: $scope.newBoard.name,
             columns: $scope.messageTypes,
