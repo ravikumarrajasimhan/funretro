@@ -3,7 +3,6 @@ angular
   .controller('MainCtrl', ['$firebaseArray', '$scope', '$filter', '$window', 'Utils', 'Auth',
     function($firebaseArray, $scope, $filter, $window, utils, auth) {
       var messagesRef = new Firebase("https://firedeaztest.firebaseio.com/messages");
-      var boardRef = new Firebase("https://firedeaztest.firebaseio.com/boards");
       
       $scope.messageTypes = utils.messageTypes;
       $scope.utils = utils;
@@ -11,11 +10,10 @@ angular
       $scope.userId = $window.location.hash.substring(1) || '';
 
       function getBoardAndMessages() {
-        var boardRef = new Firebase("https://firedeaztest.firebaseio.com/boards");
         $scope.userId = $window.location.hash.substring(1) || '';
-
         $scope.messages = $firebaseArray(messagesRef.orderByChild("user_id").equalTo($scope.userId));
-        var board = boardRef.child($scope.userId);
+        
+        var board = new Firebase("https://firedeaztest.firebaseio.com/boards/" + $scope.userId);
 
         board.on("value", function(board) {
           $scope.board = board.val();
@@ -40,7 +38,8 @@ angular
         $scope.userId = newUser;
 
         var callback = function() {
-          boardRef.child(newUser).set({
+          var board = new Firebase("https://firedeaztest.firebaseio.com/boards/" + newUser);
+          board.set({
             boardId: $scope.newBoard.name,
             columns: $scope.messageTypes
           });
@@ -77,7 +76,8 @@ angular
           id: utils.getNextId($scope.board)
         };
 
-        boardRef.child($scope.userId).child('columns').set(utils.toObject($scope.board.columns));
+        var boardColumns = new Firebase("https://firedeaztest.firebaseio.com/boards/" + $scope.userId + '/columns');
+        boardColumns.set(utils.toObject($scope.board.columns));
 
         utils.closeAll();
       };
@@ -88,7 +88,8 @@ angular
           id: id
         };
 
-        boardRef.child($scope.userId).child('columns').set(utils.toObject($scope.board.columns));
+        var boardColumns = new Firebase("https://firedeaztest.firebaseio.com/boards/" + $scope.userId + '/columns');
+        boardColumns.set(utils.toObject($scope.board.columns));
 
         utils.closeAll();
       };
@@ -97,7 +98,8 @@ angular
         if(confirm('Are you sure you want to delete this column?')) {
           $scope.board.columns.pop();
 
-          boardRef.child($scope.userId).child('columns').set(utils.toObject($scope.board.columns));
+          var boardColumns = new Firebase("https://firedeaztest.firebaseio.com/boards/" + $scope.userId + '/columns');
+          boardColumns.set(utils.toObject($scope.board.columns));
         }
       };
 
