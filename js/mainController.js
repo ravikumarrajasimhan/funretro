@@ -5,27 +5,32 @@ angular
       var messagesRef = new Firebase("https://firedeaztest.firebaseio.com/messages");
       var boardRef = new Firebase("https://firedeaztest.firebaseio.com/boards");
       
-      $scope.userId = $window.location.hash.substring(1) || '';
       $scope.messageTypes = utils.messageTypes;
       $scope.utils = utils;
+      $scope.newBoard = { name: '' };
+      $scope.userId = $window.location.hash.substring(1) || '';
 
-      function logCallback() {
+      function getBoardAndMessages() {
+        var boardRef = new Firebase("https://firedeaztest.firebaseio.com/boards");
+        $scope.userId = $window.location.hash.substring(1) || '';
+
         $scope.boards = $firebaseArray(boardRef);
         $scope.messages = $firebaseArray(messagesRef.orderByChild("user_id").equalTo($scope.userId));
-        $scope.board = $firebaseArray(boardRef.orderByChild("user_id").equalTo($scope.userId));
+        var boardRef = boardRef.child($scope.userId);
 
-        $scope.newBoard = { name: '' };  
-
-        $scope.board.$loaded().then(function() {
-          $scope.boardId = $scope.board[0].boardId;
+        boardRef.on("value", function(board) {
+          $scope.board = board.val();
+          $scope.boardId = board.val().boardId;
+        }, function (error) {
+          console.log("The read failed: " + error);
         });
-
+        
         $scope.messages.$loaded().then(function(messages) {
           calculateAllHeights(messages);
         });
-      };
+      }
 
-      auth.logUser($scope.userId, logCallback);
+      auth.logUser($scope.userId, getBoardAndMessages);
 
       $scope.boardNameChanged = function() {
         $scope.newBoard.name = $scope.newBoard.name.replace(/\s+/g,'');
@@ -33,14 +38,12 @@ angular
 
       $scope.createNewBoard = function() {
         var newUser = utils.createUserId();
+        $scope.userId = newUser;
 
         var callback = function() {
-          $scope.userId = newUser;
-
-          $scope.boards.$add({
+          boardRef.child(newUser).set({
             boardId: $scope.newBoard.name,
-            columns: $scope.messageTypes,
-            user_id: $scope.userId
+            columns: $scope.messageTypes
           });
 
           window.location.href = window.location.origin + window.location.pathname + "#" + newUser;
@@ -53,10 +56,10 @@ angular
       };
 
       $scope.addNewColumn = function(name) {
-        var board = $scope.boards.$getRecord($scope.board[0].$id);
+        var board = $scope.boards.$getRecord($scope.board.$id);
         board.columns.push({
           value: name,
-          id: utils.getNextId($scope.board[0])
+          id: utils.getNextId($scope.board)
         });
 
         $scope.boards.$save(board).then(function() {
@@ -82,7 +85,7 @@ angular
       }
 
       $scope.changeColumnName = function(id, newName) {
-        var board = $scope.boards.$getRecord($scope.board[0].$id);
+        var board = $scope.boards.$getRecord($scope.board.$id);
         board.columns[id - 1].value = newName;
 
         $scope.boards.$save(board).then(function() {
@@ -92,7 +95,7 @@ angular
 
       $scope.deleteLastColumn = function() {
         if(confirm('Are you sure you want to delete this column?')) {
-          var board = $scope.boards.$getRecord($scope.board[0].$id);
+          var board = $scope.boards.$getRecord($scope.board.$id);
           board.columns.pop();
           $scope.boards.$save(board);
         }
@@ -126,13 +129,7 @@ angular
       };
 
       $($window).bind('hashchange', function () {
-        $scope.userId = $window.location.hash.substring(1);
-        $scope.messages = $firebaseArray(messagesRef.orderByChild("user_id").equalTo($scope.userId));
-        $scope.board = $firebaseArray(boardRef.orderByChild("user_id").equalTo($scope.userId));
-
-        $scope.board.$loaded().then(function() {
-          $scope.boardId = $scope.board[0].boardId;
-        });
+         getBoardAndMessages();
       });
     }]
   );
