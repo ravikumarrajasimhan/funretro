@@ -1,8 +1,7 @@
 angular
   .module('fireideaz')
-  .controller('MainCtrl', ['$firebaseArray', '$scope', '$filter', '$window', 'ngDialog', 'Utils',
-    function($firebaseArray, $scope, $filter, $window, ngDialog, utils) {
-      var mainRef = new Firebase("https://firedeaztest.firebaseio.com");
+  .controller('MainCtrl', ['$firebaseArray', '$scope', '$filter', '$window', 'ngDialog', 'Utils', 'Auth',
+    function($firebaseArray, $scope, $filter, $window, ngDialog, utils, auth) {
       var messagesRef = new Firebase("https://firedeaztest.firebaseio.com/messages");
       var boardRef = new Firebase("https://firedeaztest.firebaseio.com/boards");
       
@@ -10,50 +9,29 @@ angular
       $scope.messageTypes = utils.messageTypes;
       $scope.utils = utils;
 
-      mainRef.authWithPassword({
-        email    : $scope.userId + '@fireideaz.com',
-        password : $scope.userId
-      }, function(error, authData) {
-        if (!error) {
-          $scope.boards = $firebaseArray(boardRef);
-          $scope.messages = $firebaseArray(messagesRef.orderByChild("user_id").equalTo($scope.userId));
-          $scope.board = $firebaseArray(boardRef.orderByChild("user_id").equalTo($scope.userId));
+      function logCallback() {
+        $scope.boards = $firebaseArray(boardRef);
+        $scope.messages = $firebaseArray(messagesRef.orderByChild("user_id").equalTo($scope.userId));
+        $scope.board = $firebaseArray(boardRef.orderByChild("user_id").equalTo($scope.userId));
 
-          $scope.newBoard = {
-            name: ''
-          };  
+        $scope.newBoard = {
+          name: ''
+        };  
 
-          $scope.board.$loaded().then(function() {
-            $scope.boardId = $scope.board[0].boardId;
-          });
+        $scope.board.$loaded().then(function() {
+          $scope.boardId = $scope.board[0].boardId;
+        });
 
-          $scope.messages.$loaded().then(function(messages) {
-            calculateAllHeights(messages);
-          });
-        }
-      });
+        $scope.messages.$loaded().then(function(messages) {
+          calculateAllHeights(messages);
+        });
+      };
+
+      auth.logUser($scope.userId, logCallback);
 
       $scope.boardNameChanged = function() {
         $scope.newBoard.name = $scope.newBoard.name.replace(/\s+/g,'');
       }
-
-      function createUserAndLog(newUser, callback) {
-         mainRef.createUser({
-          email    : newUser + '@fireideaz.com',
-          password : newUser
-        }, function(error, userData) {
-          if (!error) {
-            mainRef.authWithPassword({
-              email    : $scope.userId + '@fireideaz.com',
-              password : $scope.userId
-            }, function(error, authData) {
-              if (!error) {
-                callback();
-              }
-            });
-          }
-        });
-      };
 
       $scope.createNewBoard = function() {
         var newUser = utils.createUserId();
@@ -73,7 +51,7 @@ angular
           $scope.newBoard.name = '';
         }
 
-        createUserAndLog(newUser, callback);
+        auth.createUserAndLog(newUser, callback);
       };
 
       $scope.addNewColumn = function(name) {
