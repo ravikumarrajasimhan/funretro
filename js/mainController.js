@@ -3,8 +3,8 @@ angular.module("fireideaz", ['firebase', 'ngDialog'])
 .controller("MainCtrl", ["$firebaseArray", '$scope', '$filter', '$window', 'ngDialog',
   function($firebaseArray, $scope, $filter, $window, ngDialog) {
     var mainRef = new Firebase("https://firedeaztest.firebaseio.com");
-    var ref = new Firebase("https://firedeaztest.firebaseio.com/messages");
-    var ref2 = new Firebase("https://firedeaztest.firebaseio.com/boards");
+    var messagesRef = new Firebase("https://firedeaztest.firebaseio.com/messages");
+    var boardRef = new Firebase("https://firedeaztest.firebaseio.com/boards");
     
     $scope.userId = $window.location.hash.substring(1) || '';
 
@@ -12,14 +12,10 @@ angular.module("fireideaz", ['firebase', 'ngDialog'])
       email    : $scope.userId + '@fireideaz.com',
       password : $scope.userId
     }, function(error, authData) {
-      if (error) {
-        console.log("Login Failed!", error);
-      } else {
-        console.log("Authenticated successfully:", authData);
-
-        $scope.boards = $firebaseArray(ref2);
-        $scope.messages = $firebaseArray(ref.orderByChild("user_id").equalTo($scope.userId));
-        $scope.board = $firebaseArray(ref2.orderByChild("user_id").equalTo($scope.userId));
+      if (!error) {
+        $scope.boards = $firebaseArray(boardRef);
+        $scope.messages = $firebaseArray(messagesRef.orderByChild("user_id").equalTo($scope.userId));
+        $scope.board = $firebaseArray(boardRef.orderByChild("user_id").equalTo($scope.userId));
 
         $scope.newBoard = {
           name: ''
@@ -58,19 +54,12 @@ angular.module("fireideaz", ['firebase', 'ngDialog'])
         email    : newUser + '@fireideaz.com',
         password : newUser
       }, function(error, userData) {
-        if (error) {
-          console.log("Error creating user:", error);
-        } else {
-          console.log("Successfully created user account with uid:", userData.uid);
-
+        if (!error) {
           mainRef.authWithPassword({
             email    : $scope.userId + '@fireideaz.com',
             password : $scope.userId
           }, function(error, authData) {
-            if (error) {
-              console.log("Login Failed!", error);
-            } else {
-              console.log("Authenticated successfully:", authData);
+            if (!error) {
               $scope.userId = newUser;
 
               $scope.boards.$add({
@@ -96,7 +85,7 @@ angular.module("fireideaz", ['firebase', 'ngDialog'])
         id: $scope.getNextId()
       });
 
-      $scope.boards.$save(board).then(function(ref) {
+      $scope.boards.$save(board).then(function() {
         ngDialog.closeAll();
       });
     };
@@ -126,7 +115,7 @@ angular.module("fireideaz", ['firebase', 'ngDialog'])
 
     $scope.addVote = function(key, votes) {
     	if(!localStorage.getItem(key)) {
-    		ref.child(key).update({ votes: votes + 1, date: Firebase.ServerValue.TIMESTAMP });
+    		messagesRef.child(key).update({ votes: votes + 1, date: Firebase.ServerValue.TIMESTAMP });
     		localStorage.setItem(key, 1);
     	}
 
@@ -157,7 +146,7 @@ angular.module("fireideaz", ['firebase', 'ngDialog'])
       var board = $scope.boards.$getRecord($scope.board[0].$id);
       board.columns[id - 1].value = newName;
 
-      $scope.boards.$save(board).then(function(ref) {
+      $scope.boards.$save(board).then(function() {
         ngDialog.closeAll();
       });
     };
@@ -216,8 +205,8 @@ angular.module("fireideaz", ['firebase', 'ngDialog'])
         },
         date: Firebase.ServerValue.TIMESTAMP,
         votes: 0
-      }).then(function(ref) {
-        var id = ref.key();
+      }).then(function(message) {
+        var id = message.key();
         angular.element($('#' + id)).scope().isEditing = true;
         $('#' + id).find('textarea').focus();
 
@@ -227,8 +216,8 @@ angular.module("fireideaz", ['firebase', 'ngDialog'])
 
     $($window).bind('hashchange', function () {
       $scope.userId = $window.location.hash.substring(1);
-      $scope.messages = $firebaseArray(ref.orderByChild("user_id").equalTo($scope.userId));
-      $scope.board = $firebaseArray(ref2.orderByChild("user_id").equalTo($scope.userId));
+      $scope.messages = $firebaseArray(messagesRef.orderByChild("user_id").equalTo($scope.userId));
+      $scope.board = $firebaseArray(boardRef.orderByChild("user_id").equalTo($scope.userId));
 
       $scope.board.$loaded().then(function() {
         $scope.boardId = $scope.board[0].boardId;
