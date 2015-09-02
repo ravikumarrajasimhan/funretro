@@ -14,7 +14,6 @@ angular
         var boardRef = new Firebase("https://firedeaztest.firebaseio.com/boards");
         $scope.userId = $window.location.hash.substring(1) || '';
 
-        $scope.boards = $firebaseArray(boardRef);
         $scope.messages = $firebaseArray(messagesRef.orderByChild("user_id").equalTo($scope.userId));
         var board = boardRef.child($scope.userId);
 
@@ -90,15 +89,15 @@ angular
         };
 
         boardRef.child($scope.userId).child('columns').set(utils.toObject($scope.board.columns));
-        
+
         utils.closeAll();
       };
 
       $scope.deleteLastColumn = function() {
         if(confirm('Are you sure you want to delete this column?')) {
-          var board = $scope.boards.$getRecord($scope.userId);
-          board.columns.pop();
-          $scope.boards.$save(board);
+          $scope.board.columns.pop();
+
+          boardRef.child($scope.userId).child('columns').set(utils.toObject($scope.board.columns));
         }
       };
 
