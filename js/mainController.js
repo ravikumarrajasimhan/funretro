@@ -37,11 +37,8 @@ angular
         $scope.newBoard.name = $scope.newBoard.name.replace(/\s+/g,'');
       }
 
-      $scope.createNewBoard = function() {
-        var newUser = utils.createUserId();
-        $scope.newBoard.name;
-
-        mainRef.createUser({
+      function createUserAndLog(newUser, callback) {
+         mainRef.createUser({
           email    : newUser + '@fireideaz.com',
           password : newUser
         }, function(error, userData) {
@@ -51,22 +48,32 @@ angular
               password : $scope.userId
             }, function(error, authData) {
               if (!error) {
-                $scope.userId = newUser;
-
-                $scope.boards.$add({
-                  boardId: $scope.newBoard.name,
-                  columns: $scope.messageTypes,
-                  user_id: $scope.userId
-                });
-
-                window.location.href = window.location.origin + window.location.pathname + "#" + newUser;
-                ngDialog.closeAll();
-
-                $scope.newBoard.name = '';
+                callback();
               }
             });
           }
         });
+      };
+
+      $scope.createNewBoard = function() {
+        var newUser = utils.createUserId();
+
+        var callback = function() {
+          $scope.userId = newUser;
+
+          $scope.boards.$add({
+            boardId: $scope.newBoard.name,
+            columns: $scope.messageTypes,
+            user_id: $scope.userId
+          });
+
+          window.location.href = window.location.origin + window.location.pathname + "#" + newUser;
+          ngDialog.closeAll();
+
+          $scope.newBoard.name = '';
+        }
+
+        createUserAndLog(newUser, callback);
       };
 
       $scope.addNewColumn = function(name) {
