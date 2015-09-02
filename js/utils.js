@@ -20,10 +20,6 @@ angular
       }
     }
 
-    function alreadyVoted(key) {
-      return localStorage.getItem(key);
-    }
-
     function focusElement(id) {
       $('#' + id).find('textarea').focus();
     };
@@ -76,7 +72,6 @@ angular
     return {
       createUserId: createUserId,
       getHeight: getHeight,
-      alreadyVoted: alreadyVoted,
       focusElement: focusElement,
       messageTypes: messageTypes,
       showRemoveColumn: showRemoveColumn,

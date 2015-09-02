@@ -50,7 +50,7 @@
 		        		<a href="javascript:void(0)" ng-click="isEditing = true; utils.focusElement(message.$id);">✎</a>
 			        </div>
 			        <div class="votes">
-			        	<a ng-hide="utils.alreadyVoted(message.$id)" href="javascript:void(0)" ng-click="addVote(message.$id, message.votes)"><img src="img/like.png" /></a>
+			        	<a href="javascript:void(0)" ng-click="addVote(message.$id, message.votes)"><img src="img/like.png" /></a>
 			        	<strong>+ {{ message.votes }}</strong>
 			        </div>
 		        </div>
