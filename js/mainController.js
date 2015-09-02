@@ -2,35 +2,78 @@ angular.module("fireideaz", ['firebase', 'ngDialog'])
 
 .controller("MainCtrl", ["$firebaseArray", '$scope', '$filter', '$window', 'ngDialog',
   function($firebaseArray, $scope, $filter, $window, ngDialog) {
-    var ref = new Firebase("https://blinding-torch-6662.firebaseio.com/messages");
+    var mainRef = new Firebase("https://firedeaztest.firebaseio.com");
+    var ref = new Firebase("https://firedeaztest.firebaseio.com/messages");
+    var ref2 = new Firebase("https://firedeaztest.firebaseio.com/boards");
+    
+    $scope.userId = $window.location.hash.substring(1) || '';
 
-    var ref2 = new Firebase("https://blinding-torch-6662.firebaseio.com/boards");
-    $scope.boards = $firebaseArray(ref2);
+    mainRef.authWithPassword({
+      email    : $scope.userId + '@fireideaz.com',
+      password : $scope.userId
+    }, function(error, authData) {
+      if (error) {
+        console.log("Login Failed!", error);
+      } else {
+        console.log("Authenticated successfully:", authData);
 
-    $scope.boardId = $window.location.hash.substring(1) || 'test';
-    $scope.messages = $firebaseArray(ref.orderByChild("board").equalTo($scope.boardId));
+        $scope.boards = $firebaseArray(ref2);
+        $scope.messages = $firebaseArray(ref.orderByChild("user_id").equalTo($scope.userId));
+        $scope.board = $firebaseArray(ref2.orderByChild("user_id").equalTo($scope.userId));
 
-    $scope.board = $firebaseArray(ref2.orderByChild("boardId").equalTo($scope.boardId));
+        $scope.newBoard = {
+          name: ''
+        };  
 
-    $scope.newBoard = {
-      name: ''
-    };
+        $scope.board.$loaded().then(function() {
+          $scope.boardId = $scope.board[0].boardId;
+        });
+
+        $scope.messages.$loaded().then(function(messages) {
+          calculateAllHeights(messages);
+        });
+      }
+    });
 
     $scope.boardNameChanged = function() {
       $scope.newBoard.name = $scope.newBoard.name.replace(/\s+/g,'');
     }
 
-    $scope.board.$loaded().then(function() {
-      if($scope.board.length === 0) {
-        $scope.boards.$add({
-          boardId: $scope.boardId,
-          columns: $scope.messageTypes
-        });
-      }  
-    });
+    function createUserId() {
+        var text = "";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        for( var i=0; i < 5; i++ ) {
+          text += possible.charAt(Math.floor(Math.random() * possible.length));
+        }
+
+        return text;
+    }
 
     $scope.createNewBoard = function() {
-      window.location.href = window.location.origin + window.location.pathname + "#" + $scope.newBoard.name;
+      var newUser = createUserId();
+
+      mainRef.createUser({
+        email    : newUser + '@fireideaz.com',
+        password : newUser
+      }, function(error, userData) {
+        if (error) {
+          console.log("Error creating user:", error);
+        } else {
+          console.log("Successfully created user account with uid:", userData.uid);
+        }
+      });
+
+      $scope.boardId = $scope.newBoard.name;
+      $scope.userId = newUser;
+
+      $scope.boards.$add({
+        boardId: $scope.boardId,
+        columns: $scope.messageTypes,
+        user_id: $scope.userId
+      });
+
+      window.location.href = window.location.origin + window.location.pathname + "#" + newUser;
       ngDialog.closeAll();
     };
 
@@ -57,10 +100,6 @@ angular.module("fireideaz", ['firebase', 'ngDialog'])
         $scope.messages.$save(message);
       });
     }
-
-    $scope.messages.$loaded().then(function(messages) {
-      calculateAllHeights(messages);
-    });
 
     $scope.messageTypes = [{
     	id: 1,
@@ -159,6 +198,7 @@ angular.module("fireideaz", ['firebase', 'ngDialog'])
     	$scope.messages.$add({
         text: '',
         board: $scope.boardId,
+        user_id: $scope.userId,
         type: {
           id: type.id
         },
@@ -171,20 +211,15 @@ angular.module("fireideaz", ['firebase', 'ngDialog'])
 
         calculateAllHeights($scope.messages);  
       });
-    }
+    };
 
     $($window).bind('hashchange', function () {
-      $scope.boardId = $window.location.hash.substring(1);
-      $scope.messages = $firebaseArray(ref.orderByChild("board").equalTo($scope.boardId));
-      $scope.board = $firebaseArray(ref2.orderByChild("boardId").equalTo($scope.boardId));
+      $scope.userId = $window.location.hash.substring(1);
+      $scope.messages = $firebaseArray(ref.orderByChild("user_id").equalTo($scope.userId));
+      $scope.board = $firebaseArray(ref2.orderByChild("user_id").equalTo($scope.userId));
 
       $scope.board.$loaded().then(function() {
-        if($scope.board.length === 0) {
-          $scope.boards.$add({
-            boardId: $scope.boardId,
-            columns: $scope.messageTypes
-          });
-        }  
+        $scope.boardId = $scope.board[0].boardId;
       });
     });
   }]
