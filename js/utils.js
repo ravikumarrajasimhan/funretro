@@ -36,13 +36,7 @@ angular
     }];
 
     function showRemoveColumn(id, columns) {
-      if(columns.length === id) {
-        if(columns.length > 3) {
-          return true;
-        }
-      }
-
-      return false;
+      return columns.length === id && columns.length > 3 ? true : false;
     };
 
     function getNextId(board) {
