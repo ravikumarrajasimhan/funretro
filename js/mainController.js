@@ -40,18 +40,19 @@ angular.module("fireideaz", ['firebase', 'ngDialog'])
     }
 
     function createUserId() {
-        var text = "";
-        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      var text = "";
+      var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-        for( var i=0; i < 5; i++ ) {
-          text += possible.charAt(Math.floor(Math.random() * possible.length));
-        }
+      for( var i=0; i < 5; i++ ) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+      }
 
-        return text;
-    }
+      return text;
+    };
 
     $scope.createNewBoard = function() {
       var newUser = createUserId();
+      $scope.newBoard.name;
 
       mainRef.createUser({
         email    : newUser + '@fireideaz.com',
@@ -61,20 +62,31 @@ angular.module("fireideaz", ['firebase', 'ngDialog'])
           console.log("Error creating user:", error);
         } else {
           console.log("Successfully created user account with uid:", userData.uid);
+
+          mainRef.authWithPassword({
+            email    : $scope.userId + '@fireideaz.com',
+            password : $scope.userId
+          }, function(error, authData) {
+            if (error) {
+              console.log("Login Failed!", error);
+            } else {
+              console.log("Authenticated successfully:", authData);
+              $scope.userId = newUser;
+
+              $scope.boards.$add({
+                boardId: $scope.newBoard.name,
+                columns: $scope.messageTypes,
+                user_id: $scope.userId
+              });
+
+              window.location.href = window.location.origin + window.location.pathname + "#" + newUser;
+              ngDialog.closeAll();
+
+              $scope.newBoard.name = '';
+            }
+          });
         }
       });
-
-      $scope.boardId = $scope.newBoard.name;
-      $scope.userId = newUser;
-
-      $scope.boards.$add({
-        boardId: $scope.boardId,
-        columns: $scope.messageTypes,
-        user_id: $scope.userId
-      });
-
-      window.location.href = window.location.origin + window.location.pathname + "#" + newUser;
-      ngDialog.closeAll();
     };
 
     $scope.addNewColumn = function(name) {
