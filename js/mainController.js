@@ -112,6 +112,14 @@ angular
       	}
       }
 
+      function addMessageCallback(message) {
+        var id = message.key();
+        angular.element($('#' + id)).scope().isEditing = true;
+        $('#' + id).find('textarea').focus();
+
+        calculateAllHeights($scope.messages);  
+      }
+
       $scope.addNew = function(type) {
       	$scope.messages.$add({
           text: '',
@@ -122,13 +130,7 @@ angular
           },
           date: Firebase.ServerValue.TIMESTAMP,
           votes: 0
-        }).then(function(message) {
-          var id = message.key();
-          angular.element($('#' + id)).scope().isEditing = true;
-          $('#' + id).find('textarea').focus();
-
-          calculateAllHeights($scope.messages);  
-        });
+        }).then(addMessageCallback);
       };
 
       $($window).bind('hashchange', function () {
