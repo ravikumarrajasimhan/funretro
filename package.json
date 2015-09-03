@@ -1,0 +1,13 @@
+{
+  "name": "Fireideaz",
+  "description": "Retrospective tool",
+  "version": "0.0.1",
+  "private": false,
+  "scripts": {
+    "jshint": "jshint js/. --excludeg js/vendor"
+  },
+  "dependencies": {
+    "jshint": "latest",
+    "uglify": "latest"
+  }
+}
