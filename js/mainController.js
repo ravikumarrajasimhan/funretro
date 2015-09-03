@@ -11,8 +11,8 @@ angular
 
       function getBoardAndMessages(userData) {
         $scope.userId = $window.location.hash.substring(1) || '';
-        $scope.messages = $firebaseArray(messagesRef);
-        
+
+        var messagesRef = new Firebase("https://firedeaztest.firebaseio.com/messages/" + $scope.userId);
         var board = new Firebase("https://firedeaztest.firebaseio.com/boards/" + $scope.userId);
 
         board.on("value", function(board) {
@@ -21,6 +21,8 @@ angular
         });
 
         $scope.userUid = userData.uid;
+
+        $scope.messages = $firebaseArray(messagesRef);
 
         $scope.messages.$loaded().then(function(messages) {
           calculateAllHeights(messages);
@@ -131,7 +133,8 @@ angular
       };
 
       $($window).bind('hashchange', function () {
-         getBoardAndMessages();
+        $scope.userId = $window.location.hash.substring(1) || '';
+        auth.logUser($scope.userId, getBoardAndMessages);
       });
     }]
   );
