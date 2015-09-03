@@ -6,8 +6,13 @@
   "scripts": {
     "jshint": "jshint js/. --excludeg js/vendor"
   },
-  "dependencies": {
-    "jshint": "latest",
-    "uglify": "latest"
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-concat": "latest",
+    "gulp-concat-css": "latest",
+    "gulp-uglifycss": "latest",
+    "gulp-rename": "latest",
+    "gulp-uglify": "latest",
+    "jshint": "latest"
   }
 }
