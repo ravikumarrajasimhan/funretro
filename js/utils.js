@@ -63,14 +63,17 @@ angular
       ngDialog.closeAll();
     }
 
-    function toObject(arr) {
-      var rv = {};
-      for (var i = 0; i < arr.length; ++i)
-        rv[i] = {
-          id: arr[i].id,
-          value: arr[i].value,
+    function toObject(array) {
+      var object = {};
+
+      for (var i = 0; i < array.length; i++) {
+        object[i] = {
+          id: array[i].id,
+          value: array[i].value
         };
-      return rv;
+      }
+
+      return object;
     }
 
     return {
