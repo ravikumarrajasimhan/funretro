@@ -19,7 +19,7 @@ angular
           $scope.board = board.val();
           $scope.boardId = board.val().boardId;
         });
-        
+
         $scope.messages.$loaded().then(function(messages) {
           calculateAllHeights(messages);
         });
@@ -123,9 +123,7 @@ angular
           text: '',
           board: $scope.boardId,
           user_id: $scope.userId,
-          type: {
-            id: type.id
-          },
+          type: { id: type.id },
           date: Firebase.ServerValue.TIMESTAMP,
           votes: 0
         }).then(addMessageCallback);
