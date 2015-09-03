@@ -2,16 +2,16 @@ angular
   .module('fireideaz')
   .controller('MainCtrl', ['$firebaseArray', '$scope', '$filter', '$window', 'Utils', 'Auth',
     function($firebaseArray, $scope, $filter, $window, utils, auth) {
-      var messagesRef = new Firebase("https://firedeaztest.firebaseio.com/messages");
-
       $scope.messageTypes = utils.messageTypes;
       $scope.utils = utils;
       $scope.newBoard = { name: '' };
       $scope.userId = $window.location.hash.substring(1) || '';
 
+      var messagesRef = new Firebase("https://firedeaztest.firebaseio.com/messages/" + $scope.userId);
+
       function getBoardAndMessages() {
         $scope.userId = $window.location.hash.substring(1) || '';
-        $scope.messages = $firebaseArray(messagesRef.orderByChild("user_id").equalTo($scope.userId));
+        $scope.messages = $firebaseArray(messagesRef);
         
         var board = new Firebase("https://firedeaztest.firebaseio.com/boards/" + $scope.userId);
 
@@ -121,7 +121,6 @@ angular
       $scope.addNewMessage = function(type) {
       	$scope.messages.$add({
           text: '',
-          board: $scope.boardId,
           user_id: $scope.userId,
           type: { id: type.id },
           date: Firebase.ServerValue.TIMESTAMP,
