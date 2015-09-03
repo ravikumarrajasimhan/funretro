@@ -14,7 +14,7 @@ angular
           logUser(newUser, callback);
         }
       });
-    };
+    }
 
     function logUser(user, callback) {
       mainRef.unauth();
@@ -28,7 +28,7 @@ angular
           callback(authData);
         }
       });
-    };
+    }
 
     return {
       createUserAndLog: createUserAndLog,

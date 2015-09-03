@@ -36,7 +36,7 @@ angular
 
       $scope.boardNameChanged = function() {
         $scope.newBoard.name = $scope.newBoard.name.replace(/\s+/g,'');
-      }
+      };
 
       $scope.createNewBoard = function() {
         $scope.loading = true;
@@ -55,7 +55,7 @@ angular
           window.location.href = window.location.origin + window.location.pathname + "#" + newUser;
 
           $scope.newBoard.name = '';
-        }
+        };
 
         auth.createUserAndLog(newUser, callback);
       };
@@ -75,7 +75,7 @@ angular
       $scope.addVote = function(key, votes) {
     		messagesRef.child(key).update({ votes: votes + 1, date: Firebase.ServerValue.TIMESTAMP });
         calculateAllHeights($scope.messages);
-      }
+      };
 
       $scope.addNewColumn = function(name) {
         $scope.board.columns[utils.getNextId($scope.board) - 1] = {
@@ -116,7 +116,7 @@ angular
             calculateAllHeights($scope.messages);    
           });
       	}
-      }
+      };
 
       function addMessageCallback(message) {
         var id = message.key();

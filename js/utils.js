@@ -10,7 +10,7 @@ angular
       }
 
       return text;
-    };
+    }
 
     function getHeight(message, index) {
       if(!message.currentHeight) {
@@ -22,7 +22,7 @@ angular
 
     function focusElement(id) {
       $('#' + id).find('textarea').focus();
-    };
+    }
 
     var messageTypes = [{
       id: 1,
@@ -37,7 +37,7 @@ angular
 
     function showRemoveColumn(id, columns) {
       return columns.length === id && columns.length > 3 ? true : false;
-    };
+    }
 
     function getNextId(board) {
       return board.columns[board.columns.length -1].id + 1;
