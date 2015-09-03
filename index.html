@@ -5,6 +5,7 @@
   	<link rel="stylesheet" type="text/css" href="css/base.css">
   	<link rel="stylesheet" type="text/css" href="css/message.css">
   	<link rel="stylesheet" type="text/css" href="css/header.css">
+  	<link rel="stylesheet" type="text/css" href="css/spinner.css">
   	<link rel="stylesheet" type="text/css" href="css/vendor/ngDialog-theme-default.min.css">
   	<link rel="stylesheet" type="text/css" href="css/vendor/ngDialog-theme-plain.min.css">
   	<link rel="stylesheet" type="text/css" href="css/vendor/ngDialog.min.css">
@@ -88,4 +89,11 @@
 	  ga('create', 'UA-66141519-1', 'auto');
 	  ga('send', 'pageview');
   </script>
+  <div class="spinner" ng-show="loading">
+    <div class="rect1"></div>
+	<div class="rect2"></div>
+	<div class="rect3"></div>
+	<div class="rect4"></div>
+	<div class="rect5"></div>
+   </div>
 </html>

@@ -2,6 +2,7 @@ angular
   .module('fireideaz')
   .controller('MainCtrl', ['$firebaseArray', '$scope', '$filter', '$window', 'Utils', 'Auth',
     function($firebaseArray, $scope, $filter, $window, utils, auth) {
+      $scope.loading = true;
       $scope.messageTypes = utils.messageTypes;
       $scope.utils = utils;
       $scope.newBoard = { name: '' };
@@ -27,6 +28,8 @@ angular
         $scope.messages.$loaded().then(function(messages) {
           calculateAllHeights(messages);
         });
+
+        $scope.loading = false;
       }
 
       auth.logUser($scope.userId, getBoardAndMessages);
@@ -36,6 +39,8 @@ angular
       }
 
       $scope.createNewBoard = function() {
+        $scope.loading = true;
+        utils.closeAll();
         var newUser = utils.createUserId();
         $scope.userId = newUser;
 
@@ -48,7 +53,6 @@ angular
           });
 
           window.location.href = window.location.origin + window.location.pathname + "#" + newUser;
-          utils.closeAll();
 
           $scope.newBoard.name = '';
         }
@@ -133,6 +137,7 @@ angular
       };
 
       $($window).bind('hashchange', function () {
+        $scope.loading = true;
         $scope.userId = $window.location.hash.substring(1) || '';
         auth.logUser($scope.userId, getBoardAndMessages);
       });
