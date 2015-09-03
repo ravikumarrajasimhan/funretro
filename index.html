@@ -37,7 +37,7 @@
 		      <h2 ng-show="!editing" ng-click="editing = true; newName=type.value;">
 		      	{{type.value}}
 		      </h2>
-		      <a ng-show="!editing" class="add" ng-click="addNew(type)" href="javascript:void(0)">+</a>
+		      <a ng-show="!editing" class="add" ng-click="addNewMessage(type)" href="javascript:void(0)">+</a>
 		      <div class="editing-column">
 		      	  <input id="new_name_{{ type.id }}" ng-model="newName" ng-show="editing"></input>
 			      <button ng-click="changeColumnName(type.id, newName)" ng-show="editing" class="success-button">Save</button>

@@ -118,7 +118,7 @@ angular
         calculateAllHeights($scope.messages);  
       }
 
-      $scope.addNew = function(type) {
+      $scope.addNewMessage = function(type) {
       	$scope.messages.$add({
           text: '',
           board: $scope.boardId,
