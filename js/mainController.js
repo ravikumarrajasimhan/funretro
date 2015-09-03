@@ -3,7 +3,7 @@ angular
   .controller('MainCtrl', ['$firebaseArray', '$scope', '$filter', '$window', 'Utils', 'Auth',
     function($firebaseArray, $scope, $filter, $window, utils, auth) {
       var messagesRef = new Firebase("https://firedeaztest.firebaseio.com/messages");
-      
+
       $scope.messageTypes = utils.messageTypes;
       $scope.utils = utils;
       $scope.newBoard = { name: '' };
@@ -18,8 +18,6 @@ angular
         board.on("value", function(board) {
           $scope.board = board.val();
           $scope.boardId = board.val().boardId;
-        }, function (error) {
-          console.log("The read failed: " + error);
         });
         
         $scope.messages.$loaded().then(function(messages) {
