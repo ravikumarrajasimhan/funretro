@@ -13,6 +13,9 @@
     "gulp-uglifycss": "latest",
     "gulp-rename": "latest",
     "gulp-uglify": "latest",
+    "gulp-watch": "latest",
+    "connect-livereload": "latest",
+    "tiny-lr": "latest",
     "jshint": "latest"
   }
 }
