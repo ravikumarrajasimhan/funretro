@@ -6,7 +6,7 @@ concatCss = require('gulp-concat-css'),
 uglifycss = require('gulp-uglifycss'),
 watch = require('gulp-watch');
 
-gulp.task('watchFiles', function (cb) {
+gulp.task('watch', function (cb) {
   watch('css/**/*.css', function () {
     gulp.src(['css/vendor/*.css', 'css/*.css'])
     .pipe(concatCss('main.css'))
@@ -24,6 +24,9 @@ gulp.task('watchFiles', function (cb) {
     .pipe(gp_uglify())
     .pipe(gulp.dest('dist'));
   });
+  gulp.watch('*.html', notifyLiveReload);
+  gulp.watch('dist/*.css', notifyLiveReload);
+  gulp.watch('dist/*.js', notifyLiveReload);
 });
 
 gulp.task('express', function() {
@@ -48,10 +51,4 @@ function notifyLiveReload(event) {
   });
 }
 
-gulp.task('watchDist', function() {
-  gulp.watch('*.html', notifyLiveReload);
-  gulp.watch('dist/*.css', notifyLiveReload);
-  gulp.watch('dist/*.js', notifyLiveReload);
-});
-
-gulp.task('default', ['express', 'livereload', 'watchFiles', 'watchDist'], function() {});
+gulp.task('default', ['express', 'livereload', 'watch'], function() {});
