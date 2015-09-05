@@ -6,6 +6,26 @@ concatCss = require('gulp-concat-css'),
 uglifycss = require('gulp-uglifycss'),
 watch = require('gulp-watch');
 
+gulp.task('express', function() {
+  var express = require('express');
+  var app = express();
+  app.use(require('connect-livereload')({ port: 35729 }));
+  app.use(express.static(__dirname));
+  app.listen(4000, '0.0.0.0');
+});
+
+var tinylr;
+gulp.task('livereload', function() {
+  tinylr = require('tiny-lr')();
+  tinylr.listen(35729);
+});
+
+function notifyLiveReload(event) {
+  var fileName = require('path').relative(__dirname, event.path);
+
+  tinylr.changed({ body: { files: [fileName] }});
+}
+
 gulp.task('watch', function (cb) {
   watch('css/**/*.css', function () {
     gulp.src(['css/vendor/*.css', 'css/*.css'])
@@ -28,27 +48,5 @@ gulp.task('watch', function (cb) {
   gulp.watch('dist/*.css', notifyLiveReload);
   gulp.watch('dist/*.js', notifyLiveReload);
 });
-
-gulp.task('express', function() {
-  var express = require('express');
-  var app = express();
-  app.use(require('connect-livereload')({ port: 35729 }));
-  app.use(express.static(__dirname));
-  app.listen(4000, '0.0.0.0');
-});
-
-var tinylr;
-gulp.task('livereload', function() {
-  tinylr = require('tiny-lr')();
-  tinylr.listen(35729);
-});
-
-function notifyLiveReload(event) {
-  var fileName = require('path').relative(__dirname, event.path);
-
-  tinylr.changed({
-    body: { files: [fileName] }
-  });
-}
 
 gulp.task('default', ['express', 'livereload', 'watch'], function() {});
