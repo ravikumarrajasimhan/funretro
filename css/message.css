@@ -47,7 +47,11 @@ ul.column_6 .votes {
 }
 
 .message-list {
-  margin-left: 10px;
+  margin-left: 15px;
+}
+
+.message-list:last-child {
+ margin-right: 15px; 
 }
 
 .message-list {
@@ -100,7 +104,7 @@ ul.column_6 .votes {
   background: transparent;
   display: block;
 	height: 110px;
-	margin-bottom: 1em;
+	margin-bottom: 15px;
 	border-radius: 2px;
 	position: absolute;
 	-webkit-transition: top 0.3s ease-in-out;
