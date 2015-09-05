@@ -4,12 +4,14 @@ gp_rename = require('gulp-rename'),
 gp_uglify = require('gulp-uglify'),
 concatCss = require('gulp-concat-css'),
 uglifycss = require('gulp-uglifycss'),
+connectlivereload = require('connect-livereload'),
+express = require('express'),
+path = require('path'),
 watch = require('gulp-watch');
 
 gulp.task('express', function() {
-  var express = require('express');
   var app = express();
-  app.use(require('connect-livereload')({ port: 35729 }));
+  app.use(connectlivereload({ port: 35729 }));
   app.use(express.static(__dirname));
   app.listen(4000, '0.0.0.0');
 });
@@ -21,12 +23,13 @@ gulp.task('livereload', function() {
 });
 
 function notifyLiveReload(event) {
-  var fileName = require('path').relative(__dirname, event.path);
-
-  tinylr.changed({ body: { files: [fileName] }});
+  tinylr.changed({ body: { files: [path.relative(__dirname, event.path)]}});
 }
 
 gulp.task('watch', function (cb) {
+  watch('*.html', notifyLiveReload);
+  watch('dist/*.css', notifyLiveReload);
+  watch('dist/*.js', notifyLiveReload);
   watch('css/**/*.css', function () {
     gulp.src(['css/vendor/*.css', 'css/*.css'])
     .pipe(concatCss('main.css'))
@@ -44,9 +47,6 @@ gulp.task('watch', function (cb) {
     .pipe(gp_uglify())
     .pipe(gulp.dest('dist'));
   });
-  gulp.watch('*.html', notifyLiveReload);
-  gulp.watch('dist/*.css', notifyLiveReload);
-  gulp.watch('dist/*.js', notifyLiveReload);
 });
 
 gulp.task('default', ['express', 'livereload', 'watch'], function() {});
