@@ -21,7 +21,7 @@
 }
 
 .spinner > .rect {
-  background-color: black;
+  background-color: #555;
   height: 50px;
   width: 6px;
   display: inline-block;
