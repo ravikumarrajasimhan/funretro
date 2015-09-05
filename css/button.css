@@ -1,7 +1,6 @@
 button {
 	font-family: Roboto, sans-serif;
-	border: 10px;
-	box-sizing: border-box;
+	border: 0px;
 	cursor: pointer;
 	background: #028696;
 	color: white;
@@ -11,8 +10,7 @@ button {
 	overflow: hidden;
 	margin-left: 10px;
 	padding: 5px 8px;
-	border-radius: 2px;
-	border-bottom: 2px solid #016C79;
+	border-bottom: 2px solid #017280;
 }
 
 header button:hover {

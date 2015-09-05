@@ -35,7 +35,9 @@
 		        		<a href="javascript:void(0)" ng-click="isEditing = true; utils.focusElement(message.$id);">✎</a>
 			        </div>
 			        <div class="votes">
-			        	<a href="javascript:void(0)" ng-click="addVote(message.$id, message.votes)"><img src="img/like.png" /></a>
+			        	<a href="javascript:void(0)" ng-click="addVote(message.$id, message.votes)">
+			        		<i class="fa fa-thumbs-o-up"></i>
+			        	</a>
 			        	<strong>+ {{ message.votes }}</strong>
 			        </div>
 		        </div>
