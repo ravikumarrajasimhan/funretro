@@ -19,6 +19,8 @@ iframe {
 	vertical-align: top;
     margin-top: 14px;
     display: inline-block;
+    position: absolute;
+    top: 60px;
 }
 
 ul {
@@ -29,9 +31,9 @@ h2 {
 	cursor: pointer;
 	display: inline-block;
 	margin-bottom: 0;
-	display: inline-block;
     max-width: 80%;
-    font-size: 1.4em;
+    font-size: 1.3em;
+    line-height: 1em;
     min-width: 50px;
     height: 30px;
 }
@@ -82,7 +84,7 @@ h2 {
 .delete {
 	color: #d32f2f;
 	vertical-align: top;
-    margin-top: 24px;
+    margin-top: 19px;
     display: inline-block;
 }
 
