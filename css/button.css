@@ -37,5 +37,8 @@ button:disabled {
 	margin-top: 5px;
 	background: #00C853;
 	margin-left: 0;
+}
+
+.success-button, .message button {
 	border-bottom: 2px solid #00A946;
 }
