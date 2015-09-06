@@ -176,6 +176,28 @@ ul.column_6 .votes {
   transform: rotateX(0deg) rotateY(0deg);
 }
 
+.message.flip .back button {
+  animation: show .4s normal forwards ease-in-out;
+}
+
+.message .back button {
+  animation: hide .4s normal forwards ease-in-out;
+}
+
+@keyframes hide {
+  0% { opacity: 1; }
+  33% { opacity: 1; }
+  66% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+@keyframes show {
+  0% { opacity: 0; }
+  33% { opacity: 0; }
+  66% { opacity: 1; }
+  100% { opacity: 1; }
+}
+
 .back a {
 	color: #d32f2f;
 }
