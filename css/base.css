@@ -13,14 +13,18 @@ iframe {
 
 .add {
 	margin-left: 10px;
-	font-size: 1.5em;
+	
 	font-weight: bold;
 	color: #00bcd4;
 	vertical-align: top;
     margin-top: 14px;
     display: inline-block;
     position: absolute;
-    top: 60px;
+    top: 65px;
+}
+
+.add i {
+	font-size: 0.9em;
 }
 
 ul {
@@ -82,10 +86,19 @@ h2 {
 }
 
 .delete {
-	color: #d32f2f;
+	color: #EF5350;
 	vertical-align: top;
     margin-top: 19px;
     display: inline-block;
+}
+
+.editing .fa-times {
+	font-size: 0.9em;
+}
+
+.message-body a.delete-link {
+	top: 8px;
+	right: 10px;
 }
 
 .edit {
