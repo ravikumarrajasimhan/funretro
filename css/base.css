@@ -96,6 +96,10 @@ h2 {
 	font-size: 0.9em;
 }
 
+.fa-thumbs-o-up:hover:before {
+	content: '\f164';
+}
+
 .message-body a.delete-link {
 	top: 8px;
 	right: 10px;
