@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "private": false,
   "scripts": {
-    "jshint": "jshint js/. --excludeg js/vendor"
+    "jshint": "jshint js/. --exclude js/vendor"
   },
   "devDependencies": {
     "gulp": "^3.9.0",
