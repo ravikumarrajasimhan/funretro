@@ -107,6 +107,11 @@ h2 {
 	width: 12.8281px;
 }
 
+.fa-pencil:hover {
+	color: #333;
+	opacity: 0.5;
+}
+
 .message-body a.delete-link {
 	top: 8px;
 	right: 10px;
