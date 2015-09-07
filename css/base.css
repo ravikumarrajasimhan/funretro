@@ -175,8 +175,3 @@ textarea {
 .ngdialog-content {
 	width: 350px !important;
 }
-
-.ngdialog-content button {
-	vertical-align: top;
-	height: 29px;
-}

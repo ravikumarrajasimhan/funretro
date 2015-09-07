@@ -11,12 +11,24 @@ button {
 	margin-left: 10px;
 	padding: 5px 8px;
 	border-bottom: 2px solid #017280;
+	outline: none;
 }
 
 header button:hover {
 	border-bottom: 0;
 	position: relative;
 	top: 2px;
+}
+
+.ngdialog-content button {
+	vertical-align: top;
+	height: 28px;
+}
+
+.ngdialog-content button:hover {
+	border-bottom: 0;
+	position: relative;
+	top: 1px;	
 }
 
 .message button:hover {
