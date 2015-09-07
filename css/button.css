@@ -19,6 +19,11 @@ header button:hover {
 	top: 2px;
 }
 
+.message button:hover {
+	border-bottom: 0;
+	bottom: 13px;
+}
+
 button:disabled {
 	cursor: default;
 	background: #009EB2;
@@ -26,7 +31,6 @@ button:disabled {
 }
 
 .message button {
-	position: relative;
 	height: 23px;
 	padding: 0px;
 	position: absolute;
@@ -34,7 +38,6 @@ button:disabled {
 	left: 14px;
 	outline: none;
 	width: 50px;
-	margin-top: 5px;
 	background: #00C853;
 	margin-left: 0;
 }
