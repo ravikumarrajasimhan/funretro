@@ -13,7 +13,6 @@ iframe {
 
 .add {
 	margin-left: 10px;
-	
 	font-weight: bold;
 	color: #00bcd4;
 	vertical-align: top;
@@ -21,6 +20,10 @@ iframe {
     display: inline-block;
     position: absolute;
     top: 65px;
+}
+
+.add:hover {
+	color: #0299AD;
 }
 
 .add i {
@@ -98,6 +101,10 @@ h2 {
 
 .fa-thumbs-o-up:hover:before {
 	content: '\f164';
+}
+
+.fa-thumbs-o-up:hover {
+	width: 12.8281px;
 }
 
 .message-body a.delete-link {
