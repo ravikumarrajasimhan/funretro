@@ -6,12 +6,12 @@ angular
       $scope.messageTypes = utils.messageTypes;
       $scope.utils = utils;
       $scope.newBoard = { name: '' };
-      $scope.userId = $window.location.hash.substring(1) || '';
+      $scope.userId = $window.location.hash.substring(1) || 'apvil';
 
       var messagesRef = new Firebase("https://firedeaztest.firebaseio.com/messages/" + $scope.userId);
 
       function getBoardAndMessages(userData) {
-        $scope.userId = $window.location.hash.substring(1) || '';
+        $scope.userId = $window.location.hash.substring(1) || 'apvil';
 
         var messagesRef = new Firebase("https://firedeaztest.firebaseio.com/messages/" + $scope.userId);
         var board = new Firebase("https://firedeaztest.firebaseio.com/boards/" + $scope.userId);

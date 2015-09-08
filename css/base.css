@@ -95,6 +95,10 @@ h2 {
     display: inline-block;
 }
 
+.delete:hover {
+	color: #C33B38;
+}
+
 .editing .fa-times {
 	font-size: 0.9em;
 }
