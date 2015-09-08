@@ -16,10 +16,8 @@ iframe {
 	font-weight: bold;
 	color: #00bcd4;
 	vertical-align: top;
-    margin-top: 14px;
+    margin-top: 17px;
     display: inline-block;
-    position: absolute;
-    top: 65px;
 }
 
 .add:hover {
@@ -38,7 +36,7 @@ h2 {
 	cursor: pointer;
 	display: inline-block;
 	margin-bottom: 0;
-    max-width: 80%;
+    max-width: 75%;
     font-size: 1.3em;
     line-height: 1em;
     min-width: 50px;
