@@ -1,7 +1,7 @@
 angular
   .module('fireideaz')
   .service('Auth', function () {
-    var mainRef = new Firebase("https://firedeaztest.firebaseio.com");
+    var mainRef = new Firebase("https://blinding-torch-6662.firebaseio.com");
     
     function createUserAndLog(newUser, callback) {
       mainRef.createUser({

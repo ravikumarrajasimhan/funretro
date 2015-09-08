@@ -8,13 +8,13 @@ angular
       $scope.newBoard = { name: '' };
       $scope.userId = $window.location.hash.substring(1) || 'apvil';
 
-      var messagesRef = new Firebase("https://firedeaztest.firebaseio.com/messages/" + $scope.userId);
+      var messagesRef = new Firebase("https://blinding-torch-6662.firebaseio.com/messages/" + $scope.userId);
 
       function getBoardAndMessages(userData) {
         $scope.userId = $window.location.hash.substring(1) || 'apvil';
 
-        var messagesRef = new Firebase("https://firedeaztest.firebaseio.com/messages/" + $scope.userId);
-        var board = new Firebase("https://firedeaztest.firebaseio.com/boards/" + $scope.userId);
+        var messagesRef = new Firebase("https://blinding-torch-6662.firebaseio.com/messages/" + $scope.userId);
+        var board = new Firebase("https://blinding-torch-6662.firebaseio.com/boards/" + $scope.userId);
 
         board.on("value", function(board) {
           $scope.board = board.val();
@@ -45,7 +45,7 @@ angular
         $scope.userId = newUser;
 
         var callback = function(userData) {
-          var board = new Firebase("https://firedeaztest.firebaseio.com/boards/" + $scope.userId);
+          var board = new Firebase("https://blinding-torch-6662.firebaseio.com/boards/" + $scope.userId);
           board.set({
             boardId: $scope.newBoard.name,
             columns: $scope.messageTypes,
@@ -83,7 +83,7 @@ angular
           id: utils.getNextId($scope.board)
         };
 
-        var boardColumns = new Firebase("https://firedeaztest.firebaseio.com/boards/" + $scope.userId + '/columns');
+        var boardColumns = new Firebase("https://blinding-torch-6662.firebaseio.com/boards/" + $scope.userId + '/columns');
         boardColumns.set(utils.toObject($scope.board.columns));
 
         utils.closeAll();
@@ -95,7 +95,7 @@ angular
           id: id
         };
 
-        var boardColumns = new Firebase("https://firedeaztest.firebaseio.com/boards/" + $scope.userId + '/columns');
+        var boardColumns = new Firebase("https://blinding-torch-6662.firebaseio.com/boards/" + $scope.userId + '/columns');
         boardColumns.set(utils.toObject($scope.board.columns));
 
         utils.closeAll();
@@ -105,7 +105,7 @@ angular
         if(confirm('Are you sure you want to delete this column?')) {
           $scope.board.columns.pop();
 
-          var boardColumns = new Firebase("https://firedeaztest.firebaseio.com/boards/" + $scope.userId + '/columns');
+          var boardColumns = new Firebase("https://blinding-torch-6662.firebaseio.com/boards/" + $scope.userId + '/columns');
           boardColumns.set(utils.toObject($scope.board.columns));
         }
       };
