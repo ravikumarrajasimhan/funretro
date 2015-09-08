@@ -18,6 +18,7 @@ header button:hover {
 	border-bottom: 0;
 	position: relative;
 	top: 2px;
+	margin-bottom: 2px;
 }
 
 .ngdialog-content button {
