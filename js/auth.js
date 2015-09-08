@@ -24,6 +24,8 @@ angular
       }, function(error, authData) {
         if (error) {
           console.log('Log user failed: ', error);
+          window.location.hash = '';
+          location.reload();
         } else {
           callback(authData);
         }

@@ -26,7 +26,7 @@ header button:hover {
 	height: 28px;
 }
 
-.ngdialog-content button:hover {
+.ngdialog-content button:hover, .editing-column button:hover {
 	border-bottom: 0;
 	position: relative;
 	top: 1px;	
