@@ -99,6 +99,10 @@ h2 {
 	color: #C33B38;
 }
 
+.front a {
+	font-size: 12px;
+}
+
 .editing .fa-times {
 	font-size: 0.9em;
 }
