@@ -20,6 +20,7 @@ iframe {
     display: inline-block;
     position: absolute;
     top: 65px;
+    font-size: 12px;
 }
 
 .add:hover {
@@ -97,10 +98,6 @@ h2 {
 
 .delete:hover {
 	color: #C33B38;
-}
-
-.front a {
-	font-size: 12px;
 }
 
 .editing .fa-times {
