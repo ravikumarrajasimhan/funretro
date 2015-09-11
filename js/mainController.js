@@ -48,6 +48,7 @@ angular
           var board = new Firebase("https://blinding-torch-6662.firebaseio.com/boards/" + $scope.userId);
           board.set({
             boardId: $scope.newBoard.name,
+            date_created: new Date().toString(),
             columns: $scope.messageTypes,
             user_id: userData.uid
           });
