@@ -74,7 +74,11 @@ angular
       }
 
       $scope.addVote = function(key, votes) {
-    		messagesRef.child(key).update({ votes: votes + 1, date: Firebase.ServerValue.TIMESTAMP });
+        if(!localStorage.getItem(key)) {
+          messagesRef.child(key).update({ votes: votes + 1, date: Firebase.ServerValue.TIMESTAMP });
+          localStorage.setItem(key, 1);
+       }
+
         calculateAllHeights($scope.messages);
       };
 

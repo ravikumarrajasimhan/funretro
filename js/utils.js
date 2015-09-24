@@ -12,6 +12,10 @@ angular
       return text;
     }
 
+    function alreadyVoted(key) {
+      return localStorage.getItem(key);
+    }
+
     function getHeight(message, index) {
       if(!message.currentHeight) {
         return index * 125 + 120 + 'px';
@@ -78,6 +82,7 @@ angular
 
     return {
       createUserId: createUserId,
+      alreadyVoted: alreadyVoted,
       getHeight: getHeight,
       focusElement: focusElement,
       messageTypes: messageTypes,
