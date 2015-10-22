@@ -49,4 +49,4 @@ gulp.task('watch', function (cb) {
   });
 });
 
-gulp.task('default', ['express', 'livereload', 'watch'], function() {});
+gulp.task('default', ['express', 'livereload', 'watch']);
