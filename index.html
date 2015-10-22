@@ -17,7 +17,7 @@
         </span>
     </header>
     <span class="container">
-        <span ng-show="boardId != ''" class="message-list" ng-repeat="(index, type) in board.columns">
+        <span ng-show="boardId !== ''" class="message-list" ng-repeat="(index, type) in board.columns">
             <ul class="column column_{{ type.id }}">
               <a class="controls delete" ng-show="utils.showRemoveColumn(type.id, board.columns) && !editing" href="javascript:void(0)" ng-click="deleteLastColumn()"><i class="fa fa-times"></i></a>
               <h2 ng-show="!editing" ng-click="editing = true; newName=type.value;">
