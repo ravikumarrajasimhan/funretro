@@ -17,5 +17,8 @@
     "connect-livereload": "latest",
     "tiny-lr": "latest",
     "jshint": "latest"
+  },
+  "dependencies": {
+    "express": "^4.13.3"
   }
 }
