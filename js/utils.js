@@ -36,7 +36,7 @@ angular
       value: "To improve"
     }, { 
       id: 3,
-      value: "Action Items"
+      value: "Action items"
     }];
 
     function showRemoveColumn(id, columns) {
