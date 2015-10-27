@@ -1,7 +1,7 @@
 angular
   .module('fireideaz')
-  .controller('MainCtrl', ['$firebaseArray', '$scope', '$filter', '$window', 'Utils', 'Auth',
-    function($firebaseArray, $scope, $filter, $window, utils, auth) {
+  .controller('MainCtrl', ['$firebaseArray', '$scope', '$filter', '$window', 'Utils', 'Auth', '$rootScope',
+    function($firebaseArray, $scope, $filter, $window, utils, auth, $rootScope) {
       $scope.loading = true;
       $scope.messageTypes = utils.messageTypes;
       $scope.utils = utils;
@@ -18,7 +18,7 @@ angular
 
         board.on("value", function(board) {
           $scope.board = board.val();
-          $scope.boardId = board.val().boardId;
+          $scope.boardId = $rootScope.boardId = board.val().boardId;
         });
 
         $scope.userUid = userData.uid;
