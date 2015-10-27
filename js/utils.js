@@ -16,14 +16,6 @@ angular
       return localStorage.getItem(key);
     }
 
-    function getHeight(message, index) {
-      if(!message.currentHeight) {
-        return index * 125 + 120 + 'px';
-      } else {
-        return message.currentHeight;
-      }
-    }
-
     function focusElement(id) {
       $('#' + id).find('textarea').focus();
     }
@@ -83,7 +75,6 @@ angular
     return {
       createUserId: createUserId,
       alreadyVoted: alreadyVoted,
-      getHeight: getHeight,
       focusElement: focusElement,
       messageTypes: messageTypes,
       showRemoveColumn: showRemoveColumn,

@@ -7,6 +7,7 @@ angular
       $scope.utils = utils;
       $scope.newBoard = { name: '' };
       $scope.userId = $window.location.hash.substring(1) || '499sm';
+      $scope.sortField = '$id';
 
       var messagesRef = new Firebase("https://blinding-torch-6662.firebaseio.com/messages/" + $scope.userId);
 
@@ -22,13 +23,7 @@ angular
         });
 
         $scope.userUid = userData.uid;
-
         $scope.messages = $firebaseArray(messagesRef);
-
-        $scope.messages.$loaded().then(function(messages) {
-          calculateAllHeights(messages);
-        });
-
         $scope.loading = false;
       }
 
@@ -36,6 +31,14 @@ angular
 
       $scope.boardNameChanged = function() {
         $scope.newBoard.name = $scope.newBoard.name.replace(/\s+/g,'');
+      };
+
+      $scope.getSortOrder = function() {
+        if($scope.sortField === 'votes') {
+          return true;
+        } else {
+          return false;
+        }
       };
 
       $scope.createNewBoard = function() {
@@ -61,25 +64,11 @@ angular
         auth.createUserAndLog(newUser, callback);
       };
 
-      function calculateAllHeights(messages) {
-        var orderedArray = $filter('orderBy')(messages, ['-votes', 'date']);
-         orderedArray.forEach(function(message) {
-          var filtered = orderedArray.filter(function(item) {
-            return item.type.id === message.type.id;
-          });
-
-          message.currentHeight = filtered.indexOf(message) * 125 + 120 + 'px';
-          $scope.messages.$save(message);
-        });
-      }
-
       $scope.addVote = function(key, votes) {
         if(!localStorage.getItem(key)) {
           messagesRef.child(key).update({ votes: votes + 1, date: Firebase.ServerValue.TIMESTAMP });
           localStorage.setItem(key, 1);
        }
-
-        calculateAllHeights($scope.messages);
       };
 
       $scope.addNewColumn = function(name) {
@@ -117,9 +106,7 @@ angular
 
       $scope.deleteMessage = function(message) {
       	if(confirm('Are you sure you want to delete this note?')) {
-      		$scope.messages.$remove(message).then(function() {
-            calculateAllHeights($scope.messages);    
-          });
+      		$scope.messages.$remove(message);
       	}
       };
 
@@ -127,8 +114,6 @@ angular
         var id = message.key();
         angular.element($('#' + id)).scope().isEditing = true;
         $('#' + id).find('textarea').focus();
-
-        calculateAllHeights($scope.messages);  
       }
 
       $scope.addNewMessage = function(type) {

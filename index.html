@@ -12,6 +12,11 @@
     <header>
         <h1>Fireideaz - {{boardId}}</h1>
         <span>
+            <label>Sort by</label>
+            <select ng-model="sortField">
+              <option value="$id">Created date</option>
+              <option value="votes">Votes</option>
+            </select>
             <button ng-show="board.columns.length < 6" ng-click="utils.openDialogColumn(this)">New column</button>
             <button ng-click="utils.openDialogBoard(this)">New board</button>
             <iframe src="https://ghbtns.com/github-btn.html?user=glauberramos&repo=fireideaz&type=star&count=true" frameborder="0" scrolling="0" width="80px" height="20px"></iframe>
@@ -30,7 +35,7 @@
                   <button ng-click="changeColumnName(type.id, newName)" ng-show="editing" class="success-button">Save</button>
                   <a ng-show="editing" class="blue" ng-click="editing=false;">Cancel</a>
               </div>
-              <li id="{{ message.$id }}" enter-click class="message" style="width: {{ 100 / board.columns.length - 1.5 }}%" ng-class="{'flip': isEditing}" ng-repeat="message in messages | filter: {type: {id: type.id}}" ng-style="{'top': utils.getHeight(message, $index) }">
+              <li id="{{ message.$id }}" enter-click class="message" ng-class="{'flip': isEditing}" ng-repeat="message in messages | filter: {type: {id: type.id}} | orderBy: sortField:getSortOrder()">
                 <div class="front">
                     <div class="message-body">
                         <div class="text">{{message.text}}</div>

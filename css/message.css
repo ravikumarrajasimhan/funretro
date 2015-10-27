@@ -106,7 +106,6 @@ ul.column_6 .votes {
 	height: 110px;
 	margin-bottom: 15px;
 	border-radius: 2px;
-	position: absolute;
 	-webkit-transition: top 0.3s ease-in-out;
 	-moz-transition: top 0.3s ease-in-out;
 	transition: top 0.3s ease-in-out;	
