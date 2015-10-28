@@ -39,13 +39,11 @@ $column-colors-votes: #009688, #E6403D, #AB47BC, #039BE5, #FFB300, #F57C00;
 }
 
 .votes {
-	display: block;
+	@include position(absolute, null 0 0 null);
+  display: block;
 	font-size: 0.89em;
 	text-align: right;
 	padding: 0.5em;
-	right: 0;
-	top: 81px;
-	position: absolute;
   height: 17px;
 }
 
