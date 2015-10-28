@@ -40,7 +40,6 @@ h2 {
     font-size: 1.3em;
     line-height: 1em;
     min-width: 50px;
-    height: 30px;
 }
 
 .controls {
@@ -63,6 +62,8 @@ h2 {
 }
 
 .success-button {
+	margin-top: 5px;
+	margin-left: 0;
 	height: 24px;
     padding: 0px;
     outline: none;
@@ -71,19 +72,27 @@ h2 {
     vertical-align: top;
 }
 
+.column-header {
+	margin-bottom: 1em;
+}
+
 .editing-column {
 	margin-top: 2em;
+	margin-bottom: 0.5em;
 }
 
 .editing-column input {
 	color: #555;
-    font-size: 1em;
     font-weight: bold;
+    font-size: 1.3em;
+    max-width: 300px;
 }
 
 .editing-column .blue {
 	font-size: 0.9em;
     margin-left: 5px;
+    position: relative;
+    top: 7px;
 }
 
 .delete {
@@ -151,10 +160,10 @@ h1 {
 
 input {
 	background: white;
-	border: 1px solid #eee;
-	padding: 3px 5px;
-	width: 100px;
+	border: 1px solid #ddd;
 	border-radius: 2px;
+	padding: 3px 5px;
+	width: 100%;
 }
 
 input[type="text"] {

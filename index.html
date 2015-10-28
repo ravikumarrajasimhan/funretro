@@ -25,15 +25,19 @@
     <span class="container">
         <span ng-show="boardId !== ''" class="message-list" ng-repeat="type in board.columns">
             <ul class="column column_{{ type.id }}">
-              <a class="controls delete" ng-show="utils.showRemoveColumn(type.id, board.columns) && !editing" href="javascript:void(0)" ng-click="deleteLastColumn()"><i class="fa fa-times"></i></a>
-              <h2 ng-show="!editing" ng-click="editing = true; newName=type.value;">
-                {{type.value}}
-              </h2>
-              <a ng-show="!editing" class="add" ng-click="addNewMessage(type)" href="javascript:void(0)"><i class="fa fa-plus"></i></a>
-              <div class="editing-column">
-                  <input id="new_name_{{ type.id }}" ng-model="newName" ng-show="editing"></input>
-                  <button ng-click="changeColumnName(type.id, newName)" ng-show="editing" class="success-button">Save</button>
-                  <a ng-show="editing" class="blue" ng-click="editing=false;">Cancel</a>
+              <div class="column-header">
+                <a class="controls delete" ng-show="utils.showRemoveColumn(type.id, board.columns) && !editing" href="javascript:void(0)" ng-click="deleteLastColumn()"><i class="fa fa-times"></i></a>
+                <h2 ng-show="!editing" ng-click="editing = true; newName=type.value;">
+                  {{type.value}}
+                </h2>
+                <a ng-show="!editing" class="add" ng-click="addNewMessage(type)" href="javascript:void(0)"><i class="fa fa-plus"></i></a>
+              </div>
+              <div class="editing-column" ng-show="editing">
+                  <input id="new_name_{{ type.id }}" ng-model="newName"></input>
+                  <div>
+                    <button ng-click="changeColumnName(type.id, newName)" class="success-button">Save</button>
+                    <a class="blue" ng-click="editing=false;">Cancel</a>
+                  </div>
               </div>
               <li id="{{ message.$id }}" enter-click class="message" ng-class="{'flip': isEditing}" ng-repeat="message in messages | filter: {type: {id: type.id}} | orderBy: sortField:getSortOrder()">
                 <div class="front">

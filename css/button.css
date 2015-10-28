@@ -12,6 +12,7 @@ button {
 	padding: 5px 8px;
 	border-bottom: 2px solid #017280;
 	outline: none;
+	border-radius: 2px;
 }
 
 header button:hover {
