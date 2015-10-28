@@ -14,17 +14,17 @@ header {
   padding-right: 15px;
   display: block;
   color: white;
-}
 
-header h1 {
-	float: left;
-	margin: 0;
-	margin-top: 0.45em;
-  font-size: 1.7em;
-}
+  h1 {
+    float: left;
+    margin: 0;
+    margin-top: 0.45em;
+    font-size: 1.7em;
+  }
 
-header span {
-	float: right;
-	margin: 0.9em 0;
-	font-size: 0.9em;
+  span {
+    float: right;
+    margin: 0.9em 0;
+    font-size: 0.9em;
+  }
 }

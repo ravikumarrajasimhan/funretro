@@ -7,16 +7,17 @@
     "jshint": "jshint js/. --exclude js/vendor"
   },
   "devDependencies": {
+    "connect-livereload": "latest",
     "gulp": "^3.9.0",
     "gulp-concat": "latest",
     "gulp-concat-css": "latest",
-    "gulp-uglifycss": "latest",
     "gulp-rename": "latest",
+    "gulp-sass": "^2.0.4",
     "gulp-uglify": "latest",
+    "gulp-uglifycss": "latest",
     "gulp-watch": "latest",
-    "connect-livereload": "latest",
-    "tiny-lr": "latest",
-    "jshint": "latest"
+    "jshint": "latest",
+    "tiny-lr": "latest"
   },
   "dependencies": {
     "express": "^4.13.3"

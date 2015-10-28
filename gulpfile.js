@@ -4,6 +4,7 @@ gp_rename = require('gulp-rename'),
 gp_uglify = require('gulp-uglify'),
 concatCss = require('gulp-concat-css'),
 uglifycss = require('gulp-uglifycss'),
+sass = require('gulp-sass'),
 connectlivereload = require('connect-livereload'),
 express = require('express'),
 path = require('path'),
@@ -30,13 +31,20 @@ gulp.task('watch', function (cb) {
   watch('*.html', notifyLiveReload);
   watch('dist/*.css', notifyLiveReload);
   watch('dist/*.js', notifyLiveReload);
-  watch('css/**/*.css', function () {
-    gulp.src(['css/vendor/*.css', 'css/*.css'])
+  watch('stylesheets/vendor/*.css', function () {
+    gulp.src(['stylesheets/vendor/*.css'])
     .pipe(concatCss('main.css'))
     .pipe(gulp.dest('dist'))
-    .pipe(gp_rename('main.css'))
+    .pipe(gp_rename('vendor.css'))
     .pipe(uglifycss())
     .pipe(gulp.dest('dist'));
+  });
+  watch('stylesheets/*.scss', function() {
+    gulp.src(['stylesheets/main.scss'])
+      .pipe(sass())
+      .pipe(gp_rename('main.css'))
+      .pipe(uglifycss())
+      .pipe(gulp.dest('dist'));
   });
 
   watch('js/**/*.js', function () {
