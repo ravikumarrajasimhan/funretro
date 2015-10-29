@@ -69,7 +69,7 @@ $column-colors-votes: #009688, #E6403D, #AB47BC, #039BE5, #FFB300, #F57C00;
     @include size(100% 100%);
     font-family: Roboto, sans-serif;
     font-size: 14px;
-    padding: 0.2em 0.5em;
+    padding: 0.3em 0.5em;
     padding-bottom: 0;
     border: none;
     resize: none;
@@ -145,10 +145,6 @@ $column-colors-votes: #009688, #E6403D, #AB47BC, #039BE5, #FFB300, #F57C00;
 
 .back a {
 	color: #EF5350;
-
-  &.save-link:hover {
-    color: #00923D;
-  }
 
   &:hover {
     color: #C33B38;

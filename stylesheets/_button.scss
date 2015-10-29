@@ -45,15 +45,17 @@ button:disabled {
 }
 
 .message button {
-	height: 23px;
+	height: 20px;
 	padding: 0px;
 	position: absolute;
 	bottom: 14px;
 	left: 14px;
 	outline: none;
-	width: 50px;
+	width: 43px;
 	background: #00C853;
 	margin-left: 0;
+	line-height: 2em;
+    font-size: 0.7em;
 }
 
 .success-button, .message button {
