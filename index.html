@@ -41,26 +41,31 @@
                   </div>
               </div>
               <li id="{{ message.$id }}" enter-click class="message" ng-class="{'flip': isEditing}" ng-repeat="message in messages | filter: {type: {id: type.id}} | orderBy: sortField:getSortOrder()">
-                <div class="front">
-                    <div class="message-body">
-                        <div class="text">{{message.text}}</div>
-                        <a href="javascript:void(0)" class="pencil" ng-click="isEditing = true; utils.focusElement(message.$id);"><i class="fa fa-pencil"></i></a>
-                    </div>
-                    <div class="votes">
-                        <a ng-hide="utils.alreadyVoted(message.$id)" href="javascript:void(0)" ng-click="addVote(message.$id, message.votes)">
-                            <i class="fa fa-thumbs-o-up"></i>
-                        </a>
-                        <strong>+ {{ message.votes }}</strong>
-                    </div>
-                </div>
-                <div class="back">
-                    <div class="message-body">
-                        <div class="editing">
-                            <textarea maxlength="195" ng-model="message.text" ng-change="messages.$save(message)"></textarea>
-                            <a class="delete-link" href="javascript:void(0)" ng-click="deleteMessage(message)"><i class="fa fa-times"></i></a>
-                            <button ng-click="isEditing = false;">Done</button>
-                        </div>
-                    </div>
+                <div>
+                  <div class="front">
+                      <div class="message-body">
+                          <div class="text">{{message.text}}</div>
+                          <a href="javascript:void(0)" class="pencil" ng-click="isEditing = true; utils.focusElement(message.$id);"><i class="fa fa-pencil"></i></a>
+                      </div>
+                      <div class="votes">
+                          <a ng-hide="utils.alreadyVoted(message.$id)" href="javascript:void(0)" ng-click="addVote(message.$id, message.votes)">
+                              <i class="fa fa-thumbs-o-up"></i>
+                          </a>
+                          <strong>+ {{ message.votes }}</strong>
+                      </div>
+                  </div>
+                  <div class="back">
+                      <div class="message-body">
+                          <div class="editing">
+                              <textarea maxlength="195" ng-model="message.text" ng-change="messages.$save(message)"></textarea>
+                              <a class="delete-link" href="javascript:void(0)" ng-click="deleteMessage(message)"><i class="fa fa-times"></i></a>
+                              <button ng-click="isEditing = false;">Done</button>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="placeholder">
+                    {{ message.text }}
+                  </div>
                 </div>
               </li>
             </ul>

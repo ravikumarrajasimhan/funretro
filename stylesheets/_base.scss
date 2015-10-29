@@ -36,7 +36,7 @@ h2 {
 	cursor: pointer;
 	display: inline-block;
 	margin-bottom: 0;
-    max-width: 75%;
+    max-width: 90%;
     font-size: 1.3em;
     line-height: 1em;
     min-width: 50px;
@@ -132,6 +132,12 @@ h2 {
 	right: 10px;
 }
 
+.message-body a.save-link {
+	top: 8px;
+	right: 26px;
+	color: #00c853;
+}
+
 .edit {
 	color: #00C853;
 }
@@ -169,17 +175,6 @@ input {
 input[type="text"] {
 	font-size: 18px;
 	width: 200px;
-}
-
-textarea {
-	font-family: Roboto, sans-serif;
-	width: 100%;
-	font-size: 14px;
-  	height: 6.9em;
-  	padding: 0.5em;
-  	border: none;
-  	resize: none;
-  	outline: none;
 }
 
 .ngdialog-content h1 {
