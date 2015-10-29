@@ -96,12 +96,10 @@ angular
       };
 
       $scope.deleteLastColumn = function() {
-        if(confirm('Are you sure you want to delete this column?')) {
           $scope.board.columns.pop();
-
           var boardColumns = new Firebase("https://blinding-torch-6662.firebaseio.com/boards/" + $scope.userId + '/columns');
           boardColumns.set(utils.toObject($scope.board.columns));
-        }
+          utils.closeAll();
       };
 
       $scope.deleteMessage = function(message) {

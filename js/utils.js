@@ -63,6 +63,14 @@ angular
       });
     }
 
+    function openDialogDeleteColumn(element) {
+      ngDialog.open({
+        template: 'deleteColumn',
+        className: 'ngdialog-theme-plain',
+        scope: element
+      });
+    }
+
     function closeAll() {
       ngDialog.closeAll();
     }
@@ -90,6 +98,7 @@ angular
       openDialogColumn: openDialogColumn,
       openDialogBoard: openDialogBoard,
       openDialogDeleteCard: openDialogDeleteCard,
+      openDialogDeleteColumn: openDialogDeleteColumn,
       closeAll: closeAll,
       toObject: toObject
     };
