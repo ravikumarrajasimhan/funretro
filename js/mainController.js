@@ -105,9 +105,8 @@ angular
       };
 
       $scope.deleteMessage = function(message) {
-      	if(confirm('Are you sure you want to delete this note?')) {
       		$scope.messages.$remove(message);
-      	}
+          utils.closeAll();
       };
 
       function addMessageCallback(message) {

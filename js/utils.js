@@ -55,6 +55,14 @@ angular
       });
     }
 
+    function openDialogDeleteCard(element) {
+      ngDialog.open({
+        template: 'deleteCard',
+        className: 'ngdialog-theme-plain',
+        scope: element
+      });
+    }
+
     function closeAll() {
       ngDialog.closeAll();
     }
@@ -81,6 +89,7 @@ angular
       getNextId: getNextId,
       openDialogColumn: openDialogColumn,
       openDialogBoard: openDialogBoard,
+      openDialogDeleteCard: openDialogDeleteCard,
       closeAll: closeAll,
       toObject: toObject
     };

@@ -58,7 +58,7 @@
                       <div class="message-body">
                           <div class="editing">
                               <textarea maxlength="195" ng-model="message.text" ng-change="messages.$save(message)"></textarea>
-                              <a class="delete-link" href="javascript:void(0)" ng-click="deleteMessage(message)"><i class="fa fa-times"></i></a>
+                              <a class="delete-link" href="javascript:void(0)" ng-click="utils.openDialogDeleteCard(this)"><i class="fa fa-times"></i></a>
                               <button ng-click="isEditing = false;">DONE</button>
                           </div>
                       </div>
@@ -90,6 +90,12 @@
     <p>Board name example: <strong>team-board-123</strong></p>
     <input ng-model="newBoard.name" ng-change="boardNameChanged()" type="text" placeholder="Board name"></input>
     <button ng-click="createNewBoard()">Create</button>
+  </script>
+  <script type="text/ng-template" id="deleteCard">
+    <h1>Delete note</h1>
+    <p>Are you sure you want to delete this note?</strong></p>
+    <button ng-click="deleteMessage(message)">Delete</button>
+    <a ng-click="utils.closeAll()">Cancel</a>
   </script>
   <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
