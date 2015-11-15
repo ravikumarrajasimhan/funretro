@@ -64,10 +64,13 @@ angular
         auth.createUserAndLog(newUser, callback);
       };
 
-      $scope.addVote = function(key, votes) {
+      $scope.toggleVote = function(key, votes) {
         if(!localStorage.getItem(key)) {
           messagesRef.child(key).update({ votes: votes + 1, date: Firebase.ServerValue.TIMESTAMP });
           localStorage.setItem(key, 1);
+       } else {
+         messagesRef.child(key).update({ votes: votes - 1, date: Firebase.ServerValue.TIMESTAMP });
+         localStorage.removeItem(key);
        }
       };
 
