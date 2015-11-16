@@ -11,7 +11,12 @@ module.exports = function(config) {
           dir: 'coverage/'
         },
         files: [
-          'js/vendor/*.js',
+          'js/vendor/angular.min.js',
+          'js/vendor/angular-mocks.js',
+          'js/vendor/angularfire.min.js',
+          'js/vendor/firebase.js',
+          'js/vendor/ngDialog.min.js',
+          'js/vendor/zepto.min.js',
           'js/*.js',
           'test/*.js'
         ],
