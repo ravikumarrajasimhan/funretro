@@ -1,4 +1,6 @@
 var gulp = require('gulp'),
+jshint = require('gulp-jshint'),
+Server = require('karma').Server,
 gp_concat = require('gulp-concat'),
 gp_rename = require('gulp-rename'),
 gp_uglify = require('gulp-uglify'),
@@ -55,6 +57,19 @@ gulp.task('watch', function (cb) {
     .pipe(gp_uglify())
     .pipe(gulp.dest('dist'));
   });
+});
+
+gulp.task('lint', function() {
+  return gulp.src('./js/*.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
+});
+
+gulp.task('test', function (done) {
+  return new Server({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done).start();
 });
 
 gulp.task('default', ['express', 'livereload', 'watch']);

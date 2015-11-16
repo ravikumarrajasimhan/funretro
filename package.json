@@ -12,12 +12,20 @@
     "gulp-concat": "latest",
     "gulp-concat-css": "latest",
     "gulp-rename": "latest",
+    "gulp-jshint": "^1.11.2",
     "gulp-sass": "^2.0.4",
     "gulp-uglify": "latest",
     "gulp-uglifycss": "latest",
     "gulp-watch": "latest",
     "jshint": "latest",
-    "tiny-lr": "latest"
+    "tiny-lr": "latest",
+    "jasmine-core": "latest",
+    "karma": "^0.13.10",
+    "karma-coverage": "^0.5.2",
+    "karma-coveralls": "^1.1.2",
+    "karma-jasmine": "^0.3.6",
+    "karma-phantomjs-launcher": "^0.2.1",
+    "karma-spec-reporter": "0.0.20"
   },
   "dependencies": {
     "express": "^4.13.3"
