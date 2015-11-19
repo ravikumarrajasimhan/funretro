@@ -28,6 +28,37 @@ iframe {
 	font-size: 0.9em;
 }
 
+.feature-notification {
+	width: 600px;
+    height: 150px;
+    position: fixed;
+    text-align: center;
+    top: 70px;
+    left: 25%;
+    background: #00626F;
+    padding: 30px;
+    color: white;
+    font-size: 18px;
+
+    .title {
+    	font-size: 1.5em;
+    	font-weight: bold;
+    }
+
+    a {
+		text-decoration: underline;
+		color: #FFCF22;
+		font-size: 1.2em;
+    }
+
+    i {
+    	position: absolute;
+    	top: 5px;
+    	right: 5px;
+    	cursor: pointer;
+    }
+}
+
 ul {
 	padding-left: 0;
 }

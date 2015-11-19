@@ -1,5 +1,5 @@
 # Fun Retrospectives
-Easy to use and beautiful restrospective board. Inspired by ideaboardz. 
+Easy to use and beautiful restrospective board.
 
 Learn more about retrospectives at [funretrospectives.com](http://funretrospectives.com)
 

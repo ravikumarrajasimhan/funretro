@@ -79,6 +79,11 @@
         <div class="rect rect4"></div>
         <div class="rect rect5"></div>
     </div>
+    <div ng-show="showNotification()" class="overlay"></div>
+    <div ng-show="showNotification()" class="feature-notification">
+      <i class="fa fa-times" ng-click="seeNotification()"></i>
+      <span class="title">We are happy to announce our new site:</span> <br><br> <a href="http://distributed.funretrospectives.com">http://distributed.funretrospectives.com</a>. <br><br> All your boards are going to keep working. Just change the old url to the new one and use the same board id.
+    </div>
   </body>
   <script type="text/ng-template" id="addNewColumn">
     <h1>New column</h1>
