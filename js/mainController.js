@@ -33,14 +33,6 @@ angular
         $scope.newBoard.name = $scope.newBoard.name.replace(/\s+/g,'');
       };
 
-      $scope.seeNotification = function() {
-        localStorage.setItem('funretro1', true);
-      };
-
-      $scope.showNotification = function() {
-        return !localStorage.getItem('funretro1');
-      };
-
       $scope.getSortOrder = function() {
         if($scope.sortField === 'votes') {
           return true;
