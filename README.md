@@ -14,6 +14,6 @@ Learn more about retrospectives at [funretrospectives.com](http://funretrospecti
 
 ## Running
 
-1. Install npm accordingly to your platform
+1. Install [Node.js](https://nodejs.org/en/)
 2. ```npm install``` (inside the project folder)
 3. Run ```./gulp```
