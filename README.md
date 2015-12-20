@@ -10,3 +10,10 @@ Learn more about retrospectives at [funretrospectives.com](http://funretrospecti
 ## User interface
 
 ![Fun retrospectives screenshot](http://i.imgur.com/iY1zc2Y.png)
+
+
+## Running
+
+1. Install npm accordingly to your platform
+2. ```npm install``` (inside the project folder)
+3. Run ```./gulp```
