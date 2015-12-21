@@ -6,10 +6,8 @@ angular
       $scope.messageTypes = utils.messageTypes;
       $scope.utils = utils;
       $scope.newBoard = { name: '' };
-      $scope.userId = $window.location.hash.substring(1) || '499sm';
+      $scope.userId = $window.location.hash.substring(1) || '';
       $scope.sortField = '$id';
-
-      var messagesRef = new Firebase("https://blinding-torch-6662.firebaseio.com/messages/" + $scope.userId);
 
       function getBoardAndMessages(userData) {
         $scope.userId = $window.location.hash.substring(1) || '499sm';
@@ -27,7 +25,12 @@ angular
         $scope.loading = false;
       }
 
-      auth.logUser($scope.userId, getBoardAndMessages);
+      if($scope.userId !== '') {
+        var messagesRef = new Firebase("https://blinding-torch-6662.firebaseio.com/messages/" + $scope.userId);
+        auth.logUser($scope.userId, getBoardAndMessages);
+      } else {
+        $scope.loading = false;
+      }
 
       $scope.boardNameChanged = function() {
         $scope.newBoard.name = $scope.newBoard.name.replace(/\s+/g,'');
