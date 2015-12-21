@@ -13,6 +13,11 @@ button {
 	border-bottom: 2px solid #017280;
 	outline: none;
 	border-radius: 2px;
+
+	&.first {
+		background: #BA68C8;
+	    border-bottom: 2px solid #93529E;
+	}
 }
 
 header button:hover {

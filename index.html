@@ -22,7 +22,7 @@
               <option value="votes">Votes</option>
             </select>
             <button ng-show="board.columns.length < 6" ng-click="utils.openDialogColumn(this)">New column</button>
-            <button ng-click="utils.openDialogBoard(this)">New board</button>
+            <button class="first" ng-click="utils.openDialogBoard(this)">New board</button>
             <iframe src="https://ghbtns.com/github-btn.html?user=funretro&repo=distributed&type=star&count=true" frameborder="0" scrolling="0" width="80px" height="20px"></iframe>
         </span>
     </header>
@@ -86,7 +86,7 @@
     <div class="home" ng-show="userId === ''">
     <section>
       <h1><img src="logo.png" />Fun Retrospectives</h1>
-      <button ng-click="utils.openDialogBoard(this)">CREATE BOARD</button>
+      <button ng-click="utils.openDialogBoard(this)">NEW BOARD</button>
     </section>
     <section class="step">
       <h2>Set the context</h2>
