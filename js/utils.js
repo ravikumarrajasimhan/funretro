@@ -71,6 +71,14 @@ angular
       });
     }
 
+    function openDialogMergeCards(scope) {
+      ngDialog.open({
+        template: 'mergeCards',
+        className: 'ngdialog-theme-plain',
+        scope: scope
+      });
+    }
+
     function closeAll() {
       ngDialog.closeAll();
     }
@@ -99,6 +107,7 @@ angular
       openDialogBoard: openDialogBoard,
       openDialogDeleteCard: openDialogDeleteCard,
       openDialogDeleteColumn: openDialogDeleteColumn,
+      openDialogMergeCards: openDialogMergeCards,
       closeAll: closeAll,
       toObject: toObject
     };

@@ -35,6 +35,32 @@ angular
         $scope.loading = false;
       }
 
+      $scope.droppedEvent = function(dragEl, dropEl) {
+        $scope.dragEl = dragEl;
+        $scope.dropEl = dropEl;
+
+        utils.openDialogMergeCards($scope);
+      };
+
+      $scope.dropped = function(dragEl, dropEl) {
+        var drag = $('#' + dragEl);
+        var drop = $('#' + dropEl);
+
+        var dropMessageRef = new Firebase("https://blinding-torch-6662.firebaseio.com/messages/" + $scope.userId + '/' + drop.attr('messageId'));
+        var dragMessageRef = new Firebase("https://blinding-torch-6662.firebaseio.com/messages/" + $scope.userId + '/' + drag.attr('messageId'));
+
+        dropMessageRef.once('value', function(dropMessage) {
+          dragMessageRef.once('value', function(dragMessage) {
+            dropMessageRef.update({
+              text: dropMessage.val().text + ' | ' + dragMessage.val().text
+            });
+
+            dragMessageRef.remove();
+            utils.closeAll();
+          });
+        });
+      }
+
       $scope.boardNameChanged = function() {
         $scope.newBoard.name = $scope.newBoard.name.replace(/\s+/g,'');
       };

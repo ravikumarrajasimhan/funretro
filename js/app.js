@@ -1,1 +1,1 @@
-angular.module('fireideaz', ['firebase', 'ngDialog']);
+angular.module('fireideaz', ['firebase', 'ngDialog', 'lvl.directives.dragdrop']);

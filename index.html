@@ -48,7 +48,7 @@
                   </div>
               </div>
               <li id="{{ message.$id }}" enter-click class="message" ng-class="{'flip': isEditing}" ng-repeat="message in messages | filter: {type: {id: type.id}} | orderBy: sortField:getSortOrder()">
-                <div>
+                <div messageId="{{ message.$id }}" x-lvl-draggable="true" x-lvl-drop-target="true" x-on-drop="droppedEvent(dragEl, dropEl)">
                   <div class="front">
                       <div class="message-body">
                           <div class="text">{{message.text}}</div>
@@ -142,6 +142,12 @@ It is time to gather data, talk about the positive stuff, recognize people and s
     <button class="delete-button" ng-click="deleteLastColumn()">Delete</button>
     <a ng-click="utils.closeAll()">Cancel</a>
   </script>
+  <script type="text/ng-template" id="mergeCards">
+    <h1>Delete column</h1>
+    <p>Are you sure you want to merge these two cards?</strong></p>
+    <button class="delete-button" ng-click="dropped(dragEl, dropEl)">Merge</button>
+    <a ng-click="utils.closeAll()">Cancel</a>
+  </script>
   <script>
     UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/2TTb5A61iTENpz6Gmnq93w.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
 
@@ -151,21 +157,7 @@ It is time to gather data, talk about the positive stuff, recognize people and s
       trigger_background_color: '#448dd6'
     }]);
 
-    UserVoice.push(['identify', {
-      //email:      'john.doe@example.com', // User’s email address
-      //name:       'John Doe', // User’s real name
-      //created_at: 1364406966, // Unix timestamp for the date the user signed up
-      //id:         123, // Optional: Unique id of the user (if set, this should not change)
-      //type:       'Owner', // Optional: segment your users by type
-      //account: {
-      //  id:           123, // Optional: associate multiple users with a single account
-      //  name:         'Acme, Co.', // Account name
-      //  created_at:   1364406966, // Unix timestamp for the date the account was created
-      //  monthly_rate: 9.99, // Decimal; monthly rate of the account
-      //  ltv:          1495.00, // Decimal; lifetime value of the account
-      //  plan:         'Enhanced' // Plan name for the account
-      //}
-    }]);
+    UserVoice.push(['identify', {}]);
 
     UserVoice.push(['addTrigger', {mode: 'smartvote', trigger_position: 'bottom-right' }]);
 

@@ -233,3 +233,16 @@ blockquote {
 	    }
 	}
 }
+
+.message > div > .lvl-over {
+	@include transition(none);
+	outline: 2px dashed #777 !important;
+}
+
+[draggable] {
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+	cursor: move;
+}
