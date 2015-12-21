@@ -207,3 +207,29 @@ input[type="text"] {
 .delete-button {
 	margin-left: 0;
 }
+
+blockquote {
+    font-family: 'PT Serif',serif;
+    font-style: italic;
+    margin: 0;
+
+	p {
+	    position: relative;
+	    margin: 0 auto;
+	    padding: 5px 0;
+	    font-style: italic;
+	    font-size: 14px;
+	    line-height: 20px;
+	}
+
+	footer {
+		margin: 3px;
+		font-size: 13px;
+		line-height: 20px;
+		text-align: right;
+    
+	    &:before {
+	      content: '\2014';
+	    }
+	}
+}

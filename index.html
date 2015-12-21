@@ -14,7 +14,10 @@
         <h1>Fun Retrospectives - {{boardId}}</h1>
         <span>
             <span class="prime"><i class="fa fa-star"></i>Prime Directive
-              <span>“Regardless of what we discover, we understand and truly believe that everyone did the best job he or she could, given what was known at the time, his or her skills and abilities, the resources available and the situation at hand”</span>
+              <span>
+              <blockquote>
+<p>Regardless of what we discover, we understand and truly believe that everyone did the best job he or she could, given what was known at the time, his or her skills and abilities, the resources available and the situation at hand</p>
+<footer>In Project Retrospectives, Norm Kerth</footer></blockquote></span>
             </span>
             <label>Sort by</label>
             <select ng-model="sortField">
@@ -90,43 +93,29 @@
     </section>
     <section class="step">
       <h2>Set the context</h2>
+      <img src="image1.png"/>
       <p>
 Why is this retrospective being held? What will it cover? Retrospectives, similarly to any other meeting, are more effective if the participants align their expectations before getting into it.
- <br><br>
-You can start with a pre-defined context or define it in real-time with the participants. But it must be clear to everyone – “This retrospective context is…”.
- <br><br>
-Below are some sample contexts:<br>
-<ul>
-<li>In 14 days, our artifact should reach the main production stage</li>
-<li>A feature exploded in production, system was down for two hours until sysadmin could bring it back up</li>
-<li>We worked together in the past year and we will work together for another year to come</li>
-<li>This retrospective is a bi-weekly recurring scrum retrospective for the ABC team. We are on Sprint 12 out of 30</li>
-</ul>
       </p>
     </section>
     <section class="step">
       <h2>
         Read the prime directive
       </h2>
-      <p>
-In Project Retrospectives: A Handbook for Team Reviews, Norm Kerth introduces the prime directive, a statement intended to set the stage for the retrospective. It says:
-<br><br>
-“Regardless of what we discover, we understand and truly believe that everyone did the best job he or she could, given what was known at the time, his or her skills and abilities, the resources available and the situation at hand”.
- <br><br>
-The statement is invaluable for setting the meeting tone. Make it visible to all participants, and read it out loud before running your retrospective activity.
-      </p>
+<p class="left">The statement is invaluable for setting the meeting tone. Make it visible to all participants, and read it out loud before running your retrospective activity.</p>
+<img src="image2.png"/>
     </section>
     <section class="step">
       <h2>
-        Select and run an activity
+        Go for it!
       </h2>
+      <img src="image3.png"/>
       <p>
-A retrospective activity generates insights for continuous improvement. This is when you gather data, check on the team’s morale, talk about the positive stuff, recognize people and seek improvements. These activities drive the team to reflect about the given context, reinforce a shared vision and generate insights.
-<br><br>
-It is the time for team members to feel heard. Each important note is written down and acknowledged, so it is visible for the entire team. Shared notes will trigger conversations. Action items are created. Together, the team will look at different angles and perspectives, and raise the level of awareness.
-<br><br>
-Teams that have regular retrospectives as recurring meetings may want to look for alternative activities. By combining and varying activities, your team retrospectives will be fun, effective, and rewarding.
+It is time to gather data, talk about the positive stuff, recognize people and seek improvements. Select an activity, create and customize your board, and go for it!
       </p>
+    </section>
+    <section>
+      <button class="alone" ng-click="utils.openDialogBoard(this)">NEW BOARD</button>
     </section>
     </div>
   </body>
