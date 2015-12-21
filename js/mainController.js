@@ -18,8 +18,11 @@ angular
         board.on("value", function(board) {
           $scope.board = board.val();
           $scope.boardId = $rootScope.boardId = board.val().boardId;
+          $scope.boardContext = $rootScope.boardContext = board.val().boardContext;
         });
 
+
+        $scope.boardRef = board;
         $scope.userUid = userData.uid;
         $scope.messages = $firebaseArray(messagesRef);
         $scope.loading = false;
@@ -65,6 +68,12 @@ angular
         };
 
         auth.createUserAndLog(newUser, callback);
+      };
+
+      $scope.changeBoardContext = function() {
+        $scope.boardRef.update({
+          boardContext: $scope.boardContext
+        });
       };
 
       $scope.toggleVote = function(key, votes) {
