@@ -35,11 +35,21 @@ angular
         $scope.loading = false;
       }
 
-      $scope.droppedEvent = function(dragEl, dropEl) {
-        $scope.dragEl = dragEl;
-        $scope.dropEl = dropEl;
+      $scope.seeNotification = function() {
+         localStorage.setItem('funretro1', true);
+       };
+ 
+       $scope.showNotification = function() {
+         return !localStorage.getItem('funretro1') && $scope.userId !== '';
+       };
 
-        utils.openDialogMergeCards($scope);
+      $scope.droppedEvent = function(dragEl, dropEl) {
+        if(dragEl !== dropEl) {
+          $scope.dragEl = dragEl;
+          $scope.dropEl = dropEl;
+
+          utils.openDialogMergeCards($scope);
+        }
       };
 
       $scope.dropped = function(dragEl, dropEl) {
