@@ -33,6 +33,7 @@ gulp.task('watch', function (cb) {
   watch('*.html', notifyLiveReload);
   watch('dist/*.css', notifyLiveReload);
   watch('dist/*.js', notifyLiveReload);
+
   watch('stylesheets/vendor/*.css', function () {
     gulp.src(['stylesheets/vendor/*.css'])
     .pipe(concatCss('main.css'))
@@ -41,6 +42,7 @@ gulp.task('watch', function (cb) {
     .pipe(uglifycss())
     .pipe(gulp.dest('dist'));
   });
+
   watch('stylesheets/*.scss', function() {
     gulp.src(['stylesheets/main.scss'])
       .pipe(sass())
@@ -72,4 +74,9 @@ gulp.task('test', function (done) {
   }, done).start();
 });
 
-gulp.task('default', ['express', 'livereload', 'watch']);
+gulp.task('copy', function(){
+  gulp.src('node_modules/open-sans-fontface/fonts/Regular/*')
+  .pipe(gulp.dest('dist/fonts'));
+});
+
+gulp.task('default', ['copy', 'express', 'livereload', 'watch']);

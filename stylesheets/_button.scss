@@ -1,75 +1,75 @@
 button {
-	font-family: Roboto, sans-serif;
-	border: 0px;
-	cursor: pointer;
-	background: #028696;
-	color: white;
-	transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
-	-webkit-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
-	transform: translate3d(0px, 0px, 0px);
-	overflow: hidden;
-	margin-left: 10px;
-	padding: 5px 8px;
-	border-bottom: 2px solid #017280;
-	outline: none;
-	border-radius: 2px;
+  font-family: 'Open Sans', sans-serif;
+  border: 0px;
+  cursor: pointer;
+  background: #028696;
+  color: white;
+  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+  -webkit-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+  transform: translate3d(0px, 0px, 0px);
+  overflow: hidden;
+  margin-left: 10px;
+  padding: 5px 8px;
+  border-bottom: 2px solid #017280;
+  outline: none;
+  border-radius: 2px;
 
-	&.first {
-		background: #BA68C8;
-	    border-bottom: 2px solid #93529E;
-	}
+  &.first {
+    background: #BA68C8;
+      border-bottom: 2px solid #93529E;
+  }
 }
 
 header button:hover {
-	border-bottom: 0;
-	position: relative;
-	top: 2px;
-	margin-bottom: 2px;
+  border-bottom: 0;
+  position: relative;
+  top: 2px;
+  margin-bottom: 2px;
 }
 
 .ngdialog-content button {
-	vertical-align: top;
-	font-size: 1em;
-	height: 28px;
+  vertical-align: top;
+  font-size: 1em;
+  height: 28px;
 }
 
 .ngdialog-content a {
-	color: #028696;
-	margin-left: 10px;
-	font-size: 1em;
+  color: #028696;
+  margin-left: 10px;
+  font-size: 1em;
 }
 
 .ngdialog-content button:hover, .editing-column button:hover {
-	border-bottom: 0;
-	position: relative;
-	top: 1px;	
+  border-bottom: 0;
+  position: relative;
+  top: 1px;
 }
 
 .message button:hover {
-	border-bottom: 0;
-	bottom: 13px;
+  border-bottom: 0;
+  bottom: 13px;
 }
 
 button:disabled {
-	cursor: default;
-	background: #009EB2;
-  	color: rgb(4, 134, 150);
+  cursor: default;
+  background: #009EB2;
+    color: rgb(4, 134, 150);
 }
 
 .message button {
-	height: 20px;
-	padding: 0px;
-	position: absolute;
-	bottom: 14px;
-	left: 14px;
-	outline: none;
-	width: 43px;
-	background: #00C853;
-	margin-left: 0;
-	line-height: 2em;
+  height: 20px;
+  padding: 0px;
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  outline: none;
+  width: 43px;
+  background: #00C853;
+  margin-left: 0;
+  line-height: 2em;
     font-size: 0.7em;
 }
 
 .success-button, .message button {
-	border-bottom: 2px solid #00A946;
+  border-bottom: 2px solid #00A946;
 }
