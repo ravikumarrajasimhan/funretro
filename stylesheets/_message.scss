@@ -1,5 +1,3 @@
-$column-colors-main: #4DB6AC, #e57373, #BA68C8, #64B5F6, #FFCA28, #FFA000;
-$column-colors-votes: #009688, #E6403D, #AB47BC, #039BE5, #FFB300, #F57C00;
 
 @for $i from 1 through 6 {
   ul.column_#{$i} .front, ul.column_#{$i} .back {
@@ -28,21 +26,21 @@ $column-colors-votes: #009688, #E6403D, #AB47BC, #039BE5, #FFB300, #F57C00;
 }
 
 .message-body {
-	padding: 0.5em;
+  padding: 0.5em;
  
   a {
-  	position: absolute;
-  	right: 0.5em;
+    position: absolute;
+    right: 0.5em;
     top: 0.4em;
   }
 }
 
 .votes {
-	@include position(absolute, null 0 0 null);
+  @include position(absolute, null 0 0 null);
   display: block;
-	font-size: 0.89em;
-	text-align: right;
-	padding: .3em .4em;
+  font-size: 0.89em;
+  text-align: right;
+  padding: .3em .4em;
   height: 17px;
 }
 
@@ -60,9 +58,9 @@ $column-colors-votes: #009688, #E6403D, #AB47BC, #039BE5, #FFB300, #F57C00;
   @include perspective(500);
   background: transparent;
   display: block;
-	height: auto;
-	margin-bottom: 29px;
-	border-radius: 2px;
+  height: auto;
+  margin-bottom: 29px;
+  border-radius: 2px;
   padding-bottom: 20px;
 
   textarea {
@@ -144,7 +142,7 @@ $column-colors-votes: #009688, #E6403D, #AB47BC, #039BE5, #FFB300, #F57C00;
 }
 
 .back a {
-	color: #EF5350;
+  color: #EF5350;
 
   &:hover {
     color: #C33B38;

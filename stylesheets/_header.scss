@@ -1,5 +1,5 @@
 header {
-  background-color: #00bcd4;
+  background-color: $teal;
   transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
   box-sizing: border-box;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
@@ -52,7 +52,7 @@ header {
       width: 300px;
       height: 130px;
       line-height: 1.3em;
-      background-color: #555;
+      background-color: $grey;
       border-radius: 4px;
       text-shadow: none;
 
@@ -66,7 +66,7 @@ header {
         height: 0;
         border-left: 8px solid transparent;
         border-right: 8px solid transparent;
-        border-bottom: 8px solid #555;
+        border-bottom: 8px solid $grey;
         border-top: 8px solid transparent;
       }
     }
@@ -78,7 +78,7 @@ header {
     }
 
     i {
-      color: #ffd700;
+      color: $yellow;
       margin-right: 4px;
     }
   }

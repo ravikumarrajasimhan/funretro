@@ -2,7 +2,7 @@ button {
   font-family: 'Open Sans', sans-serif;
   border: 0px;
   cursor: pointer;
-  background: #028696;
+  background: $light-teal;
   color: white;
   transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
   -webkit-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
@@ -10,14 +10,20 @@ button {
   overflow: hidden;
   margin-left: 10px;
   padding: 5px 8px;
-  border-bottom: 2px solid #017280;
+  border-bottom: 2px solid $dark-blue;
   outline: none;
   border-radius: 2px;
 
   &.first {
-    background: #BA68C8;
-      border-bottom: 2px solid #93529E;
+    background: $purple;
+    border-bottom: 2px solid $light-purple;
   }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+
 }
 
 header button:hover {
@@ -34,7 +40,7 @@ header button:hover {
 }
 
 .ngdialog-content a {
-  color: #028696;
+  color: $light-teal;
   margin-left: 10px;
   font-size: 1em;
 }
@@ -50,11 +56,6 @@ header button:hover {
   bottom: 13px;
 }
 
-button:disabled {
-  cursor: default;
-  background: #009EB2;
-    color: rgb(4, 134, 150);
-}
 
 .message button {
   height: 20px;
@@ -64,12 +65,12 @@ button:disabled {
   left: 14px;
   outline: none;
   width: 43px;
-  background: #00C853;
+  background: $green;
   margin-left: 0;
   line-height: 2em;
-    font-size: 0.7em;
+  font-size: 0.7em;
 }
 
 .success-button, .message button {
-  border-bottom: 2px solid #00A946;
+  border-bottom: 2px solid $light-green;
 }
