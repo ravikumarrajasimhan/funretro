@@ -75,7 +75,9 @@ gulp.task('test', function (done) {
 });
 
 gulp.task('copy', function(){
-  gulp.src('node_modules/open-sans-fontface/fonts/Regular/*')
+  gulp.src('node_modules/roboto-fontface/fonts/*Regular.*')
+  .pipe(gulp.dest('dist/fonts'));
+  gulp.src('node_modules/roboto-fontface/fonts/*Bold.*')
   .pipe(gulp.dest('dist/fonts'));
 });
 
