@@ -11,21 +11,22 @@
     "gulp": "^3.9.0",
     "gulp-concat": "latest",
     "gulp-concat-css": "latest",
-    "gulp-rename": "latest",
     "gulp-jshint": "^1.11.2",
+    "gulp-rename": "latest",
     "gulp-sass": "^2.0.4",
     "gulp-uglify": "latest",
     "gulp-uglifycss": "latest",
     "gulp-watch": "latest",
-    "jshint": "latest",
-    "tiny-lr": "latest",
     "jasmine-core": "latest",
+    "jshint": "latest",
     "karma": "^0.13.10",
     "karma-coverage": "^0.5.2",
     "karma-coveralls": "^1.1.2",
     "karma-jasmine": "^0.3.6",
     "karma-phantomjs-launcher": "^0.2.1",
-    "karma-spec-reporter": "0.0.20"
+    "karma-spec-reporter": "0.0.20",
+    "open-sans-fontface": "^1.4.0",
+    "tiny-lr": "latest"
   },
   "dependencies": {
     "express": "^4.13.3"
