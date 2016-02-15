@@ -1,7 +1,7 @@
 angular
   .module('fireideaz')
-  .controller('MainCtrl', ['$firebaseArray', '$scope', '$filter', '$window', 'Utils', 'Auth', '$rootScope',
-    function($firebaseArray, $scope, $filter, $window, utils, auth, $rootScope) {
+  .controller('MainCtrl', ['$firebaseArray', '$scope', '$filter', '$window', 'Utils', 'Auth', '$rootScope', 'FirebaseServer',
+    function($firebaseArray, $scope, $filter, $window, utils, auth, $rootScope, firebaseServer) {
       $scope.loading = true;
       $scope.messageTypes = utils.messageTypes;
       $scope.utils = utils;
@@ -12,8 +12,8 @@ angular
       function getBoardAndMessages(userData) {
         $scope.userId = $window.location.hash.substring(1) || '499sm';
 
-        var messagesRef = new Firebase("https://blinding-torch-6662.firebaseio.com/messages/" + $scope.userId);
-        var board = new Firebase("https://blinding-torch-6662.firebaseio.com/boards/" + $scope.userId);
+        var messagesRef = firebaseServer.getMessagesRef($scope.userId);
+        var board = firebaseServer.getBoardRef($scope.userId);
 
         board.on("value", function(board) {
           $scope.board = board.val();
@@ -29,7 +29,7 @@ angular
       }
 
       if($scope.userId !== '') {
-        var messagesRef = new Firebase("https://blinding-torch-6662.firebaseio.com/messages/" + $scope.userId);
+        var messagesRef = firebaseServer.getMessagesRef($scope.userId);
         auth.logUser($scope.userId, getBoardAndMessages);
       } else {
         $scope.loading = false;
@@ -56,8 +56,8 @@ angular
         var drag = $('#' + dragEl);
         var drop = $('#' + dropEl);
 
-        var dropMessageRef = new Firebase("https://blinding-torch-6662.firebaseio.com/messages/" + $scope.userId + '/' + drop.attr('messageId'));
-        var dragMessageRef = new Firebase("https://blinding-torch-6662.firebaseio.com/messages/" + $scope.userId + '/' + drag.attr('messageId'));
+        var dropMessageRef = firebaseServer.getMessageRef($scope.userId, drop.attr('messageId'));
+        var dragMessageRef = firebaseServer.getMessageRef($scope.userId, drag.attr('messageId'));
 
         dropMessageRef.once('value', function(dropMessage) {
           dragMessageRef.once('value', function(dragMessage) {
@@ -90,7 +90,7 @@ angular
         $scope.userId = newUser;
 
         var callback = function(userData) {
-          var board = new Firebase("https://blinding-torch-6662.firebaseio.com/boards/" + $scope.userId);
+          var board = firebaseServer.getBoardRef($scope.userId);
           board.set({
             boardId: $scope.newBoard.name,
             date_created: new Date().toString(),
@@ -128,7 +128,7 @@ angular
           id: utils.getNextId($scope.board)
         };
 
-        var boardColumns = new Firebase("https://blinding-torch-6662.firebaseio.com/boards/" + $scope.userId + '/columns');
+        var boardColumns = firebaseServer.getBoardColumns($scope.userId);
         boardColumns.set(utils.toObject($scope.board.columns));
 
         utils.closeAll();
@@ -140,7 +140,7 @@ angular
           id: id
         };
 
-        var boardColumns = new Firebase("https://blinding-torch-6662.firebaseio.com/boards/" + $scope.userId + '/columns');
+        var boardColumns = firebaseServer.getBoardColumns($scope.userId);
         boardColumns.set(utils.toObject($scope.board.columns));
 
         utils.closeAll();
@@ -148,7 +148,7 @@ angular
 
       $scope.deleteLastColumn = function() {
           $scope.board.columns.pop();
-          var boardColumns = new Firebase("https://blinding-torch-6662.firebaseio.com/boards/" + $scope.userId + '/columns');
+          var boardColumns = firebaseServer.getBoardColumns($scope.userId);
           boardColumns.set(utils.toObject($scope.board.columns));
           utils.closeAll();
       };
