@@ -1,5 +1,4 @@
 describe('MainCtrl: ', function() {
-
   var $rootScope,
       $scope,
       $controller,

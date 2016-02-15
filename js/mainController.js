@@ -38,7 +38,7 @@ angular
       $scope.seeNotification = function() {
          localStorage.setItem('funretro1', true);
        };
- 
+
        $scope.showNotification = function() {
          return !localStorage.getItem('funretro1') && $scope.userId !== '';
        };
@@ -174,7 +174,7 @@ angular
         }).then(addMessageCallback);
       };
 
-      $($window).bind('hashchange', function () {
+      angular.element($window).bind('hashchange', function () {
         $scope.loading = true;
         $scope.userId = $window.location.hash.substring(1) || '';
         auth.logUser($scope.userId, getBoardAndMessages);

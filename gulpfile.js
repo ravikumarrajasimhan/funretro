@@ -52,7 +52,7 @@ gulp.task('watch', function (cb) {
   });
 
   watch('js/**/*.js', function () {
-    gulp.src(['js/vendor/*.js', 'js/*.js'])
+    gulp.src(['!js/vendor/angular-mocks.js','js/vendor/*.js', 'js/*.js'])
     .pipe(gp_concat('main.js'))
     .pipe(gulp.dest('dist'))
     .pipe(gp_rename('main.js'))
@@ -70,7 +70,7 @@ gulp.task('lint', function() {
 gulp.task('test', function (done) {
   return new Server({
     configFile: __dirname + '/karma.conf.js',
-    singleRun: true
+    singleRun: false
   }, done).start();
 });
 
