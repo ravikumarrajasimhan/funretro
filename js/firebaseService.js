@@ -1,7 +1,15 @@
 angular
   .module('fireideaz')
-  .service('FirebaseServer', ['$firebaseArray', function ($firebaseArray) {
+  .service('FirebaseService', ['$firebaseArray', function ($firebaseArray) {
     var firebaseUrl = "https://blinding-torch-6662.firebaseio.com";
+
+    function newFirebaseArray(messagesRef) {
+      return $firebaseArray(messagesRef);
+    }
+
+    function getServerTimestamp() {
+      return Firebase.ServerValue.TIMESTAMP;
+    }
 
     function getMessagesRef(userId) {
       return new Firebase(firebaseUrl + "/messages/" + userId);
@@ -20,6 +28,8 @@ angular
     }
 
     return {
+      newFirebaseArray: newFirebaseArray,
+      getServerTimestamp: getServerTimestamp,
       getMessagesRef: getMessagesRef,
       getMessageRef: getMessageRef,
       getBoardRef: getBoardRef,

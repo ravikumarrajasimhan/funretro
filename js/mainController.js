@@ -1,7 +1,7 @@
 angular
   .module('fireideaz')
-  .controller('MainCtrl', ['$firebaseArray', '$scope', '$filter', '$window', 'Utils', 'Auth', '$rootScope', 'FirebaseServer',
-    function($firebaseArray, $scope, $filter, $window, utils, auth, $rootScope, firebaseServer) {
+  .controller('MainCtrl', ['$scope', '$filter', '$window', 'Utils', 'Auth', '$rootScope', 'FirebaseService',
+    function($scope, $filter, $window, utils, auth, $rootScope, firebaseService) {
       $scope.loading = true;
       $scope.messageTypes = utils.messageTypes;
       $scope.utils = utils;
@@ -12,8 +12,8 @@ angular
       function getBoardAndMessages(userData) {
         $scope.userId = $window.location.hash.substring(1) || '499sm';
 
-        var messagesRef = firebaseServer.getMessagesRef($scope.userId);
-        var board = firebaseServer.getBoardRef($scope.userId);
+        var messagesRef = firebaseService.getMessagesRef($scope.userId);
+        var board = firebaseService.getBoardRef($scope.userId);
 
         board.on("value", function(board) {
           $scope.board = board.val();
@@ -21,15 +21,14 @@ angular
           $scope.boardContext = $rootScope.boardContext = board.val().boardContext;
         });
 
-
         $scope.boardRef = board;
         $scope.userUid = userData.uid;
-        $scope.messages = $firebaseArray(messagesRef);
+        $scope.messages = firebaseService.newFirebaseArray(messagesRef);
         $scope.loading = false;
       }
 
       if($scope.userId !== '') {
-        var messagesRef = firebaseServer.getMessagesRef($scope.userId);
+        var messagesRef = firebaseService.getMessagesRef($scope.userId);
         auth.logUser($scope.userId, getBoardAndMessages);
       } else {
         $scope.loading = false;
@@ -56,8 +55,8 @@ angular
         var drag = $('#' + dragEl);
         var drop = $('#' + dropEl);
 
-        var dropMessageRef = firebaseServer.getMessageRef($scope.userId, drop.attr('messageId'));
-        var dragMessageRef = firebaseServer.getMessageRef($scope.userId, drag.attr('messageId'));
+        var dropMessageRef = firebaseService.getMessageRef($scope.userId, drop.attr('messageId'));
+        var dragMessageRef = firebaseService.getMessageRef($scope.userId, drag.attr('messageId'));
 
         dropMessageRef.once('value', function(dropMessage) {
           dragMessageRef.once('value', function(dragMessage) {
@@ -90,7 +89,7 @@ angular
         $scope.userId = newUser;
 
         var callback = function(userData) {
-          var board = firebaseServer.getBoardRef($scope.userId);
+          var board = firebaseService.getBoardRef($scope.userId);
           board.set({
             boardId: $scope.newBoard.name,
             date_created: new Date().toString(),
@@ -114,10 +113,10 @@ angular
 
       $scope.toggleVote = function(key, votes) {
         if(!localStorage.getItem(key)) {
-          messagesRef.child(key).update({ votes: votes + 1, date: Firebase.ServerValue.TIMESTAMP });
+          messagesRef.child(key).update({ votes: votes + 1, date: firebaseService.getServerTimestamp() });
           localStorage.setItem(key, 1);
        } else {
-         messagesRef.child(key).update({ votes: votes - 1, date: Firebase.ServerValue.TIMESTAMP });
+         messagesRef.child(key).update({ votes: votes - 1, date: firebaseService.getServerTimestamp() });
          localStorage.removeItem(key);
        }
       };
@@ -128,7 +127,7 @@ angular
           id: utils.getNextId($scope.board)
         };
 
-        var boardColumns = firebaseServer.getBoardColumns($scope.userId);
+        var boardColumns = firebaseService.getBoardColumns($scope.userId);
         boardColumns.set(utils.toObject($scope.board.columns));
 
         utils.closeAll();
@@ -140,7 +139,7 @@ angular
           id: id
         };
 
-        var boardColumns = firebaseServer.getBoardColumns($scope.userId);
+        var boardColumns = firebaseService.getBoardColumns($scope.userId);
         boardColumns.set(utils.toObject($scope.board.columns));
 
         utils.closeAll();
@@ -148,7 +147,7 @@ angular
 
       $scope.deleteLastColumn = function() {
           $scope.board.columns.pop();
-          var boardColumns = firebaseServer.getBoardColumns($scope.userId);
+          var boardColumns = firebaseService.getBoardColumns($scope.userId);
           boardColumns.set(utils.toObject($scope.board.columns));
           utils.closeAll();
       };
@@ -169,7 +168,7 @@ angular
           text: '',
           user_id: $scope.userUid,
           type: { id: type.id },
-          date: Firebase.ServerValue.TIMESTAMP,
+          date: firebaseService.getServerTimestamp(),
           votes: 0
         }).then(addMessageCallback);
       };
