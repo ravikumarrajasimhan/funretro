@@ -2,7 +2,7 @@ module.exports = function(config) {
   config.set({
 
     basePath: '',
-    frameworks: ['mocha', 'chai'],
+    frameworks: ['mocha', 'chai', 'sinon'],
 
     files: [
       'js/vendor/angular.min.js',
@@ -46,6 +46,7 @@ module.exports = function(config) {
       'karma-coverage',
       'karma-coveralls',
       'karma-nyan-reporter',
+      'karma-sinon',
     ]
   })
 }
