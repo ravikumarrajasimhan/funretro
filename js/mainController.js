@@ -68,7 +68,7 @@ angular
             utils.closeAll();
           });
         });
-      }
+      };
 
       $scope.boardNameChanged = function() {
         $scope.newBoard.name = $scope.newBoard.name.replace(/\s+/g,'');
