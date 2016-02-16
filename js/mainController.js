@@ -75,11 +75,7 @@ angular
       };
 
       $scope.getSortOrder = function() {
-        if($scope.sortField === 'votes') {
-          return true;
-        } else {
-          return false;
-        }
+        return $scope.sortField === 'votes' ? true : false;
       };
 
       $scope.createNewBoard = function() {
