@@ -74,6 +74,13 @@ gulp.task('test', function (done) {
   }, done).start();
 });
 
+gulp.task('testci', function (done) {
+  return new Server({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done).start();
+});
+
 gulp.task('copy', function(){
   gulp.src('node_modules/roboto-fontface/fonts/*Regular.*')
   .pipe(gulp.dest('dist/fonts'));
