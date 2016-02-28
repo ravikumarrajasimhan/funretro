@@ -24,4 +24,4 @@ Learn more about retrospectives at [funretrospectives.com](http://funretrospecti
 
 1. Run ```./gulp test```
 
-PS.: The tests autoreload when you make some change on the files.
+
