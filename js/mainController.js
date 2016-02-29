@@ -35,12 +35,12 @@ angular
       }
 
       $scope.seeNotification = function() {
-         localStorage.setItem('funretro1', true);
-       };
+        localStorage.setItem('funretro1', true);
+      };
 
-       $scope.showNotification = function() {
-         return !localStorage.getItem('funretro1') && $scope.userId !== '';
-       };
+      $scope.showNotification = function() {
+        return !localStorage.getItem('funretro1') && $scope.userId !== '';
+      };
 
       $scope.droppedEvent = function(dragEl, dropEl) {
         if(dragEl !== dropEl) {
