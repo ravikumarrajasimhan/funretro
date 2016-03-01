@@ -3,7 +3,8 @@ describe('MainCtrl: ', function() {
       $scope,
       $controller,
       utils,
-      board;
+      board,
+      firebaseService;
 
   beforeEach(angular.mock.module('fireideaz'));
 
@@ -12,10 +13,12 @@ describe('MainCtrl: ', function() {
     $scope = $rootScope.$new();
     $controller = $injector.get('$controller');
     utils = $injector.get('Utils');
+    firebaseService = $injector.get('FirebaseService');
 
     $controller('MainCtrl', {
       '$scope': $scope,
       'utils': utils,
+      'firebaseService': firebaseService,
     });
   }));
 
@@ -86,4 +89,74 @@ describe('MainCtrl: ', function() {
     expect(utils.openDialogMergeCards.calledWith($scope)).to.be.false;
   });
 
+  describe('Columns', function() {
+    var setSpy,
+        boardColumns,
+        expectedColumns,
+        closeAllSpy;
+
+    beforeEach(function() {
+      closeAllSpy = sinon.spy(utils, 'closeAll');
+
+      setSpy = sinon.spy();
+
+      boardColumns = {
+        set: setSpy
+      }
+
+      sinon.stub(utils, 'toObject', function () {
+        return { column: 'column' };
+      });
+
+      $scope.board = {
+        columns: [
+          {
+            value: 'columnName',
+            id: 1
+          }
+        ]
+      }
+
+      sinon.stub(firebaseService, 'getBoardColumns', function () {
+        return boardColumns;
+      });
+    });
+
+    it('should add a new column to the board', function() {
+      expectedColumns = [
+        {
+          value: 'columnName',
+          id: 1
+        },
+        {
+          value: 'otherColumnName',
+          id: 2
+        }
+      ]
+
+      sinon.stub(utils, 'getNextId', function () { return 2; });
+
+      $scope.addNewColumn('otherColumnName');
+
+      expect($scope.board.columns).to.deep.equal(expectedColumns);
+      expect(setSpy.called).to.be.true;
+      expect(closeAllSpy.called).to.be.true;
+    });
+
+    it('should change column name', function() {
+      $scope.changeColumnName(1, 'new name!');
+
+      expect($scope.board.columns[0].value).to.equal('new name!');
+      expect(setSpy.called).to.be.true;
+      expect(closeAllSpy.called).to.be.true;
+    });
+
+    it('should delete last column of the board', function() {
+      $scope.deleteLastColumn();
+
+      expect($scope.board.columns).to.deep.equal([]);
+      expect(setSpy.called).to.be.true;
+      expect(closeAllSpy.called).to.be.true;
+    });
+  });
 });
