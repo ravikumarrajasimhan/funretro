@@ -4,7 +4,8 @@ describe('MainCtrl: ', function() {
       $controller,
       utils,
       board,
-      firebaseService;
+      firebaseService,
+      auth
 
   beforeEach(angular.mock.module('fireideaz'));
 
@@ -14,34 +15,17 @@ describe('MainCtrl: ', function() {
     $controller = $injector.get('$controller');
     utils = $injector.get('Utils');
     firebaseService = $injector.get('FirebaseService');
+    auth = $injector.get('Auth');
+
+    $scope.userId = 'userId';
 
     $controller('MainCtrl', {
       '$scope': $scope,
       'utils': utils,
       'firebaseService': firebaseService,
+      'auth': auth
     });
   }));
-
-  it('should strip spaces from board names', function() {
-    $scope.newBoard.name = 'new name';
-
-    $scope.boardNameChanged();
-
-    expect($scope.newBoard.name).to.equal('newname');
-  });
-
-
-  it('should return true when sort order by votes', function() {
-    $scope.sortField = 'votes';
-
-    expect($scope.getSortOrder()).to.be.true;
-  });
-
-  it('should return false when sort order is not by votes', function() {
-    $scope.sortField = 'something else';
-
-    expect($scope.getSortOrder()).to.be.false;
-  });
 
   it('should set true to board when user sees notification', function() {
     sinon.spy(localStorage, 'setItem');
@@ -49,6 +33,8 @@ describe('MainCtrl: ', function() {
     $scope.seeNotification();
 
     expect(localStorage.setItem.calledWith('funretro1', true)).to.be.true;
+
+    localStorage.setItem.restore();
   });
 
   it('should retrurn true if user hasn\'t seen the notification before', function() {
@@ -62,7 +48,7 @@ describe('MainCtrl: ', function() {
     localStorage.getItem.restore();
   });
 
-  it('should retrurn false if user has seen the notification before', function() {
+  it('should retrurn false if user has already seen the notification', function() {
     sinon.stub(localStorage, 'getItem', function () { return true; });
     $scope.userId = 'userId';
 
@@ -87,6 +73,114 @@ describe('MainCtrl: ', function() {
     $scope.droppedEvent("<div class='element1'></div>", "<div class='element1'></div>");
 
     expect(utils.openDialogMergeCards.calledWith($scope)).to.be.false;
+  });
+
+  describe('Board', function () {
+
+    it('should return true when sort board order by votes', function() {
+      $scope.sortField = 'votes';
+
+      expect($scope.getSortOrder()).to.be.true;
+    });
+
+    it('should return false when sort board order is not by votes', function() {
+      $scope.sortField = 'something else';
+
+      expect($scope.getSortOrder()).to.be.false;
+    });
+
+    it('should strip spaces from board names', function() {
+      $scope.newBoard.name = 'new name';
+
+      $scope.boardNameChanged();
+
+      expect($scope.newBoard.name).to.equal('newname');
+    });
+
+    it('should change the board context', function() {
+      var updateSpy = sinon.spy();
+
+      $scope.boardRef = {
+        update: updateSpy
+      }
+
+      $scope.changeBoardContext();
+
+      expect(updateSpy.called).to.be.true;
+    });
+
+    it('should create a new board', function () {
+      sinon.stub(utils, 'createUserId', function () { return 'userId'; });
+      var createUserSpy = sinon.spy(auth, 'createUserAndLog');
+
+      $scope.createNewBoard();
+
+      expect(createUserSpy.calledWith($scope.userId)).to.be.true;
+    });
+
+  });
+
+  describe('Messages', function () {
+
+    it('should delete a message', function() {
+      closeAllSpy = sinon.spy(utils, 'closeAll');
+      var removeSpy = sinon.spy();
+
+      var message = {
+        text: 'text of message',
+        user_id: '139021'
+      }
+
+      $scope.messages = {
+        $remove: removeSpy
+      }
+
+      $scope.deleteMessage(message);
+
+      expect(utils.closeAll.called).to.be.true;
+      expect(removeSpy.calledWith(message)).to.be.true;
+    });
+
+    it('should add a new message', function() {
+      closeAllSpy = sinon.spy(utils, 'closeAll');
+      sinon.stub(firebaseService, 'getServerTimestamp', function() { return '00:00:00' });
+
+      var addMessagePromise = { then: sinon.spy() };
+      var addStub = sinon.stub().returns(addMessagePromise);
+
+      var message = {
+        text: 'text of message',
+        user_id: '139021'
+      }
+
+      $scope.messages = {
+        $add: addStub
+      }
+
+      $scope.addNewMessage({id: 1});
+
+      expect(addStub.called).to.be.true;
+    });
+
+    it('should add a vote to a message when user didn\'t vote on this message before', function() {
+      sinon.spy(localStorage, 'setItem');
+      sinon.stub(localStorage, 'getItem', function() { return false; });
+
+      $scope.toggleVote('key', 0);
+
+      expect(localStorage.setItem.called).to.be.true;
+
+      localStorage.getItem.restore();
+    });
+
+    it('should subtract a vote to a message when user already voted on this message before', function() {
+      sinon.spy(localStorage, 'removeItem');
+      sinon.stub(localStorage, 'getItem', function() { return true; });
+
+      $scope.toggleVote('key', 0);
+
+      expect(localStorage.removeItem.called).to.be.true;
+    });
   });
 
   describe('Columns', function() {
