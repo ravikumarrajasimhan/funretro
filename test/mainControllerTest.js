@@ -161,26 +161,6 @@ describe('MainCtrl: ', function() {
 
       expect(addStub.called).to.be.true;
     });
-
-    it('should add a vote to a message when user didn\'t vote on this message before', function() {
-      sinon.spy(localStorage, 'setItem');
-      sinon.stub(localStorage, 'getItem', function() { return false; });
-
-      $scope.toggleVote('key', 0);
-
-      expect(localStorage.setItem.called).to.be.true;
-
-      localStorage.getItem.restore();
-    });
-
-    it('should subtract a vote to a message when user already voted on this message before', function() {
-      sinon.spy(localStorage, 'removeItem');
-      sinon.stub(localStorage, 'getItem', function() { return true; });
-
-      $scope.toggleVote('key', 0);
-
-      expect(localStorage.removeItem.called).to.be.true;
-    });
   });
 
   describe('Columns', function() {
