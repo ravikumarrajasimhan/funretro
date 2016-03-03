@@ -6,6 +6,7 @@ angular
       $scope.messageTypes = utils.messageTypes;
       $scope.utils = utils;
       $scope.newBoard = { name: '' };
+      $scope.userId = $window.location.hash.substring(1);
       $scope.sortField = '$id';
 
       function getBoardAndMessages(userData) {
