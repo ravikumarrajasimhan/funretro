@@ -6,7 +6,7 @@ angular
       $scope.messageTypes = utils.messageTypes;
       $scope.utils = utils;
       $scope.newBoard = { name: '' };
-      $scope.userId = $window.location.hash.substring(1) || '';
+      $scope.userId = $window.location.hash.substring(1);
       $scope.sortField = '$id';
 
       function getBoardAndMessages(userData) {
@@ -27,7 +27,7 @@ angular
         $scope.loading = false;
       }
 
-      if($scope.userId !== '') {
+      if($scope.userId) {
         var messagesRef = firebaseService.getMessagesRef($scope.userId);
         auth.logUser($scope.userId, getBoardAndMessages);
       } else {
@@ -81,8 +81,7 @@ angular
       $scope.createNewBoard = function() {
         $scope.loading = true;
         utils.closeAll();
-        var newUser = utils.createUserId();
-        $scope.userId = newUser;
+        $scope.userId = utils.createUserId();
 
         var callback = function(userData) {
           var board = firebaseService.getBoardRef($scope.userId);
@@ -93,13 +92,17 @@ angular
             user_id: userData.uid
           });
 
-          window.location.href = window.location.origin + window.location.pathname + "#" + newUser;
+          redirectToBoard();
 
           $scope.newBoard.name = '';
         };
 
-        auth.createUserAndLog(newUser, callback);
+        auth.createUserAndLog($scope.userId, callback);
       };
+
+      function redirectToBoard() {
+        window.location.href = window.location.origin + window.location.pathname + "#" + $scope.userId;
+      }
 
       $scope.changeBoardContext = function() {
         $scope.boardRef.update({
@@ -111,10 +114,10 @@ angular
         if(!localStorage.getItem(key)) {
           messagesRef.child(key).update({ votes: votes + 1, date: firebaseService.getServerTimestamp() });
           localStorage.setItem(key, 1);
-       } else {
-         messagesRef.child(key).update({ votes: votes - 1, date: firebaseService.getServerTimestamp() });
-         localStorage.removeItem(key);
-       }
+         } else {
+           messagesRef.child(key).update({ votes: votes - 1, date: firebaseService.getServerTimestamp() });
+           localStorage.removeItem(key);
+         }
       };
 
       $scope.addNewColumn = function(name) {
