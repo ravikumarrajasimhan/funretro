@@ -1,8 +1,0 @@
-$phone: 400px;
-$tablet: 768px;
-
-@mixin media-query($device) {
-  @media screen and (max-width: $device) {
-    @content;
-  }
-}
