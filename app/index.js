@@ -1,2 +1,2 @@
-var angular = require('angular');
+const angular = require('angular');
 angular.module('fireideaz', []);

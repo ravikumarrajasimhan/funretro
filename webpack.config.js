@@ -1,12 +1,23 @@
+var path = require('path');
+
+var directories = {
+  app: path.resolve(__dirname, 'app')
+};
+
 module.exports = {
   devtool: 'sourcemap',
-  context: __dirname + '/app',
+  context: directories.app,
   entry: './index.js',
   output: {
-    path: __dirname + '/app',
+    path: directories.app,
     filename: 'bundle.js'
   },
+  module: {
+    loaders: [
+      { test: /.js$/, exclude: [/node_modules/], loader: 'ng-annotate!babel' }
+    ]
+  },
   devServer: {
-    contentBase: "./app",
+    contentBase: directories.app,
   }
-}
+};
