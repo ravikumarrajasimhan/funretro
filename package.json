@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node node_modules/.bin/webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -11,5 +12,8 @@
   "devDependencies": {
     "webpack": "^1.13.0",
     "webpack-dev-server": "^1.14.1"
+  },
+  "dependencies": {
+    "angular": "^1.5.5"
   }
 }
