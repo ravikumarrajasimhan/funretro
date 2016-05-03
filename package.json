@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "./node_modules/.bin/webpack-dev-server",
+    "start": "./node_modules/.bin/webpack-dev-server --config webpack.dev.config.js",
+    "build": "./node_modules/.bin/webpack --config webpack.dist.config.js",
     "lint": "eslint --ext .js .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,7 +18,9 @@
     "eslint": "^2.9.0",
     "eslint-config-airbnb-base": "^2.0.0",
     "eslint-plugin-import": "^1.6.1",
+    "html-webpack-plugin": "^2.16.1",
     "ng-annotate-loader": "^0.1.0",
+    "raw-loader": "^0.5.1",
     "webpack": "^1.13.0",
     "webpack-dev-server": "^1.14.1"
   },
