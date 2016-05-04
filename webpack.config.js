@@ -13,8 +13,8 @@ module.exports = {
   entry: './index.js',
   module: {
     loaders: [
-      { test: /.js$/, exclude: [/node_modules/], loader: 'ng-annotate!babel' },
-      { test: /.html$/, loader: 'raw' }
+      { test: /.js$/, exclude: [/node_modules/], loader: 'ng-annotate!babel' }
+      // { test: /.html$/, loader: 'raw' }
     ]
   },
   devServer: {
@@ -22,7 +22,13 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: directories.app + '/index.html',
+      title: 'Fun Retrospectives',
+      template: 'underscore-template!' + directories.app + '/index.html',
+      appMountId: 'fireideaz',
+      googleAnalytics: {
+        trackingId: 'UA-66141519-1',
+        pageViewOnLoad: true
+      },
       inject: 'body',
       hash: true
     })
