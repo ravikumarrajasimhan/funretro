@@ -13,12 +13,20 @@ module.exports = {
   entry: './index.js',
   module: {
     loaders: [
-      { test: /.js$/, exclude: [/node_modules/], loader: 'ng-annotate!babel' }
-      // { test: /.html$/, loader: 'raw' }
+      { test: /.js$/,
+	exclude: /node_modules/,
+	loader: 'ng-loader!babel',
+	query: {
+	  presets: ['es2015']
+	}
+      }
     ]
   },
   devServer: {
-    contentBase: directories.app
+    contentBase: directories.app,
+    stats: {
+      colors: true
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({
