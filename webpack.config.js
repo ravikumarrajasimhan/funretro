@@ -14,16 +14,15 @@ module.exports = {
   module: {
     loaders: [
       { test: /.js$/,
-	exclude: /node_modules/,
-	loader: 'ng-loader!babel',
-	query: {
-	  presets: ['es2015']
-	}
+        exclude: /node_modules/,
+        loaders: ['ng-annotate', 'babel?presets[]=es2015']
       }
     ]
   },
   devServer: {
     contentBase: directories.app,
+    hot: true,
+    inline: true,
     stats: {
       colors: true
     }
@@ -32,12 +31,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Fun Retrospectives',
       template: 'underscore-template!' + directories.app + '/index.html',
+      inject: false,
       appMountId: 'fireideaz',
       googleAnalytics: {
         trackingId: 'UA-66141519-1',
         pageViewOnLoad: true
       },
-      inject: 'body',
       hash: true
     })
   ]
