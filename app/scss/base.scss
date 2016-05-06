@@ -1,0 +1,11 @@
+@import './config/typography';
+@import './config/colors';
+@import './utilities/responsive';
+@import './landing';
+
+body {
+  margin: 0;
+  font-family: $base-font-family;
+  font-size: 16px;
+  color: $grey;
+}

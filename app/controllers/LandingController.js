@@ -1,7 +1,4 @@
-import { Inject } from 'angular-es6';
-
-function MainController($scope) {
-  let auth;
+function LandingController($scope) {
 
   $scope.createNewBoard = () => {
 
@@ -15,6 +12,6 @@ function MainController($scope) {
   };
 }
 
-MainController.$inject = ['$scope'];
+LandingController.$inject = ['$scope'];
 
-export { MainController };
+export { LandingController };

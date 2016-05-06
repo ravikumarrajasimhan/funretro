@@ -1,0 +1,8 @@
+@import 'node_modules/roboto-fontface/css/mixins.scss';
+$roboto-font-path: '../../node_modules/roboto-fontface/fonts';
+
+@include roboto-font-pair('Regular', 400);
+@include roboto-font-pair('Bold', 700);
+
+$base-font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+$bold-font-family: 'RobotoBold', 'Helvetica Neue', sans-serif;

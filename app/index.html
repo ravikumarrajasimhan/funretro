@@ -31,7 +31,9 @@
 <% } %>
 
 <% if (htmlWebpackPlugin.options.appMountId) { %>
-<div ng-app="<%= htmlWebpackPlugin.options.appMountId%>"></div>
+<div ng-app="<%= htmlWebpackPlugin.options.appMountId%>">
+  <ng-view></ng-view>
+</div>
 <% } %>
 
 <% if (htmlWebpackPlugin.options.appMountIds && htmlWebpackPlugin.options.appMountIds.length > 0) { %>
