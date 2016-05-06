@@ -1,11 +1,33 @@
-@import './config/typography';
+@import '~bourbon/app/assets/stylesheets/bourbon';
+@import '~bourbon-neat/app/assets/stylesheets/neat';
 @import './config/colors';
+@import './config/variables';
+@import './config/typography';
 @import './utilities/responsive';
+@import './buttons';
+@import './forms';
 @import './landing';
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
 
 body {
   margin: 0;
   font-family: $base-font-family;
-  font-size: 16px;
-  color: $grey;
+  font-size: $base-font-size;
+  color: $base-font-color;
+}
+
+ul,
+ol {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
