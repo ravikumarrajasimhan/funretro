@@ -4,6 +4,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var directories = {
   app: path.resolve(__dirname, 'app'),
   style: path.resolve(__dirname, 'app/scss'),
+  images: path.resolve(__dirname, 'app/images'),
   dist: path.resolve(__dirname, 'dist')
 };
 
@@ -23,6 +24,11 @@ module.exports = {
     }, {
       test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
       loader: 'file-loader'
+    },
+    {
+      test: /\.(jpg|jpeg|gif|png|ico)$/,
+      exclude: /node_modules/,
+      loader:'file-loader?name=images/[path][name].[ext]&context=' + directories.images
     }, {
       test: /.js$/,
       exclude: /node_modules/,
@@ -41,6 +47,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Fun Retrospectives',
       template: 'underscore-template!' + directories.app + '/index.html',
+      favicon: directories.app + '/favicon.ico',
       inject: false,
       appMountId: 'fireideaz',
       googleAnalytics: {
