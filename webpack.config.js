@@ -24,11 +24,14 @@ module.exports = {
     }, {
       test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
       loader: 'file-loader'
-    },
-    {
-      test: /\.(jpg|jpeg|gif|png|ico)$/,
-      exclude: /node_modules/,
-      loader:'file-loader?name=images/[path][name].[ext]&context=' + directories.images
+    }, {
+      test: /\.(jpe?g|png|gif|svg)$/i,
+      loader: 'file?name=[path][name].[hash].[ext]',
+      include: directories.images
+    }, {
+      test: /\.html$/,
+      include: /app\/views/,
+      loader: 'ngtemplate!html'
     }, {
       test: /.js$/,
       exclude: /node_modules/,

@@ -1,7 +1,6 @@
-function LandingController($scope) {
-
+const Landing = ($scope, modalService) => {
+  $scope.modalService = modalService;
   $scope.createNewBoard = () => {
-
     $scope.loading = true;
     $scope.userId = utils.createUserId();
 
@@ -10,8 +9,8 @@ function LandingController($scope) {
     };
 
   };
-}
+};
 
-LandingController.$inject = ['$scope'];
+Landing.$inject = ['$scope', 'modalService'];
 
-export { LandingController };
+export default Landing;
