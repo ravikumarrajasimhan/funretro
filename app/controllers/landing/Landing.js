@@ -1,16 +1,21 @@
-const Landing = ($scope, modalService) => {
+const Landing = ($scope, modalService, boardService) => {
+
   $scope.modalService = modalService;
-  $scope.createNewBoard = () => {
-    $scope.loading = true;
-    $scope.userId = utils.createUserId();
-
-    const callback = (userData) => {
-      console.log(userData);
-    };
-
+  $scope.board = {
+    name: ''
   };
+
+  $scope.createNewBoard = () => {
+    modalService.closeAll();
+    $scope.loading = true;
+    boardService.connect();
+    boardService.create($scope.board.name).then((boardID) => {
+      $scope.board.id = boardID;
+    });
+  };
+
 };
 
-Landing.$inject = ['$scope', 'modalService'];
+Landing.$inject = ['$scope', 'modalService', 'boardService'];
 
 export default Landing;
