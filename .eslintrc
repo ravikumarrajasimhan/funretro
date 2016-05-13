@@ -1,6 +1,9 @@
 {
-  "extends": ["airbnb", "angular"],
+  "extends": ["airbnb-base", "angular"],
   "rules": {
+    "no-param-reassign": [2, {
+      "props": false
+    }],
     "comma-dangle": 0
   }
 }

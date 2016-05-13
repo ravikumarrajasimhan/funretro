@@ -17,9 +17,9 @@ const BoardService = ($q) => {
       const boardID = generateBoardID();
       const deferred = $q.defer();
 
-      const board = boardsRef.child(boardID).set({
+      boardsRef.child(boardID).set({
         hash: boardID,
-        name: name
+        name
       }, (error) => {
         if (error) deferred.reject();
         deferred.resolve(boardID);
@@ -27,7 +27,7 @@ const BoardService = ($q) => {
 
       return deferred.promise;
     },
-    findById: (boardId) => {
+    findById: (boardID) => {
       const deferred = $q.defer();
 
       const board = boardsRef.child(boardID);
@@ -39,7 +39,7 @@ const BoardService = ($q) => {
       return deferred.promise;
     }
   };
-}
+};
 
 BoardService.$inject = ['$q'];
 

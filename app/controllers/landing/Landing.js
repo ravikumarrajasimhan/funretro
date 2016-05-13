@@ -1,12 +1,11 @@
 const Landing = ($scope, modalService, boardService, $window) => {
-
   $scope.modalService = modalService;
   $scope.board = {
     name: ''
   };
 
   const openBoard = () => {
-    $window.location.href = `/#${$scope.board.id}`;
+    $window.location.href = `/#${$scope.board.hash}`;
   };
 
   $scope.createNewBoard = () => {
@@ -14,11 +13,10 @@ const Landing = ($scope, modalService, boardService, $window) => {
     $scope.loading = true;
     boardService.connect();
     boardService.create($scope.board.name).then((boardID) => {
-      $scope.board.id = boardID;
+      $scope.board.hash = boardID;
       openBoard();
     });
   };
-
 };
 
 Landing.$inject = ['$scope', 'modalService', 'boardService', '$window'];
