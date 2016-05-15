@@ -1,18 +1,18 @@
 var gulp = require('gulp'),
-clean = require('gulp-clean'),
-jshint = require('gulp-jshint'),
-Server = require('karma').Server,
-concat = require('gulp-concat'),
-sourcemaps = require('gulp-sourcemaps'),
-gp_rename = require('gulp-rename'),
-uglify = require('gulp-uglify'),
-concatCss = require('gulp-concat-css'),
-uglifycss = require('gulp-uglifycss'),
-sass = require('gulp-sass'),
-connectlivereload = require('connect-livereload'),
-express = require('express'),
-path = require('path'),
-watch = require('gulp-watch');
+  clean = require('gulp-clean'),
+  jshint = require('gulp-jshint'),
+  Server = require('karma').Server,
+  concat = require('gulp-concat'),
+  sourcemaps = require('gulp-sourcemaps'),
+  gp_rename = require('gulp-rename'),
+  uglify = require('gulp-uglify'),
+  concatCss = require('gulp-concat-css'),
+  uglifycss = require('gulp-uglifycss'),
+  sass = require('gulp-sass'),
+  connectlivereload = require('connect-livereload'),
+  express = require('express'),
+  path = require('path'),
+  watch = require('gulp-watch');
 
 gulp.task('express', function() {
   var app = express();
