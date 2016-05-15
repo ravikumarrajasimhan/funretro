@@ -1,4 +1,4 @@
-# Fun Retrospectives
+# Fun Retro
 Easy to use and beautiful restrospective board.
 
 Learn more about retrospectives at [funretrospectives.com](http://funretrospectives.com)
@@ -8,7 +8,7 @@ Learn more about retrospectives at [funretrospectives.com](http://funretrospecti
 
 ## User interface
 
-![Fun retrospectives screenshot](http://i.imgur.com/iY1zc2Y.png)
+![Fun retro screenshot](http://i.imgur.com/iY1zc2Y.png)
 
 ## How to setup local environment
 
@@ -16,13 +16,13 @@ Learn more about retrospectives at [funretrospectives.com](http://funretrospecti
 2. Install [Node.js](https://nodejs.org/en/)
 3. Run ```npm install``` (inside the project folder)
 4. Run ```gulp```
-5. Fun Retrospectives is using [Firebase](http://www.firebase.com). First create an account at firebase. Then create a test app
+5. Fun Retro is using [Firebase](http://www.firebase.com). First create an account at firebase. Then create a test app
 6. After creating the app you can save the new url (ex: https://funretrotest.firebaseio.com/) and replace the variable ```firebaseUrl``` inside ```js/firebaseService.js```
 7. Now you can open the app on [http://localhost:4000/](http://localhost:4000/) and start creating your boards.
    You will notice that the app has this architecture on firebase:
-![Fun retrospectives architecture](https://i.imgur.com/etYgDia.png)
+![Fun retro architecture](https://i.imgur.com/etYgDia.png)
 
-## Contribute to Fun Retrospectives
+## Contribute to Fun Retro
 
 * All things being developed are managed with Github issues.
 * We are currently using labels for [Bug](https://github.com/funretro/distributed/issues?q=is%3Aissue+is%3Aopen+label%3Abug) and [Priority](https://github.com/funretro/distributed/issues?q=is%3Aissue+is%3Aopen+label%3Apriority).
