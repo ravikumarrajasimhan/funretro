@@ -76,14 +76,6 @@ describe('MainCtrl: ', function() {
       expect($scope.getSortOrder()).to.be.false;
     });
 
-    it('should not strip spaces from board names', function() {
-      $scope.newBoard.name = 'new name';
-
-      $scope.boardNameChanged();
-
-      expect($scope.newBoard.name).to.equal('new name');
-    });
-
     it('should change the board context', function() {
       var updateSpy = sinon.spy();
 

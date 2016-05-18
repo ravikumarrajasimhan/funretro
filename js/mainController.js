@@ -56,10 +56,6 @@ angular
         return !localStorage.getItem('funretro1') && $scope.userId !== '';
       };
 
-      $scope.boardNameChanged = function() {
-        $scope.newBoard.name = $scope.newBoard.name;
-      };
-
       $scope.getSortOrder = function() {
         return $scope.sortField === 'votes' ? true : false;
       };
