@@ -38,7 +38,7 @@ angular
     }
 
     function getNextId(board) {
-      return board.columns[board.columns.length -1].id + 1;
+      return board.columns.pop().id + 1;
     }
 
     function toObject(array) {

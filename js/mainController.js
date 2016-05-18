@@ -112,10 +112,10 @@ angular
       };
 
       $scope.addNewColumn = function(name) {
-        $scope.board.columns[utils.getNextId($scope.board) - 1] = {
+        $scope.board.columns.push({
           value: name,
           id: utils.getNextId($scope.board)
-        };
+        });
 
         var boardColumns = firebaseService.getBoardColumns($scope.userId);
         boardColumns.set(utils.toObject($scope.board.columns));
