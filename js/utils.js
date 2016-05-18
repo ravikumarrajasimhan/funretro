@@ -33,12 +33,8 @@ angular
       value: 'Action items'
     }];
 
-    function showRemoveColumn(id, columns) {
-      return columns.length === id && columns.length > 3 ? true : false;
-    }
-
     function getNextId(board) {
-      return board.columns.pop().id + 1;
+      return board.columns.slice(-1).pop().id + 1;
     }
 
     function toObject(array) {
@@ -54,13 +50,17 @@ angular
       return object;
     }
 
+    function columnClass(id) {
+      return "column_" + (id % 6 || 6);
+    }
+
     return {
       createUserId: createUserId,
       alreadyVoted: alreadyVoted,
       focusElement: focusElement,
       messageTypes: messageTypes,
-      showRemoveColumn: showRemoveColumn,
       getNextId: getNextId,
-      toObject: toObject
+      toObject: toObject,
+      columnClass: columnClass
     };
   }]);

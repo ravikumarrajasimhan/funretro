@@ -135,8 +135,11 @@ angular
         modalService.closeAll();
       };
 
-      $scope.deleteLastColumn = function() {
-        $scope.board.columns.pop();
+      $scope.deleteColumn = function(column) {
+        $scope.board.columns = $scope.board.columns.filter(function(_column) {
+            return _column.id !== column.id;
+        });
+
         var boardColumns = firebaseService.getBoardColumns($scope.userId);
         boardColumns.set(utils.toObject($scope.board.columns));
         modalService.closeAll();

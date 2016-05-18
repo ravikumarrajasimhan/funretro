@@ -166,6 +166,10 @@ describe('MainCtrl: ', function() {
           {
             value: 'columnName',
             id: 1
+          },
+          {
+            value: 'otherColumnName',
+            id: 2
           }
         ]
       }
@@ -176,7 +180,7 @@ describe('MainCtrl: ', function() {
     });
 
     it('should add a new column to the board', function() {
-      expectedColumns = [
+      var expectedColumns = [
         {
           value: 'columnName',
           id: 1
@@ -184,12 +188,16 @@ describe('MainCtrl: ', function() {
         {
           value: 'otherColumnName',
           id: 2
+        },
+        {
+          value: 'anotherColumnName',
+          id: 3
         }
       ]
 
-      sinon.stub(utils, 'getNextId', function () { return 2; });
+      sinon.stub(utils, 'getNextId', function () { return 3; });
 
-      $scope.addNewColumn('otherColumnName');
+      $scope.addNewColumn('anotherColumnName');
 
       expect($scope.board.columns).to.deep.equal(expectedColumns);
       expect(setSpy.called).to.be.true;
@@ -205,9 +213,37 @@ describe('MainCtrl: ', function() {
     });
 
     it('should delete last column of the board', function() {
-      $scope.deleteLastColumn();
+      var expectedBoard = {
+        columns: [
+          {
+            value: 'columnName',
+            id: 1
+          },
+          {
+            value: 'otherColumnName',
+            id: 2
+          }
+        ]
+      };
 
-      expect($scope.board.columns).to.deep.equal([]);
+      $scope.deleteColumn({id: 3});
+
+      expect($scope.board.columns).to.deep.equal(expectedBoard.columns);
+      expect(setSpy.called).to.be.true;
+      expect(closeAllSpy.called).to.be.true;
+    });
+
+    it('should delete specific column of the board', function() {
+      var expectedColumns = [
+        {
+          value: 'otherColumnName',
+          id: 2
+        }
+      ];
+
+      $scope.deleteColumn({id: 1});
+
+      expect($scope.board.columns).to.deep.equal(expectedColumns);
       expect(setSpy.called).to.be.true;
       expect(closeAllSpy.called).to.be.true;
     });

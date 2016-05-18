@@ -8,9 +8,9 @@
 </div>
 <span class="container">
     <span ng-show="boardId !== ''" class="message-list" ng-class="{'selected': isColumnSelected(type.id)}" ng-repeat="type in board.columns">
-        <ul class="column column_{{ type.id }}">
+        <ul class="column {{utils.columnClass(type.id)}}">
           <div class="column-header">
-            <a class="controls delete" ng-show="utils.showRemoveColumn(type.id, board.columns) && !editing" href="javascript:void(0)" ng-click="modalService.openDeleteColumn(this)"><i class="fa fa-times"></i></a>
+            <a class="controls delete" ng-show="!editing" href="javascript:void(0)" ng-click="modalService.openDeleteColumn(this)"><i class="fa fa-times"></i></a>
             <h2 ng-show="!editing" ng-click="editing = true; newName=type.value;">
               {{type.value}}
             </h2>

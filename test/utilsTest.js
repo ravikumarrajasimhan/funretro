@@ -17,18 +17,6 @@ describe('Utils: ', function() {
     });
   }));
 
-  it('should say it can show remove column - last column bigger than three columns', function() {
-    var columns = [{ 'id': 1 },{ 'id': 2 },{ 'id': 3 },{ 'id': 4 }];
-
-    expect(utils.showRemoveColumn(4, columns)).to.equal(true);
-  });
-
-  it('should say it cannot show remove column - third column', function() {
-    var columns = [{ 'id': 1 },{ 'id': 2 },{ 'id': 3 },{ 'id': 4 }];
-
-    expect(utils.showRemoveColumn(3, columns)).to.equal(false);
-  });
-
   it('should create an user ID with random characters', function(){
     var count = 0.001;
     sinon.stub(Math, 'random', function () {
@@ -61,4 +49,16 @@ describe('Utils: ', function() {
 
     expect(utils.toObject(arrayOfObjects)).to.deep.equal(expectedObject);
   });
+
+  it('should return class name with type.id when id is lower than 6', function() {
+    expect(utils.columnClass(1)).to.equal('column_1');
+  });
+
+  it('should return class name with type.id when id is 6', function () {
+    expect(utils.columnClass(6)).to.equal('column_6');
+  });
+
+  it('should map class name to 1..6 when type.id is greater than 6', function () {
+    expect(utils.columnClass(20)).to.equal('column_2');
+  })
 });
