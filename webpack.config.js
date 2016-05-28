@@ -1,4 +1,5 @@
 var path = require('path');
+var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 var directories = {
@@ -58,6 +59,9 @@ module.exports = {
         pageViewOnLoad: true
       },
       hash: true
+    }),
+    new webpack.DefinePlugin({
+      ON_TEST: process.env.NODE_ENV === 'test'
     })
   ]
 };

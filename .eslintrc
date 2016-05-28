@@ -1,4 +1,13 @@
 {
+  "env": {
+    "node": true,
+     "mocha": true,
+     "browser": true
+  },
+  "globals": {
+    "angular": true,
+    "inject": true
+  },
   "extends": ["airbnb-base", "angular"],
   "rules": {
     "no-param-reassign": [2, {
