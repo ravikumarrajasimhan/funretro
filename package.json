@@ -68,5 +68,8 @@
     "node-neat": "^1.7.2",
     "roboto-fontface": "^0.4.5",
     "url-loader": "^0.5.7"
+  },
+  "babel": {
+    "presets": ["es2015"]
   }
 }
