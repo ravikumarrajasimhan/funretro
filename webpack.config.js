@@ -16,8 +16,8 @@ module.exports = {
   entry: './index.js',
   module: {
     loaders: [{
-      test: /\.scss$/,
-      loaders: ['style', 'css', 'sass'],
+      test: /\.s?css$/,
+      loaders: ['style', 'css?sourceMap', 'sass?sourceMap'],
       include: directories.style
     }, {
       test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
