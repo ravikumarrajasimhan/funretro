@@ -4,7 +4,7 @@ var entry = path.resolve(webpackConfig.context, webpackConfig.entry);
 
 var preprocessors = {};
 preprocessors[entry] = ['webpack'];
-preprocessors['**/*Test.js'] = ['babel'];
+preprocessors['./test/**/*Test.js'] = ['webpack'];
 
 module.exports = function(config) {
   config.set({
@@ -16,6 +16,9 @@ module.exports = function(config) {
       './test/**/*Test.js'
     ],
     webpack: webpackConfig,
+    webpackMiddleware: {
+      noInfo: true
+    },
     exclude: [],
     preprocessors: preprocessors,
     reporters: ['mocha'],
@@ -27,7 +30,7 @@ module.exports = function(config) {
     singleRun: false,
 
     plugins: [
-      'karma-webpack',
+      require('karma-webpack'),
       'karma-mocha',
       'karma-chai',
       'karma-babel-preprocessor',

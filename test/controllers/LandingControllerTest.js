@@ -8,7 +8,7 @@ describe('LandingController', () => {
   };
 
   let $scope, rootScope, deferred;
-  beforeEach(module('fireideaz'));
+  beforeEach(angular.mock.module('fireideaz'));
 
   const testID = 'some.id';
   beforeEach(inject((_$controller_, $rootScope, $q) => {
