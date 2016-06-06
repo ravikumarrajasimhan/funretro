@@ -3,7 +3,7 @@ var webpackConfig = require('../webpack.config');
 var entry = path.resolve(webpackConfig.context, webpackConfig.entry);
 
 var preprocessors = {};
-preprocessors[entry] = ['webpack'];
+preprocessors[entry] = ['webpack', 'sourcemap'];
 preprocessors['./test/index.js'] = ['webpack','sourcemap'];
 
 module.exports = function(config) {
