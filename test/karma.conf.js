@@ -4,7 +4,7 @@ var entry = path.resolve(webpackConfig.context, webpackConfig.entry);
 
 var preprocessors = {};
 preprocessors[entry] = ['webpack'];
-preprocessors['./test/**/*Test.js'] = ['webpack'];
+preprocessors['./test/index.js'] = ['webpack','sourcemap'];
 
 module.exports = function(config) {
   config.set({
@@ -13,7 +13,7 @@ module.exports = function(config) {
     files: [
       entry,
       './node_modules/angular-mocks/angular-mocks.js',
-      './test/**/*Test.js'
+      './test/index.js'
     ],
     webpack: webpackConfig,
     webpackMiddleware: {
@@ -31,6 +31,7 @@ module.exports = function(config) {
 
     plugins: [
       require('karma-webpack'),
+      'karma-sourcemap-loader',
       'karma-mocha',
       'karma-chai',
       'karma-babel-preprocessor',

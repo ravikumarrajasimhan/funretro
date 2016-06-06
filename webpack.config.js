@@ -11,7 +11,7 @@ var directories = {
 
 module.exports = {
   directories: directories,
-  devtool: 'sourcemap',
+  devtool: 'inline-source-map',
   context: directories.app,
   entry: './index.js',
   module: {

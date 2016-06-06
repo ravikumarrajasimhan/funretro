@@ -70,6 +70,8 @@
     "url-loader": "^0.5.7"
   },
   "babel": {
-    "presets": ["es2015"]
+    "presets": [
+      "es2015"
+    ]
   }
 }
