@@ -22,6 +22,11 @@ module.exports = function(config) {
     exclude: [],
     preprocessors: preprocessors,
     reporters: ['mocha'],
+    client: {
+      mocha: {
+        reporter: 'html'
+      }
+    },
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
