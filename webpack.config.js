@@ -37,6 +37,11 @@ module.exports = {
       test: /.js$/,
       exclude: /node_modules/,
       loaders: ['ng-annotate', 'babel?presets[]=es2015']
+    }],
+    preLoaders: [{
+      test: /\.js$/,
+      exclude: /(test|node_modules)\//,
+      loader: 'isparta'
     }]
   },
   devServer: {

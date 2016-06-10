@@ -6,6 +6,10 @@ var preprocessors = {};
 preprocessors[entry] = ['webpack', 'sourcemap'];
 preprocessors['./test/index.js'] = ['webpack','sourcemap'];
 
+webpackConfig.isparta = {
+  embedSource: true,
+  noAutoWrap: true
+};
 module.exports = function(config) {
   config.set({
     basePath: '../',
@@ -21,7 +25,11 @@ module.exports = function(config) {
     },
     exclude: [],
     preprocessors: preprocessors,
-    reporters: ['mocha'],
+    reporters: ['mocha', 'coverage'],
+    coverageReporter: {
+      type: 'html',
+      dir: 'coverage/'
+    },
     client: {
       mocha: {
         reporter: 'html'
@@ -33,12 +41,12 @@ module.exports = function(config) {
     autoWatch: true,
     browsers: ['Chrome', 'PhantomJS'],
     singleRun: false,
-
     plugins: [
       require('karma-webpack'),
       'karma-sourcemap-loader',
       'karma-mocha',
       'karma-chai',
+      'karma-coverage',
       'karma-babel-preprocessor',
       'karma-nyan-reporter',
       'karma-mocha-reporter',
