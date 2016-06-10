@@ -21,7 +21,7 @@ npm start
 - [ ] Separate landing page from retro board with angular routing.
 - [ ] Load directive templates with ng-template-loader.
 - [x] Include testing through npm with karma and mocha.
-- [ ] Enable code coverage using karma-coverage with webpack supported methods [webpack/karma-webpack#21](https://github.com/webpack/karma-webpack/issues/21), [Medium article](https://medium.com/@scbarrus/how-to-get-test-coverage-on-react-with-karma-babel-and-webpack-c9273d805063#.i5krbohek)
+- [x] Enable code coverage using karma-coverage with webpack supported methods [webpack/karma-webpack#21](https://github.com/webpack/karma-webpack/issues/21), [Medium article](https://medium.com/@scbarrus/how-to-get-test-coverage-on-react-with-karma-babel-and-webpack-c9273d805063#.i5krbohek)
 - [ ] Lint Sass.
 - [ ] Lint HTML for accessibility.
 
@@ -36,6 +36,10 @@ npm build
 ```
 npm test
 ```
+
+### Code Coverage:
+
+As you run tests, view coverage results by opening the `coverage/` in any browser.
 
 ## Lint:
 ```
