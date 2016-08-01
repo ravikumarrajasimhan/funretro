@@ -112,11 +112,13 @@ gulp.task('watch-test', function (done) {
 });
 
 gulp.task('test-once', function (done) {
-  return new Server({
+  Server.start({
     configFile: __dirname + '/karma.conf.js',
     singleRun: true,
     reporters: ['mocha']
-  }, done).start();
+  }, function(error) {
+      done(error);
+  });
 });
 
 gulp.task('copy', function(){
