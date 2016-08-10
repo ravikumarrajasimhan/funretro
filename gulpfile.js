@@ -94,7 +94,8 @@ gulp.task('bundle', function() {
 gulp.task('watch', function (cb) {
   watch('dist/*', notifyLiveReload);
   watch('**/*.html', notifyLiveReload);
-  watch('stylesheets/**/*.scss', sass);
+  watch('**/*.scss', processSass);
+  watch('**/*.scss', notifyLiveReload);
   watch('js/**/*.js', minifyJS);
 });
 

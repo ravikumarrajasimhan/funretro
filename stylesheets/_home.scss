@@ -93,7 +93,35 @@
     }
   }
 
-  button, .button {
+  form fieldset {
+    border: none;
+  }
+
+  .subscribe__email {
+    width: 30%;
+    height: 40px;
+    font-size: 16px;
+
+    @media (max-width: 800px) {
+      width: 80%;
+      margin-bottom: 10px;
+    }
+  }
+
+  form input[type='submit'] {
+    width: auto;
+    padding: 5px 25px;
+    margin-left: 10px;
+    overflow: hidden;
+    font-family: 'Roboto',sans-serif;
+    color: white;
+    cursor: pointer;
+    background: #0299ad;
+    border: 0;
+    border-bottom: 2px solid #017280;
+    border-radius: 2px;
+    height: 40px;
+    transform: translate3d(0,0,0);
     font-size: 16px;
   }
 
@@ -107,7 +135,7 @@
     }
   }
 
-  button {
+  button, .button {
     display: block;
     width: 160px;
     height: 47px;
@@ -115,6 +143,8 @@
     margin-top: 60px;
     background: $purple;
     border-bottom: 3px solid $light-purple;
+    color: white;
+    font-size: 16px;
 
     &.alone {
       margin: 0 auto;
@@ -134,19 +164,31 @@
     list-style: none;
   }
 
+  .donation {
+    width: 200px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .heart {
+    color: red;
+  }
+
   h2 {
     display: block;
     max-width: 100%;
     margin-top: 0;
     margin-right: 0;
-    margin-bottom: 1.5em;
-    font-size: 2.7em;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    font-size: 1.6rem;
     font-weight: 100;
 
     @media (max-width: 500px) {
-      margin-top: 10px;
+      margin-top: 15px;
       margin-bottom: 10px;
-      font-size: 2em;
+      font-size: 1.5rem;
+      line-height: 1.7rem;
     }
   }
 }
