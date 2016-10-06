@@ -24,6 +24,8 @@ npm start
 - [x] Enable code coverage using karma-coverage with webpack supported methods [webpack/karma-webpack#21](https://github.com/webpack/karma-webpack/issues/21), [Medium article](https://medium.com/@scbarrus/how-to-get-test-coverage-on-react-with-karma-babel-and-webpack-c9273d805063#.i5krbohek)
 - [ ] Lint Sass.
 - [ ] Lint HTML for accessibility.
+- [ ] Upgrade firebase version
+- [ ] Enable html5Mode
 
 ## Build for deployment:
 

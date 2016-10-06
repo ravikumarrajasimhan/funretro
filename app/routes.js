@@ -13,7 +13,7 @@ const Routes = ($routeProvider, $locationProvider) => {
   });
 
   $locationProvider.html5Mode({
-    enabled: true,
+    enabled: false,
     requireBase: false
   });
 };
