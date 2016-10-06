@@ -9,6 +9,8 @@
 @import './buttons';
 @import './forms';
 @import './landing';
+@import './header';
+@import './board';
 
 html {
   box-sizing: border-box;
@@ -33,3 +35,25 @@ ol {
   margin: 0;
   padding: 0;
 }
+
+blockquote {
+  margin: 0;
+  font-family: 'PT Serif', serif;
+  font-style: italic;
+
+  p {
+    margin: 0 auto;
+    font-size: 14px;
+  }
+
+  footer {
+    margin: 3px;
+    font-size: 13px;
+    line-height: 20px;
+    text-align: right;
+
+    &:before {
+      content: '\2014';
+    }
+  }
+} 
