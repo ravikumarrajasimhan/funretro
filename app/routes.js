@@ -1,15 +1,19 @@
 import LandingController from './controllers/landing/Landing';
+import BoardController from './controllers/board/Board';
 import LandingView from './views/landing.html';
+import BoardView from './views/board.html';
 
 const Routes = ($routeProvider, $locationProvider) => {
   $routeProvider
+  .when('/:id', {
+    controller: BoardController,
+    controllerAs: 'board',
+    templateUrl: BoardView
+  })
   .when('/', {
     controller: LandingController,
     controllerAs: 'landing',
     templateUrl: LandingView
-  })
-  .otherwise({
-    redirectTo: '/'
   });
 
   $locationProvider.html5Mode({
