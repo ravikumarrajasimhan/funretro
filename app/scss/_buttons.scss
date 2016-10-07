@@ -1,5 +1,4 @@
 #{$all-buttons} {
-  appearance: none;
   background-color: $action-color;
   border: 0;
   border-bottom: $base-border-radius solid darken($action-color, 15%);
@@ -44,22 +43,4 @@
     background-color: shade($color, 20%);
   }
 
-}
-
-header button, .button {
-  padding: 5px 8px;
-  margin-left: 10px;
-  overflow: hidden;
-
-  &.first {
-    background: $purple;
-    border-bottom: 2px solid $light-purple;
-  }
-}
-
-header button:hover {
-  position: relative;
-  top: 2px;
-  margin-bottom: 2px;
-  border-bottom: 0;
 }

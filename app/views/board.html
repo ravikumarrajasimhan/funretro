@@ -14,9 +14,9 @@
   </div>
 </header>
 
-<div ng-show="userId !== ''" class="menu">
+<section class="menu">
   <h2>boardId</h2>
-  <span class="menu-controls">
+  <div class="menu-controls">
     <label class="menu-controls">Sort by</label>
     <select ng-model="sortField">
       <option value="$id">Created date</option>
@@ -25,14 +25,16 @@
     <button class="pull-right new-column" ng-click="modalService.openAddNewColumn(this)">New column</button>
     <!--<button class="pull-right new-column" ng-show="board.columns.length < 6" ng-click="modalService.openAddNewColumn(this)">New column</button>-->
     <button class="pull-right delete-button" ng-click="modalService.openDeleteCards(this)">Delete cards</button>
-  </span>
-</div>
+  </div>
+</section>
 
-<div class="filter-mobile" ng-show="userId !== ''">
+<div class="filter-mobile">
   <label>Filter by</label>
-  <select
-    ng-model="selectedType"
-    ng-options="column.id as column.value for column in board.columns">
-  </select>
+  <select ng-model="selectedType" ng-options="column.id as column.value for column in board.columns"></select>
   <button class="pull-right new-column" ng-show="board.columns.length < 6" ng-click="modalService.openAddNewColumn(this)">New column</button>
 </div>
+
+<footer>
+  Fun Retro
+  <iframe src="https://ghbtns.com/github-btn.html?user=funretro&repo=distributed&type=star&count=true" frameborder="0" scrolling="0" width="80px" height="20px"></iframe>
+</footer>
