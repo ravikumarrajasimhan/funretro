@@ -1,0 +1,28 @@
+.header {
+  h2 {
+    display: inline-block;
+    font-size: 1.2em;
+  };
+};
+
+.controls {
+  display: inline-block;
+  font-weight: bold;
+  vertical-align: middle;
+};
+
+.controls.add {
+  color: $teal;
+};
+
+.controls.add:hover {
+  color: $light-teal;
+};
+
+.controls.delete {
+  color: $red;
+};
+
+.controls.delete:hover {
+  color: $faded-red;
+};

@@ -1,16 +1,16 @@
 <div ng-include="'views/header.html'"></div>
 <div ng-include="'views/menu.html'"></div>
 
-<span class="container">
-  <span class="message-list" ng-class="{'selected': isColumnSelected(type.id)}">
-    <ul class="column utils.columnClass(type.id)">
-      <div class="column-header">
-        <a class="controls delete" href="javascript:void(0)"><i class="fa fa-times"></i></a>
-        <h2 newName=type.value;"> type.value </h2>
-        <a class="add" href="javascript:void(0)"><i class="fa fa-plus"></i></a>
+<section class="board">
+  <div>
+    <ul>
+      <div class="header">
+        <a class="controls delete"><i class="fa fa-times"></i></a>
+        <h2> Went Well </h2>
+        <a class="controls add"><i class="fa fa-plus"></i></a>
       </div>
     </ul>
-  </span>
-</span>
+  </div>
+</section>
 
 <div ng-include="'views/footer.html'"></div>
