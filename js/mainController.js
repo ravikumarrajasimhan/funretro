@@ -60,6 +60,11 @@ angular
         return $scope.sortField === 'votes' ? true : false;
       };
 
+      $scope.saveMessage = function(message) {
+        message.saved = true;
+        $scope.messages.$save(message)
+      }
+
       $scope.toggleVote = function(key, votes) {
         if (!localStorage.getItem(key)) {
           messagesRef.child(key).update({

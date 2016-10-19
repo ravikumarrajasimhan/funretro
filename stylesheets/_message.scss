@@ -12,7 +12,6 @@
 .message-list {
   margin-left: 15px;
   flex-basis: 0;
-
   flex-grow: 1;
 
   @media (max-width: 500px) {
@@ -81,6 +80,10 @@
     resize: none;
     border: none;
   }
+}
+
+.message .filter {
+  filter: blur(3px);
 }
 
 .message .front {
