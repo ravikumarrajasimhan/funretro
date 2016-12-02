@@ -37,7 +37,7 @@
     "karma-sinon": "^1.0.4",
     "mocha": "^3.2.0",
     "phantomjs-prebuilt": "^2.1.4",
-    "roboto-fontface": "^0.6.0",
+    "roboto-fontface": "^0.4.2",
     "sinon": "1.17.6",
     "tiny-lr": "latest"
   },
