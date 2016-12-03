@@ -61,8 +61,8 @@ angular
       };
 
       $scope.saveMessage = function(message) {
-        message.saved = true;
-        $scope.messages.$save(message)
+        message.creating = false;
+        $scope.messages.$save(message);
       }
 
       $scope.toggleVote = function(key, votes) {
@@ -164,6 +164,7 @@ angular
       $scope.addNewMessage = function(type) {
         $scope.messages.$add({
           text: '',
+          creating: true,
           user_id: $scope.userUid,
           type: {
             id: type.id
