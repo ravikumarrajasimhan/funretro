@@ -65,6 +65,52 @@ angular
         $scope.messages.$save(message);
       }
 
+      $scope.isAbleToVote = function() {
+        return localStorage.getItem($scope.userId) < $scope.board.max_votes;
+      }
+
+      $scope.returnNumberOfVotes = function() {
+        return localStorage.getItem($scope.userId) ? parseInt(localStorage.getItem($scope.userId)) : 0;
+      }
+
+      $scope.remainingVotes = function() {
+        return ($scope.board.max_votes - $scope.returnNumberOfVotes()) > 0
+          ? $scope.board.max_votes - $scope.returnNumberOfVotes()
+          : 0;
+      }
+
+      $scope.vote = function(key, votes) {
+        messagesRef.child(key).update({
+          votes: votes + 1,
+          date: firebaseService.getServerTimestamp()
+        });
+
+        if(localStorage.getItem(key)) {
+          localStorage.setItem(key, parseInt(localStorage.getItem(key)) + 1);
+        } else {
+          localStorage.setItem(key, 1);
+        }
+
+        localStorage.setItem($scope.userId, $scope.returnNumberOfVotes() + 1);
+      }
+
+      $scope.unvote = function(key, votes) {
+        if(localStorage.getItem(key) > 0) {
+          messagesRef.child(key).update({
+            votes: votes - 1,
+            date: firebaseService.getServerTimestamp()
+          });
+
+          if(localStorage.getItem(key) === 1) {
+            localStorage.removeItem(key);
+          } else {
+            localStorage.setItem(key, parseInt(localStorage.getItem(key)) - 1);
+          }
+
+          localStorage.setItem($scope.userId, $scope.returnNumberOfVotes() - 1);
+        }
+      }
+
       $scope.toggleVote = function(key, votes) {
         var messagesRef = firebaseService.getMessagesRef($scope.userId);
         if (!localStorage.getItem(key)) {
@@ -74,6 +120,7 @@ angular
           });
 
           localStorage.setItem(key, 1);
+          localStorage.setItem($scope.userId, $scope.returnNumberOfVotes() + 1);
         } else {
           messagesRef.child(key).update({
             votes: votes - 1,
@@ -81,6 +128,7 @@ angular
           });
 
           localStorage.removeItem(key);
+          localStorage.setItem($scope.userId, $scope.returnNumberOfVotes() - 1);
         }
       };
 
@@ -100,7 +148,8 @@ angular
             boardId: $scope.newBoard.name,
             date_created: new Date().toString(),
             columns: $scope.messageTypes,
-            user_id: userData.uid
+            user_id: userData.uid,
+            max_votes: $scope.newBoard.max_votes || 6
           });
 
           redirectToBoard();
