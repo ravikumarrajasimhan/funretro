@@ -3,8 +3,8 @@
 angular
   .module('fireideaz')
   .controller('MainCtrl', ['$scope', '$filter',
-    '$window', 'Utils', 'Auth', '$rootScope', 'FirebaseService', 'ModalService',
-    function($scope, $filter, $window, utils, auth, $rootScope, firebaseService, modalService) {
+    '$window', 'Utils', 'Auth', '$rootScope', 'FirebaseService', 'ModalService', 'VoteService',
+    function($scope, $filter, $window, utils, auth, $rootScope, firebaseService, modalService, voteService) {
       $scope.loading = true;
       $scope.messageTypes = utils.messageTypes;
       $scope.utils = utils;
@@ -32,13 +32,14 @@ angular
         });
 
         $scope.boardRef = board;
+        $scope.messagesRef = messagesRef;
         $scope.userUid = userData.uid;
         $scope.messages = firebaseService.newFirebaseArray(messagesRef);
         $scope.loading = false;
       }
 
       if ($scope.userId !== '') {
-        var messagesRef = firebaseService.getMessagesRef($scope.userId);
+        //var messagesRef = firebaseService.getMessagesRef($scope.userId);
         auth.logUser($scope.userId, getBoardAndMessages);
       } else {
         $scope.loading = false;
@@ -65,72 +66,29 @@ angular
         $scope.messages.$save(message);
       }
 
-      $scope.isAbleToVote = function() {
-        return localStorage.getItem($scope.userId) < $scope.board.max_votes;
-      }
-
-      $scope.returnNumberOfVotes = function() {
-        return localStorage.getItem($scope.userId) ? parseInt(localStorage.getItem($scope.userId)) : 0;
-      }
-
-      $scope.remainingVotes = function() {
-        return ($scope.board.max_votes - $scope.returnNumberOfVotes()) > 0
-          ? $scope.board.max_votes - $scope.returnNumberOfVotes()
-          : 0;
-      }
-
       $scope.vote = function(key, votes) {
-        messagesRef.child(key).update({
-          votes: votes + 1,
-          date: firebaseService.getServerTimestamp()
-        });
-
-        if(localStorage.getItem(key)) {
-          localStorage.setItem(key, parseInt(localStorage.getItem(key)) + 1);
-        } else {
-          localStorage.setItem(key, 1);
-        }
-
-        localStorage.setItem($scope.userId, $scope.returnNumberOfVotes() + 1);
-      }
-
-      $scope.unvote = function(key, votes) {
-        if(localStorage.getItem(key) > 0) {
-          messagesRef.child(key).update({
-            votes: votes - 1,
-            date: firebaseService.getServerTimestamp()
-          });
-
-          if(localStorage.getItem(key) === 1) {
-            localStorage.removeItem(key);
-          } else {
-            localStorage.setItem(key, parseInt(localStorage.getItem(key)) - 1);
-          }
-
-          localStorage.setItem($scope.userId, $scope.returnNumberOfVotes() - 1);
-        }
-      }
-
-      $scope.toggleVote = function(key, votes) {
-        var messagesRef = firebaseService.getMessagesRef($scope.userId);
-        if (!localStorage.getItem(key)) {
-          messagesRef.child(key).update({
+        if(voteService.isAbleToVote($scope.userId, $scope.board.max_votes)) {
+          $scope.messagesRef.child(key).update({
             votes: votes + 1,
             date: firebaseService.getServerTimestamp()
           });
 
-          localStorage.setItem(key, 1);
-          localStorage.setItem($scope.userId, $scope.returnNumberOfVotes() + 1);
-        } else {
-          messagesRef.child(key).update({
+          voteService.increaseMessageVotes(key);
+          voteService.increaseUserVotes($scope.userId);
+        }
+      }
+
+      $scope.unvote = function(key, votes) {
+        if(voteService.canUnvoteMessage(key, votes)) {
+          $scope.messagesRef.child(key).update({
             votes: votes - 1,
             date: firebaseService.getServerTimestamp()
           });
 
-          localStorage.removeItem(key);
-          localStorage.setItem($scope.userId, $scope.returnNumberOfVotes() - 1);
+          voteService.decreaseMessageVotes(key);
+          voteService.decreaseUserVotes($scope.userId);
         }
-      };
+      }
 
       function redirectToBoard() {
         window.location.href = window.location.origin +
