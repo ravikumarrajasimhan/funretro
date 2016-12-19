@@ -1,12 +1,9 @@
 'use strict';
 
-angular.module('fireideaz').directive('pageFooter', ['VoteService', function(voteService) {
+angular.module('fireideaz').directive('pageFooter', [function() {
     return {
       restrict: 'E',
-      templateUrl : 'components/footer.html',
-      link: function($scope) {
-        $scope.voteService = voteService;
-      }
+      templateUrl : 'components/footer.html'
     };
   }]
 );
