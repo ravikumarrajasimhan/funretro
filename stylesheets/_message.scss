@@ -6,7 +6,24 @@
   }
 
   ul.column_#{$i} .votes {
-    background: nth($column-colors-votes, $i);
+    .vote-area {
+      padding: 2px 7px;
+      margin: 0;
+      background: nth($column-colors-votes, $i);
+    }
+
+    .fa-times {
+      color: darken(nth($column-colors-votes, $i), 15%);
+    }
+
+    .disabled i {
+      color: nth($column-colors-main, $i);
+      cursor: not-allowed;
+
+      &:hover {
+        color: nth($column-colors-main, $i);
+      }
+    }
   }
 }
 
@@ -46,11 +63,15 @@
 
 .votes {
   @include position(absolute, null 0 0 null);
-  display: block;
-  height: 17px;
-  padding: 0.3em 0.4em;
+  display: flex;
+  height: 22px;
   font-size: 0.89em;
   text-align: right;
+  align-items: center;
+
+  .fa-times {
+    margin-right: 5px;
+  }
 }
 
 .placeholder {
