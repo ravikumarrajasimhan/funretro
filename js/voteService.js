@@ -3,14 +3,14 @@
 angular
   .module('fireideaz')
   .service('VoteService', [function () {
+    function returnNumberOfVotes(userId) {
+      return localStorage.getItem(userId) ? parseInt(localStorage.getItem(userId)) : 0;
+    }
+
     function remainingVotes(maxVotes, userId) {
       return (maxVotes - this.returnNumberOfVotes(userId)) > 0
         ? maxVotes - this.returnNumberOfVotes(userId)
         : 0;
-    }
-
-    function returnNumberOfVotes(userId) {
-      return localStorage.getItem(userId) ? parseInt(localStorage.getItem(userId)) : 0;
     }
 
     function increaseMessageVotes(key) {
