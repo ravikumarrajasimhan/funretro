@@ -14,7 +14,7 @@ angular
     }
 
     function increaseMessageVotes(key) {
-      if(localStorage.getItem(key)) {
+      if (localStorage.getItem(key)) {
         localStorage.setItem(key, parseInt(localStorage.getItem(key)) + 1);
       } else {
         localStorage.setItem(key, 1);
@@ -26,7 +26,7 @@ angular
     }
 
     function decreaseMessageVotes(key) {
-      if(localStorage.getItem(key) === 1) {
+      if (localStorage.getItem(key) === 1) {
         localStorage.removeItem(key);
       } else {
         localStorage.setItem(key, parseInt(localStorage.getItem(key)) - 1);
