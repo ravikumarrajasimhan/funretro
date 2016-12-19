@@ -49,14 +49,6 @@ angular
         return parseInt($scope.selectedType) === parseInt(type);
       };
 
-      $scope.seeNotification = function() {
-        localStorage.setItem('funretro1', true);
-      };
-
-      $scope.showNotification = function() {
-        return !localStorage.getItem('funretro1') && $scope.userId !== '';
-      };
-
       $scope.getSortOrder = function() {
         return $scope.sortField === 'votes' ? true : false;
       };
