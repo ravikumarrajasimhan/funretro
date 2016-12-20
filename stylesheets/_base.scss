@@ -210,9 +210,9 @@ img {
 }
 
 small {
-  margin-left: 1em;
-  font-size: 0.8em;
-  color: $lightest-gray;
+  margin-left: 0.5em;
+  font-size: 1em;
+  color: $light-grey;
 }
 
 h1 {
@@ -225,10 +225,9 @@ input {
   padding: 3px 5px;
   background: white;
   border: 1px solid $lightest-gray;
-  border-radius: 2px;
 }
 
-input[type="text"] {
+input[type="text"], input[type="number"] {
   width: 200px;
   font-size: 18px;
 }
@@ -296,8 +295,8 @@ blockquote {
 
 .danger p.header {
   position: relative;
-  top: -15px;
-  left: -15px;
+  top: -18px;
+  left: -23px;
   width: 350px;
   padding: 10px 17px !important;
   margin: 0;
@@ -332,5 +331,35 @@ blockquote {
 
   select {
     flex-grow: 2;
+  }
+}
+
+.ngdialog.ngdialog-theme-plain .ngdialog-content {
+  padding: 1.2em 1.5em 1.5em;
+
+  h1 {
+    font-size: 1.7em;
+  }
+
+  label {
+    display: inline-block;
+    padding: 15px 0 10px 0;
+    font-size: 16px;
+  }
+
+  input {
+    display: block;
+    width: 250px;
+    height: 30px;
+    font-size: 16px;
+  }
+
+  button {
+    height: auto;
+    padding: 5px 10px;
+    margin: 0;
+    margin-top: 1.5em;
+    font-size: 16px;
+    border-radius: 0;
   }
 }
