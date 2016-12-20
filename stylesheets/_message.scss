@@ -12,10 +12,6 @@
       background: nth($column-colors-votes, $i);
     }
 
-    .fa-times {
-      color: darken(nth($column-colors-votes, $i), 15%);
-    }
-
     .disabled i {
       color: nth($column-colors-main, $i);
       cursor: not-allowed;
@@ -71,6 +67,7 @@
 
   .fa-times {
     margin-right: 5px;
+    color: white;
   }
 }
 
