@@ -2,6 +2,7 @@
 @for $i from 1 through 6 {
   ul.column_#{$i} .front, ul.column_#{$i} .back {
     background: nth($column-colors-main, $i);
+    min-height: 52px;
   }
 
   ul.column_#{$i} .votes {
