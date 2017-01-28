@@ -110,6 +110,10 @@ angular
         auth.createUserAndLog($scope.userId, callback);
       };
 
+      $scope.isBoardNameInvalid = function() {
+        return !$scope.newBoard.name;
+      }
+
       $scope.changeBoardContext = function() {
         $scope.boardRef.update({
           boardContext: $scope.boardContext
