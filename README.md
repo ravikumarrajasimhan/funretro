@@ -55,4 +55,4 @@ Our tests run on [SnapCI](https://snap-ci.com/funretro/distributed/branch/master
 1. Run ```gulp test```
 2. Refactor and watch tests re-run.
 3. Fix any red tests
-4. Note: you can open http://localhost:9876/debug.html to run tests with a browser
+4. Note: you can open [http://localhost:9876/debug.html](http://localhost:9876/debug.html) to run tests with a browser
