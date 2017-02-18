@@ -48,7 +48,7 @@ Learn more about retrospectives at [funretrospectives.com](http://funretrospecti
 
 ## Continuous Integration
 
-Our tests run on SnapCI [SnapCI](https://snap-ci.com/funretro/distributed/branch/master)
+Our tests run on [SnapCI](https://snap-ci.com/funretro/distributed/branch/master)
 
 ## Running the tests
 
