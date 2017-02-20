@@ -16,8 +16,8 @@ Learn more about retrospectives at [funretrospectives.com](http://funretrospecti
 2. Install [Node.js](https://nodejs.org/en/)
 3. Run ```npm install``` (inside the project folder)
 4. Run ```gulp```
-5. Fun Retro is using [Firebase](http://www.firebase.com). First create an account at firebase. Then create a test app.
-6. Change the Database rules of created app:
+5. Fun Retro is using [Firebase](http://www.firebase.com). First create an account at firebase. Then create a test project.
+6. Change the Database rules of created project:
 ```
 {
     "rules": {
@@ -26,7 +26,7 @@ Learn more about retrospectives at [funretrospectives.com](http://funretrospecti
     }
 }
 ```
-7. After creating the app you can save the new url (ex: https://funretrotest.firebaseio.com/) and replace the variable ```firebaseUrl``` inside ```js/firebaseService.js```
+7. After creating the project you can select Database from the left pane, where you can find the database url (ex: https://funretrotest.firebaseio.com/). Replace ```firebaseUrl``` inside ```js/firebaseService.js``` with this database url.
 8. Now you can open the app on [http://localhost:4000/](http://localhost:4000/) and start creating your boards.
    You will notice that the app has this architecture on firebase:
 ![Fun retro architecture](https://i.imgur.com/etYgDia.png)
@@ -48,11 +48,11 @@ Learn more about retrospectives at [funretrospectives.com](http://funretrospecti
 
 ## Continuous Integration
 
-Our tests run on SnapCI [SnapCI](https://snap-ci.com/funretro/distributed/branch/master)
+Our tests run on [SnapCI](https://snap-ci.com/funretro/distributed/branch/master)
 
 ## Running the tests
 
 1. Run ```gulp test```
 2. Refactor and watch tests re-run.
 3. Fix any red tests
-4. Note: you can open http://localhost:9876/debug.html to run tests with a browser
+4. Note: you can open [http://localhost:9876/debug.html](http://localhost:9876/debug.html) to run tests with a browser
