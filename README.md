@@ -26,7 +26,7 @@ Learn more about retrospectives at [funretrospectives.com](http://funretrospecti
     }
 }
 ```
-7. After creating the project you can select Database from the left pane, where you can find the database url (ex: https://funretrotest.firebaseio.com/). You can save this url and replace it with the variable ```firebaseUrl``` inside ```js/firebaseService.js```
+7. After creating the project you can select Database from the left pane, where you can find the database url (ex: https://funretrotest.firebaseio.com/). Replace ```firebaseUrl``` inside ```js/firebaseService.js``` with this database url.
 8. Now you can open the app on [http://localhost:4000/](http://localhost:4000/) and start creating your boards.
    You will notice that the app has this architecture on firebase:
 ![Fun retro architecture](https://i.imgur.com/etYgDia.png)
