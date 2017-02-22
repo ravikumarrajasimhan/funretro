@@ -117,14 +117,14 @@ h2 {
   margin-bottom: .5em;
 }
 
-.editing-column input {
+.editing-column input, .editing-board-name input {
   max-width: 300px;
   font-size: 1.3em;
   font-weight: bold;
   color: $dark-gray;
 }
 
-.editing-column .blue {
+.editing-column .blue, .editing-board-name .blue{
   position: relative;
   top: 7px;
   margin-left: 5px;

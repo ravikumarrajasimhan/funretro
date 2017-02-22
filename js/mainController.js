@@ -114,6 +114,14 @@ angular
         return !$scope.newBoard.name;
       }
 
+      $scope.changeBoardName = function(newBoardName) {
+        $scope.boardRef.update({
+          boardId: newBoardName
+        });
+
+        modalService.closeAll();
+      };
+
       $scope.changeBoardContext = function() {
         $scope.boardRef.update({
           boardContext: $scope.boardContext
