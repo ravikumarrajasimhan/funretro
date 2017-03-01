@@ -144,6 +144,14 @@ ul {
   border: none;
 }
 
+.menu #board-name + .fa-pencil{
+  display: none;
+}
+
+.menu #board-name:hover + .fa-pencil{
+  display: inline-block;
+}
+
 .delete {
   display: inline-block;
   margin-top: 19px;
