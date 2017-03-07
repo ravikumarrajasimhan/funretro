@@ -66,6 +66,7 @@ angular
       }
 
       $scope.toggleVote = function(key, votes) {
+        var messagesRef = firebaseService.getMessagesRef($scope.userId);
         if (!localStorage.getItem(key)) {
           messagesRef.child(key).update({
             votes: votes + 1,
