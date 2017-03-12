@@ -144,22 +144,22 @@ ul {
   border: none;
 }
 
-.menu #board-name + .fa-pencil{
+#board-name + .fa-pencil {
   display: none;
 }
 
-.menu #board-name:hover + .fa-pencil{
+#board-name:hover + .fa-pencil {
   display: inline-block;
 }
 
-.menu .editing-board-name button.success-button,
-.menu .editing-board-name input,
-.menu .editing-board-name a.blue {
+.editing-board-name button.success-button,
+.editing-board-name input,
+.editing-board-name a.blue {
   vertical-align: middle;
   margin: 0 5px 0 0;
 }
 
-.menu .editing-board-name a.blue {
+.editing-board-name a.blue {
   font-size: .9em;
 }
 
