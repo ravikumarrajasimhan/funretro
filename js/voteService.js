@@ -4,7 +4,15 @@ angular
   .module('fireideaz')
   .service('VoteService', [function () {
     function returnNumberOfVotes(userId) {
-      return localStorage.getItem(userId) ? parseInt(localStorage.getItem(userId)) : 0;
+      var userVotes = localStorage.getItem(userId) ? JSON.parse(localStorage.getItem(userId)) : {}
+
+      var totalVotes = Object.keys(userVotes).map(function(messageKey) {
+        return userVotes[messageKey]
+      }).reduce(function (a, b) {
+        return a + b;
+      }, 0)
+
+      return localStorage.getItem(userId) ? totalVotes : 0;
     }
 
     function remainingVotes(maxVotes, userId) {
