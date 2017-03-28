@@ -101,8 +101,6 @@ describe('VoteService: ', function() {
 
       voteService.decreaseMessageVotes('userId', 'abc')
 
-      console.log(localStorage.setItem.getCall(0).args[1])
-
       expect(localStorage.setItem.calledWith('userId', '{"abc":2}')).to.be.true;
 
       localStorage.getItem.restore();

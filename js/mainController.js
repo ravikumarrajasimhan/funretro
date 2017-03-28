@@ -58,25 +58,25 @@ angular
         $scope.messages.$save(message);
       }
 
-      $scope.vote = function(key, votes) {
+      $scope.vote = function(messageKey, votes) {
         if(voteService.isAbleToVote($scope.userId, $scope.board.max_votes)) {
-          $scope.messagesRef.child(key).update({
+          $scope.messagesRef.child(messageKey).update({
             votes: votes + 1,
             date: firebaseService.getServerTimestamp()
           });
 
-          voteService.increaseMessageVotes(key);
+          voteService.increaseMessageVotes($scope.userId, messageKey);
         }
       }
 
-      $scope.unvote = function(key, votes) {
-        if(voteService.canUnvoteMessage(key, votes)) {
-          $scope.messagesRef.child(key).update({
+      $scope.unvote = function(messageKey, votes) {
+        if(voteService.canUnvoteMessage(messageKey, votes)) {
+          $scope.messagesRef.child(messageKey).update({
             votes: votes - 1,
             date: firebaseService.getServerTimestamp()
           });
 
-          voteService.decreaseMessageVotes(key);
+          voteService.decreaseMessageVotes($scope.userId, messageKey);
         }
       }
 
