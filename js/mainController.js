@@ -114,6 +114,13 @@ angular
         });
       };
 
+      $scope.changeBoardName = function(newBoardName) {
+        $scope.boardRef.update({
+          boardId: newBoardName
+        });
+        modalService.closeAll();
+      };
+
       $scope.addNewColumn = function(name) {
         $scope.board.columns.push({
           value: name,
