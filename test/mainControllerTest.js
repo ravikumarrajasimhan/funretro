@@ -6,7 +6,8 @@ describe('MainCtrl: ', function() {
       board,
       firebaseService,
       auth,
-      modalService;
+      modalService,
+      voteService;
 
   beforeEach(angular.mock.module('fireideaz'));
 
@@ -18,15 +19,18 @@ describe('MainCtrl: ', function() {
     modalService = $injector.get('ModalService');
     firebaseService = $injector.get('FirebaseService');
     auth = $injector.get('Auth');
+    voteService = $injector.get('VoteService');
 
     $scope.userId = 'userId';
+    $scope.board = { max_votes: 6 };
 
     $controller('MainCtrl', {
       '$scope': $scope,
       'utils': utils,
       'modalService': modalService,
       'firebaseService': firebaseService,
-      'auth': auth
+      'auth': auth,
+      'voteService': voteService
     });
   }));
 
@@ -82,6 +86,22 @@ describe('MainCtrl: ', function() {
   });
 
   describe('Messages', function () {
+    it('should return array containing 1 element for each vote on a message', function() {
+      sinon.stub(voteService, 'returnNumberOfVotesOnMessage', function() { return 3 });
+
+      var array = $scope.getNumberOfVotesOnMessage('userId', 'abc');
+
+      expect(array.length).to.equal(3);
+    });
+
+    it('should return empty array', function() {
+      sinon.stub(voteService, 'returnNumberOfVotesOnMessage', function() { return 0 });
+
+      var array = $scope.getNumberOfVotesOnMessage('userId', 'abc');
+
+      expect(array.length).to.equal(0);
+    });
+
     it('should delete a message', function() {
       var removeSpy = sinon.spy();
       var closeAllSpy = sinon.spy(modalService, 'closeAll');
@@ -119,6 +139,46 @@ describe('MainCtrl: ', function() {
       $scope.addNewMessage({id: 1});
 
       expect(addStub.called).to.be.true;
+    });
+
+    it('should vote on a message', function() {
+      sinon.stub(firebaseService, 'getServerTimestamp', function() { return '00:00:00' });
+      sinon.stub(voteService, 'isAbleToVote', function() { return true });
+      sinon.spy(voteService, 'increaseMessageVotes');
+      var updateSpy = sinon.spy();
+
+      $scope.messagesRef = {
+        child: function() {
+          return { update: updateSpy}
+        }
+      }
+
+      $scope.userId = 'userId';
+
+      $scope.vote('abc', 5);
+
+      expect(updateSpy.calledWith({votes: 6, date: '00:00:00'})).to.be.true;
+      expect(voteService.increaseMessageVotes.calledWith('userId', 'abc')).to.be.true;
+    });
+
+    it('should unvote a message', function() {
+      sinon.stub(firebaseService, 'getServerTimestamp', function() { return '00:00:00' });
+      sinon.stub(voteService, 'canUnvoteMessage', function() { return true });
+      sinon.spy(voteService, 'decreaseMessageVotes');
+      var updateSpy = sinon.spy();
+
+      $scope.messagesRef = {
+        child: function() {
+          return { update: updateSpy}
+        }
+      }
+
+      $scope.userId = 'userId';
+
+      $scope.unvote('abc', 5);
+
+      expect(updateSpy.calledWith({votes: 4, date: '00:00:00'})).to.be.true;
+      expect(voteService.decreaseMessageVotes.calledWith('userId', 'abc')).to.be.true;
     });
   });
 

@@ -19,6 +19,10 @@ angular
         modalService.closeAll();
       };
 
+      $scope.getNumberOfVotesOnMessage = function(userId, messageId) {
+        return new Array(voteService.returnNumberOfVotesOnMessage(userId, messageId));
+      }
+
       function getBoardAndMessages(userData) {
         $scope.userId = $window.location.hash.substring(1) || '499sm';
 
@@ -27,6 +31,7 @@ angular
 
         board.on('value', function(board) {
           $scope.board = board.val();
+          $scope.maxVotes = board.val().max_votes ? board.val().max_votes : 6;
           $scope.boardId = $rootScope.boardId = board.val().boardId;
           $scope.boardContext = $rootScope.boardContext = board.val().boardContext;
         });
@@ -58,27 +63,25 @@ angular
         $scope.messages.$save(message);
       }
 
-      $scope.vote = function(key, votes) {
-        if(voteService.isAbleToVote($scope.userId, $scope.board.max_votes)) {
-          $scope.messagesRef.child(key).update({
+      $scope.vote = function(messageKey, votes) {
+        if(voteService.isAbleToVote($scope.userId, $scope.maxVotes, $scope.messages)) {
+          $scope.messagesRef.child(messageKey).update({
             votes: votes + 1,
             date: firebaseService.getServerTimestamp()
           });
 
-          voteService.increaseMessageVotes(key);
-          voteService.increaseUserVotes($scope.userId);
+          voteService.increaseMessageVotes($scope.userId, messageKey);
         }
       }
 
-      $scope.unvote = function(key, votes) {
-        if(voteService.canUnvoteMessage(key, votes)) {
-          $scope.messagesRef.child(key).update({
+      $scope.unvote = function(messageKey, votes) {
+        if(voteService.canUnvoteMessage($scope.userId, messageKey)) {
+          $scope.messagesRef.child(messageKey).update({
             votes: votes - 1,
             date: firebaseService.getServerTimestamp()
           });
 
-          voteService.decreaseMessageVotes(key);
-          voteService.decreaseUserVotes($scope.userId);
+          voteService.decreaseMessageVotes($scope.userId, messageKey);
         }
       }
 
@@ -110,22 +113,17 @@ angular
         auth.createUserAndLog($scope.userId, callback);
       };
 
-      $scope.isBoardNameInvalid = function() {
-        return !$scope.newBoard.name;
-      }
+      $scope.changeBoardContext = function() {
+        $scope.boardRef.update({
+          boardContext: $scope.boardContext
+        });
+      };
 
       $scope.changeBoardName = function(newBoardName) {
         $scope.boardRef.update({
           boardId: newBoardName
         });
-
         modalService.closeAll();
-      };
-
-      $scope.changeBoardContext = function() {
-        $scope.boardRef.update({
-          boardContext: $scope.boardContext
-        });
       };
 
       $scope.addNewColumn = function(name) {

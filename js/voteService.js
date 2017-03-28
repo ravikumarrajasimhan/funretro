@@ -3,61 +3,98 @@
 angular
   .module('fireideaz')
   .service('VoteService', [function () {
-    function returnNumberOfVotes(userId) {
-      return localStorage.getItem(userId) ? parseInt(localStorage.getItem(userId)) : 0;
+    function returnNumberOfVotes(userId, messagesIds) {
+      var userVotes = localStorage.getItem(userId) ? JSON.parse(localStorage.getItem(userId)) : {}
+
+      var totalVotes = Object.keys(userVotes).map(function(messageKey) {
+        return messagesIds.indexOf(messageKey) >= 0 ? userVotes[messageKey] : 0;
+      }).reduce(function (a, b) {
+        return a + b;
+      }, 0)
+
+      return localStorage.getItem(userId) ? totalVotes : 0;
     }
 
-    function remainingVotes(maxVotes, userId) {
-      return (maxVotes - this.returnNumberOfVotes(userId)) > 0
-        ? maxVotes - this.returnNumberOfVotes(userId)
+    function extractMessageIds(messages) {
+      return messages ? messages.map(function(message) { return message.$id }) : [];
+    }
+
+    function returnNumberOfVotesOnMessage(userId, messageKey) {
+      var userVotes = localStorage.getItem(userId) ? JSON.parse(localStorage.getItem(userId)) : {}
+
+      return userVotes[messageKey] ? userVotes[messageKey] : 0;
+    }
+
+    function remainingVotes(userId, maxVotes, messages) {
+      var messagesIds = this.extractMessageIds(messages);
+
+      return (maxVotes - this.returnNumberOfVotes(userId, messagesIds)) > 0
+        ? maxVotes - this.returnNumberOfVotes(userId, messagesIds)
         : 0;
     }
 
-    function increaseMessageVotes(key) {
-      if (localStorage.getItem(key)) {
-        localStorage.setItem(key, parseInt(localStorage.getItem(key)) + 1);
+    function increaseMessageVotes(userId, messageKey) {
+      if (localStorage.getItem(userId)) {
+        var boardVotes = JSON.parse(localStorage.getItem(userId));
+
+        if (boardVotes[messageKey]) {
+          boardVotes[messageKey] = parseInt(boardVotes[messageKey] + 1);
+          localStorage.setItem(userId, JSON.stringify(boardVotes));
+        } else {
+          boardVotes[messageKey] = 1
+          localStorage.setItem(userId, JSON.stringify(boardVotes));
+        }
       } else {
-        localStorage.setItem(key, 1);
+        var newObject = {};
+        newObject[messageKey] = 1;
+        localStorage.setItem(userId, JSON.stringify(newObject));
       }
     }
 
-    function increaseUserVotes(userId) {
-      localStorage.setItem(userId, this.returnNumberOfVotes(userId) + 1);
-    }
+    function decreaseMessageVotes(userId, messageKey) {
+      if (localStorage.getItem(userId)) {
+        var boardVotes = JSON.parse(localStorage.getItem(userId));
 
-    function decreaseMessageVotes(key) {
-      if (localStorage.getItem(key) === 1) {
-        localStorage.removeItem(key);
-      } else {
-        localStorage.setItem(key, parseInt(localStorage.getItem(key)) - 1);
+        if (boardVotes[messageKey] === 1) {
+            delete boardVotes[messageKey];
+        } else {
+          boardVotes[messageKey] = boardVotes[messageKey] - 1;
+        }
+
+        localStorage.setItem(userId, JSON.stringify(boardVotes));
       }
     }
 
-    function decreaseUserVotes(userId) {
-      localStorage.setItem(userId, this.returnNumberOfVotes(userId) - 1);
+    function mergeMessages(userId, dragMessage, dropMessage) {
+      var dragMessageVoteCount = this.returnNumberOfVotesOnMessage(userId, dragMessage)
+      var dropMessageVoteCount = this.returnNumberOfVotesOnMessage(userId, dropMessage)
+      var boardVotes = JSON.parse(localStorage.getItem(userId));
+
+      if(dragMessageVoteCount > 0) {
+        boardVotes[dropMessage] = dragMessageVoteCount + dropMessageVoteCount;
+        delete boardVotes[dragMessage];
+
+        localStorage.setItem(userId, JSON.stringify(boardVotes));
+      }
     }
 
-    function canUnvoteMessage(key, votes) {
-      return localStorage.getItem(key) > 0 && votes > 0;
+    function canUnvoteMessage(userId, messageKey) {
+      return localStorage.getItem(userId) && JSON.parse(localStorage.getItem(userId))[messageKey] ? true : false;
     }
 
-    function haveVotedOnMessage(key) {
-      return parseInt(localStorage.getItem(key)) > 0;
-    }
-
-    function isAbleToVote(userId, maxVotes) {
-      return localStorage.getItem(userId) < maxVotes;
+    function isAbleToVote(userId, maxVotes, messages) {
+      return this.remainingVotes(userId, maxVotes, messages) > 0;
     }
 
     return {
       returnNumberOfVotes: returnNumberOfVotes,
+      returnNumberOfVotesOnMessage: returnNumberOfVotesOnMessage,
       increaseMessageVotes: increaseMessageVotes,
-      increaseUserVotes: increaseUserVotes,
       decreaseMessageVotes: decreaseMessageVotes,
-      decreaseUserVotes: decreaseUserVotes,
+      extractMessageIds: extractMessageIds,
+      mergeMessages: mergeMessages,
       remainingVotes: remainingVotes,
       canUnvoteMessage: canUnvoteMessage,
-      haveVotedOnMessage: haveVotedOnMessage,
       isAbleToVote: isAbleToVote
     };
   }]);
