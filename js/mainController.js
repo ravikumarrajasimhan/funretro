@@ -3,8 +3,8 @@
 angular
   .module('fireideaz')
   .controller('MainCtrl', ['$scope', '$filter',
-    '$window', 'Utils', 'Auth', '$rootScope', 'FirebaseService', 'ModalService',
-    function($scope, $filter, $window, utils, auth, $rootScope, firebaseService, modalService) {
+    '$window', 'Utils', 'Auth', '$rootScope', 'FirebaseService', 'ModalService', 'VoteService',
+    function($scope, $filter, $window, utils, auth, $rootScope, firebaseService, modalService, voteService) {
       $scope.loading = true;
       $scope.messageTypes = utils.messageTypes;
       $scope.utils = utils;
@@ -32,13 +32,14 @@ angular
         });
 
         $scope.boardRef = board;
+        $scope.messagesRef = messagesRef;
         $scope.userUid = userData.uid;
         $scope.messages = firebaseService.newFirebaseArray(messagesRef);
         $scope.loading = false;
       }
 
       if ($scope.userId !== '') {
-        var messagesRef = firebaseService.getMessagesRef($scope.userId);
+        //var messagesRef = firebaseService.getMessagesRef($scope.userId);
         auth.logUser($scope.userId, getBoardAndMessages);
       } else {
         $scope.loading = false;
@@ -46,14 +47,6 @@ angular
 
       $scope.isColumnSelected = function(type) {
         return parseInt($scope.selectedType) === parseInt(type);
-      };
-
-      $scope.seeNotification = function() {
-        localStorage.setItem('funretro1', true);
-      };
-
-      $scope.showNotification = function() {
-        return !localStorage.getItem('funretro1') && $scope.userId !== '';
       };
 
       $scope.getSortOrder = function() {
@@ -65,24 +58,29 @@ angular
         $scope.messages.$save(message);
       }
 
-      $scope.toggleVote = function(key, votes) {
-        var messagesRef = firebaseService.getMessagesRef($scope.userId);
-        if (!localStorage.getItem(key)) {
-          messagesRef.child(key).update({
+      $scope.vote = function(key, votes) {
+        if(voteService.isAbleToVote($scope.userId, $scope.board.max_votes)) {
+          $scope.messagesRef.child(key).update({
             votes: votes + 1,
             date: firebaseService.getServerTimestamp()
           });
 
-          localStorage.setItem(key, 1);
-        } else {
-          messagesRef.child(key).update({
+          voteService.increaseMessageVotes(key);
+          voteService.increaseUserVotes($scope.userId);
+        }
+      }
+
+      $scope.unvote = function(key, votes) {
+        if(voteService.canUnvoteMessage(key, votes)) {
+          $scope.messagesRef.child(key).update({
             votes: votes - 1,
             date: firebaseService.getServerTimestamp()
           });
 
-          localStorage.removeItem(key);
+          voteService.decreaseMessageVotes(key);
+          voteService.decreaseUserVotes($scope.userId);
         }
-      };
+      }
 
       function redirectToBoard() {
         window.location.href = window.location.origin +
@@ -100,7 +98,8 @@ angular
             boardId: $scope.newBoard.name,
             date_created: new Date().toString(),
             columns: $scope.messageTypes,
-            user_id: userData.uid
+            user_id: userData.uid,
+            max_votes: $scope.newBoard.max_votes || 6
           });
 
           redirectToBoard();

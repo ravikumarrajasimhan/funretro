@@ -30,38 +30,6 @@ describe('MainCtrl: ', function() {
     });
   }));
 
-  it('should set true to board when user sees notification', function() {
-    sinon.spy(localStorage, 'setItem');
-
-    $scope.seeNotification();
-
-    expect(localStorage.setItem.calledWith('funretro1', true)).to.be.true;
-
-    localStorage.setItem.restore();
-  });
-
-  it('should retrurn true if user hasn\'t seen the notification before', function() {
-    sinon.stub(localStorage, 'getItem', function () { return false; });
-    $scope.userId = 'userId';
-
-    var shouldShowNotification = $scope.showNotification();
-
-    expect(shouldShowNotification).to.be.true;
-
-    localStorage.getItem.restore();
-  });
-
-  it('should retrurn false if user has already seen the notification', function() {
-    sinon.stub(localStorage, 'getItem', function () { return true; });
-    $scope.userId = 'userId';
-
-    var shouldShowNotification = $scope.showNotification();
-
-    expect(shouldShowNotification).to.be.false;
-
-    localStorage.getItem.restore();
-  });
-
   describe('Board', function () {
 
     it('should return true when sort board order by votes', function() {

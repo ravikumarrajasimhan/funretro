@@ -31,10 +31,15 @@
                       <a href="javascript:void(0)" class="pencil" ng-click="isEditing = true; utils.focusElement(message.$id);"><i class="fa fa-pencil"></i></a>
                   </div>
                   <div class="votes">
-                      <a ng-hide="utils.alreadyVoted(message.$id)" href="javascript:void(0)" ng-click="toggleVote(message.$id, message.votes)">
-                          <i class="fa fa-thumbs-o-up"></i>
+                      <a ng-show="voteService.haveVotedOnMessage(message.$id)" href="javascript:void(0)" ng-click="unvote(message.$id, message.votes)">
+                        <i class="fa fa-times"></i>
                       </a>
-                      <strong><a ng-show="utils.alreadyVoted(message.$id)" href="javascript:void(0)" ng-click="toggleVote(message.$id, message.votes)"><i class="fa fa-thumbs-o-down"></i> </a>+ {{ message.votes }}</strong>
+                      <strong class="vote-area">
+                        <a ng-class="{'disabled': !voteService.isAbleToVote(userId, board.max_votes)}" href="javascript:void(0)" ng-click="vote(message.$id, message.votes)">
+                            <i class="fa fa-thumbs-o-up"></i>
+                        </a>
+                        {{ message.votes }}
+                      </strong>
                   </div>
               </div>
               <div class="back">
