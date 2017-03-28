@@ -66,7 +66,6 @@ angular
           });
 
           voteService.increaseMessageVotes(key);
-          voteService.increaseUserVotes($scope.userId);
         }
       }
 
@@ -78,7 +77,6 @@ angular
           });
 
           voteService.decreaseMessageVotes(key);
-          voteService.decreaseUserVotes($scope.userId);
         }
       }
 
@@ -108,18 +106,6 @@ angular
         };
 
         auth.createUserAndLog($scope.userId, callback);
-      };
-
-      $scope.isBoardNameInvalid = function() {
-        return !$scope.newBoard.name;
-      }
-
-      $scope.changeBoardName = function(newBoardName) {
-        $scope.boardRef.update({
-          boardId: newBoardName
-        });
-
-        modalService.closeAll();
       };
 
       $scope.changeBoardContext = function() {
