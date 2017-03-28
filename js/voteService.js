@@ -15,7 +15,7 @@ angular
       return localStorage.getItem(userId) ? totalVotes : 0;
     }
 
-    function remainingVotes(maxVotes, userId) {
+    function remainingVotes(userId, maxVotes) {
       return (maxVotes - this.returnNumberOfVotes(userId)) > 0
         ? maxVotes - this.returnNumberOfVotes(userId)
         : 0;
@@ -53,16 +53,12 @@ angular
       }
     }
 
-    function canUnvoteMessage(key, votes) {
-      return localStorage.getItem(key) > 0 && votes > 0;
-    }
-
-    function haveVotedOnMessage(key) {
-      return parseInt(localStorage.getItem(key)) > 0;
+    function canUnvoteMessage(userId, messageKey) {
+      return localStorage.getItem(userId) && JSON.stringify(localStorage.getItem(userId))[messageKey] ? true : false;
     }
 
     function isAbleToVote(userId, maxVotes) {
-      return localStorage.getItem(userId) < maxVotes;
+      return this.remainingVotes(userId, maxVotes) > 0;
     }
 
     return {
@@ -71,7 +67,6 @@ angular
       decreaseMessageVotes: decreaseMessageVotes,
       remainingVotes: remainingVotes,
       canUnvoteMessage: canUnvoteMessage,
-      haveVotedOnMessage: haveVotedOnMessage,
       isAbleToVote: isAbleToVote
     };
   }]);

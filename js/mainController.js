@@ -70,7 +70,7 @@ angular
       }
 
       $scope.unvote = function(messageKey, votes) {
-        if(voteService.canUnvoteMessage(messageKey, votes)) {
+        if(voteService.canUnvoteMessage($scope.userId, messageKey)) {
           $scope.messagesRef.child(messageKey).update({
             votes: votes - 1,
             date: firebaseService.getServerTimestamp()

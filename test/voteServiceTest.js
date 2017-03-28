@@ -39,13 +39,13 @@ describe('VoteService: ', function() {
   describe('remainingVotes', function() {
     it('should return remaining votes 3', function() {
       sinon.stub(localStorage, 'getItem', function () { return '{"abc":2}'; });
-      expect(voteService.remainingVotes(5, 'userId')).to.equal(3);
+      expect(voteService.remainingVotes('userId', 5)).to.equal(3);
       localStorage.getItem.restore();
     });
 
     it('should return remaining votes 0', function() {
       sinon.stub(localStorage, 'getItem', function () { return '{"abc":2,"afe":3}'; });
-      expect(voteService.remainingVotes(5, 'userId')).to.equal(0);
+      expect(voteService.remainingVotes('userId', 5)).to.equal(0);
       localStorage.getItem.restore();
     });
   })
@@ -128,37 +128,25 @@ describe('VoteService: ', function() {
 
   describe('control votes', function() {
     it('should be able to unvote if votes equal to 3', function() {
-      sinon.stub(localStorage, 'getItem', function () { return 3; });
+      sinon.stub(localStorage, 'getItem', function () { return '{"abc":2,"afe":1}'; });
       expect(voteService.canUnvoteMessage('abc', 3)).to.be.true;
       localStorage.getItem.restore();
     });
 
     it('should not be able to unvote if votes equal to 0', function() {
-      sinon.stub(localStorage, 'getItem', function () { return "0"; });
+      sinon.stub(localStorage, 'getItem', function () { return null; });
       expect(voteService.canUnvoteMessage('abc', 0)).to.be.false;
       localStorage.getItem.restore();
     });
 
-    it('should return true if voted already', function() {
-      sinon.stub(localStorage, 'getItem', function () { return "1"; });
-      expect(voteService.haveVotedOnMessage('abc')).to.be.true;
-      localStorage.getItem.restore();
-    });
-
-    it('should return false if did not vote', function() {
-      sinon.stub(localStorage, 'getItem', function () { return "0"; });
-      expect(voteService.haveVotedOnMessage('abc')).to.be.false;
-      localStorage.getItem.restore();
-    });
-
     it('should return true if still has votes', function() {
-      sinon.stub(localStorage, 'getItem', function () { return "3"; });
+      sinon.stub(localStorage, 'getItem', function () { return '{"abc":2,"abd":2}'; });
       expect(voteService.isAbleToVote('abc', 5)).to.be.true;
       localStorage.getItem.restore();
     });
 
     it('should return false if does not have votes', function() {
-      sinon.stub(localStorage, 'getItem', function () { return "5"; });
+      sinon.stub(localStorage, 'getItem', function () { return '{"abc":4,"abd":1}'; });
       expect(voteService.isAbleToVote('abc', 5)).to.be.false;
       localStorage.getItem.restore();
     });

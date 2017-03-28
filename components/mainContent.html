@@ -31,7 +31,7 @@
                       <a href="javascript:void(0)" class="pencil" ng-click="isEditing = true; utils.focusElement(message.$id);"><i class="fa fa-pencil"></i></a>
                   </div>
                   <div class="votes">
-                      <a ng-show="voteService.haveVotedOnMessage(message.$id)" href="javascript:void(0)" ng-click="unvote(message.$id, message.votes)">
+                      <a ng-show="voteService.canUnvoteMessage(userId, message.$id)" href="javascript:void(0)" ng-click="unvote(message.$id, message.votes)">
                         <i class="fa fa-times"></i>
                       </a>
                       <strong class="vote-area">
