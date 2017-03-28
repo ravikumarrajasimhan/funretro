@@ -59,6 +59,19 @@ angular
       }
     }
 
+    function mergeMessages(userId, dragMessage, dropMessage) {
+      var dragMessageVoteCount = this.returnNumberOfVotesOnMessage(userId, dragMessage)
+      var dropMessageVoteCount = this.returnNumberOfVotesOnMessage(userId, dropMessage)
+      var boardVotes = JSON.parse(localStorage.getItem(userId));
+
+      if(dragMessageVoteCount > 0) {
+        boardVotes[dropMessage] = dragMessageVoteCount + dropMessageVoteCount;
+        delete boardVotes[dragMessage];
+
+        localStorage.setItem(userId, JSON.stringify(boardVotes));
+      }
+    }
+
     function canUnvoteMessage(userId, messageKey) {
       return localStorage.getItem(userId) && JSON.parse(localStorage.getItem(userId))[messageKey] ? true : false;
     }
@@ -72,6 +85,7 @@ angular
       returnNumberOfVotesOnMessage: returnNumberOfVotesOnMessage,
       increaseMessageVotes: increaseMessageVotes,
       decreaseMessageVotes: decreaseMessageVotes,
+      mergeMessages: mergeMessages,
       remainingVotes: remainingVotes,
       canUnvoteMessage: canUnvoteMessage,
       isAbleToVote: isAbleToVote

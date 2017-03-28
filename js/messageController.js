@@ -3,8 +3,8 @@
 angular
   .module('fireideaz')
   .controller('MessageCtrl', ['$scope', '$filter',
-              '$window', 'Auth', '$rootScope', 'FirebaseService', 'ModalService',
-    function($scope, $filter, $window, auth, $rootScope, firebaseService, modalService) {
+              '$window', 'Auth', '$rootScope', 'FirebaseService', 'ModalService', 'VoteService',
+    function($scope, $filter, $window, auth, $rootScope, firebaseService, modalService, voteService) {
       $scope.modalService = modalService;
       $scope.userId = $window.location.hash.substring(1);
 
@@ -30,6 +30,8 @@ angular
               text: dropMessage.val().text + ' | ' + dragMessage.val().text,
               votes: dropMessage.val().votes + dragMessage.val().votes
             });
+
+            voteService.mergeMessages($scope.userId, drag.attr('messageId'), drop.attr('messageId'));
 
             dragMessageRef.remove();
             modalService.closeAll();

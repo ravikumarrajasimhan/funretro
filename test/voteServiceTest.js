@@ -146,6 +146,44 @@ describe('VoteService: ', function() {
     });
   })
 
+  describe('merge messages', function() {
+    it('should merge messages votes', function() {
+      sinon.stub(localStorage, 'getItem', function () { return '{"abc":5,"abf":3,"abd":2}'});
+      sinon.spy(localStorage, 'setItem');
+
+      voteService.mergeMessages('userId', 'abc', 'abf')
+
+      expect(localStorage.setItem.calledWith('userId', '{"abf":8,"abd":2}')).to.be.true;
+
+      localStorage.getItem.restore();
+      localStorage.setItem.restore();
+    });
+
+    it('should not merge messages votes if drag is zero', function() {
+      sinon.stub(localStorage, 'getItem', function () { return '{"abf":3,"abd":2}'});
+      sinon.spy(localStorage, 'setItem');
+
+      voteService.mergeMessages('userId', 'abc', 'abf')
+
+      expect(localStorage.setItem.called).to.be.false;
+
+      localStorage.getItem.restore();
+      localStorage.setItem.restore();
+    });
+
+    it('should merge messages votes if drop is zero', function() {
+      sinon.stub(localStorage, 'getItem', function () { return '{"abc":3,"abd":2}'});
+      sinon.spy(localStorage, 'setItem');
+
+      voteService.mergeMessages('userId', 'abc', 'abf')
+
+      expect(localStorage.setItem.calledWith('userId', '{"abd":2,"abf":3}')).to.be.true;
+
+      localStorage.getItem.restore();
+      localStorage.setItem.restore();
+    });
+  })
+
   describe('control votes', function() {
     it('should be able to unvote if votes equal to 3', function() {
       sinon.stub(localStorage, 'getItem', function () { return '{"abc":2,"afe":1}'; });
