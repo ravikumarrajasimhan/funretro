@@ -31,6 +31,7 @@ angular
 
         board.on('value', function(board) {
           $scope.board = board.val();
+          $scope.maxVotes = board.val().max_votes ? board.val().max_votes : 6;
           $scope.boardId = $rootScope.boardId = board.val().boardId;
           $scope.boardContext = $rootScope.boardContext = board.val().boardContext;
         });
@@ -63,7 +64,7 @@ angular
       }
 
       $scope.vote = function(messageKey, votes) {
-        if(voteService.isAbleToVote($scope.userId, $scope.board.max_votes, $scope.messages)) {
+        if(voteService.isAbleToVote($scope.userId, $scope.maxVotes, $scope.messages)) {
           $scope.messagesRef.child(messageKey).update({
             votes: votes + 1,
             date: firebaseService.getServerTimestamp()
