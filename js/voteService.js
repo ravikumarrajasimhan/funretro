@@ -54,7 +54,7 @@ angular
     }
 
     function canUnvoteMessage(userId, messageKey) {
-      return localStorage.getItem(userId) && JSON.stringify(localStorage.getItem(userId))[messageKey] ? true : false;
+      return localStorage.getItem(userId) && JSON.parse(localStorage.getItem(userId))[messageKey] ? true : false;
     }
 
     function isAbleToVote(userId, maxVotes) {

@@ -129,13 +129,13 @@ describe('VoteService: ', function() {
   describe('control votes', function() {
     it('should be able to unvote if votes equal to 3', function() {
       sinon.stub(localStorage, 'getItem', function () { return '{"abc":2,"afe":1}'; });
-      expect(voteService.canUnvoteMessage('abc', 3)).to.be.true;
+      expect(voteService.canUnvoteMessage('userId', 'abc')).to.be.true;
       localStorage.getItem.restore();
     });
 
     it('should not be able to unvote if votes equal to 0', function() {
       sinon.stub(localStorage, 'getItem', function () { return null; });
-      expect(voteService.canUnvoteMessage('abc', 0)).to.be.false;
+      expect(voteService.canUnvoteMessage('userId', 'abc')).to.be.false;
       localStorage.getItem.restore();
     });
 
