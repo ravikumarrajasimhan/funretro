@@ -63,7 +63,7 @@ angular
       }
 
       $scope.vote = function(messageKey, votes) {
-        if(voteService.isAbleToVote($scope.userId, $scope.board.max_votes)) {
+        if(voteService.isAbleToVote($scope.userId, $scope.board.max_votes, $scope.messages)) {
           $scope.messagesRef.child(messageKey).update({
             votes: votes + 1,
             date: firebaseService.getServerTimestamp()

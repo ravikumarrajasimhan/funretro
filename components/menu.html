@@ -11,7 +11,7 @@
     <option value="$id">Created date</option>
     <option value="votes">Votes</option>
   </select>
-  <span ng-show="voteService.remainingVotes(userId, board.max_votes) < board.max_votes" class="remaining-votes">Remaining votes: <strong>{{ voteService.remainingVotes(userId, board.max_votes) }}</strong></span>
+  <span ng-show="voteService.remainingVotes(userId, board.max_votes, messages) < board.max_votes" class="remaining-votes">Remaining votes: <strong>{{ voteService.remainingVotes(userId, board.max_votes, messages) }}</strong></span>
   <span class="pull-right menu-controls">
     <button class="pull-right new-column" ng-show="board.columns.length < 6" ng-click="modalService.openAddNewColumn(this)">New column</button>
     <button class="pull-right delete-button" ng-click="modalService.openDeleteCards(this)">Delete cards</button>

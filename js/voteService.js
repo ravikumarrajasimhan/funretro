@@ -3,16 +3,20 @@
 angular
   .module('fireideaz')
   .service('VoteService', [function () {
-    function returnNumberOfVotes(userId) {
+    function returnNumberOfVotes(userId, messagesIds) {
       var userVotes = localStorage.getItem(userId) ? JSON.parse(localStorage.getItem(userId)) : {}
 
       var totalVotes = Object.keys(userVotes).map(function(messageKey) {
-        return userVotes[messageKey]
+        return messagesIds.indexOf(messageKey) >= 0 ? userVotes[messageKey] : 0;
       }).reduce(function (a, b) {
         return a + b;
       }, 0)
 
       return localStorage.getItem(userId) ? totalVotes : 0;
+    }
+
+    function extractMessageIds(messages) {
+      return messages ? messages.map(function(message) { return message.$id }) : [];
     }
 
     function returnNumberOfVotesOnMessage(userId, messageKey) {
@@ -21,9 +25,11 @@ angular
       return userVotes[messageKey] ? userVotes[messageKey] : 0;
     }
 
-    function remainingVotes(userId, maxVotes) {
-      return (maxVotes - this.returnNumberOfVotes(userId)) > 0
-        ? maxVotes - this.returnNumberOfVotes(userId)
+    function remainingVotes(userId, maxVotes, messages) {
+      var messagesIds = this.extractMessageIds(messages);
+
+      return (maxVotes - this.returnNumberOfVotes(userId, messagesIds)) > 0
+        ? maxVotes - this.returnNumberOfVotes(userId, messagesIds)
         : 0;
     }
 
@@ -76,8 +82,8 @@ angular
       return localStorage.getItem(userId) && JSON.parse(localStorage.getItem(userId))[messageKey] ? true : false;
     }
 
-    function isAbleToVote(userId, maxVotes) {
-      return this.remainingVotes(userId, maxVotes) > 0;
+    function isAbleToVote(userId, maxVotes, messages) {
+      return this.remainingVotes(userId, maxVotes, messages) > 0;
     }
 
     return {
@@ -85,6 +91,7 @@ angular
       returnNumberOfVotesOnMessage: returnNumberOfVotesOnMessage,
       increaseMessageVotes: increaseMessageVotes,
       decreaseMessageVotes: decreaseMessageVotes,
+      extractMessageIds: extractMessageIds,
       mergeMessages: mergeMessages,
       remainingVotes: remainingVotes,
       canUnvoteMessage: canUnvoteMessage,

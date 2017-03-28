@@ -19,13 +19,19 @@ describe('VoteService: ', function() {
   describe('returnNumberOfVotes', function() {
     it('should return number of votes', function() {
       sinon.stub(localStorage, 'getItem', function () { return '{"abc":1,"abd":3,"sef":2}'; });
-      expect(voteService.returnNumberOfVotes('userId')).to.equal(6);
+      expect(voteService.returnNumberOfVotes('userId', ["abc", "abd", "sef"])).to.equal(6);
       localStorage.getItem.restore();
     });
 
     it('should return number of votes of 3', function() {
       sinon.stub(localStorage, 'getItem', function () { return '{"abc":3}'; });
-      expect(voteService.returnNumberOfVotes('userId')).to.equal(3);
+      expect(voteService.returnNumberOfVotes('userId', ["abc"])).to.equal(3);
+      localStorage.getItem.restore();
+    });
+
+    it('should return number of votes of 5 when message was deleted', function() {
+      sinon.stub(localStorage, 'getItem', function () { return '{"abc":3, "avc": 2, "afe": 2}'; });
+      expect(voteService.returnNumberOfVotes('userId', ["abc","avc"])).to.equal(5);
       localStorage.getItem.restore();
     });
 
@@ -58,15 +64,15 @@ describe('VoteService: ', function() {
 
   describe('remainingVotes', function() {
     it('should return remaining votes 3', function() {
-      sinon.stub(localStorage, 'getItem', function () { return '{"abc":2}'; });
-      expect(voteService.remainingVotes('userId', 5)).to.equal(3);
-      localStorage.getItem.restore();
+      sinon.stub(voteService, 'returnNumberOfVotes', function () { return 2; });
+      expect(voteService.remainingVotes('userId', 5, [])).to.equal(3);
+      voteService.returnNumberOfVotes.restore();
     });
 
     it('should return remaining votes 0', function() {
-      sinon.stub(localStorage, 'getItem', function () { return '{"abc":2,"afe":3}'; });
+      sinon.stub(voteService, 'returnNumberOfVotes', function () { return 5; });
       expect(voteService.remainingVotes('userId', 5)).to.equal(0);
-      localStorage.getItem.restore();
+      voteService.returnNumberOfVotes.restore();
     });
   })
 
@@ -204,9 +210,24 @@ describe('VoteService: ', function() {
     });
 
     it('should return false if does not have votes', function() {
-      sinon.stub(localStorage, 'getItem', function () { return '{"abc":4,"abd":1}'; });
+      sinon.stub(voteService, 'remainingVotes', function () { return 0; });
       expect(voteService.isAbleToVote('abc', 5)).to.be.false;
-      localStorage.getItem.restore();
+      voteService.remainingVotes.restore();
+    });
+  })
+
+  describe('extract message ids', function() {
+    it('should extract messages ids', function() {
+      var original = [
+        { '$id': '123' },
+        { '$id': '124' },
+        { '$id': '125' }
+      ]
+
+      expect(voteService.extractMessageIds(original).length).to.equal(3)
+      expect(voteService.extractMessageIds(original)[0]).to.equal('123')
+      expect(voteService.extractMessageIds(original)[1]).to.equal('124')
+      expect(voteService.extractMessageIds(original)[2]).to.equal('125')
     });
   })
 });
