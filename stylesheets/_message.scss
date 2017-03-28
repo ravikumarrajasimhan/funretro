@@ -21,6 +21,10 @@
       }
     }
   }
+
+  ul.column_#{$i} .message-votes li {
+    background: nth($column-colors-votes, $i);
+  }
 }
 
 .message-list {
@@ -192,5 +196,16 @@
 
   &:hover {
     color: #c33b38;
+  }
+}
+
+.message-votes {
+  li {
+    display: inline-block;
+    list-style: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    margin-right: 4px;
   }
 }

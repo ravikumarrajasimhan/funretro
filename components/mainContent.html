@@ -34,6 +34,9 @@
                       <a ng-show="voteService.canUnvoteMessage(userId, message.$id)" href="javascript:void(0)" ng-click="unvote(message.$id, message.votes)">
                         <i class="fa fa-times"></i>
                       </a>
+                      <ul class='message-votes'>
+                        <li ng-repeat="votes in getNumberOfVotesOnMessage(userId, message.$id) track by $index"></li>
+                      </ul>
                       <strong class="vote-area">
                         <a ng-class="{'disabled': !voteService.isAbleToVote(userId, board.max_votes)}" href="javascript:void(0)" ng-click="vote(message.$id, message.votes)">
                             <i class="fa fa-thumbs-o-up"></i>

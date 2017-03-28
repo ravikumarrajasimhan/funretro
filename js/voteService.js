@@ -15,6 +15,12 @@ angular
       return localStorage.getItem(userId) ? totalVotes : 0;
     }
 
+    function returnNumberOfVotesOnMessage(userId, messageKey) {
+      var userVotes = localStorage.getItem(userId) ? JSON.parse(localStorage.getItem(userId)) : {}
+
+      return userVotes[messageKey] ? userVotes[messageKey] : 0;
+    }
+
     function remainingVotes(userId, maxVotes) {
       return (maxVotes - this.returnNumberOfVotes(userId)) > 0
         ? maxVotes - this.returnNumberOfVotes(userId)
@@ -63,6 +69,7 @@ angular
 
     return {
       returnNumberOfVotes: returnNumberOfVotes,
+      returnNumberOfVotesOnMessage: returnNumberOfVotesOnMessage,
       increaseMessageVotes: increaseMessageVotes,
       decreaseMessageVotes: decreaseMessageVotes,
       remainingVotes: remainingVotes,

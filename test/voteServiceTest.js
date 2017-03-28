@@ -36,6 +36,26 @@ describe('VoteService: ', function() {
     });
   })
 
+  describe('returnNumberOfVotesOnMessage', function() {
+    it('should return number of votes', function() {
+      sinon.stub(localStorage, 'getItem', function () { return '{"abc":1,"abd":3,"sef":2}'; });
+      expect(voteService.returnNumberOfVotesOnMessage('userId', 'abc')).to.equal(1);
+      localStorage.getItem.restore();
+    });
+
+    it('should return number of votes of 3', function() {
+      sinon.stub(localStorage, 'getItem', function () { return '{"abc":3}'; });
+      expect(voteService.returnNumberOfVotesOnMessage('userId', 'abc')).to.equal(3);
+      localStorage.getItem.restore();
+    });
+
+    it('should return zero if there is no board', function() {
+      sinon.stub(localStorage, 'getItem', function () { return null; });
+      expect(voteService.returnNumberOfVotesOnMessage('userId', 'abc')).to.equal(0);
+      localStorage.getItem.restore();
+    });
+  })
+
   describe('remainingVotes', function() {
     it('should return remaining votes 3', function() {
       sinon.stub(localStorage, 'getItem', function () { return '{"abc":2}'; });

@@ -19,6 +19,10 @@ angular
         modalService.closeAll();
       };
 
+      $scope.getNumberOfVotesOnMessage = function(userId, messageId) {
+        return new Array(voteService.returnNumberOfVotesOnMessage(userId, messageId));
+      }
+
       function getBoardAndMessages(userData) {
         $scope.userId = $window.location.hash.substring(1) || '499sm';
 

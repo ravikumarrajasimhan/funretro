@@ -86,6 +86,22 @@ describe('MainCtrl: ', function() {
   });
 
   describe('Messages', function () {
+    it('should return array containing 1 element for each vote on a message', function() {
+      sinon.stub(voteService, 'returnNumberOfVotesOnMessage', function() { return 3 });
+
+      var array = $scope.getNumberOfVotesOnMessage('userId', 'abc');
+
+      expect(array.length).to.equal(3);
+    });
+
+    it('should return empty array', function() {
+      sinon.stub(voteService, 'returnNumberOfVotesOnMessage', function() { return 0 });
+
+      var array = $scope.getNumberOfVotesOnMessage('userId', 'abc');
+
+      expect(array.length).to.equal(0);
+    });
+
     it('should delete a message', function() {
       var removeSpy = sinon.spy();
       var closeAllSpy = sinon.spy(modalService, 'closeAll');
