@@ -90,6 +90,10 @@ angular
           window.location.pathname + '#' + $scope.userId;
       }
 
+      $scope.isBoardNameInvalid = function() {
+        return !$scope.newBoard.name;
+      }
+
       $scope.createNewBoard = function() {
         $scope.loading = true;
         modalService.closeAll();
