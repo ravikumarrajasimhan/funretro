@@ -2,6 +2,7 @@
 Easy to use and beautiful restrospective board.
 
 Learn more about retrospectives at [funretrospectives.com](http://funretrospectives.com)
+
 Fun retrospective guide at [Dummies guide to retrospectives](https://github.com/gmuraleekrishna/dummies-guide-to-retrospectives)
 
 [![Build](https://snap-ci.com/funretro/distributed/branch/master/build_image)](https://snap-ci.com/funretro/distributed/branch/master)
