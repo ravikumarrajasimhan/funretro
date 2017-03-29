@@ -1,11 +1,18 @@
 <div ng-show="userId !== ''" class="menu">
-  <h2>{{boardId}}</h2>
-  <span class="menu-controls">
-    <label class="menu-controls">Sort by</label>
-    <select ng-model="sortField">
-      <option value="$id">Created date</option>
-      <option value="votes">Votes</option>
-    </select>
+  <h2 id="board-name" ng-show="!editingBoardName" ng-click="editingBoardName=true;newBoardName=boardId;">{{boardId}}</h2>
+  <i class="fa fa-pencil" ng-show="!editingBoardName"></i>
+  <span ng-show="editingBoardName" class="editing-board-name">
+    <input ng-model="newBoardName"></input>
+    <button ng-click="changeBoardName(newBoardName);editingBoardName=false;" class="success-button">Save</button>
+    <a class="blue" ng-click="editingBoardName=false;">Cancel</a>
+  </span>
+  <label class="menu-controls">Sort by</label>
+  <select ng-model="sortField">
+    <option value="$id">Created date</option>
+    <option value="votes">Votes</option>
+  </select>
+  <span ng-show="voteService.remainingVotes(userId, maxVotes, messages) < maxVotes" class="remaining-votes">Remaining votes: <strong>{{ voteService.remainingVotes(userId, maxVotes, messages) }}</strong></span>
+  <span class="pull-right menu-controls">
     <button class="pull-right new-column" ng-show="board.columns.length < 6" ng-click="modalService.openAddNewColumn(this)">New column</button>
     <button class="pull-right delete-button" ng-click="modalService.openDeleteCards(this)">Delete cards</button>
   </span>
