@@ -279,9 +279,17 @@ blockquote {
   }
 }
 
-.message > div > .lvl-over {
+.message-list.lvl-over, .message > div > .lvl-over {
   @include transition(none);
-  outline: 2px dashed $lightest-gray !important;
+  outline: 2px dashed #ffa000 !important;
+}
+
+.message > div > .lvl-over {
+  outline-offset: 4px;
+}
+
+.message-list.lvl-over {
+  outline-offset: 6px;
 }
 
 [draggable] {

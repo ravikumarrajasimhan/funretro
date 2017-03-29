@@ -23,6 +23,20 @@ angular
         return new Array(voteService.returnNumberOfVotesOnMessage(userId, messageId));
       }
 
+      $scope.droppedEvent = function(dragEl, dropEl) {
+        var drag = $('#' + dragEl);
+        var drop = $('#' + dropEl);
+        var dragMessageRef = firebaseService.getMessageRef($scope.userId, drag.attr('messageId'));
+
+        dragMessageRef.once('value', function(dragMessage) {
+          dragMessageRef.update({
+            type: {
+              id: drop.data('column-id')
+            }
+          });
+        });
+      }
+
       function getBoardAndMessages(userData) {
         $scope.userId = $window.location.hash.substring(1) || '499sm';
 
