@@ -39,7 +39,6 @@ Fun retrospective guide at [Dummies guide to retrospectives](https://github.com/
 * We are currently using labels for [Bug](https://github.com/funretro/distributed/issues?q=is%3Aissue+is%3Aopen+label%3Abug) and [Priority](https://github.com/funretro/distributed/issues?q=is%3Aissue+is%3Aopen+label%3Apriority).
    * Please fell free to get any one of those two.
    * Create as many pull requests you want.
-* We also have user recommendations for new features and voting happening at [Uservoice](https://funretrospectives.uservoice.com/forums/269818-general)
 
 ## Running the application
 
