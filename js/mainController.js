@@ -108,7 +108,6 @@ angular
         return !$scope.newBoard.name;
       }
 
-
       $scope.createNewBoard = function() {
         $scope.loading = true;
         modalService.closeAll();
