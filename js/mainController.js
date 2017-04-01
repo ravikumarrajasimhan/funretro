@@ -108,6 +108,7 @@ angular
         return !$scope.newBoard.name;
       }
 
+
       $scope.createNewBoard = function() {
         $scope.loading = true;
         modalService.closeAll();
@@ -154,6 +155,7 @@ angular
         boardColumns.set(utils.toObject($scope.board.columns));
 
         modalService.closeAll();
+        $scope.newColumn='';
       };
 
       $scope.changeColumnName = function(id, newName) {

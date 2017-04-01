@@ -3,7 +3,7 @@
 angular
   .module('fireideaz')
   .service('FirebaseService', ['$firebaseArray', function ($firebaseArray) {
-    var firebaseUrl = 'https://blinding-torch-6662.firebaseio.com';
+    var firebaseUrl = 'https://fun-retro-8270d.firebaseio.com/';
 
     function newFirebaseArray(messagesRef) {
       return $firebaseArray(messagesRef);
