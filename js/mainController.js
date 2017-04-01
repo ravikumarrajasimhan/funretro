@@ -154,7 +154,6 @@ angular
         boardColumns.set(utils.toObject($scope.board.columns));
 
         modalService.closeAll();
-        $scope.newColumn='';
       };
 
       $scope.changeColumnName = function(id, newName) {
@@ -234,6 +233,30 @@ angular
 
           return clipboard;
         } else return '';
+      };
+
+      $scope.submitOnEnter = function(e, method, data){
+        if(e.keyCode == 13){
+          switch (method){
+            case "createNewBoard":
+                if(!$scope.isBoardNameInvalid()){
+                  $scope.createNewBoard()
+                }
+                else{
+                  console.log("Invalid board name");
+                }
+                break;
+            case "addNewColumn":
+                if(data){
+                  $scope.addNewColumn(data);
+                  $scope.newColumn='';
+                }
+                else{
+                  console.log("Invalid column name")
+                }
+                break;
+          }
+        }
       };
 
       angular.element($window).bind('hashchange', function() {

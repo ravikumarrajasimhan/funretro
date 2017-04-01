@@ -13,16 +13,16 @@
 </script>
 <script type="text/ng-template" id="addNewColumn">
   <h1>New column</h1>
-  <input ng-model="newColumn" type="text" ng-keyup="($event.keyCode == 13)?addNewColumn(newColumn):null"></input>
+  <input ng-model="newColumn" type="text" ng-keyup="submitOnEnter($event, 'addNewColumn', newColumn)"></input>
   <button ng-click="addNewColumn(newColumn); newColumn='';">Add</button>
 </script>
 <script type="text/ng-template" id="addNewBoard">
   <h1>New board</h1>
 
   <label>Board name</label>
-  <input ng-model="newBoard.name" type="text" ng-keyup="($event.keyCode == 13)?isBoardNameInvalid()?null:createNewBoard():null"></input>
+  <input ng-model="newBoard.name" type="text" ng-keyup="submitOnEnter($event, 'createNewBoard', 'null')"></input>
   <label>Max votes per user <small>(whole board)</small></label>
-  <input ng-model="newBoard.max_votes" type="number" ng-init="newBoard.max_votes = 6" ng-keyup="($event.keyCode == 13)?isBoardNameInvalid()?null:createNewBoard():null"></input>
+  <input ng-model="newBoard.max_votes" type="number" ng-init="newBoard.max_votes = 6" ng-keyup="submitOnEnter($event, 'createNewBoard', 'null')"></input>
   <button ng-disabled="isBoardNameInvalid()" ng-click="createNewBoard()">Create</button>
 </script>
 <script type="text/ng-template" id="deleteCard">
