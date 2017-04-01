@@ -45,7 +45,7 @@ angular
 
         board.on('value', function(board) {
           $scope.board = board.val();
-          $scope.maxVotes = board.val().max_votes ? board.val().max_votes : 6;
+          $scope.maxVotes = board.val().max_votes ? board.val().max_votes : 0;
           $scope.boardId = $rootScope.boardId = board.val().boardId;
           $scope.boardContext = $rootScope.boardContext = board.val().boardContext;
         });
@@ -120,7 +120,7 @@ angular
             date_created: new Date().toString(),
             columns: $scope.messageTypes,
             user_id: userData.uid,
-            max_votes: $scope.newBoard.max_votes || 6
+            max_votes: $scope.newBoard.max_votes || 0
           });
 
           redirectToBoard();
@@ -251,6 +251,18 @@ angular
                 break;
           }
         }
+      };
+
+      $scope.incrementMaxVotes = function() {
+        $scope.boardRef.update({
+          max_votes: $scope.maxVotes + 1
+        });
+      };
+
+      $scope.decrementMaxVotes = function() {
+        $scope.boardRef.update({
+          max_votes: Math.min(Math.max($scope.maxVotes - 1, 0), 100)
+        });
       };
 
       angular.element($window).bind('hashchange', function() {
