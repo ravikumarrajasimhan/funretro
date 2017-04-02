@@ -117,7 +117,7 @@ h2 {
   margin-bottom: .5em;
 }
 
-.editing-column input {
+.editing-column input, .editing-board-name input {
   max-width: 300px;
   font-size: 1.3em;
   font-weight: bold;
@@ -142,6 +142,25 @@ ul {
   font-size: 16px;
   color: $grey;
   border: none;
+}
+
+#board-name + .fa-pencil {
+  display: none;
+}
+
+#board-name:hover + .fa-pencil {
+  display: inline-block;
+}
+
+.editing-board-name button.success-button,
+.editing-board-name input,
+.editing-board-name a.blue {
+  vertical-align: middle;
+  margin: 0 5px 0 0;
+}
+
+.editing-board-name a.blue {
+  font-size: .9em;
 }
 
 .delete {

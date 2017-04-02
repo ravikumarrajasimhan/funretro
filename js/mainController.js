@@ -64,11 +64,12 @@ angular
       };
 
       $scope.saveMessage = function(message) {
-        message.saved = true;
-        $scope.messages.$save(message)
+        message.creating = false;
+        $scope.messages.$save(message);
       }
 
       $scope.toggleVote = function(key, votes) {
+        var messagesRef = firebaseService.getMessagesRef($scope.userId);
         if (!localStorage.getItem(key)) {
           messagesRef.child(key).update({
             votes: votes + 1,
@@ -111,6 +112,18 @@ angular
         };
 
         auth.createUserAndLog($scope.userId, callback);
+      };
+
+      $scope.isBoardNameInvalid = function() {
+        return !$scope.newBoard.name;
+      }
+
+      $scope.changeBoardName = function(newBoardName) {
+        $scope.boardRef.update({
+          boardId: newBoardName
+        });
+
+        modalService.closeAll();
       };
 
       $scope.changeBoardContext = function() {
@@ -167,6 +180,7 @@ angular
       $scope.addNewMessage = function(type) {
         $scope.messages.$add({
           text: '',
+          creating: true,
           user_id: $scope.userUid,
           type: {
             id: type.id

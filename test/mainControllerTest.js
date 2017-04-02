@@ -88,6 +88,18 @@ describe('MainCtrl: ', function() {
       expect(updateSpy.called).to.be.true;
     });
 
+    it('should change the board name', function() {
+      var updateSpy = sinon.spy();
+
+      $scope.boardRef = {
+        update: updateSpy
+      }
+
+      $scope.changeBoardName();
+
+      expect(updateSpy.called).to.be.true;
+    });
+
     it('should create a new board', function () {
       sinon.stub(utils, 'createUserId', function () { return 'userId'; });
       var createUserSpy = sinon.spy(auth, 'createUserAndLog');
