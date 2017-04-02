@@ -19,7 +19,6 @@ module.exports = function(req, res) {
             res.json({error_code:0,parsed_table: output});
         });
         parser.write(req.file.buffer.toString());
-        
         parser.end(); 
     });
 };
