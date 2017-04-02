@@ -3,8 +3,8 @@
 angular
   .module('fireideaz')
   .controller('MainCtrl', ['$scope', '$filter',
-    '$window', 'Utils', 'Auth', '$rootScope', 'FirebaseService', 'ModalService',
-    function($scope, $filter, $window, utils, auth, $rootScope, firebaseService, modalService) {
+    '$window', 'Utils', 'Auth', '$rootScope', 'FirebaseService', 'ModalService', 'Upload',
+    function($scope, $filter, $window, utils, auth, $rootScope, firebaseService, modalService, Upload) {
       $scope.loading = true;
       $scope.messageTypes = utils.messageTypes;
       $scope.utils = utils;
@@ -14,6 +14,9 @@ angular
       $scope.userId = $window.location.hash.substring(1) || '';
       $scope.sortField = '$id';
       $scope.selectedType = 1;
+      $scope.importData = [];
+      $scope.importMapping = [];
+
 
       $scope.closeAllModals = function(){
         modalService.closeAll();
@@ -205,6 +208,56 @@ angular
           return clipboard;
         } else return '';
       };
+    
+      $scope.submitImportFile = function (file) {
+        if (file) { 
+              Upload.upload({
+                url: "./upload",
+                data: {file: file}}).then(function (resp) { 
+              if(resp.data.error_code === 0){                 
+                $scope.importMapping = [];
+                $scope.board.columns.forEach (function (column){
+                  $scope.importMapping.push({map_from:"", map_to:column.id, name: column.value}); //Form mapping array. Uggly solution
+                }); 
+
+                  $scope.importData = resp.data.parsed_table;  
+              } else {
+                  $window.alert('an error occured');
+              }
+          }, function (resp) { //catch error
+              console.log('Error status: ' + resp.status);
+              $window.alert('Error status: ' + resp.status);
+          });
+        }
+      };
+
+       $scope.importMessages = function (){
+         console.log ($scope.importData);
+         for (var importIndex = 1; importIndex < $scope.importData.length; importIndex++ )
+         {
+           for (var mappingIndex = 0; mappingIndex < $scope.importMapping.length; mappingIndex++)
+           {
+             var map_from = $scope.importMapping[mappingIndex].map_from;
+             var map_to = $scope.importMapping[mappingIndex].map_to;
+             if (!map_from)
+              continue;
+
+             var cardText = $scope.importData[importIndex][map_from]; 
+             if (cardText)
+              $scope.messages.$add({
+              text: cardText,
+              user_id: $scope.userUid,
+              type: {
+                id: map_to
+              },
+              date: firebaseService.getServerTimestamp(),
+              votes: 0
+            });
+           }
+         }
+         //console.log($scope.importMapping);
+         $scope.closeAllModals();
+       }
 
       angular.element($window).bind('hashchange', function() {
         $scope.loading = true;
