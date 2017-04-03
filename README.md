@@ -3,6 +3,8 @@ Easy to use and beautiful restrospective board.
 
 Learn more about retrospectives at [funretrospectives.com](http://funretrospectives.com)
 
+Fun retrospective guide at [Dummies guide to retrospectives](https://github.com/gmuraleekrishna/dummies-guide-to-retrospectives)
+
 [![Build](https://snap-ci.com/funretro/distributed/branch/master/build_image)](https://snap-ci.com/funretro/distributed/branch/master)
 <a href="https://codeclimate.com/github/glauberramos/fireideaz"><img src="https://codeclimate.com/github/glauberramos/fireideaz/badges/gpa.svg" /></a>&nbsp;[![devDependency Status](https://david-dm.org/funretro/distributed/dev-status.svg)](https://david-dm.org/funretro/distributed#info=devDependencies)
 
@@ -37,7 +39,6 @@ Learn more about retrospectives at [funretrospectives.com](http://funretrospecti
 * We are currently using labels for [Bug](https://github.com/funretro/distributed/issues?q=is%3Aissue+is%3Aopen+label%3Abug) and [Priority](https://github.com/funretro/distributed/issues?q=is%3Aissue+is%3Aopen+label%3Apriority).
    * Please fell free to get any one of those two.
    * Create as many pull requests you want.
-* We also have user recommendations for new features and voting happening at [Uservoice](https://funretrospectives.uservoice.com/forums/269818-general)
 
 ## Running the application
 
