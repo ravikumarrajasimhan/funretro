@@ -2,9 +2,9 @@
 
 angular
   .module('fireideaz')
-  .controller('MainCtrl', ['$scope', '$filter',
-    '$window', 'Utils', 'Auth', '$rootScope', 'FirebaseService', 'ModalService', 'VoteService',
-    function($scope, $filter, $window, utils, auth, $rootScope, firebaseService, modalService, voteService) {
+  .controller('MainCtrl', ['$scope', '$filter', '$window', 'Utils', 'Auth',
+  '$rootScope', 'FirebaseService', 'ModalService', 'VoteService',
+    function ($scope, $filter, $window, utils, auth, $rootScope, firebaseService, modalService, voteService) {
       $scope.loading = true;
       $scope.messageTypes = utils.messageTypes;
       $scope.utils = utils;
@@ -21,21 +21,21 @@ angular
 
       $scope.getNumberOfVotesOnMessage = function(userId, messageId) {
         return new Array(voteService.returnNumberOfVotesOnMessage(userId, messageId));
-      }
+      };
 
       $scope.droppedEvent = function(dragEl, dropEl) {
         var drag = $('#' + dragEl);
         var drop = $('#' + dropEl);
         var dragMessageRef = firebaseService.getMessageRef($scope.userId, drag.attr('messageId'));
 
-        dragMessageRef.once('value', function(dragMessage) {
+        dragMessageRef.once('value', function() {
           dragMessageRef.update({
             type: {
               id: drop.data('column-id')
             }
           });
         });
-      }
+      };
 
       function getBoardAndMessages(userData) {
         $scope.userId = $window.location.hash.substring(1) || '499sm';
@@ -75,7 +75,7 @@ angular
       $scope.saveMessage = function(message) {
         message.creating = false;
         $scope.messages.$save(message);
-      }
+      };
 
       $scope.vote = function(messageKey, votes) {
         if(voteService.isAbleToVote($scope.userId, $scope.maxVotes, $scope.messages)) {
@@ -86,7 +86,7 @@ angular
 
           voteService.increaseMessageVotes($scope.userId, messageKey);
         }
-      }
+      };
 
       $scope.unvote = function(messageKey, votes) {
         if(voteService.canUnvoteMessage($scope.userId, messageKey)) {
@@ -97,7 +97,7 @@ angular
 
           voteService.decreaseMessageVotes($scope.userId, messageKey);
         }
-      }
+      };
 
       function redirectToBoard() {
         window.location.href = window.location.origin +
@@ -106,7 +106,7 @@ angular
 
       $scope.isBoardNameInvalid = function() {
         return !$scope.newBoard.name;
-      }
+      };
 
       $scope.createNewBoard = function() {
         $scope.loading = true;

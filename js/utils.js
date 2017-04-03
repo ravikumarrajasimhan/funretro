@@ -47,7 +47,7 @@ angular
     }
 
     function columnClass(id) {
-      return "column_" + (id % 6 || 6);
+      return 'column_' + (id % 6 || 6);
     }
 
     return {
