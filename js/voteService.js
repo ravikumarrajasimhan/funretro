@@ -3,7 +3,9 @@
 angular
   .module('fireideaz')
   .service('VoteService', [function () {
-    function returnNumberOfVotes(userId, messagesIds) {
+    var voteService = {};
+
+    voteService.returnNumberOfVotes = function(userId, messagesIds) {
       var userVotes = localStorage.getItem(userId) ? JSON.parse(localStorage.getItem(userId)) : {};
 
       var totalVotes = Object.keys(userVotes).map(function(messageKey) {
@@ -13,26 +15,26 @@ angular
       }, 0);
 
       return localStorage.getItem(userId) ? totalVotes : 0;
-    }
+    };
 
-    function extractMessageIds(messages) {
+    voteService.extractMessageIds = function(messages) {
       return messages ? messages.map(function(message) { return message.$id; }) : [];
-    }
+    };
 
-    function returnNumberOfVotesOnMessage(userId, messageKey) {
+    voteService.returnNumberOfVotesOnMessage = function(userId, messageKey) {
       var userVotes = localStorage.getItem(userId) ? JSON.parse(localStorage.getItem(userId)) : {};
 
       return userVotes[messageKey] ? userVotes[messageKey] : 0;
-    }
+    };
 
-    function remainingVotes(userId, maxVotes, messages) {
-      var messagesIds = extractMessageIds(messages);
+    voteService.remainingVotes = function(userId, maxVotes, messages) {
+      var messagesIds = voteService.extractMessageIds(messages);
 
-      return (maxVotes - returnNumberOfVotes(userId, messagesIds)) > 0 ?
-        maxVotes - returnNumberOfVotes(userId, messagesIds) : 0;
-    }
+      return (maxVotes - voteService.returnNumberOfVotes(userId, messagesIds)) > 0 ?
+        maxVotes - voteService.returnNumberOfVotes(userId, messagesIds) : 0;
+    };
 
-    function increaseMessageVotes(userId, messageKey) {
+    voteService.increaseMessageVotes = function(userId, messageKey) {
       if (localStorage.getItem(userId)) {
         var boardVotes = JSON.parse(localStorage.getItem(userId));
 
@@ -48,9 +50,9 @@ angular
         newObject[messageKey] = 1;
         localStorage.setItem(userId, JSON.stringify(newObject));
       }
-    }
+    };
 
-    function decreaseMessageVotes(userId, messageKey) {
+    voteService.decreaseMessageVotes = function(userId, messageKey) {
       if (localStorage.getItem(userId)) {
         var boardVotes = JSON.parse(localStorage.getItem(userId));
 
@@ -62,11 +64,11 @@ angular
 
         localStorage.setItem(userId, JSON.stringify(boardVotes));
       }
-    }
+    };
 
-    function mergeMessages(userId, dragMessage, dropMessage) {
-      var dragMessageVoteCount = returnNumberOfVotesOnMessage(userId, dragMessage);
-      var dropMessageVoteCount = returnNumberOfVotesOnMessage(userId, dropMessage);
+    voteService.mergeMessages = function(userId, dragMessage, dropMessage) {
+      var dragMessageVoteCount = voteService.returnNumberOfVotesOnMessage(userId, dragMessage);
+      var dropMessageVoteCount = voteService.returnNumberOfVotesOnMessage(userId, dropMessage);
       var boardVotes = JSON.parse(localStorage.getItem(userId));
 
       if(dragMessageVoteCount > 0) {
@@ -75,25 +77,15 @@ angular
 
         localStorage.setItem(userId, JSON.stringify(boardVotes));
       }
-    }
-
-    function canUnvoteMessage(userId, messageKey) {
-      return localStorage.getItem(userId) && JSON.parse(localStorage.getItem(userId))[messageKey] ? true : false;
-    }
-
-    function isAbleToVote(userId, maxVotes, messages) {
-      return remainingVotes(userId, maxVotes, messages) > 0;
-    }
-
-    return {
-      returnNumberOfVotes: returnNumberOfVotes,
-      returnNumberOfVotesOnMessage: returnNumberOfVotesOnMessage,
-      increaseMessageVotes: increaseMessageVotes,
-      decreaseMessageVotes: decreaseMessageVotes,
-      extractMessageIds: extractMessageIds,
-      mergeMessages: mergeMessages,
-      remainingVotes: remainingVotes,
-      canUnvoteMessage: canUnvoteMessage,
-      isAbleToVote: isAbleToVote
     };
+
+    voteService.canUnvoteMessage = function(userId, messageKey) {
+      return localStorage.getItem(userId) && JSON.parse(localStorage.getItem(userId))[messageKey] ? true : false;
+    };
+
+    voteService.isAbleToVote = function(userId, maxVotes, messages) {
+      return voteService.remainingVotes(userId, maxVotes, messages) > 0;
+    };
+
+    return voteService;
   }]);
