@@ -1,4 +1,4 @@
 before_script:
   - npm install
 
-script: npm run test
+script: npm run jshint && npm run test
