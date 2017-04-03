@@ -235,24 +235,18 @@ angular
         } else return '';
       };
 
-      $scope.submitOnEnter = function(e, method, data){
-        if(e.keyCode == 13){
+      $scope.submitOnEnter = function(event, method, data){
+        if(event.keyCode == 13){
           switch (method){
             case "createNewBoard":
-                if(!$scope.isBoardNameInvalid()){
+                if (!$scope.isBoardNameInvalid()) {
                   $scope.createNewBoard()
-                }
-                else{
-                  console.log("Invalid board name");
                 }
                 break;
             case "addNewColumn":
-                if(data){
+                if (data) {
                   $scope.addNewColumn(data);
-                  $scope.newColumn='';
-                }
-                else{
-                  console.log("Invalid column name")
+                  $scope.newColumn = '';
                 }
                 break;
           }

@@ -20,7 +20,7 @@
   <h1>New board</h1>
 
   <label>Board name</label>
-  <input ng-model="newBoard.name" type="text" ng-keyup="submitOnEnter($event, 'createNewBoard', 'null')"></input>
+  <input ng-model="newBoard.name" type="text" ng-keyup="submitOnEnter($event, 'createNewBoard')"></input>
   <label>Max votes per user <small>(whole board)</small></label>
   <input ng-model="newBoard.max_votes" type="number" ng-init="newBoard.max_votes = 6" ng-keyup="submitOnEnter($event, 'createNewBoard', 'null')"></input>
   <button ng-disabled="isBoardNameInvalid()" ng-click="createNewBoard()">Create</button>
