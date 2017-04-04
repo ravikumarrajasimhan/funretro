@@ -235,6 +235,24 @@ angular
         } else return '';
       };
 
+      $scope.submitOnEnter = function(event, method, data){
+        if (event.keyCode === 13) {
+          switch (method){
+            case 'createNewBoard':
+                if (!$scope.isBoardNameInvalid()) {
+                  $scope.createNewBoard();
+                }
+                break;
+            case 'addNewColumn':
+                if (data) {
+                  $scope.addNewColumn(data);
+                  $scope.newColumn = '';
+                }
+                break;
+          }
+        }
+      };
+
       angular.element($window).bind('hashchange', function() {
         $scope.loading = true;
         $scope.userId = $window.location.hash.substring(1) || '';
