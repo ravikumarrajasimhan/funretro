@@ -12,7 +12,7 @@ We are currently using 5 kinds of labels:
 * [UX](https://github.com/funretro/distributed/issues?q=is%3Aissue+is%3Aopen+label%3AUX) are issues that are related with user experience.
 * [Idea - not priority](https://github.com/funretro/distributed/issues?q=is%3Aissue+is%3Aopen+label%3A%22idea+-+not+priority%22) are issues that are just ideas for now, so these should be the last ones that you pick, they are in analysing phase.
 
-## Making Changes
+## How to start
 
 * Choose an issue to work on. More information on the section above.
 * Fork the project to your Github account.
@@ -22,7 +22,7 @@ We are currently using 5 kinds of labels:
   * [WIP] means your pull request is work in progress. It is important to create the pull request quickly so everyone can keep track on what is happening and help you to improve your code or point you on the right direction.
 * Once you think your pull request is ready to be merged you can remove the [WIP].
 
-## Commiting
+## Making changes
 
 * Make sure your changes are passing on the lints.
   npm run jshint
