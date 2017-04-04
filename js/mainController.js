@@ -190,7 +190,7 @@ angular
         var id = message.key();
         angular.element($('#' + id)).scope().isEditing = true;
         $('#' + id).find('textarea').focus();
-      };
+      }
 
       $scope.addNewMessage = function(type) {
         $scope.messages.$add({
