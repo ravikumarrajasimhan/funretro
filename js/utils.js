@@ -14,10 +14,6 @@ angular
       return text;
     }
 
-    function alreadyVoted(key) {
-      return localStorage.getItem(key);
-    }
-
     function focusElement(id) {
       $('#' + id).find('textarea').focus();
     }
@@ -51,12 +47,11 @@ angular
     }
 
     function columnClass(id) {
-      return "column_" + (id % 6 || 6);
+      return 'column_' + (id % 6 || 6);
     }
 
     return {
       createUserId: createUserId,
-      alreadyVoted: alreadyVoted,
       focusElement: focusElement,
       messageTypes: messageTypes,
       getNextId: getNextId,

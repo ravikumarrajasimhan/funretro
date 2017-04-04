@@ -13,13 +13,16 @@
 </script>
 <script type="text/ng-template" id="addNewColumn">
   <h1>New column</h1>
-  <input ng-model="newColumn" type="text"></input>
+  <input ng-model="newColumn" type="text" ng-keyup="submitOnEnter($event, 'addNewColumn', newColumn)"></input>
   <button ng-click="addNewColumn(newColumn); newColumn='';">Add</button>
 </script>
 <script type="text/ng-template" id="addNewBoard">
   <h1>New board</h1>
-  <p>Board name example: <strong>team-board-123</strong></p>
-  <input ng-model="newBoard.name" type="text" placeholder="Board name"></input>
+
+  <label>Board name</label>
+  <input ng-model="newBoard.name" type="text" ng-keyup="submitOnEnter($event, 'createNewBoard')"></input>
+  <label>Max votes per user <small>(whole board)</small></label>
+  <input ng-model="newBoard.max_votes" type="number" ng-init="newBoard.max_votes = 6" ng-keyup="submitOnEnter($event, 'createNewBoard')"></input>
   <button ng-disabled="isBoardNameInvalid()" ng-click="createNewBoard()">Create</button>
 </script>
 <script type="text/ng-template" id="deleteCard">

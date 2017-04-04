@@ -3,7 +3,6 @@ var gulp = require('gulp'),
   jshint = require('gulp-jshint'),
   Server = require('karma').Server,
   concat = require('gulp-concat'),
-  sourcemaps = require('gulp-sourcemaps'),
   gp_rename = require('gulp-rename'),
   uglify = require('gulp-uglify'),
   concatCss = require('gulp-concat-css'),
@@ -76,9 +75,7 @@ var minifyJS = function () {
   gulp.src(['js/*.js',
 	   'js/**/*.js',
 	   '!js/vendor/*.js'])
-      .pipe(sourcemaps.init())
       .pipe(concat('main.js'))
-      .pipe(sourcemaps.write())
       .pipe(gulp.dest('dist'));
 };
 

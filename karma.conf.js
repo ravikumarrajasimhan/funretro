@@ -29,7 +29,7 @@ module.exports = function(config) {
     },
 
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['nyan', 'coverage', 'coveralls'],
+    reporters: ['nyan', 'coverage'],
 
     // web server port
     port: 9876,
@@ -46,7 +46,6 @@ module.exports = function(config) {
       'karma-mocha',
       'karma-phantomjs-launcher',
       'karma-coverage',
-      'karma-coveralls',
       'karma-nyan-reporter',
       'karma-mocha-reporter',
       'karma-sinon',
