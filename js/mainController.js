@@ -190,7 +190,7 @@ angular
         var id = message.key();
         angular.element($('#' + id)).scope().isEditing = true;
         $('#' + id).find('textarea').focus();
-      }
+      };
 
       $scope.addNewMessage = function(type) {
         $scope.messages.$add({
@@ -241,12 +241,12 @@ angular
       $scope.submitImportFile = function (file) {
         if (file) { 
               Upload.upload({
-                url: "./upload",
+                url: './upload',
                 data: {file: file}}).then(function (resp) { 
               if(resp.data.error_code === 0){                 
                 $scope.importMapping = [];
                 $scope.board.columns.forEach (function (column){
-                  $scope.importMapping.push({map_from:"", map_to:column.id, name: column.value}); //Form mapping array. Uggly solution
+                  $scope.importMapping.push({map_from:'', map_to:column.id, name: column.value}); //Form mapping array. Uggly solution
                 }); 
 
                   $scope.importData = resp.data.parsed_table;  
@@ -254,7 +254,6 @@ angular
                   $window.alert('an error occured');
               }
           }, function (resp) { //catch error
-              console.log('Error status: ' + resp.status);
               $window.alert('Error status: ' + resp.status);
           });
         }
@@ -285,7 +284,7 @@ angular
            }
          }
          $scope.closeAllModals();
-       }
+       };
 
       $scope.submitOnEnter = function(event, method, data){
         if (event.keyCode === 13) {
