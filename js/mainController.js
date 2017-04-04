@@ -236,14 +236,14 @@ angular
       };
 
       $scope.submitOnEnter = function(event, method, data){
-        if (event.keyCode == 13) {
+        if (event.keyCode === 13) {
           switch (method){
-            case "createNewBoard":
+            case 'createNewBoard':
                 if (!$scope.isBoardNameInvalid()) {
-                  $scope.createNewBoard()
+                  $scope.createNewBoard();
                 }
                 break;
-            case "addNewColumn":
+            case 'addNewColumn':
                 if (data) {
                   $scope.addNewColumn(data);
                   $scope.newColumn = '';
