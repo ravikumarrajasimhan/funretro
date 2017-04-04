@@ -236,7 +236,7 @@ angular
       };
 
       $scope.submitOnEnter = function(event, method, data){
-        if(event.keyCode == 13){
+        if (event.keyCode == 13) {
           switch (method){
             case "createNewBoard":
                 if (!$scope.isBoardNameInvalid()) {
