@@ -13,9 +13,10 @@ angular
       $scope.userId = $window.location.hash.substring(1) || '';
       $scope.sortField = '$id';
       $scope.selectedType = 1;
-      $scope.importData = [];
-      $scope.importMapping = [];
-
+      $scope.import = {
+        data : [],
+        mapping : []
+      }
 
       $scope.closeAllModals = function(){
         modalService.closeAll();
@@ -238,39 +239,34 @@ angular
       };
     
       $scope.submitImportFile = function (file) {
+        $scope.import.mapping = []; 
         if (file) { 
-              Upload.upload({
-                url: "./upload",
-                data: {file: file}}).then(function (resp) { 
-              if(resp.data.error_code === 0){                 
-                $scope.importMapping = [];
-                $scope.board.columns.forEach (function (column){
-                  $scope.importMapping.push({map_from:"", map_to:column.id, name: column.value}); //Form mapping array. Uggly solution
-                }); 
+          $scope.board.columns.forEach (function (column){
+            $scope.import.mapping.push({map_from:"", map_to:column.id, name: column.value}); //Form mapping array. Uggly solution
+          });
 
-                  $scope.importData = resp.data.parsed_table;  
-              } else {
-                  $window.alert('an error occured');
-              }
-          }, function (resp) { //catch error
-              console.log('Error status: ' + resp.status);
-              $window.alert('Error status: ' + resp.status);
+          Papa.parse(file, {
+            complete: function(results) {
+              $scope.import.data = results.data;
+            }
           });
         }
       };
 
        $scope.importMessages = function (){
-         console.log ($scope.importData);
-         for (var importIndex = 1; importIndex < $scope.importData.length; importIndex++ )
+         
+         var data = $scope.import.data;
+         var mapping = $scope.import.mapping;
+         for (var importIndex = 1; importIndex < data.length; importIndex++ )
          {
-           for (var mappingIndex = 0; mappingIndex < $scope.importMapping.length; mappingIndex++)
+           for (var mappingIndex = 0; mappingIndex < mapping.length; mappingIndex++)
            {
-             var map_from = $scope.importMapping[mappingIndex].map_from;
-             var map_to = $scope.importMapping[mappingIndex].map_to;
+             var map_from = mapping[mappingIndex].map_from;
+             var map_to = mapping[mappingIndex].map_to;
              if (!map_from)
               continue;
 
-             var cardText = $scope.importData[importIndex][map_from]; 
+             var cardText = data[importIndex][map_from]; 
              if (cardText)
               $scope.messages.$add({
               text: cardText,
@@ -283,7 +279,7 @@ angular
             });
            }
          }
-         //console.log($scope.importMapping);
+         //console.log(mapping);
          $scope.closeAllModals();
        }
 
