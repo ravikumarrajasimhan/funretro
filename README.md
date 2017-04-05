@@ -33,6 +33,10 @@ Fun retrospective guide at [Dummies guide to retrospectives](https://github.com/
    You will notice that the app has this architecture on firebase:
 ![Fun retro architecture](https://i.imgur.com/etYgDia.png)
 
+## Contribute to Fun Retro
+
+Take a look on your (Contributing)[https://github.com/funretro/distributed/blob/master/CONTRIBUTING.md] guide
+
 ## Running the application
 
 1. Install [Node.js](https://nodejs.org/en/)
