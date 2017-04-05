@@ -17,17 +17,27 @@ We are currently using 5 kinds of labels:
 * Choose an issue to work on. More information on the section above.
 * Fork the project to your Github account.
 * Create a branch on your repo and start doing commits.
-* Any commit need to be linked with the issue they are related, for example: `[#122] Adding test to controller`
+* Any commit need to be linked with the issue they are related, for example:
+
+  [#122] Adding test to controller
+
 * After the first commit on your branch you can already open the pull request.
-  * You should create with the following format: `[WIP][#122] Issue name`.
+  * You should create with the following format:
+
+  [WIP][#122] Issue name
+
   * [WIP] means your pull request is work in progress. It is important to create the pull request quickly so everyone can keep track on what is happening and help you to improve your code or point you on the right direction.
 * Once you think your pull request is ready to be merged you can remove the [WIP].
 
 ## Before doing a commit
 
 * Make sure your changes are passing on the lints.
-  * npm run jshint
-  * npm run stylelint
+
+  npm run jshint
+
+  npm run stylelint
+
 * Make sure you have added the necessary tests for your changes. Every new method should have tests for it.
 * Run all the tests to ensure nothing else was accidentally broken.
-    * gulp test
+
+  gulp test
