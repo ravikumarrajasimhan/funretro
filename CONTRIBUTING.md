@@ -19,12 +19,12 @@ We are currently using 5 kinds of labels:
 * Create a branch on your repo and start doing commits.
 * Any commit need to be linked with the issue they are related, for example:
 
-  [#122] Adding test to controller
+    [#122] Adding test to controller
 
 * After the first commit on your branch you can already open the pull request.
   * You should create with the following format:
 
-  [WIP][#122] Issue name
+    [WIP][#122] Issue name
 
   * [WIP] means your pull request is work in progress. It is important to create the pull request quickly so everyone can keep track on what is happening and help you to improve your code or point you on the right direction.
 * Once you think your pull request is ready to be merged you can remove the [WIP].
@@ -33,11 +33,11 @@ We are currently using 5 kinds of labels:
 
 * Make sure your changes are passing on the lints.
 
-  npm run jshint
+    npm run jshint
 
-  npm run stylelint
+    npm run stylelint
 
 * Make sure you have added the necessary tests for your changes. Every new method should have tests for it.
 * Run all the tests to ensure nothing else was accidentally broken.
 
-  gulp test
+    gulp test
