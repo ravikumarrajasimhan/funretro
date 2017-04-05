@@ -2,6 +2,10 @@
 
 Fun retro is an open-source tool focused on simplicity and easy of use. We want to make the best retrospective tool for distributed teams. We strive for usability, clean code, simplicity and awesome user experience. Remember to keep that in mind while contributing to the project.
 
+## Hosting
+
+Fun retro is hosted at Github Pages. That means is a pure client-side application. Because of that we are not using any server side code on production. Be aware of that while contributing to the code.
+
 ## Github issues
 
 We are currently using 5 kinds of labels:
@@ -16,8 +20,13 @@ We are currently using 5 kinds of labels:
 
 * Choose an issue to work on. More information on the section above.
 * Fork the project to your Github account.
-* Create a branch on your repo and start doing commits.
-* Any commit need to be linked with the issue they are related, for example:
+* Create a branch on your repo and start doing commits, branch should follow this pattern:
+
+```
+122-issue-name
+```
+
+* Any commit message need to be linked with the issue they are related, for example:
 
 ```
 [#122] Adding test to controller
@@ -51,3 +60,11 @@ npm run stylelint
 ```
 gulp test
 ```
+
+## Definition of done
+
+* All js methods have unit tests
+* Test, lints and build are passing
+* Code is working on all modern browsers (Edge, Chrome and Firefox)
+* Design should be responsive (work on the majority of screen sizes)
+* Design should be simple, easy to use and didn't make the app more complex
