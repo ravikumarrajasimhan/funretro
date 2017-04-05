@@ -49,7 +49,7 @@ Fun retrospective guide at [Dummies guide to retrospectives](https://github.com/
 
 ## Continuous Integration
 
-Our tests run on [SnapCI](https://snap-ci.com/funretro/distributed/branch/master)
+Our tests run on [TravisCI](https://travis-ci.org/funretro/distributed)
 
 ## Running the tests
 
