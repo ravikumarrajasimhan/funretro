@@ -33,13 +33,6 @@ Fun retrospective guide at [Dummies guide to retrospectives](https://github.com/
    You will notice that the app has this architecture on firebase:
 ![Fun retro architecture](https://i.imgur.com/etYgDia.png)
 
-## Contribute to Fun Retro
-
-* All things being developed are managed with Github issues.
-* We are currently using labels for [Bug](https://github.com/funretro/distributed/issues?q=is%3Aissue+is%3Aopen+label%3Abug) and [Priority](https://github.com/funretro/distributed/issues?q=is%3Aissue+is%3Aopen+label%3Apriority).
-   * Please fell free to get any one of those two.
-   * Create as many pull requests you want.
-
 ## Running the application
 
 1. Install [Node.js](https://nodejs.org/en/)
