@@ -35,7 +35,7 @@ Fun retrospective guide at [Dummies guide to retrospectives](https://github.com/
 
 ## Contribute to Fun Retro
 
-Take a look on our (Contributing)[https://github.com/funretro/distributed/blob/master/CONTRIBUTING.md] guide
+Take a look on our [Contributing](https://github.com/funretro/distributed/blob/master/CONTRIBUTING.md) guide
 
 ## Running the application
 
