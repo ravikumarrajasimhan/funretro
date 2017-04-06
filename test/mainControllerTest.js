@@ -83,6 +83,20 @@ describe('MainCtrl: ', function() {
       expect(closeAllSpy.called).to.be.true;
     });
 
+    it('should create a new board with submitOnEnter fn', function () {
+      sinon.stub(utils, 'createUserId', function () { return 'userId'; });
+      var createUserSpy = sinon.spy(auth, 'createUserAndLog');
+      var closeAllSpy = sinon.spy(modalService, 'closeAll');
+
+      $scope.newBoard.name = "any_name_but_not_null";
+      var event = {};
+      event.keyCode = 13;
+      $scope.submitOnEnter(event, 'createNewBoard');
+
+      expect(createUserSpy.calledWith($scope.userId)).to.be.true;
+      expect(closeAllSpy.called).to.be.true;
+    });
+
   });
 
   describe('Messages', function () {
@@ -238,6 +252,33 @@ describe('MainCtrl: ', function() {
       sinon.stub(utils, 'getNextId', function () { return 3; });
 
       $scope.addNewColumn('anotherColumnName');
+
+      expect($scope.board.columns).to.deep.equal(expectedColumns);
+      expect(setSpy.called).to.be.true;
+      expect(closeAllSpy.called).to.be.true;
+    });
+
+    it('should add a new column to the board with submitOnEnter fn', function() {
+      var expectedColumns = [
+        {
+          value: 'columnName',
+          id: 1
+        },
+        {
+          value: 'otherColumnName',
+          id: 2
+        },
+        {
+          value: 'anotherColumnName',
+          id: 3
+        }
+      ]
+
+      sinon.stub(utils, 'getNextId', function () { return 3; });
+
+      var event = {};
+      event.keyCode = 13;
+      $scope.submitOnEnter(event, 'addNewColumn', 'anotherColumnName');
 
       expect($scope.board.columns).to.deep.equal(expectedColumns);
       expect(setSpy.called).to.be.true;
