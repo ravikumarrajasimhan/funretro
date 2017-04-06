@@ -14,6 +14,8 @@ module.exports = function(config) {
       'node_modules/ng-dialog/js/ngDialog.min.js',
       'node_modules/angular-aria/angular-aria.min.js',
       'node_modules/angular-sanitize/angular-sanitize.min.js',
+      'node_modules/ng-file-upload/dist/ng-file-upload-all.min.js',
+      'node_modules/papaparse/papaparse.min.js',
       'js/**/*.js',
       'test/**/*Test.js',
     ],

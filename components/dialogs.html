@@ -49,7 +49,7 @@
     <p>1.<a type="file" ngf-select="submitImportFile($file)" ngf-pattern="text/csv" accept="text/csv" ngf-max-size="10KB">Submit</a> a csv file </p>
     <p>2. Setup fields mapping</button></p>
     <p ng-repeat="column in import.mapping track by $index">{{column.name}} 
-      <select ng-model="column.map_from">
+      <select ng-model="column.mapFrom">
         <option select="selected" value="">[Select csv column]</option>
         <option ng-repeat="importColumn in import.data[0]" value="{{$index}}">{{importColumn}}</option>
       </select>

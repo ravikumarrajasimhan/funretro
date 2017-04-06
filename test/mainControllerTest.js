@@ -23,7 +23,7 @@ describe('MainCtrl: ', function() {
 
     $scope.userId = 'userId';
     $scope.board = { max_votes: 6 };
-
+    
     $controller('MainCtrl', {
       '$scope': $scope,
       'utils': utils,
@@ -331,25 +331,13 @@ describe('MainCtrl: ', function() {
   });
   
   describe('Import', function() {
-    var setSpy,
-        boardColumns,
-        expectedColumns,
-        Papa,
-        papaSpy,
-        closeAllSpy;
+    var inputFile = {lastModified: 1491246451076,
+      lastModifiedDate: Date.parse ('Mon Apr 03 2017 21:07:31 GMT+0200 (W. Europe Daylight Time)'),
+      name: "import.csv",
+      size: 515,
+      type: "application/vnd.ms-excel"};
 
     beforeEach(function() {
-      papaSpy = sinon.spy(Papa, 'parse');
-
-      setSpy = sinon.spy();
-
-      boardColumns = {
-        set: setSpy
-      }
-
-      sinon.stub(utils, 'toObject', function () {
-        return { column: 'column' };
-      });
 
       $scope.board = {
         columns: [
@@ -369,11 +357,63 @@ describe('MainCtrl: ', function() {
       });
     });
 
+    before (function (){
+      sinon.spy(Papa, 'parse');
+    });
+
+    after (function () {
+      Papa.parse.restore();
+    });
+
     it('should call parse meethod', function() {
 
-      $scope.submitImportFile('filename.csv');
-      expect(papaSpy.called).to.be.true;
-      expect(papaSpy.parse.calledWith({file:'filename.csv'})).to.be.true;
+      $scope.submitImportFile(inputFile);
+      expect(Papa.parse.called).to.be.true;
+      expect(Papa.parse.calledWith(inputFile)).to.be.true;
     });
+
+    it('should initialize mapping with board columns', function() {
+      var expectedMapping = [
+        {mapFrom:'', mapTo: 1, name: 'columnName'}, 
+        {mapFrom:'', mapTo: 2, name: 'otherColumnName'}];
+      $scope.submitImportFile(inputFile);
+      expect ($scope.import.mapping).to.deep.equal(expectedMapping);
+    });
+
+    it('should parse import data', function() {
+      var expectedData = [
+        ["Column 1","Column 2","Column 3"], 
+        ["a","b","c"],
+        ["1","2","3"]];
+      $scope.submitImportFile('"Column 1","Column 2","Column 3"\n"a","b","c"\n"1","2","3"');
+      expect ($scope.import.data).to.deep.equal(expectedData);
+     });
+
+    it('should import mapped data', function() {
+      var messageDate = Date.parse ('Mon Apr 03 2017 21:07:31 GMT+0200 (W. Europe Daylight Time)');
+      var expectedMessages = [
+        {text:'C3R1', user_id: 'userId', type: {id: 1}, date: messageDate, votes: 0},
+        {text:'C3R2', user_id: 'userId', type: {id: 1}, date: messageDate, votes: 0}];   
+     
+     sinon.stub(firebaseService, 'getServerTimestamp', function() { return messageDate }); 
+     $scope.userUid = 'userId';
+      var addStub = sinon.spy(); 
+
+      $scope.messages = {
+        $add: addStub
+      }
+
+      $scope.submitImportFile('"Column 1","Column 2","Column 3"\n"C1R1","C2R1","C3R1"\n"C1R2","C2R2","C3R2"'); 
+      //First init with data, then setup mapping
+      $scope.import.mapping = [
+        {mapFrom:2, mapTo: 1, name: 'columnName'}, 
+        {mapFrom:'', mapTo: 2, name: 'otherColumnName'}];
+      
+      $scope.importMessages();
+      expect (addStub.calledWith(expectedMessages[0])).to.be.true;
+      expect (addStub.calledWith(expectedMessages[1])).to.be.true;
+      
+    });
+
   });
 });

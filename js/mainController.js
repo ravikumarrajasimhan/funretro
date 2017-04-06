@@ -244,7 +244,7 @@ angular
         $scope.import.mapping = []; 
         if (file) {
           $scope.board.columns.forEach (function (column){
-            $scope.import.mapping.push({map_from:"", map_to:column.id, name: column.value}); //Form mapping array. Uggly solution
+            $scope.import.mapping.push({mapFrom:"", mapTo:column.id, name: column.value}); 
           });
 
           Papa.parse(file, {
@@ -256,29 +256,30 @@ angular
       };
 
        $scope.importMessages = function (){
-         
          var data = $scope.import.data;
          var mapping = $scope.import.mapping;
          for (var importIndex = 1; importIndex < data.length; importIndex++ )
-         {
+         {           
            for (var mappingIndex = 0; mappingIndex < mapping.length; mappingIndex++)
            {
-             var map_from = mapping[mappingIndex].map_from;
-             var map_to = mapping[mappingIndex].map_to;
-             if (!map_from)
+             var mapFrom = mapping[mappingIndex].mapFrom;
+             var mapTo = mapping[mappingIndex].mapTo;
+             if (!mapFrom)
               continue;
-
-             var cardText = data[importIndex][map_from]; 
+             
+             var cardText = data[importIndex][mapFrom]; 
              if (cardText)
-              $scope.messages.$add({
-              text: cardText,
-              user_id: $scope.userUid,
-              type: {
-                id: map_to
-              },
-              date: firebaseService.getServerTimestamp(),
-              votes: 0
-            });
+             {
+                $scope.messages.$add({
+                text: cardText,
+                user_id: $scope.userUid,
+                type: {
+                  id: mapTo
+                },
+                date: firebaseService.getServerTimestamp(),
+                votes: 0});
+             }
+            
            }
          }
          $scope.closeAllModals();
