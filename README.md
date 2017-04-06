@@ -35,10 +35,7 @@ Fun retrospective guide at [Dummies guide to retrospectives](https://github.com/
 
 ## Contribute to Fun Retro
 
-* All things being developed are managed with Github issues.
-* We are currently using labels for [Bug](https://github.com/funretro/distributed/issues?q=is%3Aissue+is%3Aopen+label%3Abug) and [Priority](https://github.com/funretro/distributed/issues?q=is%3Aissue+is%3Aopen+label%3Apriority).
-   * Please fell free to get any one of those two.
-   * Create as many pull requests you want.
+Take a look on our [Contributing](https://github.com/funretro/distributed/blob/master/CONTRIBUTING.md) guide
 
 ## Running the application
 
@@ -49,7 +46,7 @@ Fun retrospective guide at [Dummies guide to retrospectives](https://github.com/
 
 ## Continuous Integration
 
-Our tests run on [SnapCI](https://snap-ci.com/funretro/distributed/branch/master)
+Our tests run on [TravisCI](https://travis-ci.org/funretro/distributed)
 
 ## Running the tests
 
