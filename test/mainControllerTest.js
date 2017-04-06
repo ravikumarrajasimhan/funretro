@@ -288,4 +288,51 @@ describe('MainCtrl: ', function() {
       expect(closeAllSpy.called).to.be.true;
     });
   });
+  
+  describe('Import', function() {
+    var setSpy,
+        boardColumns,
+        expectedColumns,
+        Papa,
+        papaSpy,
+        closeAllSpy;
+
+    beforeEach(function() {
+      papaSpy = sinon.spy(Papa, 'parse');
+
+      setSpy = sinon.spy();
+
+      boardColumns = {
+        set: setSpy
+      }
+
+      sinon.stub(utils, 'toObject', function () {
+        return { column: 'column' };
+      });
+
+      $scope.board = {
+        columns: [
+          {
+            value: 'columnName',
+            id: 1
+          },
+          {
+            value: 'otherColumnName',
+            id: 2
+          }
+        ]
+      }
+
+      sinon.stub(firebaseService, 'getBoardColumns', function () {
+        return boardColumns;
+      });
+    });
+
+    it('should call parse meethod', function() {
+
+      $scope.submitImportFile('filename.csv');
+      expect(papaSpy.called).to.be.true;
+      expect(papaSpy.parse.calledWith({file:'filename.csv'})).to.be.true;
+    });
+  });
 });

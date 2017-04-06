@@ -279,7 +279,6 @@ angular
             });
            }
          }
-         //console.log(mapping);
          $scope.closeAllModals();
        }
 
