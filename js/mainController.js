@@ -18,7 +18,7 @@ angular
       $scope.import = {
         data : [],
         mapping : []
-      }
+      };
 
       $scope.closeAllModals = function(){
         modalService.closeAll();
@@ -244,9 +244,9 @@ angular
         $scope.import.mapping = []; 
         if (file) {
           $scope.board.columns.forEach (function (column){
-            $scope.import.mapping.push({mapFrom:"", mapTo:column.id, name: column.value}); 
+            $scope.import.mapping.push({mapFrom:'', mapTo:column.id, name: column.value}); 
           });
-
+          /* globals Papa */
           Papa.parse(file, {
             complete: function(results) {
               $scope.import.data = results.data;
