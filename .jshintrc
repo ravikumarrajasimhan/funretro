@@ -20,10 +20,6 @@
    * =================
    */
 
-  // Force all variable names to use either camelCase style or UPPER_CASE
-  // with underscores.
-  "camelcase": true,
-
   // Prohibit use of == and != in favor of === and !==.
   "eqeqeq": true,
 
@@ -34,7 +30,7 @@
   "latedef": true,
 
   // Enforce line length to 100 characters
-  "maxlen": 100,
+  "maxlen": 150,
 
   // Require capitalized names for constructor functions.
   "newcap": true,

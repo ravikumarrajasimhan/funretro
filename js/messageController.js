@@ -27,7 +27,7 @@ angular
         dropMessageRef.once('value', function(dropMessage) {
           dragMessageRef.once('value', function(dragMessage) {
             dropMessageRef.update({
-              text: dropMessage.val().text + ' | ' + dragMessage.val().text,
+              text: dropMessage.val().text + '\n' + dragMessage.val().text,
               votes: dropMessage.val().votes + dragMessage.val().votes
             });
 

@@ -3,7 +3,9 @@ Easy to use and beautiful restrospective board.
 
 Learn more about retrospectives at [funretrospectives.com](http://funretrospectives.com)
 
-[![Build](https://snap-ci.com/funretro/distributed/branch/master/build_image)](https://snap-ci.com/funretro/distributed/branch/master)
+Fun retrospective guide at [Dummies guide to retrospectives](https://github.com/gmuraleekrishna/dummies-guide-to-retrospectives)
+
+[![Build](https://travis-ci.org/funretro/distributed.svg?branch=master)](https://travis-ci.org/funretro/distributed)
 <a href="https://codeclimate.com/github/glauberramos/fireideaz"><img src="https://codeclimate.com/github/glauberramos/fireideaz/badges/gpa.svg" /></a>&nbsp;[![devDependency Status](https://david-dm.org/funretro/distributed/dev-status.svg)](https://david-dm.org/funretro/distributed#info=devDependencies)
 
 ## User interface
@@ -15,9 +17,10 @@ Learn more about retrospectives at [funretrospectives.com](http://funretrospecti
 1. Clone the repository
 2. Install [Node.js](https://nodejs.org/en/)
 3. Run ```npm install``` (inside the project folder)
-4. Run ```gulp```
-5. Fun Retro is using [Firebase](http://www.firebase.com). First create an account at firebase. Then create a test project.
-6. Change the Database rules of created project:
+4. Install [Gulp](http://gulpjs.com/)
+5. Run ```gulp```
+6. Fun Retro is using [Firebase](http://www.firebase.com). First create an account at firebase. Then create a test project.
+7. After creating the project you can select Database from the left pane, on the Rules tab, change the Database rules of created project:
 ```
 {
     "rules": {
@@ -26,18 +29,14 @@ Learn more about retrospectives at [funretrospectives.com](http://funretrospecti
     }
 }
 ```
-7. After creating the project you can select Database from the left pane, where you can find the database url (ex: https://funretrotest.firebaseio.com/). Replace ```firebaseUrl``` inside ```js/firebaseService.js``` with this database url.
-8. Now you can open the app on [http://localhost:4000/](http://localhost:4000/) and start creating your boards.
+8. Still in the database section, you can find the database url (ex: https://funretrotest.firebaseio.com/). Replace ```firebaseUrl``` inside ```js/firebaseService.js``` with this database url.
+9. Now you can open the app on [http://localhost:4000/](http://localhost:4000/) and start creating your boards.
    You will notice that the app has this architecture on firebase:
 ![Fun retro architecture](https://i.imgur.com/etYgDia.png)
 
 ## Contribute to Fun Retro
 
-* All things being developed are managed with Github issues.
-* We are currently using labels for [Bug](https://github.com/funretro/distributed/issues?q=is%3Aissue+is%3Aopen+label%3Abug) and [Priority](https://github.com/funretro/distributed/issues?q=is%3Aissue+is%3Aopen+label%3Apriority).
-   * Please fell free to get any one of those two.
-   * Create as many pull requests you want.
-* We also have user recommendations for new features and voting happening at [Uservoice](https://funretrospectives.uservoice.com/forums/269818-general)
+Take a look on our [Contributing](https://github.com/funretro/distributed/blob/master/CONTRIBUTING.md) guide
 
 ## Running the application
 
@@ -48,7 +47,7 @@ Learn more about retrospectives at [funretrospectives.com](http://funretrospecti
 
 ## Continuous Integration
 
-Our tests run on [SnapCI](https://snap-ci.com/funretro/distributed/branch/master)
+Our tests run on [TravisCI](https://travis-ci.org/funretro/distributed)
 
 ## Running the tests
 
