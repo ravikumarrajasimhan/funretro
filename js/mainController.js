@@ -291,7 +291,7 @@ angular
           data : [],
           mapping : []
         };
-      }
+      };
 
       $scope.submitOnEnter = function(event, method, data){
         if (event.keyCode === 13) {
