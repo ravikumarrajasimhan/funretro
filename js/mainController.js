@@ -45,7 +45,7 @@ angular
 
         board.on('value', function(board) {
           $scope.board = board.val();
-          $scope.maxVotes = board.val().max_votes ? board.val().max_votes : 0;
+          $scope.maxVotes = board.val().max_votes ? board.val().max_votes : 6;
           $scope.boardId = $rootScope.boardId = board.val().boardId;
           $scope.boardContext = $rootScope.boardContext = board.val().boardContext;
         });
@@ -261,7 +261,7 @@ angular
 
       $scope.decrementMaxVotes = function() {
         $scope.boardRef.update({
-          max_votes: Math.min(Math.max($scope.maxVotes - 1, 0), 100)
+          max_votes: Math.min(Math.max($scope.maxVotes - 1, 1), 100)
         });
       };
 
