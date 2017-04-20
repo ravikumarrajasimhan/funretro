@@ -54,6 +54,13 @@ angular
           scope: scope
         });
       },
+      openVoteSettings: function(scope) {
+        ngDialog.open({
+          template: 'voteSettings',
+          className: 'ngdialog-theme-plain',
+          scope: scope
+        });
+      },
       closeAll: function() {
         ngDialog.closeAll();
       }
