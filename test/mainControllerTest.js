@@ -372,10 +372,8 @@ describe('MainCtrl: ', function() {
       expect(Papa.parse.calledWith(inputFile)).to.be.true;
     });
 
-    it('should initialize mapping with board columns', function() {
-      var expectedMapping = [
-        {mapFrom:'', mapTo: 1, name: 'columnName'}, 
-        {mapFrom:'', mapTo: 2, name: 'otherColumnName'}];
+    it('should initialize clear mapping and data', function() {
+      var expectedMapping = [];
       $scope.submitImportFile(inputFile);
       expect ($scope.import.mapping).to.deep.equal(expectedMapping);
     });
@@ -407,7 +405,7 @@ describe('MainCtrl: ', function() {
       //First init with data, then setup mapping
       $scope.import.mapping = [
         {mapFrom:2, mapTo: 1, name: 'columnName'}, 
-        {mapFrom:'', mapTo: 2, name: 'otherColumnName'}];
+        {mapFrom:'-1', mapTo: 2, name: 'otherColumnName'}];
       
       $scope.importMessages();
       expect (addStub.calledWith(expectedMessages[0])).to.be.true;

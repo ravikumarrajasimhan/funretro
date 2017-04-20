@@ -53,12 +53,14 @@
         <td style="text-align:right">{{column.name}}</td>
         <td style="text-align:left">
           <select style="width:138" ng-model="column.mapFrom">
-            <option select="selected" value="">[Select csv column]</option>
+            <option select="selected" value="-1">[Select csv column]</option>
             <option ng-repeat="importColumn in import.data[0]" value="{{$index}}">{{importColumn}}</option>
           </select>
         </td> 
     </table>
-    <button ng-click="importMessages(); cleanImportData()" ng-class="{'disabled': importColumn > 0 }" >Import</button>
+    <p style="color:red"> {{import.error}} </p>
+    <button ng-click="importMessages(); cleanImportData()" ng-disabled="(import.mapping| filter:{mapFrom:'!-1'}).length == 0">Import</button>
     <a ng-click="closeAllModals(); cleanImportData()">Cancel</a>
     </span>
+       
 </script>
