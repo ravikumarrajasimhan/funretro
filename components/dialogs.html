@@ -58,7 +58,7 @@
           </select>
         </td> 
     </table>
-    <button ng-click="importMessages()">Import</button>
-    <a ng-click="closeAllModals()">Cancel</a>
+    <button ng-click="importMessages(); cleanImportData()" ng-class="{'disabled': importColumn > 0 }" >Import</button>
+    <a ng-click="closeAllModals(); cleanImportData()">Cancel</a>
     </span>
 </script>

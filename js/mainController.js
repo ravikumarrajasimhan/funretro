@@ -243,13 +243,15 @@ angular
       $scope.submitImportFile = function (file) {
         $scope.import.mapping = []; 
         if (file) {
-          $scope.board.columns.forEach (function (column){
-            $scope.import.mapping.push({mapFrom:'', mapTo:column.id, name: column.value}); 
-          });
           /* globals Papa */
           Papa.parse(file, {
             complete: function(results) {
-              $scope.import.data = results.data;
+              if (results.data.length > 0){
+                $scope.import.data = results.data;
+                $scope.board.columns.forEach (function (column){
+                  $scope.import.mapping.push({mapFrom:'', mapTo:column.id, name: column.value});  
+                });  
+              }
             }
           });
         }
@@ -278,12 +280,18 @@ angular
                 },
                 date: firebaseService.getServerTimestamp(),
                 votes: 0});
-             }
-            
+             } 
            }
          }
          $scope.closeAllModals();
        };
+
+      $scope.cleanImportData = function (){
+        $scope.import = {
+          data : [],
+          mapping : []
+        };
+      }
 
       $scope.submitOnEnter = function(event, method, data){
         if (event.keyCode === 13) {
