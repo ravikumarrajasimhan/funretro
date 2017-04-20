@@ -34,6 +34,13 @@ gulp.task('livereload', function() {
   tinylr.listen(35729);
 });
 
+var buildHTML = function() {
+  gulp.src('index.html')
+  .pipe(gulp.dest('dist'));
+  gulp.src('components/*')
+  .pipe(gulp.dest('dist/components'));
+}
+
 var bundleVendorCSS = function () {
   gulp.src(['node_modules/font-awesome/css/font-awesome.min.css',
 	   'stylesheets/vendor/*.css'])
@@ -92,6 +99,7 @@ gulp.task('bundle', function() {
 gulp.task('watch', function (cb) {
   watch('dist/*', notifyLiveReload);
   watch('**/*.html', notifyLiveReload);
+  watch('components/*', buildHTML);
   watch('**/*.scss', processSass);
   watch('**/*.scss', notifyLiveReload);
   watch('js/**/*.js', minifyJS);
@@ -125,8 +133,6 @@ gulp.task('copy', function(){
   .pipe(gulp.dest('dist/fonts'));
   gulp.src('node_modules/font-awesome/fonts/*.{woff,woff2,eot,svg,ttf}')
   .pipe(gulp.dest('dist/fonts'));
-  gulp.src('components/*')
-  .pipe(gulp.dest('dist/components'));
   gulp.src('img/*')
   .pipe(gulp.dest('dist/img'));
   gulp.src('favicon.ico')
@@ -137,8 +143,8 @@ gulp.task('copy', function(){
   .pipe(gulp.dest('dist'));
   gulp.src('CNAME')
   .pipe(gulp.dest('dist'));
-  gulp.src('index.html')
-  .pipe(gulp.dest('dist'));
+  
+  buildHTML();
 });
 
 gulp.task('default', ['bundle', 'copy', 'express', 'livereload', 'watch']);

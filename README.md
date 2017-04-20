@@ -17,9 +17,10 @@ Fun retrospective guide at [Dummies guide to retrospectives](https://github.com/
 1. Clone the repository
 2. Install [Node.js](https://nodejs.org/en/)
 3. Run ```npm install``` (inside the project folder)
-4. Run ```gulp```
-5. Fun Retro is using [Firebase](http://www.firebase.com). First create an account at firebase. Then create a test project.
-6. Change the Database rules of created project:
+4. Install [Gulp](http://gulpjs.com/)
+5. Run ```gulp```
+6. Fun Retro is using [Firebase](http://www.firebase.com). First create an account at firebase. Then create a test project.
+7. After creating the project you can select Database from the left pane, on the Rules tab, change the Database rules of created project:
 ```
 {
     "rules": {
@@ -28,8 +29,8 @@ Fun retrospective guide at [Dummies guide to retrospectives](https://github.com/
     }
 }
 ```
-7. After creating the project you can select Database from the left pane, where you can find the database url (ex: https://funretrotest.firebaseio.com/). Replace ```firebaseUrl``` inside ```js/firebaseService.js``` with this database url.
-8. Now you can open the app on [http://localhost:4000/](http://localhost:4000/) and start creating your boards.
+8. Still in the database section, you can find the database url (ex: https://funretrotest.firebaseio.com/). Replace ```firebaseUrl``` inside ```js/firebaseService.js``` with this database url.
+9. Now you can open the app on [http://localhost:4000/](http://localhost:4000/) and start creating your boards.
    You will notice that the app has this architecture on firebase:
 ![Fun retro architecture](https://i.imgur.com/etYgDia.png)
 
