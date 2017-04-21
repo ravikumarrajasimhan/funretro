@@ -120,7 +120,7 @@ angular
             date_created: new Date().toString(),
             columns: $scope.messageTypes,
             user_id: userData.uid,
-            max_votes: $scope.newBoard.max_votes || 0
+            max_votes: $scope.newBoard.max_votes || 6
           });
 
           redirectToBoard();
