@@ -13,7 +13,7 @@
   </select>
   <span ng-show="voteService.remainingVotes(userId, maxVotes, messages) < maxVotes" class="remaining-votes">Remaining votes: <strong>{{ voteService.remainingVotes(userId, maxVotes, messages) }}</strong>
     <span class="null-blank-space">&nbsp</span>
-    <span class="settings" ng-click="modalService.openVoteSettings(this)"><i class='fa fa-pencil fa-lg'></i></span>
+    <span class="settings" ng-click="modalService.openVoteSettings(this)"><i class='fa fa-pencil fa-md'></i></span>
   </span>
 
   <span class="pull-right menu-controls">
