@@ -61,7 +61,6 @@ var processSass = function() {
 
 var bundleVendorJS = function() {
   gulp.src(['node_modules/angular/angular.min.js',
-	   'js/vendor/firebase.js',
 	   'node_modules/angularfire/dist/angularfire.min.js',
 	   'node_modules/angular-*/**/angular-*.min.js',
 	   '!node_modules/**/angular-mocks.js',

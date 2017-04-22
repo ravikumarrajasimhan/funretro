@@ -8,7 +8,6 @@ module.exports = function(config) {
       'node_modules/angular/angular.min.js',
       'node_modules/angular-mocks/angular-mocks.js',
       'node_modules/angularfire/dist/angularfire.min.js',
-      'js/vendor/firebase.js',
       'js/vendor/lvl-uuid.js',
       'js/vendor/lvl-drag-drop.js',
       'node_modules/ng-dialog/js/ngDialog.min.js',
