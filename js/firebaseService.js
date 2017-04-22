@@ -2,7 +2,7 @@
 
 angular
   .module('fireideaz')
-  .service('FirebaseService', ['$firebaseArray', function ($firebaseArray) {
+  .service('FirebaseService', ['firebase', '$firebaseArray', function (firebase, $firebaseArray) {
     function newFirebaseArray(messagesRef) {
       return $firebaseArray(messagesRef);
     }
