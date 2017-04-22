@@ -329,4 +329,30 @@ describe('MainCtrl: ', function() {
       expect(closeAllSpy.called).to.be.true;
     });
   });
+
+  describe('vote limits', function() {
+    it(' is able to increment the maximum number of votes allowed per user', function() {
+      var updateSpy = sinon.spy();
+
+      $scope.boardRef = {
+        update: updateSpy
+      }
+
+      oldMaxVotes = $scope.maxVotes;
+      $scope.incrementMaxVotes();
+      expect(updateSpy.calledWith({max_votes: (oldMaxVotes + 1)})).to.be.true;
+    })
+
+    it(' is able to decrement the maximum number of votes allowed per user', function() {
+      var updateSpy = sinon.spy();
+
+      $scope.boardRef = {
+        update: updateSpy
+      }
+
+      oldMaxVotes = $scope.maxVotes;
+      $scope.decrementMaxVotes();
+      expect(updateSpy.calledWith({max_votes: (oldMaxVotes - 1)})).to.be.true;
+    })
+  })
 });

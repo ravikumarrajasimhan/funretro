@@ -253,6 +253,18 @@ angular
         }
       };
 
+      $scope.incrementMaxVotes = function() {
+        $scope.boardRef.update({
+          max_votes: $scope.maxVotes + 1
+        });
+      };
+
+      $scope.decrementMaxVotes = function() {
+        $scope.boardRef.update({
+          max_votes: Math.min(Math.max($scope.maxVotes - 1, 1), 100)
+        });
+      };
+
       angular.element($window).bind('hashchange', function() {
         $scope.loading = true;
         $scope.userId = $window.location.hash.substring(1) || '';
