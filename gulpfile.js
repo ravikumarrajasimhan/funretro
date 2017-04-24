@@ -66,12 +66,13 @@ var bundleVendorJS = function() {
 	   'node_modules/angular-*/**/angular-*.min.js',
 	   '!node_modules/**/angular-mocks.js',
 	   'js/vendor/*.js',
-	   'node_modules/ng-dialog/**/ngDialog*.min.js'])
+	   'node_modules/ng-dialog/**/ngDialog*.min.js',
+     'node_modules/ng-file-upload/**/ng-file-upload-all.min.js',
+     'node_modules/papaparse/papaparse.min.js'])
       .pipe(concat('vendor.js'))
       .pipe(gulp.dest('dist'))
       .pipe(uglify())
       .pipe(gulp.dest('dist'));
-
 };
 
 var minifyJS = function () {
