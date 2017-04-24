@@ -354,8 +354,7 @@ describe('MainCtrl: ', function() {
       expect(updateSpy.calledWith({max_votes: (oldMaxVotes - 1)})).to.be.true;
     })
   })
-});
- describe('Import', function() {
+describe('Import', function() {
     var inputFile = {lastModified: 1491246451076,
       lastModifiedDate: Date.parse ('Mon Apr 03 2017 21:07:31 GMT+0200 (W. Europe Daylight Time)'),
       name: "import.csv",
@@ -444,3 +443,5 @@ describe('MainCtrl: ', function() {
       expect (addStub.calledWith(expectedMessages[1])).to.be.true;
     });
   });
+});
+ 
