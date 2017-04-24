@@ -400,7 +400,7 @@ describe('Import', function() {
       var emptyFile = inputFile;
       emptyFile.size = 0;
       $scope.submitImportFile(inputFile);
-       expect ($scope.import.error).to.be.equal('The file you are trying to import seems to be  empty');
+      expect ($scope.import.error).to.be.equal('The file you are trying to import seems to be  empty');
     }) 
 
     it('should initialize clear mapping and data', function() {
