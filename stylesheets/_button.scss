@@ -50,6 +50,10 @@ header button:hover {
   color: $light-teal;
 }
 
+.ngdialog-content a.inline-link{
+  margin: 0;
+}
+
 .ngdialog-content button:hover, .editing-column button:hover {
   position: relative;
   top: 1px;

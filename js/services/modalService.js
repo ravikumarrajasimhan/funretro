@@ -41,6 +41,7 @@ angular
         });
       },
        openImportBoard: function(scope) {
+        scope.cleanImportData();
         ngDialog.open({
           template: 'importCards',
           className: 'ngdialog-theme-plain bigDialog',

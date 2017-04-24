@@ -46,21 +46,20 @@
 <script type="text/ng-template" id="importCards">
   <h1>Import cards</h1>
   <span >
-    <p>1. <a style="margin:0" type="file" ngf-select="submitImportFile($file)" ngf-pattern="text/csv" accept="text/csv" ngf-max-size="10KB"> Submit</a> a csv file </p>
+    <p>1. <a class="inline-link" type="file" ngf-select="submitImportFile($file)" ngf-pattern="text/csv" accept="text/csv" ngf-max-size="10KB"> Submit</a> a csv file </p>
     <p>2. Setup fields mapping</button></p>
     <table>
       <tr ng-repeat="column in import.mapping track by $index">
-        <td style="text-align:right">{{column.name}}</td>
-        <td style="text-align:left">
-          <select style="width:138" ng-model="column.mapFrom">
+        <td class="align-right">{{column.name}}</td>
+        <td class="align-left">
+          <select class="import-select" ng-model="column.mapFrom">
             <option select="selected" value="-1">[Select csv column]</option>
-            <option ng-repeat="importColumn in import.data[0]" value="{{$index}}">{{importColumn}}</option>
+            <option ng-repeat="importColumn in import.data[0] track by $index" value="{{$index}}">{{importColumn}}</option>
           </select>
         </td> 
     </table>
-    <p style="color:red"> {{import.error}} </p>
-    <button ng-click="importMessages(); cleanImportData()" ng-disabled="(import.mapping| filter:{mapFrom:'!-1'}).length == 0">Import</button>
-    <a ng-click="closeAllModals(); cleanImportData()">Cancel</a>
+    <p class="error-msg" ng-show="import.error"> {{import.error}} </p>
+    <button ng-click="importMessages()" ng-disabled="(import.mapping| filter:{mapFrom:'!-1'}).length == 0">Import</button>
+    <a ng-click="closeAllModals()">Cancel</a>
     </span>
-       
 </script>

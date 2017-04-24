@@ -318,6 +318,37 @@ blockquote {
   display: none !important;
 }
 
+.base-msg {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 3px 3px 3px 3px;
+  font-size: 0.85em;
+}
+
+.info-msg {
+  @extend .base-msg;
+  color: #059; 
+  background-color: #BEF;
+}
+
+.success-msg {
+  @extend .base-msg;
+  color: #270;
+  background-color: #DFF2BF;
+}
+
+.warning-msg {
+  @extend .base-msg;
+  color: #9F6000;
+  background-color: #FEEFB3;
+}
+
+.error-msg {
+  @extend .base-msg;
+  color: #D8000C !important;
+  background-color: #FFBABA;
+}
+
 .copy-text {
   padding: 15px;
   margin: 20px 0;
@@ -367,7 +398,14 @@ blockquote {
     padding: 5px 10px;
     margin: 0;
     margin-top: 1.5em;
-    font-size: 16px;
+    
     border-radius: 0;
+  }
+
+  .aling-left{
+    text-align:left;
+  }
+  .align-right{
+    text-align:right;
   }
 }

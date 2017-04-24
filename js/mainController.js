@@ -244,7 +244,7 @@ angular
         $scope.cleanImportData ();
         if (file) {
           if (file.size === 0){
-            $scope.import.error = 'The file is empty';
+            $scope.import.error = 'The file you are trying to import seems to be  empty';
             return;
           }
           /* globals Papa */
@@ -256,7 +256,7 @@ angular
                   $scope.import.mapping.push({mapFrom:'-1', mapTo:column.id, name: column.value});  
                 });  
                 if (results.errors.length > 0)
-                  $scope.import.error = results.errors[0].message;
+                   $scope.import.error = results.errors[0].message;
                 $scope.$apply();
               }
             }

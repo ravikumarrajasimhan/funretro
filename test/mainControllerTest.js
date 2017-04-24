@@ -372,6 +372,13 @@ describe('MainCtrl: ', function() {
       expect(Papa.parse.calledWith(inputFile)).to.be.true;
     });
 
+    it ('should show error for empty file', function(){
+      var emptyFile = inputFile;
+      emptyFile.size = 0;
+      $scope.submitImportFile(inputFile);
+       expect ($scope.import.error).to.be.equal('The file you are trying to import seems to be  empty');
+    })
+
     it('should initialize clear mapping and data', function() {
       var expectedMapping = [];
       $scope.submitImportFile(inputFile);
