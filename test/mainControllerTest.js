@@ -403,6 +403,13 @@ describe('Import', function() {
       expect ($scope.import.error).to.be.equal('The file you are trying to import seems to be  empty');
     }) 
 
+    it ('should show error for malformed file', function(){
+      var emptyFile = inputFile;
+      emptyFile.size = 0;
+      $scope.submitImportFile('nn');
+      expect ($scope.import.error).to.be.not.empty;
+    }) 
+
     it('should initialize clear mapping and data', function() {
       var expectedMapping = [];
       $scope.submitImportFile(inputFile);
