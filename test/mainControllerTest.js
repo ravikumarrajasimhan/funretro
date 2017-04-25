@@ -9,30 +9,64 @@ describe('MainCtrl: ', function() {
       modalService,
       voteService;
 
-  beforeEach(angular.mock.module('fireideaz'));
+  beforeEach(function() {
+    angular.mock.module('fireideaz');
 
-  beforeEach(inject(function($injector){
-    $rootScope = $injector.get('$rootScope');
-    $scope = $rootScope.$new();
-    $controller = $injector.get('$controller');
-    utils = $injector.get('Utils');
-    modalService = $injector.get('ModalService');
-    firebaseService = $injector.get('FirebaseService');
-    auth = $injector.get('Auth');
-    voteService = $injector.get('VoteService');
+    angular.mock.module(function($provide) {
+      $provide.service('FirebaseService', function() {
+        this.newFirebaseArray = function(messagesRef) {
+          return [];
+        };
+        this.getServerTimestamp = function() {
+          return '00:00:00';
+        };
+        this.getMessagesRef = function(userId) {
+          return [];
+        };
+        this.getMessageRef = function(userId, messageId) {
+          return [];
+        };
+        this.getBoardRef = function(userId) {
+          return [];
+        };
+        this.getBoardColumns = function(userId) {
+          return [];
+        };
+      });
 
-    $scope.userId = 'userId';
-    $scope.board = { max_votes: 6 };
-    
-    $controller('MainCtrl', {
-      '$scope': $scope,
-      'utils': utils,
-      'modalService': modalService,
-      'firebaseService': firebaseService,
-      'auth': auth,
-      'voteService': voteService
+      $provide.service('Auth', function() {
+        this.logUser = function(newUser, callback) {
+          return "mock";
+        };
+        this.createUserAndLog = function(newUser, callback) {
+          return "mock";
+        };
+      });
     });
-  }));
+
+    inject(function($injector) {
+      $rootScope = $injector.get('$rootScope');
+      $scope = $rootScope.$new();
+      $controller = $injector.get('$controller');
+      utils = $injector.get('Utils');
+      modalService = $injector.get('ModalService');
+      firebaseService = $injector.get('FirebaseService');
+      auth = $injector.get('Auth');
+      voteService = $injector.get('VoteService');
+
+      $scope.userId = 'userId';
+      $scope.board = { max_votes: 6 };
+      
+      $controller('MainCtrl', {
+        '$scope': $scope,
+        'utils': utils,
+        'modalService': modalService,
+        'firebaseService': firebaseService,
+        'auth': auth,
+        'voteService': voteService
+      });
+    });
+  });
 
   describe('Board', function () {
 

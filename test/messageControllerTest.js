@@ -7,25 +7,59 @@ describe('MessageCtrl: ', function() {
       firebaseService,
       auth
 
-  beforeEach(angular.mock.module('fireideaz'));
+  beforeEach(function() {
+    angular.mock.module('fireideaz');
 
-  beforeEach(inject(function($injector){
-    $rootScope = $injector.get('$rootScope');
-    $scope = $rootScope.$new();
-    $controller = $injector.get('$controller');
-    modalService = $injector.get('ModalService');
-    firebaseService = $injector.get('FirebaseService');
-    auth = $injector.get('Auth');
+    angular.mock.module(function($provide) {
+      $provide.service('FirebaseService', function() {
+        this.newFirebaseArray = function(messagesRef) {
+          return [];
+        };
+        this.getServerTimestamp = function() {
+          return '00:00:00';
+        };
+        this.getMessagesRef = function(userId) {
+          return [];
+        };
+        this.getMessageRef = function(userId, messageId) {
+          return [];
+        };
+        this.getBoardRef = function(userId) {
+          return [];
+        };
+        this.getBoardColumns = function(userId) {
+          return [];
+        };
+      });
 
-    $scope.userId = 'userId';
-
-    $controller('MessageCtrl', {
-      '$scope': $scope,
-      'modalService': modalService,
-      'firebaseService': firebaseService,
-      'auth': auth
+      $provide.service('Auth', function() {
+        this.logUser = function(newUser, callback) {
+          return "mock";
+        };
+        this.createUserAndLog = function(newUser, callback) {
+          return "mock";
+        };
+      });
     });
-  }));
+
+    inject(function($injector){
+      $rootScope = $injector.get('$rootScope');
+      $scope = $rootScope.$new();
+      $controller = $injector.get('$controller');
+      modalService = $injector.get('ModalService');
+      firebaseService = $injector.get('FirebaseService');
+      auth = $injector.get('Auth');
+
+      $scope.userId = 'userId';
+
+      $controller('MessageCtrl', {
+        '$scope': $scope,
+        'modalService': modalService,
+        'firebaseService': firebaseService,
+        'auth': auth
+      });
+    });
+  });
 
   it('should open dialog to merge cards when drop an card over another card', function () {
     sinon.spy(modalService, 'openMergeCards');
