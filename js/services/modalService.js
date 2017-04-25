@@ -40,6 +40,14 @@ angular
           scope: scope
         });
       },
+       openImportBoard: function(scope) {
+        scope.cleanImportData();
+        ngDialog.open({
+          template: 'importCards',
+          className: 'ngdialog-theme-plain bigDialog',
+          scope: scope
+        });
+      },
       openCopyBoard: function(scope) {
         ngDialog.open({
           template: 'copyBoard',
@@ -51,6 +59,13 @@ angular
         ngDialog.open({
           template: 'deleteCards',
           className: 'ngdialog-theme-plain danger',
+          scope: scope
+        });
+      },
+      openVoteSettings: function(scope) {
+        ngDialog.open({
+          template: 'voteSettings',
+          className: 'ngdialog-theme-plain',
           scope: scope
         });
       },
