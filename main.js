@@ -2,7 +2,8 @@ angular.module('fireideaz', ['firebase',
                'ngDialog',
                'lvl.directives.dragdrop',
                'ngSanitize',
-               'ngAria']);
+               'ngAria',
+               'ngFileUpload']);
 
 'use strict';
 
@@ -109,6 +110,7 @@ angular
 
 angular
   .module('fireideaz')
+
   .controller('MainCtrl', ['$scope', '$filter', '$window', 'Utils', 'Auth',
   '$rootScope', 'FirebaseService', 'ModalService', 'VoteService',
     function ($scope, $filter, $window, utils, auth, $rootScope, firebaseService, modalService, voteService) {
@@ -121,6 +123,10 @@ angular
       $scope.userId = $window.location.hash.substring(1) || '';
       $scope.sortField = '$id';
       $scope.selectedType = 1;
+      $scope.import = {
+        data : [],
+        mapping : []
+      };
 
       $scope.closeAllModals = function(){
         modalService.closeAll();
@@ -341,6 +347,65 @@ angular
           return clipboard;
         } else return '';
       };
+    
+      $scope.submitImportFile = function (file) {
+        $scope.cleanImportData ();
+        if (file) {
+          if (file.size === 0){
+            $scope.import.error = 'The file you are trying to import seems to be  empty';
+            return;
+          }
+          /* globals Papa */
+          Papa.parse(file, {
+            complete: function(results) {
+              if (results.data.length > 0){
+                $scope.import.data = results.data;
+                $scope.board.columns.forEach (function (column){
+                  $scope.import.mapping.push({mapFrom:'-1', mapTo:column.id, name: column.value});  
+                });  
+                if (results.errors.length > 0)
+                   $scope.import.error = results.errors[0].message;
+                $scope.$apply();
+              }
+            }
+          });
+        }
+      };
+
+       $scope.importMessages = function (){
+         var data = $scope.import.data;
+         var mapping = $scope.import.mapping;
+         for (var importIndex = 1; importIndex < data.length; importIndex++ )
+         {           
+           for (var mappingIndex = 0; mappingIndex < mapping.length; mappingIndex++)
+           {
+             var mapFrom = mapping[mappingIndex].mapFrom;
+             var mapTo = mapping[mappingIndex].mapTo;
+             if (mapFrom === -1)
+              continue;
+             
+             var cardText = data[importIndex][mapFrom]; 
+             if (cardText)
+             {
+                $scope.messages.$add({
+                text: cardText,
+                user_id: $scope.userUid,
+                type: {
+                  id: mapTo
+                },
+                date: firebaseService.getServerTimestamp(),
+                votes: 0});
+             } 
+           }
+         }
+         $scope.closeAllModals();
+       };
+
+      $scope.cleanImportData = function (){
+        $scope.import.data = [];
+        $scope.import.mapping = [];
+        $scope.import.error = '';
+      };
 
       $scope.submitOnEnter = function(event, method, data){
         if (event.keyCode === 13) {
@@ -358,6 +423,18 @@ angular
                 break;
           }
         }
+      };
+
+      $scope.incrementMaxVotes = function() {
+        $scope.boardRef.update({
+          max_votes: $scope.maxVotes + 1
+        });
+      };
+
+      $scope.decrementMaxVotes = function() {
+        $scope.boardRef.update({
+          max_votes: Math.min(Math.max($scope.maxVotes - 1, 1), 100)
+        });
       };
 
       angular.element($window).bind('hashchange', function() {
@@ -683,6 +760,14 @@ angular
           scope: scope
         });
       },
+       openImportBoard: function(scope) {
+        scope.cleanImportData();
+        ngDialog.open({
+          template: 'importCards',
+          className: 'ngdialog-theme-plain bigDialog',
+          scope: scope
+        });
+      },
       openCopyBoard: function(scope) {
         ngDialog.open({
           template: 'copyBoard',
@@ -694,6 +779,13 @@ angular
         ngDialog.open({
           template: 'deleteCards',
           className: 'ngdialog-theme-plain danger',
+          scope: scope
+        });
+      },
+      openVoteSettings: function(scope) {
+        ngDialog.open({
+          template: 'voteSettings',
+          className: 'ngdialog-theme-plain',
           scope: scope
         });
       },
