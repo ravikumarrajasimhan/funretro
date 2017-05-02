@@ -25,7 +25,7 @@ Fun retrospective guide at [Dummies guide to retrospectives](https://github.com/
     }
 }
 ```
-4. Create a file on js/vendor/firebaseinitialization.js and replace the values with your project values
+4. Change the file on js/vendor/firebaseinitialization.js and replace the values with your project values
 ```
 var config = {
   apiKey: "YOUR_API_KEY",
@@ -38,11 +38,15 @@ var config = {
 
 firebase.initializeApp(config);
 ```
-5. Install [Node.js](https://nodejs.org/en/)
-6. Run ```npm install``` (inside the project folder)
-7. Install [Gulp](http://gulpjs.com/)
-8. Run ```gulp```
-9. Now you can open the app on [http://localhost:4000/](http://localhost:4000/) and start creating your boards.
+5. If you don't want to file to be tracked by git just run this command on the project home folder:
+```
+git update-index --assume-unchanged js/vendor/firebaseinitialization.js
+```
+6. Install [Node.js](https://nodejs.org/en/)
+7. Run ```npm install``` (inside the project folder)
+8. Install [Gulp](http://gulpjs.com/)
+9. Run ```gulp```
+10. Now you can open the app on [http://localhost:4000/](http://localhost:4000/) and start creating your boards.
    You will notice that the app has this architecture on firebase:
 ![Fun retro architecture](https://i.imgur.com/etYgDia.png)
 
