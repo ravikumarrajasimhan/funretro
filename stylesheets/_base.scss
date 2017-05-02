@@ -80,14 +80,8 @@ h2 {
 }
 
 .container {
-  display: -webkit-box;
-  display:    -moz-box;
-  display: -ms-flexbox;
-  display:    -moz-flex;
-  display: -webkit-flex;
-  display:         flex;
+  display: flex;
   width: 100%;
-  -ms-box-orient: horizontal;
   padding-bottom: 35px;
 }
 
@@ -287,9 +281,7 @@ blockquote {
 
 [draggable] {
   cursor: move;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
 }
 
 .ngdialog.ngdialog-theme-plain .ngdialog-content .header {

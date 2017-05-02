@@ -45,7 +45,6 @@
       "-webkit-box-sizing",
       "-moz-box-sizing",
       "box-sizing",
-      "-ms-box-orient",
       "appearance",
       "-moz-appearance",
       "-o-appearance",

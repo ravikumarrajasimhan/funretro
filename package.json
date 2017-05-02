@@ -22,6 +22,7 @@
     "gulp-sass": "^2.0.4",
     "gulp-uglify": "latest",
     "gulp-uglifycss": "latest",
+    "gulp-autoprefixer": "latest",
     "gulp-watch": "latest",
     "jshint": "2.9.4",
     "jshint-stylish": "^2.2.0",
