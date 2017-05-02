@@ -189,7 +189,7 @@ angular
       };
 
       function addMessageCallback(message) {
-        var id = message.key();
+        var id = message.key;
         angular.element($('#' + id)).scope().isEditing = true;
         $('#' + id).find('textarea').focus();
       }

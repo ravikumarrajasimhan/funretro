@@ -9,30 +9,32 @@ describe('MainCtrl: ', function() {
       modalService,
       voteService;
 
-  beforeEach(angular.mock.module('fireideaz'));
+  beforeEach(function() {
+    angular.mock.module('fireideaz');
 
-  beforeEach(inject(function($injector){
-    $rootScope = $injector.get('$rootScope');
-    $scope = $rootScope.$new();
-    $controller = $injector.get('$controller');
-    utils = $injector.get('Utils');
-    modalService = $injector.get('ModalService');
-    firebaseService = $injector.get('FirebaseService');
-    auth = $injector.get('Auth');
-    voteService = $injector.get('VoteService');
+    inject(function($injector) {
+      $rootScope = $injector.get('$rootScope');
+      $scope = $rootScope.$new();
+      $controller = $injector.get('$controller');
+      utils = $injector.get('Utils');
+      modalService = $injector.get('ModalService');
+      firebaseService = $injector.get('FirebaseService');
+      auth = $injector.get('Auth');
+      voteService = $injector.get('VoteService');
 
-    $scope.userId = 'userId';
-    $scope.board = { max_votes: 6 };
-    
-    $controller('MainCtrl', {
-      '$scope': $scope,
-      'utils': utils,
-      'modalService': modalService,
-      'firebaseService': firebaseService,
-      'auth': auth,
-      'voteService': voteService
+      $scope.userId = 'userId';
+      $scope.board = { max_votes: 6 };
+      
+      $controller('MainCtrl', {
+        '$scope': $scope,
+        'utils': utils,
+        'modalService': modalService,
+        'firebaseService': firebaseService,
+        'auth': auth,
+        'voteService': voteService
+      });
     });
-  }));
+  });
 
   describe('Board', function () {
 
