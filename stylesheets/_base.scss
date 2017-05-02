@@ -2,7 +2,6 @@
   font-family: 'Roboto';
   font-style: normal;
   font-weight: normal;
-
   src: url("../fonts/Roboto-Regular.eot?v=0.4.2");
   src: url("../fonts/Roboto-Regular.eot?#iefix&v=0.4.2") format("embedded-opentype"), url("../fonts/Roboto-Regular.woff?v=0.4.2") format("woff"), url("../fonts/Roboto-Regular.ttf?v=0.4.2") format("truetype"), url("../fonts/Roboto-Regular.svg?v=0.4.2") format("svg");
 }
@@ -11,7 +10,6 @@
   font-family: 'RobotoBold';
   font-style: normal;
   font-weight: normal;
-
   src: url("../fonts/Roboto-Bold.eot?v=0.4.2");
   src: url("../fonts/Roboto-Bold.eot?#iefix&v=0.4.2") format("embedded-opentype"), url("../fonts/Roboto-Bold.woff?v=0.4.2") format("woff"), url("../fonts/Roboto-Bold.ttf?v=0.4.2") format("truetype"), url("../fonts/Roboto-Bold.svg?v=0.4.2") format("svg");
 }
@@ -59,6 +57,7 @@ strong {
 
 ul {
   padding-left: 0;
+  margin-top: 0;
 }
 
 h2 {
@@ -81,16 +80,9 @@ h2 {
 }
 
 .container {
-  display: -webkit-box;
-  display:    -moz-box;
-  display: -ms-flexbox;
-  display:    -moz-flex;
-  display: -webkit-flex;
-  display:         flex;
+  display: flex;
   width: 100%;
   padding-bottom: 35px;
-
-  -ms-box-orient: horizontal;
 }
 
 .success-button {
@@ -111,7 +103,8 @@ h2 {
   margin-bottom: 0.5em;
 }
 
-.editing-column input, .editing-board-name input {
+.editing-column input,
+.editing-board-name input {
   max-width: 300px;
   font-size: 1.3em;
   font-weight: bold;
@@ -125,11 +118,7 @@ h2 {
   font-size: 0.9em;
 }
 
-ul {
-  margin-top: 0;
-}
-
-#board-context {
+.board-context {
   height: 36px;
   padding-left: 14px;
   font-family: 'Roboto', sans-serif;
@@ -138,23 +127,23 @@ ul {
   border: none;
 }
 
-#board-name + .fa-pencil {
+.board-name + .fa-pencil {
   display: none;
 }
 
-#board-name:hover + .fa-pencil {
+.board-name:hover + .fa-pencil {
   display: inline-block;
 }
 
 .editing-board-name button.success-button,
 .editing-board-name input,
 .editing-board-name a.blue {
-  vertical-align: middle;
   margin: 0 5px 0 0;
+  vertical-align: middle;
 }
 
 .editing-board-name a.blue {
-  font-size: .9em;
+  font-size: 0.9em;
 }
 
 .delete {
@@ -176,7 +165,7 @@ ul {
   font-size: 0.9em;
 }
 
-a:not(.disabled) .fa-thumbs-o-up:hover:before {
+a:not(.disabled) .fa-thumbs-o-up:hover::before {
   content: '\f164';
 }
 
@@ -227,7 +216,8 @@ input {
   border: 1px solid $lightest-gray;
 }
 
-input[type="text"], input[type="number"] {
+input[type="text"],
+input[type="number"] {
   width: 200px;
   font-size: 18px;
 }
@@ -237,15 +227,11 @@ input[type="text"], input[type="number"] {
   margin-bottom: 0.5em;
 }
 
-.ngdialog-content {
-  width: 350px !important;
-}
-
-.ngdialog.bigDialog {
+.ngdialog.ngdialog-theme-plain.bigDialog {
   padding-top: 60px;
 
   .ngdialog-content {
-    width: 700px !important;
+    width: 700px;
   }
 }
 
@@ -273,15 +259,16 @@ blockquote {
     line-height: 20px;
     text-align: right;
 
-    &:before {
+    &::before {
       content: '\2014';
     }
   }
 }
 
-.message-list.lvl-over, .message > div > .lvl-over {
+.message-list.lvl-over,
+.message > div > .lvl-over {
   @include transition(none);
-  outline: 2px dashed #ffa000 !important;
+  outline: 2px dashed #ffa000;
 }
 
 .message > div > .lvl-over {
@@ -294,59 +281,51 @@ blockquote {
 
 [draggable] {
   cursor: move;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
-
-   -khtml-user-select: none;
+  user-select: none;
 }
 
-.danger p.header {
+.ngdialog.ngdialog-theme-plain .ngdialog-content .header {
   position: relative;
   top: -18px;
   left: -23px;
   width: 350px;
-  padding: 10px 17px !important;
+  padding: 10px 17px;
   margin: 0;
   margin-bottom: -10px;
   font-size: 1.3em;
-  color: white !important;
+  color: white;
   background: #df3e3e;
 }
 
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-  display: none !important;
-}
-
 .base-msg {
-  margin: 10px 0;
   padding: 10px;
-  border-radius: 3px 3px 3px 3px;
+  margin: 10px 0;
   font-size: 0.85em;
+  border-radius: 3px;
 }
 
 .info-msg {
   @extend .base-msg;
-  color: #059; 
-  background-color: #BEF;
+  color: #059;
+  background-color: #bef;
 }
 
 .success-msg {
   @extend .base-msg;
   color: #270;
-  background-color: #DFF2BF;
+  background-color: #dff2bf;
 }
 
 .warning-msg {
   @extend .base-msg;
-  color: #9F6000;
-  background-color: #FEEFB3;
+  color: #9f6000;
+  background-color: #feefb3;
 }
 
 .error-msg {
   @extend .base-msg;
-  color: #D8000C !important;
-  background-color: #FFBABA;
+  color: #d8000c;
+  background-color: #ffbaba;
 }
 
 .copy-text {
@@ -374,6 +353,7 @@ blockquote {
 }
 
 .ngdialog.ngdialog-theme-plain .ngdialog-content {
+  width: 350px;
   padding: 1.2em 1.5em 1.5em;
 
   h1 {
@@ -382,7 +362,7 @@ blockquote {
 
   label {
     display: inline-block;
-    padding: 15px 0 10px 0;
+    padding: 15px 0 10px;
     font-size: 16px;
   }
 
@@ -398,14 +378,14 @@ blockquote {
     padding: 5px 10px;
     margin: 0;
     margin-top: 1.5em;
-    
     border-radius: 0;
   }
 
-  .aling-left{
-    text-align:left;
+  .aling-left {
+    text-align: left;
   }
-  .align-right{
-    text-align:right;
+
+  .align-right {
+    text-align: right;
   }
 }

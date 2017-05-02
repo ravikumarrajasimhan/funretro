@@ -31,7 +31,9 @@
     }
   }
 
-  a, a:visited, a:focus {
+  a,
+  a:visited,
+  a:focus {
     color: $purple;
   }
 
@@ -110,19 +112,19 @@
 
   form input[type='submit'] {
     width: auto;
+    height: 40px;
     padding: 5px 25px;
     margin-left: 10px;
     overflow: hidden;
-    font-family: 'Roboto',sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
     color: white;
     cursor: pointer;
     background: #0299ad;
     border: 0;
     border-bottom: 2px solid #017280;
     border-radius: 2px;
-    height: 40px;
-    transform: translate3d(0,0,0);
-    font-size: 16px;
+    transform: translate3d(0, 0, 0);
   }
 
   .second {
@@ -135,16 +137,17 @@
     }
   }
 
-  button, .button {
+  button,
+  .button {
     display: block;
     width: 160px;
     height: 47px;
     margin: 0 auto;
     margin-top: 60px;
+    font-size: 16px;
+    color: white;
     background: $purple;
     border-bottom: 3px solid $light-purple;
-    color: white;
-    font-size: 16px;
 
     &.alone {
       margin: 0 auto;
@@ -165,9 +168,9 @@
   }
 
   .donation {
+    display: block;
     width: 200px;
     margin: 0 auto;
-    display: block;
   }
 
   .heart {
@@ -177,9 +180,8 @@
   h2 {
     display: block;
     max-width: 100%;
-    margin-top: 0;
-    margin-right: 0;
     margin-top: 2em;
+    margin-right: 0;
     margin-bottom: 1em;
     font-size: 1.6rem;
     font-weight: 100;
