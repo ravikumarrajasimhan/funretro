@@ -13,6 +13,7 @@ angular
       mainAuthRef.$signInWithEmailAndPassword(email, password).then(function(userData) {
         callback(userData);
       }, function(error) {
+        console.log('Logged user failed: ', error);
         window.location.hash = '';
         location.reload();
       });
@@ -25,7 +26,7 @@ angular
       mainAuthRef.$createUserWithEmailAndPassword(email, password).then(function() {
         logUser(newUser, callback);
       }, function(error) {
-        //failed to create user
+        console.log('Create user failed: ', error);
       });
     }
 
