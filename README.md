@@ -40,7 +40,7 @@ firebase.initializeApp(config);
 ```
 5. If you don't want to file to be tracked by git just run this command on the project home folder:
 ```
-git update-index --assume-unchanged js/vendor/firebaseinitialization.js
+git update-index --assume-unchanged js/vendor/firebaseInitialization.js
 ```
 6. Install [Node.js](https://nodejs.org/en/)
 7. Run ```npm install``` (inside the project folder)
