@@ -47,8 +47,6 @@ git update-index --assume-unchanged js/vendor/firebaseInitialization.js
 8. Install [Gulp](http://gulpjs.com/)
 9. Run ```gulp```
 10. Now you can open the app on [http://localhost:4000/](http://localhost:4000/) and start creating your boards.
-   You will notice that the app has this architecture on firebase:
-![Fun retro architecture](https://i.imgur.com/etYgDia.png)
 
 ## Contribute to Fun Retro
 
