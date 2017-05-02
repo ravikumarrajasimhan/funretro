@@ -15,12 +15,8 @@ Fun retrospective guide at [Dummies guide to retrospectives](https://github.com/
 ## How to setup local environment
 
 1. Clone the repository
-2. Install [Node.js](https://nodejs.org/en/)
-3. Run ```npm install``` (inside the project folder)
-4. Install [Gulp](http://gulpjs.com/)
-5. Run ```gulp```
-6. Fun Retro is using [Firebase](http://www.firebase.com). First create an account at firebase. Then create a test project.
-7. After creating the project you can select Database from the left pane, on the Rules tab, change the Database rules of created project:
+2. Fun Retro is using [Firebase](http://www.firebase.com). First create an account at firebase. Then create a test project.
+3. After creating the project you can select Database from the left pane, on the Rules tab, change the Database rules of created project:
 ```
 {
     "rules": {
@@ -29,8 +25,28 @@ Fun retrospective guide at [Dummies guide to retrospectives](https://github.com/
     }
 }
 ```
-8. Still in the database section, you can find the database url (ex: https://funretrotest.firebaseio.com/). Replace ```databaseURL``` inside ```js/vendor/firebaseInitialization.js``` with this database url.
-9. Now you can open the app on [http://localhost:4000/](http://localhost:4000/) and start creating your boards.
+4. Change the file on js/vendor/firebaseinitialization.js and replace the values with your project values
+```
+var config = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+  databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT_ID.appspot.com",
+  messagingSenderId: "YOUR_MESSAGE_ID"
+};
+
+firebase.initializeApp(config);
+```
+5. If you don't want to file to be tracked by git just run this command on the project home folder:
+```
+git update-index --assume-unchanged js/vendor/firebaseinitialization.js
+```
+6. Install [Node.js](https://nodejs.org/en/)
+7. Run ```npm install``` (inside the project folder)
+8. Install [Gulp](http://gulpjs.com/)
+9. Run ```gulp```
+10. Now you can open the app on [http://localhost:4000/](http://localhost:4000/) and start creating your boards.
    You will notice that the app has this architecture on firebase:
 ![Fun retro architecture](https://i.imgur.com/etYgDia.png)
 

@@ -1,10 +1,10 @@
 var config = {
-  apiKey: "AIzaSyDKlqYdC-wUUOT7E7aRmRtEDtK6N8CAZ3U",
-  authDomain: "fun-retro-6216f.firebaseapp.com",
-  databaseURL: "https://fun-retro-6216f.firebaseio.com",
-  projectId: "fun-retro-6216f",
-  storageBucket: "fun-retro-6216f.appspot.com",
-  messagingSenderId: "741022796633"
-};
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+  databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT_ID.appspot.com",
+  messagingSenderId: "YOUR_MESSAGE_ID"
+ };
 
-firebase.initializeApp(config);
+ firebase.initializeApp(config);
