@@ -1,6 +1,7 @@
 <div class="filter-mobile" ng-show="userId !== ''">
   <label>Filter by</label>
   <select
+    title="select column type"
     ng-model="selectedType"
     ng-options="column.id as column.value for column in board.columns">
   </select>

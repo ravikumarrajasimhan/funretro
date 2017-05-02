@@ -2,12 +2,12 @@
   <h2 id="board-name" class="board-name" ng-show="!editingBoardName" ng-click="editingBoardName=true;newBoardName=boardId;">{{boardId}}</h2>
   <i class="fa fa-pencil" ng-show="!editingBoardName"></i>
   <span ng-show="editingBoardName" class="editing-board-name">
-    <input ng-model="newBoardName"></input>
+    <input title="new board name" ng-model="newBoardName"></input>
     <button ng-click="changeBoardName(newBoardName);editingBoardName=false;" class="success-button">Save</button>
     <a class="blue" ng-click="editingBoardName=false;">Cancel</a>
   </span>
   <label class="menu-controls">Sort by</label>
-  <select ng-model="sortField">
+  <select title="sort fields" ng-model="sortField">
     <option value="$id">Created date</option>
     <option value="votes">Votes</option>
   </select>

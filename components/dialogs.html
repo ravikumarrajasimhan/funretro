@@ -52,11 +52,11 @@
       <tr ng-repeat="column in import.mapping track by $index">
         <td class="align-right">{{column.name}}</td>
         <td class="align-left">
-          <select class="import-select" ng-model="column.mapFrom">
+          <select class="import-select" title="fields mapping" ng-model="column.mapFrom">
             <option select="selected" value="-1">[Select csv column]</option>
             <option ng-repeat="importColumn in import.data[0] track by $index" value="{{$index}}">{{importColumn}}</option>
           </select>
-        </td> 
+        </td>
     </table>
     <p class="error-msg" ng-show="import.error"> {{import.error}} </p>
     <button ng-click="importMessages()" ng-disabled="(import.mapping| filter:{mapFrom:'!-1'}).length == 0">Import</button>
