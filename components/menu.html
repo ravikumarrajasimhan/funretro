@@ -1,5 +1,5 @@
 <div ng-show="userId !== ''" class="menu">
-  <h2 id="board-name" ng-show="!editingBoardName" ng-click="editingBoardName=true;newBoardName=boardId;">{{boardId}}</h2>
+  <h2 id="board-name" class="board-name" ng-show="!editingBoardName" ng-click="editingBoardName=true;newBoardName=boardId;">{{boardId}}</h2>
   <i class="fa fa-pencil" ng-show="!editingBoardName"></i>
   <span ng-show="editingBoardName" class="editing-board-name">
     <input ng-model="newBoardName"></input>

@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "private": false,
   "scripts": {
-    "jshint": "jshint js/. --exclude js/vendor",
+    "jshint": "jshint js/. --exclude js/vendor && stylelint stylesheets/*.scss",
     "deploy": "./deploy.sh",
     "test": "karma start karma.conf.js --singleRun=true"
   },
@@ -37,7 +37,8 @@
     "phantomjs-prebuilt": "^2.1.4",
     "roboto-fontface": "^0.4.2",
     "sinon": "1.17.6",
-    "tiny-lr": "latest"
+    "tiny-lr": "latest",
+    "stylelint": "latest"
   },
   "dependencies": {
     "angular": "^1.4.9",

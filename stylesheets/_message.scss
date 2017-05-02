@@ -1,24 +1,22 @@
-
 @for $i from 1 through 6 {
-  ul.column_#{$i} .front, ul.column_#{$i} .back {
-    background: nth($column-colors-main, $i);
+  ul.column_#{$i} .front,
+  ul.column_#{$i} .back {
     min-height: 52px;
+    background: nth($column-colors-main, $i);
   }
 
-  ul.column_#{$i} .votes {
-    .vote-area {
-      padding: 2px 7px;
-      margin: 0;
-      background: nth($column-colors-votes, $i);
+  ul.column_#{$i} {
+    .votes {
+      .vote-area {
+        padding: 2px 7px;
+        margin: 0;
+        background: nth($column-colors-votes, $i);
+      }
     }
 
     .disabled i {
       color: nth($column-colors-main, $i);
       cursor: not-allowed;
-
-      &:hover {
-        color: nth($column-colors-main, $i);
-      }
     }
   }
 
@@ -28,10 +26,10 @@
 }
 
 .message-list {
+  padding-bottom: 15px;
   margin-left: 15px;
   flex-basis: 0;
   flex-grow: 1;
-  padding-bottom: 15px;
 
   @media (max-width: 500px) {
     margin: 0 15px;
@@ -72,8 +70,8 @@
 
   .fa-times {
     margin-right: 5px;
-    color: white;
     font-size: 1.1em;
+    color: white;
   }
 }
 
@@ -167,12 +165,15 @@
   0% {
     opacity: 1;
   }
+
   33% {
     opacity: 1;
   }
+
   66% {
     opacity: 0;
   }
+
   100% {
     opacity: 0;
   }
@@ -182,12 +183,15 @@
   0% {
     opacity: 0;
   }
+
   33% {
     opacity: 0;
   }
+
   66% {
     opacity: 1;
   }
+
   100% {
     opacity: 1;
   }
@@ -204,10 +208,10 @@
 .message-votes {
   li {
     display: inline-block;
-    list-style: none;
     width: 10px;
     height: 10px;
-    border-radius: 10px;
     margin-right: 4px;
+    list-style: none;
+    border-radius: 10px;
   }
 }
