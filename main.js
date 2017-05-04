@@ -653,82 +653,6 @@ angular
 
 'use strict';
 
-angular.module('fireideaz').directive('boardContext', [function() {
-    return {
-      restrict: 'E',
-      templateUrl : 'components/boardContext.html'
-    };
-  }]
-);
-
-'use strict';
-
-angular.module('fireideaz').directive('dialogs', [function() {
-    return {
-      restrict: 'E',
-      templateUrl : 'components/dialogs.html'
-    };
-  }]
-);
-
-'use strict';
-
-angular.module('fireideaz').directive('pageHeader', ['ModalService', function(modalService) {
-    return {
-      templateUrl : 'components/header.html',
-      link: function($scope) {
-        $scope.modalService = modalService;
-      }
-    };
-  }]
-);
-
-'use strict';
-
-angular.module('fireideaz').directive('mainContent', [function() {
-    return {
-      templateUrl : 'components/mainContent.html'
-    };
-  }]
-);
-
-'use strict';
-
-angular.module('fireideaz').directive('mainPage', ['ModalService', function(modalService) {
-    return {
-      restrict: 'E',
-      templateUrl : 'components/mainPage.html',
-      link: function($scope) {
-        $scope.modalService = modalService;
-      }
-    };
-  }]
-);
-
-'use strict';
-
-angular.module('fireideaz').directive('menu', ['VoteService', function(voteService) {
-    return {
-      templateUrl : 'components/menu.html',
-      link: function($scope) {
-        $scope.voteService = voteService;
-      }
-    };
-  }]
-);
-
-'use strict';
-
-angular.module('fireideaz').directive('spinner', [function() {
-    return {
-      restrict: 'E',
-      templateUrl : 'components/spinner.html'
-    };
-  }]
-);
-
-'use strict';
-
 angular
   .module('fireideaz')
   .service('ModalService', ['ngDialog', function(ngDialog) {
@@ -803,3 +727,79 @@ angular
       }
     };
   }]);
+
+'use strict';
+
+angular.module('fireideaz').directive('boardContext', [function() {
+    return {
+      restrict: 'E',
+      templateUrl : 'components/boardContext.html'
+    };
+  }]
+);
+
+'use strict';
+
+angular.module('fireideaz').directive('dialogs', [function() {
+    return {
+      restrict: 'E',
+      templateUrl : 'components/dialogs.html'
+    };
+  }]
+);
+
+'use strict';
+
+angular.module('fireideaz').directive('pageHeader', ['ModalService', function(modalService) {
+    return {
+      templateUrl : 'components/header.html',
+      link: function($scope) {
+        $scope.modalService = modalService;
+      }
+    };
+  }]
+);
+
+'use strict';
+
+angular.module('fireideaz').directive('mainContent', [function() {
+    return {
+      templateUrl : 'components/mainContent.html'
+    };
+  }]
+);
+
+'use strict';
+
+angular.module('fireideaz').directive('mainPage', ['ModalService', function(modalService) {
+    return {
+      restrict: 'E',
+      templateUrl : 'components/mainPage.html',
+      link: function($scope) {
+        $scope.modalService = modalService;
+      }
+    };
+  }]
+);
+
+'use strict';
+
+angular.module('fireideaz').directive('menu', ['VoteService', function(voteService) {
+    return {
+      templateUrl : 'components/menu.html',
+      link: function($scope) {
+        $scope.voteService = voteService;
+      }
+    };
+  }]
+);
+
+'use strict';
+
+angular.module('fireideaz').directive('spinner', [function() {
+    return {
+      restrict: 'E',
+      templateUrl : 'components/spinner.html'
+    };
+  }]
+);
