@@ -63,7 +63,6 @@ angular
       }
 
       if ($scope.userId !== '') {
-        //var messagesRef = firebaseService.getMessagesRef($scope.userId);
         auth.logUser($scope.userId, getBoardAndMessages);
       } else {
         $scope.loading = false;
@@ -128,9 +127,13 @@ angular
             columns: $scope.messageTypes,
             user_id: userData.uid,
             max_votes: $scope.newBoard.max_votes || 6
+          }, function(error) {
+             if (error) {
+                $scope.loading = false;
+             } else {
+                redirectToBoard();
+             }
           });
-
-          redirectToBoard();
 
           $scope.newBoard.name = '';
         };
