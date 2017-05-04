@@ -222,6 +222,10 @@ angular
         return !$scope.newBoard.name;
       };
 
+      $scope.isMaxVotesValid = function() {
+        return Number.isInteger($scope.newBoard.max_votes);
+      };
+
       $scope.createNewBoard = function() {
         $scope.loading = true;
         modalService.closeAll();
