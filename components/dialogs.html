@@ -23,7 +23,7 @@
   <input ng-model="newBoard.name" type="text" ng-keyup="submitOnEnter($event, 'createNewBoard')"></input>
   <label>Max votes per user <small>(whole board)</small></label>
   <input ng-model="newBoard.max_votes" type="number" ng-init="newBoard.max_votes = 6" ng-keyup="submitOnEnter($event, 'createNewBoard')"></input>
-  <button ng-disabled="isBoardNameInvalid()" ng-click="createNewBoard()">Create</button>
+  <button ng-disabled="isBoardNameInvalid() || !isMaxVotesValid()" ng-click="createNewBoard()">Create</button>
 </script>
 <script type="text/ng-template" id="deleteCard">
   <h1>Delete note</h1>
@@ -56,7 +56,7 @@
             <option select="selected" value="-1">[Select csv column]</option>
             <option ng-repeat="importColumn in import.data[0] track by $index" value="{{$index}}">{{importColumn}}</option>
           </select>
-        </td> 
+        </td>
     </table>
     <p class="error-msg" ng-show="import.error"> {{import.error}} </p>
     <button ng-click="importMessages()" ng-disabled="(import.mapping| filter:{mapFrom:'!-1'}).length == 0">Import</button>
