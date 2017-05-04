@@ -152,6 +152,11 @@ angular
         var board = firebaseService.getBoardRef($scope.userId);
 
         board.on('value', function(board) {
+          if (board.val() === null) {
+            window.location.hash = '';
+            location.reload();
+          }
+
           $scope.board = board.val();
           $scope.maxVotes = board.val().max_votes ? board.val().max_votes : 6;
           $scope.boardId = $rootScope.boardId = board.val().boardId;
@@ -166,7 +171,6 @@ angular
       }
 
       if ($scope.userId !== '') {
-        //var messagesRef = firebaseService.getMessagesRef($scope.userId);
         auth.logUser($scope.userId, getBoardAndMessages);
       } else {
         $scope.loading = false;
@@ -198,8 +202,10 @@ angular
 
       $scope.unvote = function(messageKey, votes) {
         if(voteService.canUnvoteMessage($scope.userId, messageKey)) {
+          var newVotes = (votes >= 1) ? votes - 1 : 0;
+
           $scope.messagesRef.child(messageKey).update({
-            votes: votes - 1,
+            votes: newVotes,
             date: firebaseService.getServerTimestamp()
           });
 
@@ -229,9 +235,13 @@ angular
             columns: $scope.messageTypes,
             user_id: userData.uid,
             max_votes: $scope.newBoard.max_votes || 6
+          }, function(error) {
+             if (error) {
+                $scope.loading = false;
+             } else {
+                redirectToBoard();
+             }
           });
-
-          redirectToBoard();
 
           $scope.newBoard.name = '';
         };
@@ -342,7 +352,7 @@ angular
           return clipboard;
         } else return '';
       };
-    
+
       $scope.submitImportFile = function (file) {
         $scope.cleanImportData ();
         if (file) {
@@ -356,8 +366,8 @@ angular
               if (results.data.length > 0){
                 $scope.import.data = results.data;
                 $scope.board.columns.forEach (function (column){
-                  $scope.import.mapping.push({mapFrom:'-1', mapTo:column.id, name: column.value});  
-                });  
+                  $scope.import.mapping.push({mapFrom:'-1', mapTo:column.id, name: column.value});
+                });
                 if (results.errors.length > 0)
                    $scope.import.error = results.errors[0].message;
                 $scope.$apply();
@@ -371,15 +381,15 @@ angular
          var data = $scope.import.data;
          var mapping = $scope.import.mapping;
          for (var importIndex = 1; importIndex < data.length; importIndex++ )
-         {           
+         {
            for (var mappingIndex = 0; mappingIndex < mapping.length; mappingIndex++)
            {
              var mapFrom = mapping[mappingIndex].mapFrom;
              var mapTo = mapping[mappingIndex].mapTo;
              if (mapFrom === -1)
               continue;
-             
-             var cardText = data[importIndex][mapFrom]; 
+
+             var cardText = data[importIndex][mapFrom];
              if (cardText)
              {
                 $scope.messages.$add({
@@ -390,7 +400,7 @@ angular
                 },
                 date: firebaseService.getServerTimestamp(),
                 votes: 0});
-             } 
+             }
            }
          }
          $scope.closeAllModals();
@@ -603,7 +613,7 @@ angular
       if (localStorage.getItem(userId)) {
         var boardVotes = JSON.parse(localStorage.getItem(userId));
 
-        if (boardVotes[messageKey] === 1) {
+        if (boardVotes[messageKey] <= 1) {
             delete boardVotes[messageKey];
         } else {
           boardVotes[messageKey] = boardVotes[messageKey] - 1;
