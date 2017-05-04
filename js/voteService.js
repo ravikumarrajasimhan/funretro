@@ -56,7 +56,7 @@ angular
       if (localStorage.getItem(userId)) {
         var boardVotes = JSON.parse(localStorage.getItem(userId));
 
-        if (boardVotes[messageKey] === 1) {
+        if (boardVotes[messageKey] <= 1) {
             delete boardVotes[messageKey];
         } else {
           boardVotes[messageKey] = boardVotes[messageKey] - 1;

@@ -127,6 +127,18 @@ describe('VoteService: ', function() {
       localStorage.setItem.restore();
     });
 
+    it('should remove from localStorage if votes equal to -1', function() {
+      sinon.stub(localStorage, 'getItem', function () { return '{"abc":-1}'; });
+      sinon.spy(localStorage, 'setItem');
+
+      voteService.decreaseMessageVotes('userId', 'abc')
+
+      expect(localStorage.setItem.calledWith('userId', "{}")).to.be.true;
+
+      localStorage.getItem.restore();
+      localStorage.setItem.restore();
+    });
+
     it('should decrease votes', function() {
       sinon.stub(localStorage, 'getItem', function () { return '{"abc":3}'; });
       sinon.spy(localStorage, 'setItem');
