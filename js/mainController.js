@@ -49,6 +49,11 @@ angular
         var board = firebaseService.getBoardRef($scope.userId);
 
         board.on('value', function(board) {
+          if (board.val() === null) {
+            window.location.hash = '';
+            location.reload();
+          }
+
           $scope.board = board.val();
           $scope.maxVotes = board.val().max_votes ? board.val().max_votes : 6;
           $scope.boardId = $rootScope.boardId = board.val().boardId;
