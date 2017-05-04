@@ -95,7 +95,7 @@ angular
 
       $scope.unvote = function(messageKey, votes) {
         if(voteService.canUnvoteMessage($scope.userId, messageKey)) {
-          var newVotes = (votes - 1 >= 0) ? votes - 1 : 0;
+          var newVotes = (votes >= 1) ? votes - 1 : 0;
 
           $scope.messagesRef.child(messageKey).update({
             votes: newVotes,
