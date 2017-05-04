@@ -24,7 +24,7 @@ describe('MainCtrl: ', function() {
 
       $scope.userId = 'userId';
       $scope.board = { max_votes: 6 };
-      
+
       $controller('MainCtrl', {
         '$scope': $scope,
         'utils': utils,
@@ -194,6 +194,46 @@ describe('MainCtrl: ', function() {
       $scope.unvote('abc', 5);
 
       expect(updateSpy.calledWith({votes: 4, date: '00:00:00'})).to.be.true;
+      expect(voteService.decreaseMessageVotes.calledWith('userId', 'abc')).to.be.true;
+    });
+
+    it('should not give negative votes to a message with votes -1', function() {
+      sinon.stub(firebaseService, 'getServerTimestamp', function() { return '00:00:00' });
+      sinon.stub(voteService, 'canUnvoteMessage', function() { return true });
+      sinon.spy(voteService, 'decreaseMessageVotes');
+      var updateSpy = sinon.spy();
+
+      $scope.messagesRef = {
+        child: function() {
+          return { update: updateSpy}
+        }
+      }
+
+      $scope.userId = 'userId';
+
+      $scope.unvote('abc', -1);
+
+      expect(updateSpy.calledWith({votes: 0, date: '00:00:00'})).to.be.true;
+      expect(voteService.decreaseMessageVotes.calledWith('userId', 'abc')).to.be.true;
+    });
+
+    it('should not give negative votes to a message with zero votes', function() {
+      sinon.stub(firebaseService, 'getServerTimestamp', function() { return '00:00:00' });
+      sinon.stub(voteService, 'canUnvoteMessage', function() { return true });
+      sinon.spy(voteService, 'decreaseMessageVotes');
+      var updateSpy = sinon.spy();
+
+      $scope.messagesRef = {
+        child: function() {
+          return { update: updateSpy}
+        }
+      }
+
+      $scope.userId = 'userId';
+
+      $scope.unvote('abc', 0);
+
+      expect(updateSpy.calledWith({votes: 0, date: '00:00:00'})).to.be.true;
       expect(voteService.decreaseMessageVotes.calledWith('userId', 'abc')).to.be.true;
     });
   });
@@ -403,14 +443,14 @@ describe('Import', function() {
       emptyFile.size = 0;
       $scope.submitImportFile(inputFile);
       expect ($scope.import.error).to.be.equal('The file you are trying to import seems to be  empty');
-    }) 
+    })
 
     it ('should show error for malformed file', function(){
       var emptyFile = inputFile;
       emptyFile.size = 0;
       $scope.submitImportFile('nn');
       expect ($scope.import.error).to.be.not.empty;
-    }) 
+    })
 
     it('should initialize clear mapping and data', function() {
       var expectedMapping = [];
@@ -420,7 +460,7 @@ describe('Import', function() {
 
     it('should parse import data', function() {
       var expectedData = [
-        ["Column 1","Column 2","Column 3"], 
+        ["Column 1","Column 2","Column 3"],
         ["a","b","c"],
         ["1","2","3"]];
       $scope.submitImportFile('"Column 1","Column 2","Column 3"\n"a","b","c"\n"1","2","3"');
@@ -431,26 +471,25 @@ describe('Import', function() {
       var messageDate = Date.parse ('Mon Apr 03 2017 21:07:31 GMT+0200 (W. Europe Daylight Time)');
       var expectedMessages = [
         {text:'C3R1', user_id: 'userId', type: {id: 1}, date: messageDate, votes: 0},
-        {text:'C3R2', user_id: 'userId', type: {id: 1}, date: messageDate, votes: 0}];   
-     
-     sinon.stub(firebaseService, 'getServerTimestamp', function() { return messageDate }); 
+        {text:'C3R2', user_id: 'userId', type: {id: 1}, date: messageDate, votes: 0}];
+
+     sinon.stub(firebaseService, 'getServerTimestamp', function() { return messageDate });
      $scope.userUid = 'userId';
-      var addStub = sinon.spy(); 
+      var addStub = sinon.spy();
 
       $scope.messages = {
         $add: addStub
       }
 
-      $scope.submitImportFile('"Column 1","Column 2","Column 3"\n"C1R1","C2R1","C3R1"\n"C1R2","C2R2","C3R2"'); 
+      $scope.submitImportFile('"Column 1","Column 2","Column 3"\n"C1R1","C2R1","C3R1"\n"C1R2","C2R2","C3R2"');
       //First init with data, then setup mapping
       $scope.import.mapping = [
-        {mapFrom:2, mapTo: 1, name: 'columnName'}, 
+        {mapFrom:2, mapTo: 1, name: 'columnName'},
         {mapFrom:'-1', mapTo: 2, name: 'otherColumnName'}];
-      
+
       $scope.importMessages();
       expect (addStub.calledWith(expectedMessages[0])).to.be.true;
       expect (addStub.calledWith(expectedMessages[1])).to.be.true;
     });
   });
 });
- 
