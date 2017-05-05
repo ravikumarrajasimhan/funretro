@@ -162,10 +162,11 @@ angular
       };
 
       $scope.changeColumnName = function(id, newName) {
-        $scope.board.columns[id - 1] = {
-          value: newName,
-          id: id
-        };
+        $scope.board.columns.map(function(column, index, array) {
+          if (column.id === id) {
+            array[index].value = newName;
+          }
+        });
 
         var boardColumns = firebaseService.getBoardColumns($scope.userId);
         boardColumns.set(utils.toObject($scope.board.columns));
@@ -239,7 +240,7 @@ angular
           return clipboard;
         } else return '';
       };
-    
+
       $scope.submitImportFile = function (file) {
         $scope.cleanImportData ();
         if (file) {
@@ -253,8 +254,8 @@ angular
               if (results.data.length > 0){
                 $scope.import.data = results.data;
                 $scope.board.columns.forEach (function (column){
-                  $scope.import.mapping.push({mapFrom:'-1', mapTo:column.id, name: column.value});  
-                });  
+                  $scope.import.mapping.push({mapFrom:'-1', mapTo:column.id, name: column.value});
+                });
                 if (results.errors.length > 0)
                    $scope.import.error = results.errors[0].message;
                 $scope.$apply();
@@ -268,15 +269,15 @@ angular
          var data = $scope.import.data;
          var mapping = $scope.import.mapping;
          for (var importIndex = 1; importIndex < data.length; importIndex++ )
-         {           
+         {
            for (var mappingIndex = 0; mappingIndex < mapping.length; mappingIndex++)
            {
              var mapFrom = mapping[mappingIndex].mapFrom;
              var mapTo = mapping[mappingIndex].mapTo;
              if (mapFrom === -1)
               continue;
-             
-             var cardText = data[importIndex][mapFrom]; 
+
+             var cardText = data[importIndex][mapFrom];
              if (cardText)
              {
                 $scope.messages.$add({
@@ -287,7 +288,7 @@ angular
                 },
                 date: firebaseService.getServerTimestamp(),
                 votes: 0});
-             } 
+             }
            }
          }
          $scope.closeAllModals();
