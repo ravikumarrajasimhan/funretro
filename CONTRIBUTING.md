@@ -50,10 +50,6 @@ We are currently using 5 kinds of labels:
 npm run jshint
 ```
 
-```
-npm run stylelint
-```
-
 * Make sure you have added the necessary tests for your changes. Every new method should have tests for it.
 * Run all the tests to ensure nothing else was accidentally broken.
 
