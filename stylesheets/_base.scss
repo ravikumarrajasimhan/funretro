@@ -316,7 +316,7 @@ blockquote {
 
 .success-msg {
   @extend .base-msg;
-  color: $success-msg
+  color: $success-msg;
   background-color: $success-msg-back;
 }
 
