@@ -192,10 +192,10 @@
 }
 
 .back a {
-  color: #ef5350;
+  color: $danger;
 
   &:hover {
-    color: #c33b38;
+    color: darken($danger, 15%);
   }
 }
 

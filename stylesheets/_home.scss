@@ -120,9 +120,9 @@
     font-size: 16px;
     color: white;
     cursor: pointer;
-    background: #0299ad;
+    background: $light-teal;
     border: 0;
-    border-bottom: 2px solid #017280;
+    border-bottom: 2px solid $dark-blue;
     border-radius: 2px;
     transform: translate3d(0, 0, 0);
   }
