@@ -272,7 +272,7 @@ blockquote {
 .message-list.lvl-over,
 .message > div > .lvl-over {
   @include transition(none);
-  outline: 2px dashed #ffa000;
+  outline: 2px dashed $outline-color;
 }
 
 .message > div > .lvl-over {
