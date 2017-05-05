@@ -310,33 +310,33 @@ blockquote {
 
 .info-msg {
   @extend .base-msg;
-  color: #059;
-  background-color: #bef;
+  color: $info-msg;
+  background-color: $info-msg-back;
 }
 
 .success-msg {
   @extend .base-msg;
-  color: #270;
-  background-color: #dff2bf;
+  color: $success-msg
+  background-color: $success-msg-back;
 }
 
 .warning-msg {
   @extend .base-msg;
-  color: #9f6000;
-  background-color: #feefb3;
+  color: $warning-msg;
+  background-color: $warning-msg-back;
 }
 
 .error-msg {
   @extend .base-msg;
-  color: #d8000c;
-  background-color: #ffbaba;
+  color: $error-msg;
+  background-color: $error-msg-back;
 }
 
 .copy-text {
   padding: 15px;
   margin: 20px 0;
-  background: #eee;
-  border: 1px solid #ddd;
+  background: white;
+  border: 1px solid $lighter-gray;
   border-radius: 2px;
 }
 
