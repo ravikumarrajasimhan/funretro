@@ -45,7 +45,9 @@
 }
 
 .text {
+  padding-top: 0.1em;
   padding-right: 15px;
+  padding-left: 0.1em;
   word-break: break-word;
   white-space: pre-line;
 }
@@ -190,10 +192,10 @@
 }
 
 .back a {
-  color: #ef5350;
+  color: $danger;
 
   &:hover {
-    color: #c33b38;
+    color: darken($danger, 15%);
   }
 }
 

@@ -44,15 +44,15 @@
   <a ng-click="closeAllModals()">Cancel</a>
 </script>
 <script type="text/ng-template" id="importCards">
-  <h1>Import cards</h1>
-  <span >
+  <h1>Import CSV</h1>
+  <span>
     <p>1. <a class="inline-link" type="file" ngf-select="submitImportFile($file)" ngf-pattern="text/csv" accept="text/csv" ngf-max-size="10KB"> Submit</a> a csv file </p>
     <p>2. Setup fields mapping</button></p>
     <table>
       <tr ng-repeat="column in import.mapping track by $index">
         <td class="align-right">{{column.name}}</td>
         <td class="align-left">
-          <select class="import-select" ng-model="column.mapFrom">
+          <select class="import-select" title="fields mapping" ng-model="column.mapFrom">
             <option select="selected" value="-1">[Select csv column]</option>
             <option ng-repeat="importColumn in import.data[0] track by $index" value="{{$index}}">{{importColumn}}</option>
           </select>

@@ -176,10 +176,11 @@ angular
       };
 
       $scope.changeColumnName = function(id, newName) {
-        $scope.board.columns[id - 1] = {
-          value: newName,
-          id: id
-        };
+        $scope.board.columns.map(function(column, index, array) {
+          if (column.id === id) {
+            array[index].value = newName;
+          }
+        });
 
         var boardColumns = firebaseService.getBoardColumns($scope.userId);
         boardColumns.set(utils.toObject($scope.board.columns));

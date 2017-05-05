@@ -23,8 +23,8 @@ button,
   }
 
   &.delete-button {
-    background: #df3e3e;
-    border-color: darken(#df3e3e, 15%);
+    background: $danger;
+    border-color: darken($danger, 15%);
   }
 }
 

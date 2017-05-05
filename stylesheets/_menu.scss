@@ -5,8 +5,7 @@
   box-sizing: border-box;
   padding: 10px 15px;
   overflow: hidden;
-  background: #eee;
-  border-top: 2px solid #aaa;
+  border-bottom: 2px solid $almost-white;
 
   h2 {
     margin-top: 0;
@@ -44,7 +43,7 @@
   padding: 8px 12px;
   margin-right: 10px;
   border-radius: 2px;
-  box-shadow: 0 0 0 0 rgba(#5a99d4, 0.5);
+  box-shadow: 0 0 0 0 rgba($teal, 0.5);
   animation: pulse 1.5s;
 
   strong {
@@ -55,11 +54,11 @@
 
   @keyframes pulse {
     70% {
-      box-shadow: 0 0 0 50px rgba(#5a99d4, 0);
+      box-shadow: 0 0 0 50px rgba($teal, 0);
     }
 
     100% {
-      box-shadow: 0 0 0 0 rgba(#5a99d4, 0);
+      box-shadow: 0 0 0 0 rgba($teal, 0);
     }
   }
 }
