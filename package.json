@@ -6,7 +6,8 @@
   "scripts": {
     "jshint": "jshint js/. --exclude js/vendor && stylelint stylesheets/*.scss",
     "deploy": "./deploy.sh",
-    "test": "karma start karma.conf.js --singleRun=true"
+    "test": "karma start karma.conf.js --singleRun=true",
+    "postinstall": "opencollective postinstall"
   },
   "devDependencies": {
     "angular-mocks": "^1.5.5",
@@ -46,10 +47,16 @@
     "angular-aria": "^1.5.5",
     "angular-sanitize": "^1.5.5",
     "angularfire": "^2.3.0",
-    "ng-file-upload":"12.2.13",
     "express": "^4.13.3",
     "font-awesome": "^4.6.1",
     "ng-dialog": "^0.6.0",
-    "papaparse":"^4.2.0"
+    "ng-file-upload": "12.2.13",
+    "opencollective": "^1.0.3",
+    "papaparse": "^4.2.0"
+  },
+  "collective": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/distributed",
+    "logo": "https://opencollective.com/opencollective/logo.txt"
   }
 }
