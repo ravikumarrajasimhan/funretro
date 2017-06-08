@@ -8,7 +8,7 @@
   </span>
   <label class="menu-controls">Sort by</label>
   <select title="sort fields by" ng-model="sortField">
-    <option value="$id">Created date</option>
+    <option value="date">Created date</option>
     <option value="votes">Votes</option>
   </select>
   <span ng-show="voteService.remainingVotes(userId, maxVotes, messages) < maxVotes" class="remaining-votes">Remaining votes: <strong>{{ voteService.remainingVotes(userId, maxVotes, messages) }}</strong>
