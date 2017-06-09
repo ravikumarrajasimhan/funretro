@@ -13,7 +13,7 @@ angular
         name: ''
       };
       $scope.userId = $window.location.hash.substring(1) || '';
-      $scope.sortField = '$id';
+      $scope.sortField = 'date';
       $scope.selectedType = 1;
       $scope.import = {
         data : [],
