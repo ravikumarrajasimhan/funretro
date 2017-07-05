@@ -67,6 +67,7 @@ var bundleVendorJS = function() {
 	   'js/vendor/firebaseInitialization.js',
 	   'node_modules/angularfire/dist/angularfire.min.js',
 	   'node_modules/angular-*/**/angular-*.min.js',
+	   'node_modules/core-js/client/shim.min.js',
 	   '!node_modules/**/angular-mocks.js',
 	   'js/vendor/*.js',
 	   'node_modules/ng-dialog/**/ngDialog*.min.js',
