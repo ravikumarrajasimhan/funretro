@@ -654,6 +654,15 @@ angular
 
 'use strict';
 
+angular.module('fireideaz').directive('about', [function() {
+    return {
+      templateUrl : 'components/about.html'
+    };
+  }]
+);
+
+'use strict';
+
 angular.module('fireideaz').directive('boardContext', [function() {
     return {
       restrict: 'E',
