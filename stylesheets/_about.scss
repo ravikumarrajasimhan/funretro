@@ -1,0 +1,65 @@
+.about {
+  padding: 70px 17%;
+  margin: 0 auto;
+  margin-top: 20px;
+  border-top: 3px solid #f3f3f3;
+
+  iframe {
+    margin: 5px;
+  }
+
+  p {
+    margin: 20px 0;
+    font-size: 18px;
+    line-height: 1.8em;
+  }
+
+  a,
+  a:visited,
+  a:active {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #9c27b0;
+  }
+
+  a:nth-child(2) {
+    color: #009688;
+  }
+
+  a:nth-child(3) {
+    color: #e91e63;
+  }
+
+  a:nth-child(4) {
+    color: #ff5722;
+  }
+
+  a:nth-child(5) {
+    color: #2196f3;
+  }
+
+  .donation {
+    width: 200px;
+  }
+
+  img {
+    width: 200px;
+  }
+
+  .me {
+    display: inline-block;
+    width: 100px;
+    margin-left: 20px;
+    border-radius: 50%;
+  }
+
+  .first-p {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  form {
+    display: inline-block;
+    width: 230px;
+  }
+}
