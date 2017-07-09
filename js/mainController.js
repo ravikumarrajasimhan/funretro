@@ -164,6 +164,10 @@ angular
       };
 
       $scope.addNewColumn = function(name) {
+        if(typeof name === 'undefined' || name === '') {
+          return;
+        }
+
         $scope.board.columns.push({
           value: name,
           id: utils.getNextId($scope.board)
@@ -176,6 +180,10 @@ angular
       };
 
       $scope.changeColumnName = function(id, newName) {
+        if(typeof newName === 'undefined' || newName === '') {
+          return;
+        }
+
         $scope.board.columns.map(function(column, index, array) {
           if (column.id === id) {
             array[index].value = newName;

@@ -327,12 +327,70 @@ describe('MainCtrl: ', function() {
       expect(closeAllSpy.called).to.be.true;
     });
 
+    it('should not add a new column to the board when name is empty', function() {
+      var expectedColumns = [
+        {
+          value: 'columnName',
+          id: 1
+        },
+        {
+          value: 'otherColumnName',
+          id: 2
+        }
+      ]
+
+      sinon.stub(utils, 'getNextId', function () { return 3; });
+
+      $scope.addNewColumn('');
+
+      expect($scope.board.columns).to.deep.equal(expectedColumns);
+      expect(setSpy.called).to.be.false;
+      expect(closeAllSpy.called).to.be.false;
+    });
+
+    it('should not add a new column to the board when name is undefined', function() {
+      var expectedColumns = [
+        {
+          value: 'columnName',
+          id: 1
+        },
+        {
+          value: 'otherColumnName',
+          id: 2
+        }
+      ]
+
+      sinon.stub(utils, 'getNextId', function () { return 3; });
+
+      $scope.addNewColumn(undefined);
+
+      expect($scope.board.columns).to.deep.equal(expectedColumns);
+      expect(setSpy.called).to.be.false;
+      expect(closeAllSpy.called).to.be.false;
+    });
+
     it('should change column name', function() {
       $scope.changeColumnName(1, 'new name!');
 
       expect($scope.board.columns[0].value).to.equal('new name!');
       expect(setSpy.called).to.be.true;
       expect(closeAllSpy.called).to.be.true;
+    });
+
+    it('should not change column name for empty string', function() {
+      $scope.changeColumnName(1, '');
+
+      expect($scope.board.columns[0].value).to.equal('columnName');
+      expect(setSpy.called).to.be.false;
+      expect(closeAllSpy.called).to.be.false;
+    });
+
+    it('should not change column name for undefined', function() {
+      $scope.changeColumnName(1, undefined);
+
+      expect($scope.board.columns[0].value).to.equal('columnName');
+      expect(setSpy.called).to.be.false;
+      expect(closeAllSpy.called).to.be.false;
     });
 
     it('should delete last column of the board', function() {
