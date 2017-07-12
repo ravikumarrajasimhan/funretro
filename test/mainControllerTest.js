@@ -38,16 +38,17 @@ describe('MainCtrl: ', function() {
 
   describe('Board', function () {
 
-    it('should return true when sort board order by votes', function() {
+    it('should return multiple fields when sort board order by votes', function() {
       $scope.sortField = 'votes';
 
-      expect($scope.getSortOrder()).to.be.true;
+      expect($scope.getSortFields()[0]).to.equal('-votes');
+      expect($scope.getSortFields()[1]).to.equal('date_created');
     });
 
-    it('should return false when sort board order is not by votes', function() {
+    it('should return date_created when sort board order is not by votes', function() {
       $scope.sortField = 'something else';
 
-      expect($scope.getSortOrder()).to.be.false;
+      expect($scope.getSortFields()).to.equal('date_created');
     });
 
     it('should change the board context', function() {
