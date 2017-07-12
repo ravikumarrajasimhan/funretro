@@ -151,7 +151,7 @@ angular
         var messagesRef = firebaseService.getMessagesRef($scope.userId);
         var board = firebaseService.getBoardRef($scope.userId);
 
-        board.on('value', function(board) {
+        board.once('value', function(board) {
           if (board.val() === null) {
             window.location.hash = '';
             location.reload();
@@ -161,6 +161,9 @@ angular
           $scope.maxVotes = board.val().max_votes ? board.val().max_votes : 6;
           $scope.boardId = $rootScope.boardId = board.val().boardId;
           $scope.boardContext = $rootScope.boardContext = board.val().boardContext;
+        }, function() {
+          window.location.hash = '';
+          location.reload();
         });
 
         $scope.boardRef = board;
@@ -267,6 +270,10 @@ angular
       };
 
       $scope.addNewColumn = function(name) {
+        if(typeof name === 'undefined' || name === '') {
+          return;
+        }
+
         $scope.board.columns.push({
           value: name,
           id: utils.getNextId($scope.board)
@@ -279,6 +286,10 @@ angular
       };
 
       $scope.changeColumnName = function(id, newName) {
+        if(typeof newName === 'undefined' || newName === '') {
+          return;
+        }
+
         $scope.board.columns.map(function(column, index, array) {
           if (column.id === id) {
             array[index].value = newName;
@@ -331,6 +342,15 @@ angular
         });
 
         modalService.closeAll();
+      };
+
+      $scope.deleteBoard = function() {
+        $scope.deleteCards();
+        $scope.boardRef.ref.remove();
+
+        modalService.closeAll();
+        window.location.hash = '';
+        location.reload();
       };
 
       $scope.getBoardText = function() {
@@ -791,6 +811,13 @@ angular
         ngDialog.open({
           template: 'copyBoard',
           className: 'ngdialog-theme-plain bigDialog',
+          scope: scope
+        });
+      },
+      openDeleteBoard: function(scope) {
+        ngDialog.open({
+          template: 'deleteBoard',
+          className: 'ngdialog-theme-plain danger',
           scope: scope
         });
       },

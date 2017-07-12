@@ -20,7 +20,7 @@
           <div class="editing-column" ng-show="editing">
               <input id="new_name_{{ type.id }}" ng-model="newName"></input>
               <div>
-                <button ng-click="changeColumnName(type.id, newName)" class="success-button">Save</button>
+                <button ng-click="changeColumnName(type.id, newName);editing=false" class="success-button">Save</button>
                 <a class="blue" ng-click="editing=false;">Cancel</a>
               </div>
           </div>
