@@ -183,8 +183,8 @@ angular
         return parseInt($scope.selectedType) === parseInt(type);
       };
 
-      $scope.getSortOrder = function() {
-        return $scope.sortField === 'votes' ? true : false;
+      $scope.getSortFields = function() {
+        return $scope.sortField === 'votes' ? ['-votes', 'date_created'] : 'date_created';
       };
 
       $scope.saveMessage = function(message) {
@@ -365,8 +365,7 @@ angular
               clipboard += '<br /><strong>' + column.value + '</strong><br />';
             }
             var filteredArray = $filter('orderBy')($scope.messages,
-              $scope.sortField,
-              $scope.getSortOrder());
+              $scope.getSortFields());
 
             $(filteredArray).each(function(index2, message) {
               if (message.type.id === column.id) {
@@ -525,14 +524,10 @@ angular
   .module('fireideaz')
   .service('Utils', [function () {
     function createUserId() {
-      var text = '';
-      var possible = 'abcdefghijklmnopqrstuvwxyz0123456789';
-
-      for( var i=0; i < 7; i++ ) {
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-      }
-
-      return text;
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
+            return v.toString(16);
+        });
     }
 
     function focusElement(id) {
