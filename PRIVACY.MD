@@ -16,6 +16,8 @@ A board can only be accessed by people with the board URL, that provides some le
 
 We delete all data that is older than 3 months. But we recommend you to export and delete your data after using Fun Retro to ensure it's 100% secure.
 
+The security of your information is important to us, but remember that no method of transmission over the Internet is 100% secure. While we strive to protect your information, we cannot guarantee its absolute security.
+
 You have the option to download the application code, create your own Firebase account and host it in your internal network.
 
 ____________________________________________________________________________________________________________________________________
