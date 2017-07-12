@@ -13,7 +13,7 @@ angular
         name: ''
       };
       $scope.userId = $window.location.hash.substring(1) || '';
-      $scope.sortField = 'date';
+      $scope.sortField = 'date_created';
       $scope.selectedType = 1;
       $scope.import = {
         data : [],
@@ -58,6 +58,7 @@ angular
           $scope.maxVotes = board.val().max_votes ? board.val().max_votes : 6;
           $scope.boardId = $rootScope.boardId = board.val().boardId;
           $scope.boardContext = $rootScope.boardContext = board.val().boardContext;
+          $scope.loading = false;
         }, function() {
           window.location.hash = '';
           location.reload();
@@ -67,7 +68,6 @@ angular
         $scope.messagesRef = messagesRef;
         $scope.userUid = userData.uid;
         $scope.messages = firebaseService.newFirebaseArray(messagesRef);
-        $scope.loading = false;
       }
 
       if ($scope.userId !== '') {
@@ -229,6 +229,7 @@ angular
             id: type.id
           },
           date: firebaseService.getServerTimestamp(),
+          date_created: firebaseService.getServerTimestamp(),
           votes: 0
         }).then(addMessageCallback);
       };
