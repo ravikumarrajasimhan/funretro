@@ -48,7 +48,7 @@ angular
         var messagesRef = firebaseService.getMessagesRef($scope.userId);
         var board = firebaseService.getBoardRef($scope.userId);
 
-        board.on('value', function(board) {
+        board.once('value', function(board) {
           if (board.val() === null) {
             window.location.hash = '';
             location.reload();
@@ -58,6 +58,9 @@ angular
           $scope.maxVotes = board.val().max_votes ? board.val().max_votes : 6;
           $scope.boardId = $rootScope.boardId = board.val().boardId;
           $scope.boardContext = $rootScope.boardContext = board.val().boardContext;
+        }, function(error) {
+          window.location.hash = '';
+          location.reload();
         });
 
         $scope.boardRef = board;
@@ -236,6 +239,15 @@ angular
         });
 
         modalService.closeAll();
+      };
+
+      $scope.deleteBoard = function() {
+        $scope.deleteCards();
+        $scope.boardRef.ref.remove();
+
+        modalService.closeAll();
+        window.location.hash = '';
+        location.reload();
       };
 
       $scope.getBoardText = function() {

@@ -55,6 +55,13 @@ angular
           scope: scope
         });
       },
+      openDeleteBoard: function(scope) {
+        ngDialog.open({
+          template: 'deleteBoard',
+          className: 'ngdialog-theme-plain danger',
+          scope: scope
+        });
+      },
       openDeleteCards: function(scope) {
         ngDialog.open({
           template: 'deleteCards',
