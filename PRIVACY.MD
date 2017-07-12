@@ -14,7 +14,7 @@ We use a third party service called Firebase to store all data.
 
 We delete all data that is older than 3 months. But we recommend you to export and delete your data after using Fun Retro to ensure it's 100% secure.
 
-A board can only be accessed by people with the board link, that provides some level of security but it's not 100% secure.
+A board can only be accessed by people with the board URL, that provides some level of security however, if someone you don't know discovers the URL, they'll also be able to see your board.
 
 The security of your information is important to us, but remember that no method of transmission over the Internet is 100% secure. While we strive to protect your information, we cannot guarantee its absolute security.
 
