@@ -48,7 +48,7 @@ angular
         var messagesRef = firebaseService.getMessagesRef($scope.userId);
         var board = firebaseService.getBoardRef($scope.userId);
 
-        board.once('value', function(board) {
+        board.on('value', function(board) {
           if (board.val() === null) {
             window.location.hash = '';
             location.reload();
