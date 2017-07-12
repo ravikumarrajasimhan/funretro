@@ -58,7 +58,7 @@ angular
           $scope.maxVotes = board.val().max_votes ? board.val().max_votes : 6;
           $scope.boardId = $rootScope.boardId = board.val().boardId;
           $scope.boardContext = $rootScope.boardContext = board.val().boardContext;
-        }, function(error) {
+        }, function() {
           window.location.hash = '';
           location.reload();
         });
