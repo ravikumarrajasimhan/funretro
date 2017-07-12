@@ -18,7 +18,7 @@ A board can only be accessed by people with the board link, that provides some l
 
 The security of your information is important to us, but remember that no method of transmission over the Internet is 100% secure. While we strive to protect your information, we cannot guarantee its absolute security.
 
-You have the option to download the application code, create your Firebase account and host it on your internal network.
+You have the option to download the application code, create your Firebase account and host it in your internal network.
 
 ____________________________________________________________________________________________________________________________________
 Changes to our Privacy Policy
