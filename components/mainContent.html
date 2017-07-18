@@ -51,7 +51,7 @@
               <div class="back">
                   <div class="message-body">
                       <div class="editing">
-                          <textarea ng-model="message.text" ng-change="messages.$save(message)" aria-label="Message text entry"></textarea>
+                          <textarea data-emoji="true" ng-model="message.text" ng-change="messages.$save(message)" aria-label="Message text entry"></textarea>
                           <a class="delete-link" href="javascript:void(0)" ng-click="modalService.openDeleteCard(this)" aria-label="Delete message"><i class="fa fa-trash"></i></a>
                           <button ng-click="isEditing = false;saveMessage(message);">DONE</button>
                       </div>

@@ -184,6 +184,7 @@ angular
       function addMessageCallback(message) {
         var id = message.key;
         angular.element($('#' + id)).scope().isEditing = true;
+        window.EmojiPicker.init()
         $('#' + id).find('textarea').focus();
       }
 
