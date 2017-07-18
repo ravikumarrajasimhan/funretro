@@ -117,7 +117,7 @@
     "selector-pseudo-element-no-unknown": true,
     "selector-type-case": "lower",
     "selector-type-no-unknown": true,
-    "selector-no-id": true,
+    "selector-max-id": 0,
     "shorthand-property-no-redundant-values": true,
     "string-no-newline": true,
     "unit-case": "lower",
