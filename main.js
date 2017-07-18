@@ -162,9 +162,6 @@ angular
           $scope.boardId = $rootScope.boardId = board.val().boardId;
           $scope.boardContext = $rootScope.boardContext = board.val().boardContext;
           $scope.loading = false;
-        }, function() {
-          window.location.hash = '';
-          location.reload();
         });
 
         $scope.boardRef = board;
