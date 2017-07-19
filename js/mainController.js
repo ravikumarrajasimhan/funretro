@@ -160,6 +160,7 @@ angular
         $scope.boardRef.update({
           boardId: newBoardName
         });
+
         modalService.closeAll();
       };
 
@@ -208,6 +209,7 @@ angular
 
       $scope.deleteMessage = function(message) {
         $scope.messages.$remove(message);
+
         modalService.closeAll();
       };
 
@@ -331,20 +333,20 @@ angular
         $scope.import.error = '';
       };
 
-      $scope.submitOnEnter = function(event, method, data){
+      $scope.submitOnEnter = function(event, method, data) {
         if (event.keyCode === 13) {
-          switch (method){
+          switch (method) {
             case 'createNewBoard':
-                if (!$scope.isBoardNameInvalid()) {
-                  $scope.createNewBoard();
-                }
-                break;
+              if (!$scope.isBoardNameInvalid()) {
+                $scope.createNewBoard();
+              }
+              break;
             case 'addNewColumn':
-                if (data) {
-                  $scope.addNewColumn(data);
-                  $scope.newColumn = '';
-                }
-                break;
+              if (data) {
+                $scope.addNewColumn(data);
+                $scope.newColumn = '';
+              }
+              break;
           }
         }
       };
