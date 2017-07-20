@@ -314,7 +314,7 @@ angular
                 votes: 0});
              }
            }
-         };
+         }
 
          modalService.closeAll();
        };
