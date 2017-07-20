@@ -20,14 +20,6 @@ angular
         mapping : []
       };
 
-      $scope.closeAllModals = function(){
-        modalService.closeAll();
-      };
-
-      $scope.getNumberOfVotesOnMessage = function(userId, messageId) {
-        return new Array(voteService.returnNumberOfVotesOnMessage(userId, messageId));
-      };
-
       $scope.droppedEvent = function(dragEl, dropEl) {
         var drag = $('#' + dragEl);
         var drop = $('#' + dropEl);
@@ -277,14 +269,15 @@ angular
       $scope.submitImportFile = function (file) {
         $scope.cleanImportData ();
         if (file) {
-          if (file.size === 0){
+          if (file.size === 0) {
             $scope.import.error = 'The file you are trying to import seems to be  empty';
             return;
           }
+
           /* globals Papa */
           Papa.parse(file, {
             complete: function(results) {
-              if (results.data.length > 0){
+              if (results.data.length > 0) {
                 $scope.import.data = results.data;
                 $scope.board.columns.forEach (function (column){
                   $scope.import.mapping.push({mapFrom:'-1', mapTo:column.id, name: column.value});
@@ -301,18 +294,16 @@ angular
        $scope.importMessages = function (){
          var data = $scope.import.data;
          var mapping = $scope.import.mapping;
-         for (var importIndex = 1; importIndex < data.length; importIndex++ )
-         {
-           for (var mappingIndex = 0; mappingIndex < mapping.length; mappingIndex++)
-           {
+
+         for (var importIndex = 1; importIndex < data.length; importIndex++) {
+           for (var mappingIndex = 0; mappingIndex < mapping.length; mappingIndex++) {
              var mapFrom = mapping[mappingIndex].mapFrom;
              var mapTo = mapping[mappingIndex].mapTo;
              if (mapFrom === -1)
               continue;
 
              var cardText = data[importIndex][mapFrom];
-             if (cardText)
-             {
+             if (cardText) {
                 $scope.messages.$add({
                 text: cardText,
                 user_id: $scope.userUid,
@@ -323,8 +314,9 @@ angular
                 votes: 0});
              }
            }
-         }
-         $scope.closeAllModals();
+         };
+
+         modalService.closeAll();
        };
 
       $scope.cleanImportData = function (){
@@ -340,12 +332,14 @@ angular
               if (!$scope.isBoardNameInvalid()) {
                 $scope.createNewBoard();
               }
+
               break;
             case 'addNewColumn':
               if (data) {
                 $scope.addNewColumn(data);
                 $scope.newColumn = '';
               }
+
               break;
           }
         }

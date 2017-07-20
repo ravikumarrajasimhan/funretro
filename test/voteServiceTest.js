@@ -43,6 +43,22 @@ describe('VoteService: ', function() {
   })
 
   describe('returnNumberOfVotesOnMessage', function() {
+    it('should return array containing 1 element for each vote on a message', function() {
+      sinon.stub(voteService, 'returnNumberOfVotesOnMessage', function() { return 3 });
+
+      var array = voteService.getNumberOfVotesOnMessage('userId', 'abc');
+
+      expect(array.length).to.equal(3);
+    });
+
+    it('should return empty array', function() {
+      sinon.stub(voteService, 'returnNumberOfVotesOnMessage', function() { return 0 });
+
+      var array = voteService.getNumberOfVotesOnMessage('userId', 'abc');
+
+      expect(array.length).to.equal(0);
+    });
+
     it('should return number of votes', function() {
       sinon.stub(localStorage, 'getItem', function () { return '{"abc":1,"abd":3,"sef":2}'; });
       expect(voteService.returnNumberOfVotesOnMessage('userId', 'abc')).to.equal(1);

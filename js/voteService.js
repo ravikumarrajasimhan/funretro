@@ -5,6 +5,16 @@ angular
   .service('VoteService', [function () {
     var voteService = {};
 
+    voteService.getNumberOfVotesOnMessage = function(userId, messageId) {
+      return new Array(this.returnNumberOfVotesOnMessage(userId, messageId));
+    };
+
+    voteService.returnNumberOfVotesOnMessage = function(userId, messageKey) {
+      var userVotes = localStorage.getItem(userId) ? JSON.parse(localStorage.getItem(userId)) : {};
+
+      return userVotes[messageKey] ? userVotes[messageKey] : 0;
+    };
+
     voteService.returnNumberOfVotes = function(userId, messagesIds) {
       var userVotes = localStorage.getItem(userId) ? JSON.parse(localStorage.getItem(userId)) : {};
 
@@ -19,12 +29,6 @@ angular
 
     voteService.extractMessageIds = function(messages) {
       return messages ? messages.map(function(message) { return message.$id; }) : [];
-    };
-
-    voteService.returnNumberOfVotesOnMessage = function(userId, messageKey) {
-      var userVotes = localStorage.getItem(userId) ? JSON.parse(localStorage.getItem(userId)) : {};
-
-      return userVotes[messageKey] ? userVotes[messageKey] : 0;
     };
 
     voteService.remainingVotes = function(userId, maxVotes, messages) {
