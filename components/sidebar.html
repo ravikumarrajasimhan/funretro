@@ -1,0 +1,14 @@
+<div ng-click="sidebarOpened = false;" class="sidebar-overlay" ng-class="{'sidebar-overlay-show': sidebarOpened}"></div>
+<div class="sidebar" ng-class="{'sidebar-show': sidebarOpened}">
+  <div class="sidebar-header">
+    <a href="javascript:void(0)" ng-click="sidebarOpened = false;">
+      <i class="fa fa-times"></i>
+    </a>
+  </div>
+  <div class="sidebar-body">
+    <button id="import-board" ng-click="modalService.openImportBoard(this)">Import CSV</button>
+    <button id="copy-board" ng-click="modalService.openCopyBoard(this)">Export board</button>
+    <button class="delete-button" ng-click="modalService.openDeleteCards(this)">Delete cards</button>
+    <button class="delete-button" ng-click="modalService.openDeleteBoard(this)">Delete board</button>
+  </div>
+</div>
