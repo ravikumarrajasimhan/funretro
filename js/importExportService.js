@@ -51,12 +51,37 @@ angular
             clipboard += '<br /><strong>' + column.value + '</strong><br />';
           }
 
-          var filteredArray = $filter('orderBy')(messages,
-            importExportService.getSortFields(sortField));
+          var filteredArray = $filter('orderBy')(messages, importExportService.getSortFields(sortField));
 
           $(filteredArray).each(function(index2, message) {
             if (message.type.id === column.id) {
               clipboard += '- ' + message.text + ' (' + message.votes + ' votes) <br />';
+            }
+          });
+        });
+
+        return clipboard;
+      }
+
+      return '';
+    };
+
+    importExportService.getBoardPureText = function(board, messages, sortField) {
+      if (board) {
+        var clipboard = '';
+
+        $(board.columns).each(function(index, column) {
+          if (index === 0) {
+            clipboard += column.value + '\n';
+          } else {
+            clipboard += '\n' + column.value + '\n';
+          }
+
+          var filteredArray = $filter('orderBy')(messages, importExportService.getSortFields(sortField));
+
+          $(filteredArray).each(function(index2, message) {
+            if (message.type.id === column.id) {
+              clipboard += '- ' + message.text + ' (' + message.votes + ' votes) \n';
             }
           });
         });

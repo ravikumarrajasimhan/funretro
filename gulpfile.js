@@ -72,7 +72,8 @@ var bundleVendorJS = function() {
 	   'js/vendor/*.js',
 	   'node_modules/ng-dialog/**/ngDialog*.min.js',
      'node_modules/ng-file-upload/**/ng-file-upload-all.min.js',
-     'node_modules/papaparse/papaparse.min.js'])
+     'node_modules/papaparse/papaparse.min.js',
+     'node_modules/clipboard/dist/clipboard.min.js'])
       .pipe(concat('vendor.js'))
       .pipe(gulp.dest('dist'))
       .pipe(uglify())

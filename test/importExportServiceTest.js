@@ -6,6 +6,18 @@ describe('ImportExportService: ', function() {
       modalService,
       $filter;
 
+  var board = {
+    columns: [{
+        value: 'columnName',
+        id: 1
+      },
+      {
+        value: 'otherColumnName',
+        id: 2
+      }
+    ]
+  };
+
   beforeEach(angular.mock.module('fireideaz'));
 
   beforeEach(inject(function($injector){
@@ -20,6 +32,38 @@ describe('ImportExportService: ', function() {
     });
   }));
 
+  describe('Export', function() {
+    var messages = [
+      {text:'C3R1', type: {id: 1}, votes: 0},
+      {text:'C3R2', type: {id: 2}, votes: 0},
+      {text:'C3R3', type: {id: 2}, votes: 0}
+    ];
+
+    it('should get board text', function() {
+      var boardText = importExportService.getBoardText(board, messages, 'votes');
+
+      expect(boardText).to.equal('<strong>columnName</strong><br />- C3R1 (0 votes) <br /><br /><strong>otherColumnName</strong><br />- C3R2 (0 votes) <br />- C3R3 (0 votes) <br />');
+    });
+
+    it('should return empty board text', function() {
+      var boardText = importExportService.getBoardText(undefined, messages, 'votes');
+
+      expect(boardText).to.equal('');
+    });
+
+    it('should get pure board text', function() {
+      var boardText = importExportService.getBoardPureText(board, messages, 'votes');
+
+      expect(boardText).to.equal('columnName\n- C3R1 (0 votes) \n\notherColumnName\n- C3R2 (0 votes) \n- C3R3 (0 votes) \n');
+    });
+
+    it('should return empty board text', function() {
+      var boardText = importExportService.getBoardPureText(undefined, messages, 'votes');
+
+      expect(boardText).to.equal('');
+    });
+  });
+
   describe('Import', function() {
     var inputFile = {
       lastModified: 1491246451076,
@@ -32,18 +76,6 @@ describe('ImportExportService: ', function() {
     var importObject = {
       mapping: [],
       data: []
-    };
-
-    var board = {
-      columns: [{
-          value: 'columnName',
-          id: 1
-        },
-        {
-          value: 'otherColumnName',
-          id: 2
-        }
-      ]
     };
 
     var scope = {

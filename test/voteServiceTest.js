@@ -7,9 +7,7 @@ describe('VoteService: ', function() {
       voteService;
 
   beforeEach(angular.mock.module('fireideaz'));
-
   beforeEach(inject(function($injector){
-
     $rootScope = $injector.get('$rootScope');
     $scope = $rootScope.$new();
     inject(function($injector) {

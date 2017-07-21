@@ -47,6 +47,7 @@
     "angular-aria": "^1.5.5",
     "angular-sanitize": "^1.5.5",
     "angularfire": "^2.3.0",
+    "clipboard": "^1.7.1",
     "core-js": "^2.4.1",
     "express": "^4.13.3",
     "font-awesome": "^4.6.1",

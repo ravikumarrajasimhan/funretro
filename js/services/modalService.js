@@ -49,6 +49,8 @@ angular
         });
       },
       openCopyBoard: function(scope) {
+        /* globals Clipboard */
+        new Clipboard('.import-btn');
         ngDialog.open({
           template: 'copyBoard',
           className: 'ngdialog-theme-plain bigDialog',
