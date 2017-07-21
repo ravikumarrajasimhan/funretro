@@ -8,7 +8,7 @@ angular
       $scope.modalService = modalService;
       $scope.userId = $window.location.hash.substring(1);
 
-      $scope.droppedEvent = function(dragEl, dropEl) {
+      $scope.dropCardOnCard = function(dragEl, dropEl) {
         if(dragEl !== dropEl) {
           $scope.dragEl = dragEl;
           $scope.dropEl = dropEl;

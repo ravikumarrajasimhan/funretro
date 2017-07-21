@@ -268,6 +268,7 @@ angular
 
       $scope.submitImportFile = function (file) {
         $scope.cleanImportData ();
+
         if (file) {
           if (file.size === 0) {
             $scope.import.error = 'The file you are trying to import seems to be  empty';
@@ -299,10 +300,13 @@ angular
            for (var mappingIndex = 0; mappingIndex < mapping.length; mappingIndex++) {
              var mapFrom = mapping[mappingIndex].mapFrom;
              var mapTo = mapping[mappingIndex].mapTo;
-             if (mapFrom === -1)
+
+             if (mapFrom === -1) {
               continue;
+            }
 
              var cardText = data[importIndex][mapFrom];
+
              if (cardText) {
                 $scope.messages.$add({
                 text: cardText,

@@ -26,7 +26,7 @@
           </div>
           <li ng-controller="MessageCtrl" id="{{ message.$id }}" enter-click class="message" ng-class="{'flip': isEditing}" ng-repeat="message in messages | filter: {type: {id: type.id}, text: filterMessage} | orderBy: getSortFields()">
             {{filterMessage}}
-            <div messageId="{{ message.$id }}" x-lvl-draggable="true" x-lvl-drop-target="true" x-on-drop="droppedEvent(dragEl, dropEl)">
+            <div messageId="{{ message.$id }}" x-lvl-draggable="true" x-lvl-drop-target="true" x-on-drop="dropCardOnCard(dragEl, dropEl)">
               <div class="front" ng-class="{'filter': message.creating}">
                   <div class="message-body">
                       <div class="text">{{message.text}}</div>
