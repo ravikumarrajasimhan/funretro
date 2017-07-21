@@ -44,7 +44,7 @@ angular
         scope.cleanImportData();
         ngDialog.open({
           template: 'importCards',
-          className: 'ngdialog-theme-plain',
+          className: 'ngdialog-theme-plain bigDialog',
           scope: scope
         });
       },

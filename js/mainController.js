@@ -218,93 +218,6 @@ angular
         location.reload();
       };
 
-      $scope.getBoardText = function() {
-        if ($scope.board) {
-          var clipboard = '';
-
-          $($scope.board.columns).each(function(index, column) {
-            if (index === 0) {
-              clipboard += '<strong>' + column.value + '</strong><br />';
-            } else {
-              clipboard += '<br /><strong>' + column.value + '</strong><br />';
-            }
-            var filteredArray = $filter('orderBy')($scope.messages,
-              $scope.getSortFields());
-
-            $(filteredArray).each(function(index2, message) {
-              if (message.type.id === column.id) {
-                clipboard += '- ' + message.text + ' (' + message.votes + ' votes) <br />';
-              }
-            });
-          });
-
-          return clipboard;
-        } else return '';
-      };
-
-      $scope.submitImportFile = function (file) {
-        $scope.cleanImportData ();
-
-        if (file) {
-          if (file.size === 0) {
-            $scope.import.error = 'The file you are trying to import seems to be  empty';
-            return;
-          }
-
-          /* globals Papa */
-          Papa.parse(file, {
-            complete: function(results) {
-              if (results.data.length > 0) {
-                $scope.import.data = results.data;
-                $scope.board.columns.forEach (function (column){
-                  $scope.import.mapping.push({mapFrom:'-1', mapTo:column.id, name: column.value});
-                });
-                if (results.errors.length > 0)
-                   $scope.import.error = results.errors[0].message;
-                $scope.$apply();
-              }
-            }
-          });
-        }
-      };
-
-       $scope.importMessages = function (){
-         var data = $scope.import.data;
-         var mapping = $scope.import.mapping;
-
-         for (var importIndex = 1; importIndex < data.length; importIndex++) {
-           for (var mappingIndex = 0; mappingIndex < mapping.length; mappingIndex++) {
-             var mapFrom = mapping[mappingIndex].mapFrom;
-             var mapTo = mapping[mappingIndex].mapTo;
-
-             if (mapFrom === -1) {
-              continue;
-            }
-
-             var cardText = data[importIndex][mapFrom];
-
-             if (cardText) {
-                $scope.messages.$add({
-                text: cardText,
-                user_id: $scope.userUid,
-                type: {
-                  id: mapTo
-                },
-                date: firebaseService.getServerTimestamp(),
-                votes: 0});
-             }
-           }
-         }
-
-         modalService.closeAll();
-       };
-
-      $scope.cleanImportData = function (){
-        $scope.import.data = [];
-        $scope.import.mapping = [];
-        $scope.import.error = '';
-      };
-
       $scope.submitOnEnter = function(event, method, data) {
         if (event.keyCode === 13) {
           switch (method) {
@@ -323,6 +236,12 @@ angular
               break;
           }
         }
+      };
+
+      $scope.cleanImportData = function () {
+        $scope.import.data = [];
+        $scope.import.mapping = [];
+        $scope.import.error = '';
       };
 
       angular.element($window).bind('hashchange', function() {
