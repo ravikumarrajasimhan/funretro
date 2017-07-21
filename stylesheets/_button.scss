@@ -1,7 +1,6 @@
 button,
 .button {
   width: auto;
-  min-width: 80px;
   padding: 5px 8px;
   margin-left: 10px;
   overflow: hidden;
@@ -14,6 +13,7 @@ button,
   border-radius: 2px;
 
   &.first {
+    min-width: 80px;
     background: $purple;
     border-bottom: 2px solid $light-purple;
   }
