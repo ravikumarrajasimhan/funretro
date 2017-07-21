@@ -6,6 +6,7 @@
   z-index: 3;
   display: flex;
   width: 19rem;
+  padding: 10px;
   margin-right: -21rem;
   flex-direction: column;
   background: white;
@@ -34,6 +35,9 @@
     height: 40px;
 
     i {
+      position: relative;
+      top: -3px;
+      right: -9px;
       float: right;
       padding: 10px;
       font-size: 1.2em;
@@ -46,6 +50,7 @@
       width: 100%;
       padding: 10px;
       margin-bottom: 15px;
+      margin-left: 0;
       font-size: 1em;
     }
   }
