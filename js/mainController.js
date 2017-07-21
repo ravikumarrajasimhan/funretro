@@ -78,30 +78,6 @@ angular
         $scope.messages.$save(message);
       };
 
-      $scope.vote = function(messageKey, votes) {
-        if(voteService.isAbleToVote($scope.userId, $scope.maxVotes, $scope.messages)) {
-          $scope.messagesRef.child(messageKey).update({
-            votes: votes + 1,
-            date: firebaseService.getServerTimestamp()
-          });
-
-          voteService.increaseMessageVotes($scope.userId, messageKey);
-        }
-      };
-
-      $scope.unvote = function(messageKey, votes) {
-        if(voteService.canUnvoteMessage($scope.userId, messageKey)) {
-          var newVotes = (votes >= 1) ? votes - 1 : 0;
-
-          $scope.messagesRef.child(messageKey).update({
-            votes: newVotes,
-            date: firebaseService.getServerTimestamp()
-          });
-
-          voteService.decreaseMessageVotes($scope.userId, messageKey);
-        }
-      };
-
       function redirectToBoard() {
         window.location.href = window.location.origin +
           window.location.pathname + '#' + $scope.userId;
