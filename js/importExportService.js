@@ -147,8 +147,8 @@ angular
             var parsedText = pdf.splitTextToSize('- ' + message.text + ' (' + message.votes + ' votes)', 180);
             var parsedHeight = pdf.getTextDimensions(parsedText).h;
             pdf.text(parsedText, 10, currentHeight);
-            currentHeight = currentHeight + parsedHeight - 10;
-            
+            currentHeight = currentHeight + parsedHeight;
+
             if (currentHeight > pdf.internal.pageSize.height - 10) {
               pdf.addPage();
               currentHeight = 10;
