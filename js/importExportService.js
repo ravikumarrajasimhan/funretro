@@ -123,5 +123,42 @@ angular
       }
     };
 
+    importExportService.generatePdf = function(board, messages, sortField) {
+      /* globals jsPDF */
+      var pdf = new jsPDF();
+      var currentHeight = 10;
+
+      $(board.columns).each(function(index, column) {
+        if (currentHeight > pdf.internal.pageSize.height - 10) {
+          pdf.addPage();
+          currentHeight = 10;
+        }
+
+        pdf.setFontType('bold');
+        currentHeight = currentHeight + 5;
+        pdf.text(column.value, 10, currentHeight);
+        currentHeight = currentHeight + 10;
+        pdf.setFontType('normal');
+
+        var filteredArray = $filter('orderBy')(messages, importExportService.getSortFields(sortField));
+
+        $(filteredArray).each(function(index2, message) {
+          if (message.type.id === column.id) {
+            var parsedText = pdf.splitTextToSize('- ' + message.text + ' (' + message.votes + ' votes)', 180);
+            var parsedHeight = pdf.getTextDimensions(parsedText).h;
+            pdf.text(parsedText, 10, currentHeight);
+            currentHeight = currentHeight + parsedHeight - 10;
+            
+            if (currentHeight > pdf.internal.pageSize.height - 10) {
+              pdf.addPage();
+              currentHeight = 10;
+            }
+          }
+        });
+      });
+
+      pdf.save(board.boardId + '.pdf');
+    };
+
     return importExportService;
   }]);
