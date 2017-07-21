@@ -9,9 +9,8 @@
   margin-right: -21rem;
   flex-direction: column;
   background: white;
-  box-shadow: 0 2px 4px -1px rgba(0,0,0,0.2), 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12);
-  -webkit-transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-          transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 
   &-overlay {
     position: fixed;
@@ -20,10 +19,7 @@
     bottom: 0;
     left: 0;
     display: none;
-    background: rgba(0,0,0,0.4);
-    -webkit-backface-visibility: hidden;
-    -webkit-animation: ngdialog-fadein 0.5s;
-            animation: ngdialog-fadein 0.5s;
+    background: rgba(0, 0, 0, 0.4);
 
     &-show {
       display: block;
