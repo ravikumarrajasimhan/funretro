@@ -1,7 +1,7 @@
-<div ng-click="modalService.toggleSidebar()" class="sidebar-overlay"></div>
-<div class="sidebar">
+<div ng-click="sidebarOpened = false;" class="sidebar-overlay" ng-class="{'sidebar-overlay-show': sidebarOpened}"></div>
+<div class="sidebar" ng-class="{'sidebar-show': sidebarOpened}">
   <div class="sidebar-header">
-    <a href="javascript:void(0)" ng-click="modalService.toggleSidebar()">
+    <a href="javascript:void(0)" ng-click="sidebarOpened = false;">
       <i class="fa fa-times"></i>
     </a>
   </div>

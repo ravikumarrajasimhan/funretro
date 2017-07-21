@@ -78,10 +78,6 @@ angular
           scope: scope
         });
       },
-      toggleSidebar: function() {
-        $('.sidebar').toggleClass('sidebar-show');
-        $('.sidebar-overlay').toggleClass('sidebar-overlay-show');
-      },
       closeAll: function() {
         ngDialog.closeAll();
       }
