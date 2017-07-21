@@ -4,8 +4,8 @@ angular
   .module('fireideaz')
 
   .controller('MainCtrl', ['$scope', '$filter', '$window', 'Utils', 'Auth',
-  '$rootScope', 'FirebaseService', 'ModalService', 'VoteService',
-    function ($scope, $filter, $window, utils, auth, $rootScope, firebaseService, modalService, voteService) {
+  '$rootScope', 'FirebaseService', 'ModalService',
+    function ($scope, $filter, $window, utils, auth, $rootScope, firebaseService, modalService) {
       $scope.loading = true;
       $scope.messageTypes = utils.messageTypes;
       $scope.utils = utils;
