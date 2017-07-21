@@ -40,7 +40,7 @@
                         <li ng-repeat="votes in voteService.getNumberOfVotesOnMessage(userId, message.$id) track by $index"></li>
                       </ul>
                       <strong class="vote-area">
-                        <a ng-class="{'disabled': !voteService.isAbleToVote(userId, maxVotes, messages)}" href="javascript:void(0)" ng-click="voteService.vote(userId, maxVotes,messages, message.$id, message.votes)">
+                        <a ng-class="{'disabled': !voteService.isAbleToVote(userId, maxVotes, messages)}" href="javascript:void(0)" ng-click="voteService.vote(userId, maxVotes, messages, message.$id, message.votes)">
                             <i class="fa fa-thumbs-o-up"></i>
                         </a>
                         {{ message.votes }}
