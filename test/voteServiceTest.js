@@ -3,6 +3,7 @@ describe('VoteService: ', function() {
       $scope,
       $controller,
       $firebaseArray,
+      firebaseService,
       voteService;
 
   beforeEach(angular.mock.module('fireideaz'));
@@ -13,6 +14,7 @@ describe('VoteService: ', function() {
     $scope = $rootScope.$new();
     inject(function($injector) {
       voteService = $injector.get('VoteService');
+      firebaseService = $injector.get('FirebaseService');
     });
   }));
 
@@ -257,5 +259,23 @@ describe('VoteService: ', function() {
       expect(voteService.extractMessageIds(original)[1]).to.equal('124')
       expect(voteService.extractMessageIds(original)[2]).to.equal('125')
     });
+  })
+
+  describe('vote limits', function() {
+    it('is able to increment the maximum number of votes allowed per user', function() {
+      var updateSpy = sinon.spy();
+      sinon.stub(firebaseService, 'getBoardRef', function () { return {update: updateSpy}; });
+
+      voteService.incrementMaxVotes(123, 1);
+      expect(updateSpy.calledWith({max_votes: 2})).to.be.true;
+    })
+
+    it('is able to decrement the maximum number of votes allowed per user', function() {
+      var updateSpy = sinon.spy();
+      sinon.stub(firebaseService, 'getBoardRef', function () { return {update: updateSpy}; });
+
+      voteService.decrementMaxVotes(123, 3);
+      expect(updateSpy.calledWith({max_votes: 2})).to.be.true;
+    })
   })
 });

@@ -2,7 +2,7 @@
 
 angular
   .module('fireideaz')
-  .service('VoteService', [function () {
+  .service('VoteService', ['FirebaseService', function (firebaseService) {
     var voteService = {};
 
     voteService.getNumberOfVotesOnMessage = function(userId, messageId) {
@@ -89,6 +89,22 @@ angular
 
     voteService.isAbleToVote = function(userId, maxVotes, messages) {
       return voteService.remainingVotes(userId, maxVotes, messages) > 0;
+    };
+
+    voteService.incrementMaxVotes = function(userId, maxVotes) {
+      var boardRef = firebaseService.getBoardRef(userId);
+
+      boardRef.update({
+        max_votes: maxVotes + 1
+      });
+    };
+
+    voteService.decrementMaxVotes = function(userId, maxVotes) {
+      var boardRef = firebaseService.getBoardRef(userId);
+
+      boardRef.update({
+        max_votes: Math.min(Math.max(maxVotes - 1, 1), 100)
+      });
     };
 
     return voteService;

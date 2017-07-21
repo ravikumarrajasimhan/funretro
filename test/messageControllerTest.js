@@ -32,7 +32,7 @@ describe('MessageCtrl: ', function() {
   it('should open dialog to merge cards when drop an card over another card', function () {
     sinon.spy(modalService, 'openMergeCards');
 
-    $scope.droppedEvent("<div class='element1'></div>", "<div class='element2'></div>");
+    $scope.dropCardOnCard("<div class='element1'></div>", "<div class='element2'></div>");
 
     expect(modalService.openMergeCards.calledWith($scope)).to.be.true;
   });
@@ -40,7 +40,7 @@ describe('MessageCtrl: ', function() {
   it('should not open dialog to merge cards when drop an card over the same card', function () {
     sinon.spy(modalService, 'openMergeCards');
 
-    $scope.droppedEvent("<div class='element1'></div>", "<div class='element1'></div>");
+    $scope.dropCardOnCard("<div class='element1'></div>", "<div class='element1'></div>");
 
     expect(modalService.openMergeCards.calledWith($scope)).to.be.false;
   });
