@@ -26,6 +26,10 @@ header {
     top: 4px;
     margin-left: 0.5em;
     font-size: 1.6em;
+
+    &:hover {
+      color: $dark-blue;
+    }
   }
 
   span {

@@ -1,6 +1,8 @@
 <div ng-show="userId !== ''" class="menu">
-  <h2 id="board-name" class="board-name" ng-show="!editingBoardName" ng-click="editingBoardName=true;newBoardName=boardId;">{{boardId}}</h2>
-  <i class="fa fa-pencil" ng-show="!editingBoardName"></i>
+  <span class="board-name-container" ng-click="editingBoardName=true;newBoardName=boardId;">
+    <h2 id="board-name" class="board-name" ng-show="!editingBoardName">{{boardId}}</h2>
+    <i class="fa fa-pencil" ng-show="!editingBoardName"></i>
+  </span>
   <span ng-show="editingBoardName" class="editing-board-name">
     <input title="edit the board name" ng-model="newBoardName"></input>
     <button ng-click="changeBoardName(newBoardName);editingBoardName=false;" class="success-button">Save</button>

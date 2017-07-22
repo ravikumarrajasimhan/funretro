@@ -112,7 +112,11 @@ h2 {
   max-width: 300px;
   font-size: 1.3em;
   font-weight: bold;
-  color: $dark-gray;
+  color: $grey;
+}
+
+.editing-board-name input {
+  padding: 0;
 }
 
 .editing-column .blue {
@@ -131,12 +135,22 @@ h2 {
   border: none;
 }
 
-.board-name + .fa-pencil {
-  display: none;
+.board-name-container {
+  margin-right: 10px;
+
+  .fa-pencil {
+    position: relative;
+    top: -2px;
+    display: none;
+    margin-left: 5px;
+    cursor: pointer;
+  }
 }
 
-.board-name:hover + .fa-pencil {
-  display: inline-block;
+.board-name-container:hover {
+  .fa-pencil {
+    display: inline-block;
+  }
 }
 
 .editing-board-name button.success-button,
