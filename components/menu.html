@@ -11,11 +11,11 @@
     <option value="date_created">Created date</option>
     <option value="votes">Votes</option>
   </select>
+  <input class="filter-message" placeholder="Filter your cards" ng-model="filterMessage" aria-label="Filter your cards" />
   <span ng-show="voteService.remainingVotes(userId, maxVotes, messages) < maxVotes" class="remaining-votes">Remaining votes: <strong>{{ voteService.remainingVotes(userId, maxVotes, messages) }}</strong>
     <span class="null-blank-space">&nbsp</span>
     <span class="settings" ng-click="modalService.openVoteSettings(this)"><i class='fa fa-pencil fa-md'></i></span>
   </span>
-  <input class="filter-message" placeholder="Filter your cards" ng-model="filterMessage" aria-label="Filter your cards" />
   <span class="pull-right menu-controls">
     <button class="pull-right new-column" ng-show="board.columns.length < 6" ng-click="modalService.openAddNewColumn(this)">New column</button>
   </span>
