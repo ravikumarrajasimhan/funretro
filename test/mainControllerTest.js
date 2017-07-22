@@ -1,3 +1,5 @@
+var Clipboard = function() {};
+
 describe('MainCtrl: ', function() {
   var $rootScope,
       $scope,

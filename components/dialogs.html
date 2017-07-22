@@ -12,12 +12,6 @@
   <button class="delete-button" ng-click="deleteBoard()">Delete</button>
   <a ng-click="modalService.closeAll();">Cancel</a>
 </script>
-<script type="text/ng-template" id="copyBoard">
-  <h1>Export Board</h1>
-  <button class="import-btn" ng-attr-data-clipboard-text="{{importExportService.getBoardPureText(board, messages, sortField)}}">Copy text to clipboard</button>
-  <button class="margin-left" ng-click="importExportService.generatePdf(board, messages, sortField)">Export board to PDF</button>
-  <p class="copy-text" ng-bind-html="importExportService.getBoardText(board, messages, sortField)"></p>
-</script>
 <script type="text/ng-template" id="addNewColumn">
   <h1>New column</h1>
   <input ng-model="newColumn" type="text" ng-keyup="submitOnEnter($event, 'addNewColumn', newColumn)" aria-label="New column name"></input>

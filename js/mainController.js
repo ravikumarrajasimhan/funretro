@@ -244,6 +244,9 @@ angular
         $scope.import.error = '';
       };
 
+      /* globals Clipboard */
+      new Clipboard('.import-btn');
+
       angular.element($window).bind('hashchange', function() {
         $scope.loading = true;
         $scope.userId = $window.location.hash.substring(1) || '';
