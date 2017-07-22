@@ -136,13 +136,10 @@ h2 {
 }
 
 .board-name-container {
-  margin-right: 10px;
-
   .fa-pencil {
     position: relative;
     top: -2px;
     display: none;
-    margin-left: 5px;
     cursor: pointer;
   }
 }
@@ -150,6 +147,7 @@ h2 {
 .board-name-container:hover {
   .fa-pencil {
     display: inline-block;
+    margin-right: 10px;
   }
 }
 
