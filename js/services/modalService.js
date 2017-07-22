@@ -44,11 +44,13 @@ angular
         scope.cleanImportData();
         ngDialog.open({
           template: 'importCards',
-          className: 'ngdialog-theme-plain',
+          className: 'ngdialog-theme-plain bigDialog',
           scope: scope
         });
       },
       openCopyBoard: function(scope) {
+        /* globals Clipboard */
+        new Clipboard('.import-btn');
         ngDialog.open({
           template: 'copyBoard',
           className: 'ngdialog-theme-plain bigDialog',

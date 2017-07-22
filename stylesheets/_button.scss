@@ -13,6 +13,7 @@ button,
   border-radius: 2px;
 
   &.first {
+    min-width: 80px;
     background: $purple;
     border-bottom: 2px solid $light-purple;
   }

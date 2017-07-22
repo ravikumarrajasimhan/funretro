@@ -8,10 +8,6 @@ Fun retrospective guide at [Dummies guide to retrospectives](https://github.com/
 [![Build](https://travis-ci.org/funretro/distributed.svg?branch=master)](https://travis-ci.org/funretro/distributed)
 <a href="https://codeclimate.com/github/glauberramos/fireideaz"><img src="https://codeclimate.com/github/glauberramos/fireideaz/badges/gpa.svg" /></a>&nbsp;[![devDependency Status](https://david-dm.org/funretro/distributed/dev-status.svg)](https://david-dm.org/funretro/distributed#info=devDependencies)
 
-## User interface
-
-![Fun retro screenshot](http://i.imgur.com/iY1zc2Y.png)
-
 ## How to setup local environment
 
 1. Clone the repository

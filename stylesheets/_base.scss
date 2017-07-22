@@ -198,6 +198,11 @@ a {
   cursor: pointer;
 }
 
+pre {
+  color: white;
+  background: #333;
+}
+
 img {
   width: 13px;
 }
@@ -383,6 +388,10 @@ blockquote {
     margin: 0;
     margin-top: 1.5em;
     border-radius: 0;
+  }
+
+  .margin-left {
+    margin-left: 10px;
   }
 
   .aling-left {

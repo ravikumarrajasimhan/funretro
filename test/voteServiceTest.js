@@ -7,9 +7,7 @@ describe('VoteService: ', function() {
       voteService;
 
   beforeEach(angular.mock.module('fireideaz'));
-
   beforeEach(inject(function($injector){
-
     $rootScope = $injector.get('$rootScope');
     $scope = $rootScope.$new();
     inject(function($injector) {
@@ -278,4 +276,89 @@ describe('VoteService: ', function() {
       expect(updateSpy.calledWith({max_votes: 2})).to.be.true;
     })
   })
+
+  it('should vote on a message', function() {
+    sinon.stub(firebaseService, 'getServerTimestamp', function() { return '00:00:00' });
+    sinon.stub(voteService, 'isAbleToVote', function() { return true });
+    var updateSpy = sinon.spy();
+    sinon.stub(firebaseService, 'getMessagesRef', function () {
+      return {
+        child: function() {
+          return {
+            update: updateSpy
+          };
+        }
+      };
+    });
+
+    sinon.spy(voteService, 'increaseMessageVotes');
+
+    voteService.vote('userId', 10, {}, 'abc', 5);
+
+    expect(updateSpy.calledWith({votes: 6, date: '00:00:00'})).to.be.true;
+    expect(voteService.increaseMessageVotes.calledWith('userId', 'abc')).to.be.true;
+  });
+
+  it('should unvote a message', function() {
+    sinon.stub(firebaseService, 'getServerTimestamp', function() { return '00:00:00' });
+    sinon.stub(voteService, 'canUnvoteMessage', function() { return true });
+    sinon.spy(voteService, 'decreaseMessageVotes');
+    var updateSpy = sinon.spy();
+    sinon.stub(firebaseService, 'getMessagesRef', function () {
+      return {
+        child: function() {
+          return {
+            update: updateSpy
+          };
+        }
+      };
+    });
+
+    voteService.unvote('userId', 'abc', 5);
+
+    expect(updateSpy.calledWith({votes: 4, date: '00:00:00'})).to.be.true;
+    expect(voteService.decreaseMessageVotes.calledWith('userId', 'abc')).to.be.true;
+  });
+
+  it('should not give negative votes to a message with votes -1', function() {
+    sinon.stub(firebaseService, 'getServerTimestamp', function() { return '00:00:00' });
+    sinon.stub(voteService, 'canUnvoteMessage', function() { return true });
+    sinon.spy(voteService, 'decreaseMessageVotes');
+    var updateSpy = sinon.spy();
+    sinon.stub(firebaseService, 'getMessagesRef', function () {
+      return {
+        child: function() {
+          return {
+            update: updateSpy
+          };
+        }
+      };
+    });
+
+    voteService.unvote('userId', 'abc', -1);
+
+    expect(updateSpy.calledWith({votes: 0, date: '00:00:00'})).to.be.true;
+    expect(voteService.decreaseMessageVotes.calledWith('userId', 'abc')).to.be.true;
+  });
+
+  it('should not give negative votes to a message with zero votes', function() {
+    sinon.stub(firebaseService, 'getServerTimestamp', function() { return '00:00:00' });
+    sinon.stub(voteService, 'canUnvoteMessage', function() { return true });
+    sinon.spy(voteService, 'decreaseMessageVotes');
+    var updateSpy = sinon.spy();
+    sinon.stub(firebaseService, 'getMessagesRef', function () {
+      return {
+        child: function() {
+          return {
+            update: updateSpy
+          };
+        }
+      };
+    });
+
+    voteService.unvote('userId', 'abc', 0);
+
+    expect(updateSpy.calledWith({votes: 0, date: '00:00:00'})).to.be.true;
+    expect(voteService.decreaseMessageVotes.calledWith('userId', 'abc')).to.be.true;
+  });
 });

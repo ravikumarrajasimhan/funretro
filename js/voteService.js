@@ -107,5 +107,32 @@ angular
       });
     };
 
+    voteService.vote = function(userId, maxVotes, messages, messageKey, votes) {
+      if (voteService.isAbleToVote(userId, maxVotes, messages)) {
+        var messagesRef = firebaseService.getMessagesRef(userId);
+
+        messagesRef.child(messageKey).update({
+          votes: votes + 1,
+          date: firebaseService.getServerTimestamp()
+        });
+
+        this.increaseMessageVotes(userId, messageKey);
+      }
+    };
+
+    voteService.unvote = function(userId, messageKey, votes) {
+      if(voteService.canUnvoteMessage(userId, messageKey)) {
+        var messagesRef = firebaseService.getMessagesRef(userId);
+        var newVotes = (votes >= 1) ? votes - 1 : 0;
+
+        messagesRef.child(messageKey).update({
+          votes: newVotes,
+          date: firebaseService.getServerTimestamp()
+        });
+
+        voteService.decreaseMessageVotes(userId, messageKey);
+      }
+    };
+
     return voteService;
   }]);
