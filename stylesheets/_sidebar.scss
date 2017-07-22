@@ -5,9 +5,9 @@
   bottom: 0;
   z-index: 3;
   display: flex;
-  width: 19rem;
-  padding: 10px;
-  margin-right: -21rem;
+  width: 14rem;
+  padding: 20px;
+  margin-right: -17rem;
   flex-direction: column;
   background: white;
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
@@ -32,7 +32,7 @@
   }
 
   &-header {
-    height: 40px;
+    height: 20px;
 
     i {
       position: relative;
@@ -49,9 +49,33 @@
     button {
       width: 100%;
       padding: 10px;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
       margin-left: 0;
-      font-size: 1em;
+      font-size: 1.3em;
+      color: #555;
+      text-align: left;
+      background: white;
+      border: none;
+
+      &:hover {
+        background: #eee;
+      }
+
+      &.normal-button:hover {
+        i {
+          color: $light-teal;
+        }
+      }
+
+      &.delete-button:hover {
+        i {
+          color: $red;
+        }
+      }
+
+      i {
+        margin-right: 0.7em;
+      }
     }
   }
 }

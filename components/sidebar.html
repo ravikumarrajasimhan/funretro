@@ -6,9 +6,9 @@
     </a>
   </div>
   <div class="sidebar-body">
-    <button id="import-board" ng-click="modalService.openImportBoard(this)">Import CSV</button>
-    <button id="copy-board" ng-click="modalService.openCopyBoard(this)">Export board</button>
-    <button class="delete-button" ng-click="modalService.openDeleteCards(this)">Delete cards</button>
-    <button class="delete-button" ng-click="modalService.openDeleteBoard(this)">Delete board</button>
+    <button class="normal-button" id="import-board" ng-click="modalService.openImportBoard(this)"><i class="fa fa-upload"></i>Import CSV</button>
+    <button class="normal-button" id="copy-board" ng-click="modalService.openCopyBoard(this)"><i class="fa fa-download"></i>Export board</button>
+    <button class="delete-button" ng-click="modalService.openDeleteCards(this)"><i class="fa fa-trash"></i>Delete cards</button>
+    <button class="delete-button" ng-click="modalService.openDeleteBoard(this)"><i class="fa fa-trash"></i>Delete board</button>
   </div>
 </div>
