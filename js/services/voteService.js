@@ -94,9 +94,11 @@ angular
     voteService.incrementMaxVotes = function(userId, maxVotes) {
       var boardRef = firebaseService.getBoardRef(userId);
 
-      boardRef.update({
-        max_votes: maxVotes + 1
-      });
+      if (maxVotes < 99) {
+        boardRef.update({
+          max_votes: maxVotes + 1
+        });
+      }
     };
 
     voteService.decrementMaxVotes = function(userId, maxVotes) {

@@ -9,6 +9,7 @@
 
   h2 {
     margin-top: 0;
+    line-height: 1.3em;
 
     @media (max-width: 500px) {
       display: block;
@@ -34,10 +35,6 @@
       min-width: 80px;
     }
   }
-
-  h2 {
-    line-height: 1.3em;
-  }
 }
 
 .remaining-votes {
@@ -51,6 +48,10 @@
     display: block;
     padding-bottom: 0;
     padding-left: 0;
+  }
+
+  .settings {
+    cursor: pointer;
   }
 
   strong {

@@ -268,6 +268,14 @@ describe('VoteService: ', function() {
       expect(updateSpy.calledWith({max_votes: 2})).to.be.true;
     })
 
+    it('is not able to increment the maximum number of votes allowed per user if bigger than 99', function() {
+      var updateSpy = sinon.spy();
+      sinon.stub(firebaseService, 'getBoardRef', function () { return {update: updateSpy}; });
+
+      voteService.incrementMaxVotes(123, 99);
+      expect(updateSpy.called).to.be.false;
+    })
+
     it('is able to decrement the maximum number of votes allowed per user', function() {
       var updateSpy = sinon.spy();
       sinon.stub(firebaseService, 'getBoardRef', function () { return {update: updateSpy}; });
