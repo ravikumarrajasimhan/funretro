@@ -53,9 +53,6 @@ angular
           $scope.boardContext = $rootScope.boardContext = board.val().boardContext;
           $scope.loading = false;
           setTimeout(function() {new EmojiPicker();}, 100);
-        }, function() {
-          window.location.hash = '';
-          location.reload();
         });
 
         $scope.boardRef = board;
