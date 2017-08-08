@@ -1,3 +1,4 @@
+/* global EmojiPicker */
 'use strict';
 
 angular
