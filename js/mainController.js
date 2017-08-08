@@ -52,13 +52,10 @@ angular
           $scope.boardId = $rootScope.boardId = board.val().boardId;
           $scope.boardContext = $rootScope.boardContext = board.val().boardContext;
           $scope.loading = false;
-<<<<<<< HEAD
-=======
           setTimeout(function() {new EmojiPicker();}, 100);
         }, function() {
           window.location.hash = '';
           location.reload();
->>>>>>> Newer emoji picker
         });
 
         $scope.boardRef = board;
