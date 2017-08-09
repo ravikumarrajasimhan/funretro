@@ -254,6 +254,12 @@ input[type="number"] {
   margin-left: 0;
 }
 
+.danger.ngdialog-theme-plain {
+  .ngdialog-close::before {
+    color: white;
+  }
+}
+
 blockquote {
   margin: 0;
   font-family: 'PT Serif', serif;

@@ -25,7 +25,21 @@ header {
     position: relative;
     top: 4px;
     margin-left: 0.5em;
-    font-size: 1.6em;
+
+    i {
+      font-size: 1.6em;
+    }
+
+    &-desc {
+      position: relative;
+      top: -4px;
+      right: -2px;
+      float: none;
+      padding: 0;
+      margin: 0;
+      margin-bottom: 3px;
+      text-decoration: underline;
+    }
 
     &:hover {
       color: $dark-blue;
