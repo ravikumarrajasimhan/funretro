@@ -3,7 +3,7 @@
   top: 0;
   right: 0;
   bottom: 0;
-  z-index: 3;
+  z-index: 10;
   display: flex;
   width: 16rem;
   padding: 20px;
@@ -19,6 +19,7 @@
     right: 0;
     bottom: 0;
     left: 0;
+    z-index: 9;
     display: none;
     background: rgba(0, 0, 0, 0.4);
 
