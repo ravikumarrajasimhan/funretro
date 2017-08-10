@@ -74,6 +74,7 @@ var bundleVendorJS = function() {
      'node_modules/ng-file-upload/**/ng-file-upload-all.min.js',
      'node_modules/papaparse/papaparse.min.js',
      'node_modules/clipboard/dist/clipboard.min.js',
+     'node_modules/vanilla-emoji-picker/dist/emojiPicker.min.js',
      'node_modules/jspdf/dist/jspdf.min.js'])
       .pipe(concat('vendor.js'))
       .pipe(gulp.dest('dist'))

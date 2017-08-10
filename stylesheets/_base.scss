@@ -194,12 +194,6 @@ a:not(.disabled) .fa-thumbs-o-up:hover {
   opacity: 0.5;
 }
 
-.message-body a.delete-link {
-  top: 10px;
-  right: 10px;
-  font-size: 1em;
-}
-
 .edit {
   color: $green;
 }
@@ -258,6 +252,12 @@ input[type="number"] {
 
 .ngdialog .delete-button {
   margin-left: 0;
+}
+
+.danger.ngdialog-theme-plain {
+  .ngdialog-close::before {
+    color: white;
+  }
 }
 
 blockquote {
