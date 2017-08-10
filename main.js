@@ -62,6 +62,7 @@ angular
   };
 });
 
+/* global EmojiPicker */
 'use strict';
 
 angular
@@ -115,6 +116,7 @@ angular
           $scope.boardId = $rootScope.boardId = board.val().boardId;
           $scope.boardContext = $rootScope.boardContext = board.val().boardContext;
           $scope.loading = false;
+          setTimeout(function() {new EmojiPicker();}, 100);
         });
 
         $scope.boardRef = board;
@@ -248,6 +250,7 @@ angular
       function addMessageCallback(message) {
         var id = message.key;
         angular.element($('#' + id)).scope().isEditing = true;
+        new EmojiPicker();
         $('#' + id).find('textarea').focus();
       }
 
