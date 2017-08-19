@@ -19,7 +19,7 @@
             <a ng-show="!editing" class="add" ng-click="addNewMessage(type)" href="javascript:void(0)" aria-label="Add new message"><i class="fa fa-plus"></i></a>
           </div>
           <div class="editing-column" ng-show="editing">
-              <input id="new_name_{{ type.id }}" ng-model="newName"></input>
+              <input id="new_name_{{ type.id }}" ng-model="newName" focus></input>
               <div>
                 <button ng-click="changeColumnName(type.id, newName);editing=false" class="success-button">Save</button>
                 <a class="blue" ng-click="editing=false;">Cancel</a>
