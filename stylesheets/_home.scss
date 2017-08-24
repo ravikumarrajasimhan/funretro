@@ -202,11 +202,11 @@
 
 .carbon-wrap {
   display: block;
-  max-width: 360px;
+  max-width: 330px;
   padding: 1em;
   margin: 1em auto 0;
   overflow: hidden;
-  background-color: rgba(142, 36, 170, 0.13);
+  background-color: rgba(63, 81, 181, 0.13);
   border-radius: 2px;
 
   span {
@@ -229,7 +229,7 @@
     display: inline-block;
     width: 150px;
     font-size: 13px;
-    color: $purple;
+    color: $dark-blue;
     vertical-align: top;
   }
 
@@ -245,5 +245,5 @@
   display: block;
   margin: 1em 0 2em;
   font-size: 14px;
-  color: $purple;
+  color: $dark-blue;
 }
