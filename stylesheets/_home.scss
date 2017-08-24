@@ -202,11 +202,11 @@
 
 .carbon-wrap {
   display: block;
-  max-width: 330px;
+  max-width: 300px;
   padding: 1em;
   margin: 1em auto 0;
   overflow: hidden;
-  background-color: rgba(63, 81, 181, 0.13);
+  background-color: #eee;
   border-radius: 2px;
 
   span {
@@ -229,7 +229,7 @@
     display: inline-block;
     width: 150px;
     font-size: 13px;
-    color: $dark-blue;
+    color: #555;
     vertical-align: top;
   }
 
@@ -241,9 +241,9 @@
   }
 }
 
-.carbon-poweredby {
+.home a.carbon-poweredby {
   display: block;
   margin: 1em 0 2em;
   font-size: 14px;
-  color: $dark-blue;
+  color: #555;
 }
