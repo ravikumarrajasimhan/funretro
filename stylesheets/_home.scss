@@ -40,8 +40,7 @@
   p.website {
     width: 100%;
     margin: 0;
-    margin-top: 40px;
-    font-weight: bold;
+    margin-top: 30px;
 
     @media (max-width: 500px) {
       margin-bottom: 20px;
@@ -49,7 +48,7 @@
 
     a {
       display: block;
-      font-size: 1.3em;
+      font-size: 1em;
     }
   }
 
@@ -192,5 +191,63 @@
       font-size: 1.5rem;
       line-height: 1.7rem;
     }
+  }
+}
+
+.home .sponsor-link img {
+  width: 150px;
+}
+
+#carbonads {
+  display: block;
+  max-width: 360px;
+  padding: 1em;
+  margin: 1em auto 2em;
+  overflow: hidden;
+  background-color: rgba(142, 36, 170, 0.13);
+  border-radius: 2px;
+
+  span {
+    position: relative;
+    display: block;
+    overflow: hidden;
+  }
+
+  .carbon-poweredby {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.8);
+    color: $purple;
+  }
+
+  .carbon-text {
+    width: auto;
+    max-width: calc(100% - 135px - 1em);
+    color: #fff;
+    text-align: left;
+  }
+
+  .carbon-wrap {
+    height: auto;
+  }
+
+  a.carbon-text,
+  input[type="submit"] {
+    position: relative;
+    top: 0;
+    display: inline-block;
+    width: 150px;
+    font-size: 13px;
+    color: $purple;
+    vertical-align: top;
+  }
+
+  .carbon-img {
+    display: inline-block;
+    float: left;
+    height: 100px;
+    margin-right: 1em;
   }
 }
