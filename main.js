@@ -434,6 +434,19 @@ angular.module('fireideaz').directive('about', [function() {
 
 'use strict';
 
+angular.module('fireideaz').directive('focus', function($timeout) {
+    return function(scope, element) {
+       scope.$watch('editing',
+         function () {
+            $timeout(function() {
+                element[0].focus();
+            }, 0, false);
+         });
+      };
+});
+
+'use strict';
+
 angular.module('fireideaz').directive('boardContext', [function() {
     return {
       restrict: 'E',
