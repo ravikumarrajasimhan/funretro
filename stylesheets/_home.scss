@@ -1,3 +1,5 @@
+/* stylelint-disable selector-max-specificity selector-max-id  */
+
 .home {
   section {
     padding: 60px;
@@ -198,11 +200,11 @@
   width: 150px;
 }
 
-#carbonads {
+.carbon-wrap {
   display: block;
   max-width: 360px;
   padding: 1em;
-  margin: 1em auto 2em;
+  margin: 1em auto 0;
   overflow: hidden;
   background-color: rgba(142, 36, 170, 0.13);
   border-radius: 2px;
@@ -213,24 +215,11 @@
     overflow: hidden;
   }
 
-  .carbon-poweredby {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.8);
-    color: $purple;
-  }
-
   .carbon-text {
     width: auto;
     max-width: calc(100% - 135px - 1em);
     color: #fff;
     text-align: left;
-  }
-
-  .carbon-wrap {
-    height: auto;
   }
 
   a.carbon-text,
@@ -250,4 +239,11 @@
     height: 100px;
     margin-right: 1em;
   }
+}
+
+.carbon-poweredby {
+  display: block;
+  margin: 1em 0 2em;
+  font-size: 14px;
+  color: $purple;
 }
