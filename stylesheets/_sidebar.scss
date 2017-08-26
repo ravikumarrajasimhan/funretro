@@ -1,0 +1,82 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  width: 16rem;
+  padding: 20px;
+  margin-right: -19rem;
+  flex-direction: column;
+  background: white;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  &-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9;
+    display: none;
+    background: rgba(0, 0, 0, 0.4);
+
+    &-show {
+      display: block;
+    }
+  }
+
+  &-show {
+    margin-right: 0;
+  }
+
+  &-header {
+    height: 20px;
+
+    i {
+      position: relative;
+      top: -14px;
+      right: -9px;
+      float: right;
+      padding: 10px;
+      font-size: 1.2em;
+      color: #777;
+    }
+  }
+
+  &-body {
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      margin-left: 0;
+      font-size: 1.3em;
+      color: #555;
+      text-align: left;
+      background: white;
+      border: none;
+
+      &:hover {
+        background: #eee;
+      }
+
+      &.normal-button:hover {
+        i {
+          color: $light-teal;
+        }
+      }
+
+      &.delete-button:hover {
+        i {
+          color: $red;
+        }
+      }
+
+      i {
+        margin-right: 0.7em;
+      }
+    }
+  }
+}

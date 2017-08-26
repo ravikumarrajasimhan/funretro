@@ -13,6 +13,7 @@ button,
   border-radius: 2px;
 
   &.first {
+    min-width: 80px;
     background: $purple;
     border-bottom: 2px solid $light-purple;
   }
@@ -28,6 +29,7 @@ button,
   }
 }
 
+.menu-controls button:hover,
 header button:hover {
   position: relative;
   top: 2px;
@@ -44,7 +46,7 @@ header button:hover {
 
 .ngdialog-content a {
   display: inline-block;
-  margin-top: 2em;
+  margin-top: 1.7em;
   margin-left: 10px;
   font-size: 1em;
   color: $light-teal;

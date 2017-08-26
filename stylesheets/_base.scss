@@ -112,7 +112,11 @@ h2 {
   max-width: 300px;
   font-size: 1.3em;
   font-weight: bold;
-  color: $dark-gray;
+  color: $grey;
+}
+
+.editing-board-name input {
+  padding: 0;
 }
 
 .editing-column .blue {
@@ -131,12 +135,20 @@ h2 {
   border: none;
 }
 
-.board-name + .fa-pencil {
-  display: none;
+.board-name-container {
+  .fa-pencil {
+    position: relative;
+    top: -2px;
+    display: none;
+    cursor: pointer;
+  }
 }
 
-.board-name:hover + .fa-pencil {
-  display: inline-block;
+.board-name-container:hover {
+  .fa-pencil {
+    display: inline-block;
+    margin-right: 10px;
+  }
 }
 
 .editing-board-name button.success-button,
@@ -182,12 +194,6 @@ a:not(.disabled) .fa-thumbs-o-up:hover {
   opacity: 0.5;
 }
 
-.message-body a.delete-link {
-  top: 10px;
-  right: 10px;
-  font-size: 1em;
-}
-
 .edit {
   color: $green;
 }
@@ -198,8 +204,9 @@ a {
   cursor: pointer;
 }
 
-img {
-  width: 13px;
+pre {
+  color: white;
+  background: #333;
 }
 
 small {
@@ -241,6 +248,12 @@ input[type="number"] {
 
 .ngdialog .delete-button {
   margin-left: 0;
+}
+
+.danger.ngdialog-theme-plain {
+  .ngdialog-close::before {
+    color: white;
+  }
 }
 
 blockquote {
@@ -293,7 +306,7 @@ blockquote {
   top: -18px;
   left: -23px;
   width: 350px;
-  padding: 10px 17px;
+  padding: 15px 17px;
   margin: 0;
   margin-bottom: -10px;
   font-size: 1.3em;
@@ -330,14 +343,6 @@ blockquote {
   @extend .base-msg;
   color: $error-msg;
   background-color: $error-msg-back;
-}
-
-.copy-text {
-  padding: 15px;
-  margin: 20px 0;
-  background: white;
-  border: 1px solid $lighter-gray;
-  border-radius: 2px;
 }
 
 .filter-mobile {
@@ -383,6 +388,10 @@ blockquote {
     margin: 0;
     margin-top: 1.5em;
     border-radius: 0;
+  }
+
+  .margin-left {
+    margin-left: 10px;
   }
 
   .aling-left {

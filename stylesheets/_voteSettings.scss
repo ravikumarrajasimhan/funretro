@@ -1,7 +1,12 @@
 .vote-settings {
   .increment-button,
   .decrement-button {
-    margin-right: 2px;
-    color: $teal;
+    color: white;
   }
+}
+
+.ngdialog-content .vote-settings button.increment-button {
+  margin-top: 0;
+  margin-right: 3px;
+  border-radius: 3px;
 }

@@ -2,8 +2,18 @@
 
 angular
   .module('fireideaz')
-  .service('VoteService', [function () {
+  .service('VoteService', ['FirebaseService', function (firebaseService) {
     var voteService = {};
+
+    voteService.getNumberOfVotesOnMessage = function(userId, messageId) {
+      return new Array(this.returnNumberOfVotesOnMessage(userId, messageId));
+    };
+
+    voteService.returnNumberOfVotesOnMessage = function(userId, messageKey) {
+      var userVotes = localStorage.getItem(userId) ? JSON.parse(localStorage.getItem(userId)) : {};
+
+      return userVotes[messageKey] ? userVotes[messageKey] : 0;
+    };
 
     voteService.returnNumberOfVotes = function(userId, messagesIds) {
       var userVotes = localStorage.getItem(userId) ? JSON.parse(localStorage.getItem(userId)) : {};
@@ -19,12 +29,6 @@ angular
 
     voteService.extractMessageIds = function(messages) {
       return messages ? messages.map(function(message) { return message.$id; }) : [];
-    };
-
-    voteService.returnNumberOfVotesOnMessage = function(userId, messageKey) {
-      var userVotes = localStorage.getItem(userId) ? JSON.parse(localStorage.getItem(userId)) : {};
-
-      return userVotes[messageKey] ? userVotes[messageKey] : 0;
     };
 
     voteService.remainingVotes = function(userId, maxVotes, messages) {
@@ -85,6 +89,51 @@ angular
 
     voteService.isAbleToVote = function(userId, maxVotes, messages) {
       return voteService.remainingVotes(userId, maxVotes, messages) > 0;
+    };
+
+    voteService.incrementMaxVotes = function(userId, maxVotes) {
+      var boardRef = firebaseService.getBoardRef(userId);
+
+      if (maxVotes < 99) {
+        boardRef.update({
+          max_votes: maxVotes + 1
+        });
+      }
+    };
+
+    voteService.decrementMaxVotes = function(userId, maxVotes) {
+      var boardRef = firebaseService.getBoardRef(userId);
+
+      boardRef.update({
+        max_votes: Math.min(Math.max(maxVotes - 1, 1), 100)
+      });
+    };
+
+    voteService.vote = function(userId, maxVotes, messages, messageKey, votes) {
+      if (voteService.isAbleToVote(userId, maxVotes, messages)) {
+        var messagesRef = firebaseService.getMessagesRef(userId);
+
+        messagesRef.child(messageKey).update({
+          votes: votes + 1,
+          date: firebaseService.getServerTimestamp()
+        });
+
+        this.increaseMessageVotes(userId, messageKey);
+      }
+    };
+
+    voteService.unvote = function(userId, messageKey, votes) {
+      if(voteService.canUnvoteMessage(userId, messageKey)) {
+        var messagesRef = firebaseService.getMessagesRef(userId);
+        var newVotes = (votes >= 1) ? votes - 1 : 0;
+
+        messagesRef.child(messageKey).update({
+          votes: newVotes,
+          date: firebaseService.getServerTimestamp()
+        });
+
+        voteService.decreaseMessageVotes(userId, messageKey);
+      }
     };
 
     return voteService;

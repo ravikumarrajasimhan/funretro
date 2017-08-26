@@ -24,7 +24,7 @@ describe('Utils: ', function() {
       return count;
     });
 
-    expect(utils.createUserId()).to.equal('bdfhjln');
+    expect(utils.createUserId()).to.equal('01234566-789a-4bcc-9ef10-11121313141516171819191a');
   });
 
   it('should return the id number of the next column', function() {

@@ -6,26 +6,13 @@ Learn more about retrospectives at [funretrospectives.com](http://funretrospecti
 Fun retrospective guide at [Dummies guide to retrospectives](https://github.com/gmuraleekrishna/dummies-guide-to-retrospectives)
 
 [![Build](https://travis-ci.org/funretro/distributed.svg?branch=master)](https://travis-ci.org/funretro/distributed)
-<a href="https://codeclimate.com/github/glauberramos/fireideaz"><img src="https://codeclimate.com/github/glauberramos/fireideaz/badges/gpa.svg" /></a>&nbsp;[![devDependency Status](https://david-dm.org/funretro/distributed/dev-status.svg)](https://david-dm.org/funretro/distributed#info=devDependencies)
-
-## User interface
-
-![Fun retro screenshot](http://i.imgur.com/iY1zc2Y.png)
+<a href="https://codeclimate.com/github/funretro/distributed"><img src="https://codeclimate.com/github/glauberramos/fireideaz/badges/gpa.svg" /></a>&nbsp;[![devDependency Status](https://david-dm.org/funretro/distributed/dev-status.svg)](https://david-dm.org/funretro/distributed#info=devDependencies)
 
 ## How to setup local environment
 
 1. Clone the repository
 2. Fun Retro is using [Firebase](http://www.firebase.com). First create an account at firebase. Then create a test project.
-3. After creating the project you can select Database from the left pane, on the Rules tab, change the Database rules of created project:
-```
-{
-    "rules": {
-        ".read": true,
-        ".write": true
-    }
-}
-```
-4. Change the file on js/vendor/firebaseinitialization.js and replace the values with your project values
+3. Change the file on js/vendor/firebaseinitialization.js and replace the values with your project values
 ```
 var config = {
   apiKey: "YOUR_API_KEY",
@@ -38,15 +25,15 @@ var config = {
 
 firebase.initializeApp(config);
 ```
-5. If you don't want to file to be tracked by git just run this command on the project home folder:
+4. If you don't want to file to be tracked by git just run this command on the project home folder:
 ```
 git update-index --assume-unchanged js/vendor/firebaseInitialization.js
 ```
-6. Install [Node.js](https://nodejs.org/en/)
-7. Run ```npm install``` (inside the project folder)
-8. Install [Gulp](http://gulpjs.com/)
-9. Run ```gulp```
-10. Now you can open the app on [http://localhost:4000/](http://localhost:4000/) and start creating your boards.
+5. Install [Node.js](https://nodejs.org/en/)
+6. Run ```npm install``` (inside the project folder)
+7. Install [Gulp](http://gulpjs.com/)
+8. Run ```gulp```
+9. Now you can open the app on [http://localhost:4000/](http://localhost:4000/) and start creating your boards.
 
 ## Contribute to Fun Retro
 

@@ -44,14 +44,14 @@ angular
         scope.cleanImportData();
         ngDialog.open({
           template: 'importCards',
-          className: 'ngdialog-theme-plain',
+          className: 'ngdialog-theme-plain bigDialog',
           scope: scope
         });
       },
-      openCopyBoard: function(scope) {
+      openDeleteBoard: function(scope) {
         ngDialog.open({
-          template: 'copyBoard',
-          className: 'ngdialog-theme-plain bigDialog',
+          template: 'deleteBoard',
+          className: 'ngdialog-theme-plain danger',
           scope: scope
         });
       },

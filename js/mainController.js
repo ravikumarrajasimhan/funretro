@@ -1,11 +1,12 @@
+/* global EmojiPicker */
 'use strict';
 
 angular
   .module('fireideaz')
 
   .controller('MainCtrl', ['$scope', '$filter', '$window', 'Utils', 'Auth',
-  '$rootScope', 'FirebaseService', 'ModalService', 'VoteService',
-    function ($scope, $filter, $window, utils, auth, $rootScope, firebaseService, modalService, voteService) {
+  '$rootScope', 'FirebaseService', 'ModalService',
+    function ($scope, $filter, $window, utils, auth, $rootScope, firebaseService, modalService) {
       $scope.loading = true;
       $scope.messageTypes = utils.messageTypes;
       $scope.utils = utils;
@@ -13,19 +14,11 @@ angular
         name: ''
       };
       $scope.userId = $window.location.hash.substring(1) || '';
-      $scope.sortField = '$id';
+      $scope.sortField = 'date_created';
       $scope.selectedType = 1;
       $scope.import = {
         data : [],
         mapping : []
-      };
-
-      $scope.closeAllModals = function(){
-        modalService.closeAll();
-      };
-
-      $scope.getNumberOfVotesOnMessage = function(userId, messageId) {
-        return new Array(voteService.returnNumberOfVotesOnMessage(userId, messageId));
       };
 
       $scope.droppedEvent = function(dragEl, dropEl) {
@@ -58,13 +51,14 @@ angular
           $scope.maxVotes = board.val().max_votes ? board.val().max_votes : 6;
           $scope.boardId = $rootScope.boardId = board.val().boardId;
           $scope.boardContext = $rootScope.boardContext = board.val().boardContext;
+          $scope.loading = false;
+          setTimeout(function() {new EmojiPicker();}, 100);
         });
 
         $scope.boardRef = board;
         $scope.messagesRef = messagesRef;
         $scope.userUid = userData.uid;
         $scope.messages = firebaseService.newFirebaseArray(messagesRef);
-        $scope.loading = false;
       }
 
       if ($scope.userId !== '') {
@@ -77,37 +71,13 @@ angular
         return parseInt($scope.selectedType) === parseInt(type);
       };
 
-      $scope.getSortOrder = function() {
-        return $scope.sortField === 'votes' ? true : false;
+      $scope.getSortFields = function() {
+        return $scope.sortField === 'votes' ? ['-votes', 'date_created'] : 'date_created';
       };
 
       $scope.saveMessage = function(message) {
         message.creating = false;
         $scope.messages.$save(message);
-      };
-
-      $scope.vote = function(messageKey, votes) {
-        if(voteService.isAbleToVote($scope.userId, $scope.maxVotes, $scope.messages)) {
-          $scope.messagesRef.child(messageKey).update({
-            votes: votes + 1,
-            date: firebaseService.getServerTimestamp()
-          });
-
-          voteService.increaseMessageVotes($scope.userId, messageKey);
-        }
-      };
-
-      $scope.unvote = function(messageKey, votes) {
-        if(voteService.canUnvoteMessage($scope.userId, messageKey)) {
-          var newVotes = (votes >= 1) ? votes - 1 : 0;
-
-          $scope.messagesRef.child(messageKey).update({
-            votes: newVotes,
-            date: firebaseService.getServerTimestamp()
-          });
-
-          voteService.decreaseMessageVotes($scope.userId, messageKey);
-        }
       };
 
       function redirectToBoard() {
@@ -160,10 +130,15 @@ angular
         $scope.boardRef.update({
           boardId: newBoardName
         });
+
         modalService.closeAll();
       };
 
       $scope.addNewColumn = function(name) {
+        if(typeof name === 'undefined' || name === '') {
+          return;
+        }
+
         $scope.board.columns.push({
           value: name,
           id: utils.getNextId($scope.board)
@@ -176,6 +151,10 @@ angular
       };
 
       $scope.changeColumnName = function(id, newName) {
+        if(typeof newName === 'undefined' || newName === '') {
+          return;
+        }
+
         $scope.board.columns.map(function(column, index, array) {
           if (column.id === id) {
             array[index].value = newName;
@@ -200,12 +179,14 @@ angular
 
       $scope.deleteMessage = function(message) {
         $scope.messages.$remove(message);
+
         modalService.closeAll();
       };
 
       function addMessageCallback(message) {
         var id = message.key;
         angular.element($('#' + id)).scope().isEditing = true;
+        new EmojiPicker();
         $('#' + id).find('textarea').focus();
       }
 
@@ -218,6 +199,7 @@ angular
             id: type.id
           },
           date: firebaseService.getServerTimestamp(),
+          date_created: firebaseService.getServerTimestamp(),
           votes: 0
         }).then(addMessageCallback);
       };
@@ -230,119 +212,43 @@ angular
         modalService.closeAll();
       };
 
-      $scope.getBoardText = function() {
-        if ($scope.board) {
-          var clipboard = '';
+      $scope.deleteBoard = function() {
+        $scope.deleteCards();
+        $scope.boardRef.ref.remove();
 
-          $($scope.board.columns).each(function(index, column) {
-            if (index === 0) {
-              clipboard += '<strong>' + column.value + '</strong><br />';
-            } else {
-              clipboard += '<br /><strong>' + column.value + '</strong><br />';
-            }
-            var filteredArray = $filter('orderBy')($scope.messages,
-              $scope.sortField,
-              $scope.getSortOrder());
-
-            $(filteredArray).each(function(index2, message) {
-              if (message.type.id === column.id) {
-                clipboard += '- ' + message.text + ' (' + message.votes + ' votes) <br />';
-              }
-            });
-          });
-
-          return clipboard;
-        } else return '';
+        modalService.closeAll();
+        window.location.hash = '';
+        location.reload();
       };
 
-      $scope.submitImportFile = function (file) {
-        $scope.cleanImportData ();
-        if (file) {
-          if (file.size === 0){
-            $scope.import.error = 'The file you are trying to import seems to be  empty';
-            return;
-          }
-          /* globals Papa */
-          Papa.parse(file, {
-            complete: function(results) {
-              if (results.data.length > 0){
-                $scope.import.data = results.data;
-                $scope.board.columns.forEach (function (column){
-                  $scope.import.mapping.push({mapFrom:'-1', mapTo:column.id, name: column.value});
-                });
-                if (results.errors.length > 0)
-                   $scope.import.error = results.errors[0].message;
-                $scope.$apply();
+      $scope.submitOnEnter = function(event, method, data) {
+        if (event.keyCode === 13) {
+          switch (method) {
+            case 'createNewBoard':
+              if (!$scope.isBoardNameInvalid()) {
+                $scope.createNewBoard();
               }
-            }
-          });
+
+              break;
+            case 'addNewColumn':
+              if (data) {
+                $scope.addNewColumn(data);
+                $scope.newColumn = '';
+              }
+
+              break;
+          }
         }
       };
 
-       $scope.importMessages = function (){
-         var data = $scope.import.data;
-         var mapping = $scope.import.mapping;
-         for (var importIndex = 1; importIndex < data.length; importIndex++ )
-         {
-           for (var mappingIndex = 0; mappingIndex < mapping.length; mappingIndex++)
-           {
-             var mapFrom = mapping[mappingIndex].mapFrom;
-             var mapTo = mapping[mappingIndex].mapTo;
-             if (mapFrom === -1)
-              continue;
-
-             var cardText = data[importIndex][mapFrom];
-             if (cardText)
-             {
-                $scope.messages.$add({
-                text: cardText,
-                user_id: $scope.userUid,
-                type: {
-                  id: mapTo
-                },
-                date: firebaseService.getServerTimestamp(),
-                votes: 0});
-             }
-           }
-         }
-         $scope.closeAllModals();
-       };
-
-      $scope.cleanImportData = function (){
+      $scope.cleanImportData = function () {
         $scope.import.data = [];
         $scope.import.mapping = [];
         $scope.import.error = '';
       };
 
-      $scope.submitOnEnter = function(event, method, data){
-        if (event.keyCode === 13) {
-          switch (method){
-            case 'createNewBoard':
-                if (!$scope.isBoardNameInvalid()) {
-                  $scope.createNewBoard();
-                }
-                break;
-            case 'addNewColumn':
-                if (data) {
-                  $scope.addNewColumn(data);
-                  $scope.newColumn = '';
-                }
-                break;
-          }
-        }
-      };
-
-      $scope.incrementMaxVotes = function() {
-        $scope.boardRef.update({
-          max_votes: $scope.maxVotes + 1
-        });
-      };
-
-      $scope.decrementMaxVotes = function() {
-        $scope.boardRef.update({
-          max_votes: Math.min(Math.max($scope.maxVotes - 1, 1), 100)
-        });
-      };
+      /* globals Clipboard */
+      new Clipboard('.import-btn');
 
       angular.element($window).bind('hashchange', function() {
         $scope.loading = true;

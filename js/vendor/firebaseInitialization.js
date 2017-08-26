@@ -5,6 +5,6 @@ var config = {
   projectId: "YOUR_PROJECT_ID",
   storageBucket: "YOUR_PROJECT_ID.appspot.com",
   messagingSenderId: "YOUR_MESSAGE_ID"
- };
+};
 
- firebase.initializeApp(config);
+firebase.initializeApp(config);

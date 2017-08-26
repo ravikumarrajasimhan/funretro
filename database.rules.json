@@ -1,0 +1,22 @@
+{
+  "rules": {
+    "boards": {
+      "$userId": {
+        ".read": "auth.uid === data.child('user_id').val()",
+        ".write": "auth.uid === newData.child('user_id').val() || auth.uid === data.child('user_id').val()",
+        ".validate": "auth.uid === newData.child('user_id').val()"
+      }
+    },
+    "messages": {
+      "$userId": {
+        ".read": "auth != null",
+        ".write": "auth != null",
+        "$messageId": {
+          ".read": "auth.uid === data.child('user_id').val()",
+          ".write": "auth.uid === newData.child('user_id').val()",
+          ".validate": "auth.uid === newData.child('user_id').val()"
+        }
+      }
+    }
+  }
+}

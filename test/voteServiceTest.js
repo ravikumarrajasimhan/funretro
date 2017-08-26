@@ -3,16 +3,16 @@ describe('VoteService: ', function() {
       $scope,
       $controller,
       $firebaseArray,
+      firebaseService,
       voteService;
 
   beforeEach(angular.mock.module('fireideaz'));
-
   beforeEach(inject(function($injector){
-
     $rootScope = $injector.get('$rootScope');
     $scope = $rootScope.$new();
     inject(function($injector) {
       voteService = $injector.get('VoteService');
+      firebaseService = $injector.get('FirebaseService');
     });
   }));
 
@@ -43,6 +43,22 @@ describe('VoteService: ', function() {
   })
 
   describe('returnNumberOfVotesOnMessage', function() {
+    it('should return array containing 1 element for each vote on a message', function() {
+      sinon.stub(voteService, 'returnNumberOfVotesOnMessage', function() { return 3 });
+
+      var array = voteService.getNumberOfVotesOnMessage('userId', 'abc');
+
+      expect(array.length).to.equal(3);
+    });
+
+    it('should return empty array', function() {
+      sinon.stub(voteService, 'returnNumberOfVotesOnMessage', function() { return 0 });
+
+      var array = voteService.getNumberOfVotesOnMessage('userId', 'abc');
+
+      expect(array.length).to.equal(0);
+    });
+
     it('should return number of votes', function() {
       sinon.stub(localStorage, 'getItem', function () { return '{"abc":1,"abd":3,"sef":2}'; });
       expect(voteService.returnNumberOfVotesOnMessage('userId', 'abc')).to.equal(1);
@@ -242,4 +258,115 @@ describe('VoteService: ', function() {
       expect(voteService.extractMessageIds(original)[2]).to.equal('125')
     });
   })
+
+  describe('vote limits', function() {
+    it('is able to increment the maximum number of votes allowed per user', function() {
+      var updateSpy = sinon.spy();
+      sinon.stub(firebaseService, 'getBoardRef', function () { return {update: updateSpy}; });
+
+      voteService.incrementMaxVotes(123, 1);
+      expect(updateSpy.calledWith({max_votes: 2})).to.be.true;
+    })
+
+    it('is not able to increment the maximum number of votes allowed per user if bigger than 99', function() {
+      var updateSpy = sinon.spy();
+      sinon.stub(firebaseService, 'getBoardRef', function () { return {update: updateSpy}; });
+
+      voteService.incrementMaxVotes(123, 99);
+      expect(updateSpy.called).to.be.false;
+    })
+
+    it('is able to decrement the maximum number of votes allowed per user', function() {
+      var updateSpy = sinon.spy();
+      sinon.stub(firebaseService, 'getBoardRef', function () { return {update: updateSpy}; });
+
+      voteService.decrementMaxVotes(123, 3);
+      expect(updateSpy.calledWith({max_votes: 2})).to.be.true;
+    })
+  })
+
+  it('should vote on a message', function() {
+    sinon.stub(firebaseService, 'getServerTimestamp', function() { return '00:00:00' });
+    sinon.stub(voteService, 'isAbleToVote', function() { return true });
+    var updateSpy = sinon.spy();
+    sinon.stub(firebaseService, 'getMessagesRef', function () {
+      return {
+        child: function() {
+          return {
+            update: updateSpy
+          };
+        }
+      };
+    });
+
+    sinon.spy(voteService, 'increaseMessageVotes');
+
+    voteService.vote('userId', 10, {}, 'abc', 5);
+
+    expect(updateSpy.calledWith({votes: 6, date: '00:00:00'})).to.be.true;
+    expect(voteService.increaseMessageVotes.calledWith('userId', 'abc')).to.be.true;
+  });
+
+  it('should unvote a message', function() {
+    sinon.stub(firebaseService, 'getServerTimestamp', function() { return '00:00:00' });
+    sinon.stub(voteService, 'canUnvoteMessage', function() { return true });
+    sinon.spy(voteService, 'decreaseMessageVotes');
+    var updateSpy = sinon.spy();
+    sinon.stub(firebaseService, 'getMessagesRef', function () {
+      return {
+        child: function() {
+          return {
+            update: updateSpy
+          };
+        }
+      };
+    });
+
+    voteService.unvote('userId', 'abc', 5);
+
+    expect(updateSpy.calledWith({votes: 4, date: '00:00:00'})).to.be.true;
+    expect(voteService.decreaseMessageVotes.calledWith('userId', 'abc')).to.be.true;
+  });
+
+  it('should not give negative votes to a message with votes -1', function() {
+    sinon.stub(firebaseService, 'getServerTimestamp', function() { return '00:00:00' });
+    sinon.stub(voteService, 'canUnvoteMessage', function() { return true });
+    sinon.spy(voteService, 'decreaseMessageVotes');
+    var updateSpy = sinon.spy();
+    sinon.stub(firebaseService, 'getMessagesRef', function () {
+      return {
+        child: function() {
+          return {
+            update: updateSpy
+          };
+        }
+      };
+    });
+
+    voteService.unvote('userId', 'abc', -1);
+
+    expect(updateSpy.calledWith({votes: 0, date: '00:00:00'})).to.be.true;
+    expect(voteService.decreaseMessageVotes.calledWith('userId', 'abc')).to.be.true;
+  });
+
+  it('should not give negative votes to a message with zero votes', function() {
+    sinon.stub(firebaseService, 'getServerTimestamp', function() { return '00:00:00' });
+    sinon.stub(voteService, 'canUnvoteMessage', function() { return true });
+    sinon.spy(voteService, 'decreaseMessageVotes');
+    var updateSpy = sinon.spy();
+    sinon.stub(firebaseService, 'getMessagesRef', function () {
+      return {
+        child: function() {
+          return {
+            update: updateSpy
+          };
+        }
+      };
+    });
+
+    voteService.unvote('userId', 'abc', 0);
+
+    expect(updateSpy.calledWith({votes: 0, date: '00:00:00'})).to.be.true;
+    expect(voteService.decreaseMessageVotes.calledWith('userId', 'abc')).to.be.true;
+  });
 });

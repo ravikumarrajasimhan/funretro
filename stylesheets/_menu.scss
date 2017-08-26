@@ -10,6 +10,7 @@
   h2 {
     margin-top: 0;
     margin-right: 10px;
+    line-height: 1.3em;
 
     @media (max-width: 500px) {
       display: block;
@@ -22,20 +23,18 @@
 
     .menu-controls {
       display: flex;
+      margin-bottom: 5px;
     }
 
     select {
+      margin: 0;
       flex-grow: 2;
     }
 
     .new-column {
       display: none;
+      min-width: 80px;
     }
-  }
-
-  h2,
-  label {
-    line-height: 1.3em;
   }
 }
 
@@ -45,6 +44,16 @@
   border-radius: 2px;
   box-shadow: 0 0 0 0 rgba($teal, 0.5);
   animation: pulse 1.5s;
+
+  @media (max-width: 500px) {
+    display: block;
+    padding-bottom: 0;
+    padding-left: 0;
+  }
+
+  .settings {
+    cursor: pointer;
+  }
 
   strong {
     margin: 0;
@@ -60,5 +69,19 @@
     100% {
       box-shadow: 0 0 0 0 rgba($teal, 0);
     }
+  }
+}
+
+.filter-message {
+  width: 200px;
+  height: 25px;
+  margin-left: 15px;
+  font-size: 0.85em;
+  vertical-align: top;
+  border-radius: 3px;
+
+  @media (max-width: 500px) {
+    width: 170px;
+    margin-left: 5px;
   }
 }
