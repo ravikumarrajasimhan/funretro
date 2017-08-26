@@ -296,7 +296,7 @@ blockquote {
   outline-offset: 6px;
 }
 
-[draggable] {
+[draggable=true] {
   cursor: move;
   user-select: none;
 }
