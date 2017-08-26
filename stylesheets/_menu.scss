@@ -7,6 +7,20 @@
   overflow: hidden;
   border-bottom: 2px solid $almost-white;
 
+  a {
+    position: relative;
+    top: 2px;
+    margin-right: 7px;
+    color: #555;
+
+    i {
+      position: relative;
+      top: 2px;
+      font-size: 1.3em;
+      color: $purple;
+    }
+  }
+
   h2 {
     margin-top: 0;
     margin-right: 10px;
