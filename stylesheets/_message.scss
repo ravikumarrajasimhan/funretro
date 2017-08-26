@@ -95,7 +95,6 @@
 }
 
 .message {
-  @include transition(top 0.3s ease-in-out);
   position: relative;
   display: block;
   height: auto;
@@ -120,7 +119,6 @@
 }
 
 .message .front {
-  @include transition(all 0.4s ease-in-out);
   @include position(absolute, 0 null null 0);
   @include size(100% 100%);
   z-index: 9;
@@ -130,7 +128,6 @@
 }
 
 .message .back {
-  @include transition(all 0.4s ease-in-out);
   @include position(absolute, 0 null null 0);
   @include size(100% 100%);
   z-index: 8;
