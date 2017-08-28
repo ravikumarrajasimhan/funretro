@@ -9,6 +9,7 @@ angular
       $scope.userId = $window.location.hash.substring(1);
 
       $scope.dropCardOnCard = function(dragEl, dropEl) {
+        console.log('dropCardOnCard');
         if(dragEl !== dropEl) {
           $scope.dragEl = dragEl;
           $scope.dropEl = dropEl;

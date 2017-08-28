@@ -2,7 +2,7 @@
 
 angular
   .module('fireideaz')
-  .service('FirebaseService', ['firebase', '$firebaseArray', function (firebase, $firebaseArray) {
+  .service('FirebaseService', ['firebase', '$firebaseArray', '$firebaseObject', function (firebase, $firebaseArray, $firebaseObject) {
     function newFirebaseArray(messagesRef) {
       return $firebaseArray(messagesRef);
     }
@@ -23,6 +23,18 @@ angular
       return firebase.database().ref('/boards/' + userId);
     }
 
+    function getBoardObjectRef(userId) {
+      return $firebaseObject(firebase.database().ref('/boards/' + userId));
+    }
+
+    function getBoardColumnRef(userId, columnIndex) {
+      return firebase.database().ref('/boards/' + userId + '/columns/' + columnIndex);
+    }
+
+    function getBoardColumnMessagesRef(userId, columnIndex) {
+      return firebase.database().ref('/boards/' + userId + '/columns/' + columnIndex + '/messages');
+    }
+
     function getBoardColumns(userId) {
       return firebase.database().ref('/boards/' + userId + '/columns');
     }
@@ -33,6 +45,9 @@ angular
       getMessagesRef: getMessagesRef,
       getMessageRef: getMessageRef,
       getBoardRef: getBoardRef,
-      getBoardColumns: getBoardColumns
+      getBoardObjectRef: getBoardObjectRef,
+      getBoardColumns: getBoardColumns,
+      getBoardColumnRef: getBoardColumnRef,
+      getBoardColumnMessagesRef: getBoardColumnMessagesRef
     };
   }]);

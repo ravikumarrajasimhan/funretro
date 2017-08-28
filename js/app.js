@@ -1,6 +1,6 @@
-angular.module('fireideaz', ['firebase',
+angular.module('fireideaz', [angularDragula(angular),
+               'firebase',
                'ngDialog',
-               'lvl.directives.dragdrop',
                'ngSanitize',
                'ngAria',
                'ngFileUpload']);

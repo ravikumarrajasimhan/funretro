@@ -1,28 +1,53 @@
 @for $i from 1 through 6 {
-  ul.column_#{$i} .front,
-  ul.column_#{$i} .back {
-    min-height: 52px;
+  .front_#{$i},
+  .back_#{$i} {
     background: nth($column-colors-main, $i);
-  }
 
-  ul.column_#{$i} {
     .votes {
       .vote-area {
-        padding: 2px 7px;
-        margin: 0;
         background: nth($column-colors-votes, $i);
       }
     }
 
     .disabled i {
       color: nth($column-colors-main, $i);
-      cursor: not-allowed;
+    }
+
+    .message-votes li {
+      background: nth($column-colors-votes, $i);
     }
   }
+}
 
-  ul.column_#{$i} .message-votes li {
-    background: nth($column-colors-votes, $i);
+.column {
+  min-height: 70vh;
+}
+
+.front,
+.back {
+  min-height: 52px;
+}
+
+.disabled i {
+  cursor: not-allowed;
+}
+
+.votes {
+  .vote-area {
+    padding: 2px 7px;
+    margin: 0;
   }
+}
+
+.gu-mirror {
+  position: fixed !important;
+  cursor:         grabbing;
+  cursor:    -moz-grabbing;
+  cursor: -webkit-grabbing;
+}
+
+.gu-transit {
+  opacity: 0.5;
 }
 
 .message-list {
@@ -100,6 +125,10 @@
   height: auto;
   padding-bottom: 20px;
   margin-bottom: 29px;
+  cursor: move;
+  cursor:         grab;
+  cursor:    -moz-grab;
+  cursor: -webkit-grab;
   background: transparent;
   border-radius: 2px;
 

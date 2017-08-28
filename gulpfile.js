@@ -65,6 +65,7 @@ var bundleVendorJS = function() {
   gulp.src([
      'js/vendor/jquery-3.2.1.min.js',
      'node_modules/angular/angular.min.js',
+     'node_modules/angularjs-dragula/dist/angular-dragula.min.js',
 	   'js/vendor/firebase.js',
 	   'js/vendor/firebaseInitialization.js',
 	   'node_modules/angularfire/dist/angularfire.min.js',

@@ -35,7 +35,8 @@ angular
       for (var i = 0; i < array.length; i++) {
         object[i] = {
           id: array[i].id,
-          value: array[i].value
+          value: array[i].value,
+          messages: array[i].messages ? array[i].messages : []
         };
       }
 
@@ -46,12 +47,22 @@ angular
       return 'column_' + (id % 6 || 6);
     }
 
+    function frontClass(id) {
+      return 'front_' + (id % 6 || 6);
+    }
+
+    function backClass(id) {
+      return 'back_' + (id % 6 || 6);
+    }
+
     return {
       createUserId: createUserId,
       focusElement: focusElement,
       messageTypes: messageTypes,
       getNextId: getNextId,
       toObject: toObject,
-      columnClass: columnClass
+      columnClass: columnClass,
+      frontClass: frontClass,
+      backClass: backClass
     };
   }]);
