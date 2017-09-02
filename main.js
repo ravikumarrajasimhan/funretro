@@ -1,6 +1,6 @@
-angular.module('fireideaz', ['firebase',
+angular.module('fireideaz', [angularDragula(angular),
+               'firebase',
                'ngDialog',
-               'lvl.directives.dragdrop',
                'ngSanitize',
                'ngAria',
                'ngFileUpload']);
@@ -69,8 +69,8 @@ angular
   .module('fireideaz')
 
   .controller('MainCtrl', ['$scope', '$filter', '$window', 'Utils', 'Auth',
-  '$rootScope', 'FirebaseService', 'ModalService',
-    function ($scope, $filter, $window, utils, auth, $rootScope, firebaseService, modalService) {
+  '$rootScope', 'FirebaseService', 'ModalService', 'dragulaService',
+    function ($scope, $filter, $window, utils, auth, $rootScope, firebaseService, modalService, dragulaService) {
       $scope.loading = true;
       $scope.messageTypes = utils.messageTypes;
       $scope.utils = utils;
@@ -85,25 +85,42 @@ angular
         mapping : []
       };
 
-      $scope.droppedEvent = function(dragEl, dropEl) {
-        var drag = $('#' + dragEl);
-        var drop = $('#' + dropEl);
-        var dragMessageRef = firebaseService.getMessageRef($scope.userId, drag.attr('messageId'));
+      $scope.getMessageIds = function(droppedOnColumn) {
+        let array = [];
 
-        dragMessageRef.once('value', function() {
-          dragMessageRef.update({
-            type: {
-              id: drop.data('column-id')
-            }
-          });
-        });
-      };
+        for (i = 0; i < droppedOnColumn.children.length; i++) {
+          if (droppedOnColumn.children[i].tagName === 'LI') {
+            array.push(droppedOnColumn.children[i].id);
+          }
+        }
+
+        return array;
+      }
+
+      $scope.$on('bag-one.drop', function (drake, element, droppedOnColumn, draggedFromColumn) {
+        const messageId = element[0].id;
+        const droppedOnColumnId = droppedOnColumn[0].id;
+        const draggedFromColumnId = draggedFromColumn[0].id;
+
+        const droppedMessageIds = $scope.getMessageIds(droppedOnColumn[0]);
+
+        if (draggedFromColumnId !== droppedOnColumnId) {
+            var draggedMessageIds = $scope.getMessageIds(draggedFromColumn[0]);
+            const draggedColumnMessages = firebaseService.getBoardColumnRef($scope.userId, draggedFromColumnId - 1);
+            draggedColumnMessages.update({ messages: draggedMessageIds });
+        }
+
+        const columnRef = firebaseService.getBoardColumnRef($scope.userId, droppedOnColumnId - 1);
+        columnRef.update({ messages: droppedMessageIds });
+      });
 
       function getBoardAndMessages(userData) {
         $scope.userId = $window.location.hash.substring(1) || '499sm';
 
         var messagesRef = firebaseService.getMessagesRef($scope.userId);
         var board = firebaseService.getBoardRef($scope.userId);
+
+        $scope.boardObject = firebaseService.getBoardObjectRef($scope.userId);
 
         board.on('value', function(board) {
           if (board.val() === null) {
@@ -248,6 +265,7 @@ angular
       };
 
       function addMessageCallback(message) {
+        console.log(message);
         var id = message.key;
         angular.element($('#' + id)).scope().isEditing = true;
         new EmojiPicker();
@@ -255,7 +273,10 @@ angular
       }
 
       $scope.addNewMessage = function(type) {
-        $scope.messages.$add({
+        const messageId = utils.createUserId();
+
+        var message = firebaseService.getMessageRef($scope.userId, messageId);
+        message.set({
           text: '',
           creating: true,
           user_id: $scope.userUid,
@@ -266,6 +287,31 @@ angular
           date_created: firebaseService.getServerTimestamp(),
           votes: 0
         }).then(addMessageCallback);
+
+        $scope.board.columns.forEach(function(column, index) {
+          if (column.id === type.id) {
+            const columnRef = firebaseService.getBoardColumnRef($scope.userId, index);
+            const newArray = !column.messages ? [messageId] : column.messages.concat([messageId]);
+
+            columnRef.update({
+              messages: newArray
+            });
+          }
+        });
+      };
+
+      $scope.getMessageObj = function(messageId) {
+        let result;
+
+        $scope.messages.forEach(function(message) {
+          if (message.$id === messageId) {
+            result = message;
+          }
+        });
+
+        result.merged = [];
+
+        return result;
       };
 
       $scope.deleteCards = function() {
@@ -333,6 +379,7 @@ angular
       $scope.userId = $window.location.hash.substring(1);
 
       $scope.dropCardOnCard = function(dragEl, dropEl) {
+        console.log('dropCardOnCard');
         if(dragEl !== dropEl) {
           $scope.dragEl = dragEl;
           $scope.dropEl = dropEl;
@@ -402,7 +449,8 @@ angular
       for (var i = 0; i < array.length; i++) {
         object[i] = {
           id: array[i].id,
-          value: array[i].value
+          value: array[i].value,
+          messages: array[i].messages ? array[i].messages : []
         };
       }
 
@@ -413,13 +461,23 @@ angular
       return 'column_' + (id % 6 || 6);
     }
 
+    function frontClass(id) {
+      return 'front_' + (id % 6 || 6);
+    }
+
+    function backClass(id) {
+      return 'back_' + (id % 6 || 6);
+    }
+
     return {
       createUserId: createUserId,
       focusElement: focusElement,
       messageTypes: messageTypes,
       getNextId: getNextId,
       toObject: toObject,
-      columnClass: columnClass
+      columnClass: columnClass,
+      frontClass: frontClass,
+      backClass: backClass
     };
   }]);
 
@@ -540,7 +598,7 @@ angular.module('fireideaz').directive('spinner', [function() {
 
 angular
   .module('fireideaz')
-  .service('FirebaseService', ['firebase', '$firebaseArray', function (firebase, $firebaseArray) {
+  .service('FirebaseService', ['firebase', '$firebaseArray', '$firebaseObject', function (firebase, $firebaseArray, $firebaseObject) {
     function newFirebaseArray(messagesRef) {
       return $firebaseArray(messagesRef);
     }
@@ -561,6 +619,18 @@ angular
       return firebase.database().ref('/boards/' + userId);
     }
 
+    function getBoardObjectRef(userId) {
+      return $firebaseObject(firebase.database().ref('/boards/' + userId));
+    }
+
+    function getBoardColumnRef(userId, columnIndex) {
+      return firebase.database().ref('/boards/' + userId + '/columns/' + columnIndex);
+    }
+
+    function getBoardColumnMessagesRef(userId, columnIndex) {
+      return firebase.database().ref('/boards/' + userId + '/columns/' + columnIndex + '/messages');
+    }
+
     function getBoardColumns(userId) {
       return firebase.database().ref('/boards/' + userId + '/columns');
     }
@@ -571,7 +641,10 @@ angular
       getMessagesRef: getMessagesRef,
       getMessageRef: getMessageRef,
       getBoardRef: getBoardRef,
-      getBoardColumns: getBoardColumns
+      getBoardObjectRef: getBoardObjectRef,
+      getBoardColumns: getBoardColumns,
+      getBoardColumnRef: getBoardColumnRef,
+      getBoardColumnMessagesRef: getBoardColumnMessagesRef
     };
   }]);
 
