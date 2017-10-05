@@ -14,7 +14,12 @@ angular
         name: ''
       };
       $scope.userId = $window.location.hash.substring(1) || '';
-      $scope.sortField = 'date_created';
+      $scope.searchParams = {}
+      $window.location.search.substr(1).split('&').forEach(pair => {
+        [key, value] = pair.split('=');
+        $scope.searchParams[key] = value;
+      });
+      $scope.sortField = $scope.searchParams.sort || 'date_created';
       $scope.selectedType = 1;
       $scope.import = {
         data : [],
@@ -133,6 +138,11 @@ angular
 
         modalService.closeAll();
       };
+
+      $scope.updateSortOrder = function() {
+        var updatedFilter = $window.location.origin + "?sort=" + $scope.sortField + $window.location.hash;
+        $window.history.pushState({ path: updatedFilter }, '', updatedFilter);
+      }
 
       $scope.addNewColumn = function(name) {
         if(typeof name === 'undefined' || name === '') {
