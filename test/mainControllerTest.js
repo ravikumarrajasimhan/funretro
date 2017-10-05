@@ -4,6 +4,7 @@ describe('MainCtrl: ', function() {
   var $rootScope,
       $scope,
       $controller,
+      $window,
       utils,
       board,
       firebaseService,
@@ -18,6 +19,7 @@ describe('MainCtrl: ', function() {
       $rootScope = $injector.get('$rootScope');
       $scope = $rootScope.$new();
       $controller = $injector.get('$controller');
+      $window = $injector.get('$window');
       utils = $injector.get('Utils');
       modalService = $injector.get('ModalService');
       firebaseService = $injector.get('FirebaseService');
@@ -33,7 +35,8 @@ describe('MainCtrl: ', function() {
         'modalService': modalService,
         'firebaseService': firebaseService,
         'auth': auth,
-        'voteService': voteService
+        'voteService': voteService,
+        '$window': $window
       });
     });
   });
@@ -100,6 +103,20 @@ describe('MainCtrl: ', function() {
 
       expect(createUserSpy.calledWith($scope.userId)).to.be.true;
       expect(closeAllSpy.called).to.be.true;
+    });
+
+    it('should add the query string to the location when the sort is changed', function() {
+      $scope.sortField = 'votes';
+      $scope.updateSortOrder();
+      expect($window.location.search).to.equal('?sort=votes');
+    });
+
+    it('should only have one query string if the sort is changed multiple times', function() {
+      $scope.sortField = 'votes';
+      $scope.updateSortOrder();
+      $scope.sortField = 'date_created';
+      $scope.updateSortOrder();
+      expect($window.location.search).to.equal('?sort=date_created');
     });
 
   });
