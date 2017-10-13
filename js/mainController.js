@@ -116,7 +116,8 @@ angular
             date_created: new Date().toString(),
             columns: $scope.messageTypes,
             user_id: userData.uid,
-            max_votes: $scope.newBoard.max_votes || 6
+            max_votes: $scope.newBoard.max_votes || 6,
+            text_editing_is_private : $scope.newBoard.text_editing_is_private
           }, function(error) {
              if (error) {
                 $scope.loading = false;

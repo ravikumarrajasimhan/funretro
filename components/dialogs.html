@@ -23,6 +23,8 @@
   <input id="newBoardName" ng-model="newBoard.name" type="text" ng-keyup="submitOnEnter($event, 'createNewBoard')"></input>
   <label for="maxUserVotes">Max votes per user <small>(whole board)</small></label>
   <input id="maxUserVotes" ng-model="newBoard.max_votes" type="number" ng-init="newBoard.max_votes = 6" ng-keyup="submitOnEnter($event, 'createNewBoard')"></input>
+  <label for="toggleWritingPrivacy">Keep text private when creating cards</label>
+  <input id="toggleWritingPrivacy" ng-model="newBoard.text_editing_is_private" type="checkbox" ng-init="newBoard.text_editing_is_private = true"></input>
   <button ng-disabled="isBoardNameInvalid() || !isMaxVotesValid()" ng-click="createNewBoard()">Create</button>
 </script>
 <script type="text/ng-template" id="deleteCard">
