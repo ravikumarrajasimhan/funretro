@@ -49,6 +49,7 @@ angular
 
           $scope.board = board.val();
           $scope.maxVotes = board.val().max_votes ? board.val().max_votes : 6;
+          $scope.privateWritingOn = board.val().text_editing_is_private;
           $scope.boardId = $rootScope.boardId = board.val().boardId;
           $scope.boardContext = $rootScope.boardContext = board.val().boardContext;
           $scope.loading = false;
@@ -69,6 +70,16 @@ angular
 
       $scope.isColumnSelected = function(type) {
         return parseInt($scope.selectedType) === parseInt(type);
+      };
+
+      $scope.isCensored = function(message, privateWritingOn) {
+        return message.creating && privateWritingOn;
+      };
+
+      $scope.updatePrivateWritingToggle = function(privateWritingOn) {
+        $scope.boardRef.update({
+          text_editing_is_private: privateWritingOn
+        });
       };
 
       $scope.getSortFields = function() {

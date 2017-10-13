@@ -80,3 +80,8 @@
     <span><button class="increment-button" ng-click="voteService.decrementMaxVotes(userId, maxVotes);"><i class="fa fa-minus fa-md decrement-button" aria-hidden="true"></i></button></span>
   </div>
 </script>
+<script type="text/ng-template" id="cardSettings">
+    <h1>Card Settings</h1>
+    <p>Should card text be private during card creation?</p>
+    <input ng-model="privateWritingOn" type="checkbox" ng-change="updatePrivateWritingToggle(privateWritingOn)"></input>
+</script>
