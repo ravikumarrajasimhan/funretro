@@ -23,8 +23,10 @@
   <input id="newBoardName" ng-model="newBoard.name" type="text" ng-keyup="submitOnEnter($event, 'createNewBoard')"></input>
   <label for="maxUserVotes">Max votes per user <small>(whole board)</small></label>
   <input id="maxUserVotes" ng-model="newBoard.max_votes" type="number" ng-init="newBoard.max_votes = 6" ng-keyup="submitOnEnter($event, 'createNewBoard')"></input>
-  <label for="toggleWritingPrivacy">Keep text private when creating cards</label>
-  <input id="toggleWritingPrivacy" ng-model="newBoard.text_editing_is_private" type="checkbox" ng-init="newBoard.text_editing_is_private = true"></input>
+  <div class="labeled-checkbox">
+    <input class="toggle-checkbox" ng-model="newBoard.text_editing_is_private" type="checkbox" ng-init="newBoard.text_editing_is_private = true"></input>
+    <label>Censor text during card creation</label>
+  <div>
   <button ng-disabled="isBoardNameInvalid() || !isMaxVotesValid()" ng-click="createNewBoard()">Create</button>
 </script>
 <script type="text/ng-template" id="deleteCard">
@@ -83,7 +85,9 @@
   </div>
 </script>
 <script type="text/ng-template" id="cardSettings">
-    <h1>Card Settings</h1>
-    <p>Should card text be private during card creation?</p>
-    <input ng-model="privateWritingOn" type="checkbox" ng-change="updatePrivateWritingToggle(privateWritingOn)"></input>
+  <h1>Card Settings</h1>
+    <div class="labeled-checkbox">
+      <input class="toggle-checkbox" type="checkbox"  ng-model="privateWritingOn" ng-change="  updatePrivateWritingToggle(privateWritingOn)"></input>
+      <label>Censor text during card creation</label>
+    </div>
 </script>
