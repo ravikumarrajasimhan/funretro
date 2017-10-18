@@ -11,7 +11,8 @@ angular
       $scope.messageTypes = utils.messageTypes;
       $scope.utils = utils;
       $scope.newBoard = {
-        name: ''
+        name: '', 
+        text_editing_is_private: true
       };
       $scope.userId = $window.location.hash.substring(1) || '';
       $scope.sortField = 'date_created';

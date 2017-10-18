@@ -24,7 +24,7 @@
   <label for="maxUserVotes">Max votes per user <small>(whole board)</small></label>
   <input id="maxUserVotes" ng-model="newBoard.max_votes" type="number" ng-init="newBoard.max_votes = 6" ng-keyup="submitOnEnter($event, 'createNewBoard')"></input>
   <div class="labeled-checkbox">
-    <input class="toggle-checkbox" ng-model="newBoard.text_editing_is_private" type="checkbox" ng-init="newBoard.text_editing_is_private = true"></input>
+    <input class="toggle-checkbox" ng-model="newBoard.text_editing_is_private" type="checkbox" ng-checked="true"></input>
     <label>Censor text during card creation</label>
   <div>
   <button ng-disabled="isBoardNameInvalid() || !isMaxVotesValid()" ng-click="createNewBoard()">Create</button>
@@ -87,7 +87,7 @@
 <script type="text/ng-template" id="cardSettings">
   <h1>Card Settings</h1>
     <div class="labeled-checkbox">
-      <input class="toggle-checkbox" type="checkbox"  ng-model="privateWritingOn" ng-change="  updatePrivateWritingToggle(privateWritingOn)"></input>
+      <input class="toggle-checkbox" type="checkbox"  ng-model="privateWritingOn" ng-change="updatePrivateWritingToggle(privateWritingOn)"></input>
       <label>Censor text during card creation</label>
     </div>
 </script>
