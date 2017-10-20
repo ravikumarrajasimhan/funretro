@@ -25,7 +25,7 @@
   <input id="maxUserVotes" ng-model="newBoard.max_votes" type="number" ng-init="newBoard.max_votes = 6" ng-keyup="submitOnEnter($event, 'createNewBoard')"></input>
   <div class="labeled-checkbox">
     <input class="toggle-checkbox" ng-model="newBoard.text_editing_is_private" type="checkbox" ng-checked="true"></input>
-    <label>Private writing during card creation</label>
+    <label>Private writing during card editing</label>
   <div>
   <button ng-disabled="isBoardNameInvalid() || !isMaxVotesValid()" ng-click="createNewBoard()">Create</button>
 </script>
@@ -88,6 +88,6 @@
   <h1>Private writing</h1>
     <div class="labeled-checkbox">
       <input class="toggle-checkbox" id="toggle-private" type="checkbox" ng-model="boardObject.text_editing_is_private" ng-change="updatePrivateWritingToggle(boardObject.text_editing_is_private)"></input>
-      <label for="toggle-private">Private writing during card creation</label>
+      <label for="toggle-private">Private writing during card editing</label>
     </div>
 </script>

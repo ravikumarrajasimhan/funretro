@@ -31,7 +31,7 @@
               <div class="front" ng-class="{'filter': isCensored(message, boardObject.text_editing_is_private)}">
                   <div class="message-body">
                       <div class="text">{{message.text}}</div>
-                      <a href="javascript:void(0)" class="pencil" ng-click="isEditing = true; utils.focusElement(message.$id);" aria-label="Edit message"><i class="fa fa-pencil"></i></a>
+                      <a href="javascript:void(0)" class="pencil" ng-click="isEditing = true; utils.focusElement(message.$id); updateEditingMessage(message, true);" aria-label="Edit message"><i class="fa fa-pencil"></i></a>
                   </div>
                   <div class="votes">
                       <a ng-show="voteService.canUnvoteMessage(userId, message.$id)" href="javascript:void(0)" ng-click="voteService.unvote(userId, message.$id, message.votes)" aria-label="Unvote">
@@ -52,7 +52,7 @@
                   <div class="message-body">
                       <div class="editing">
                           <textarea data-emoji-picker="true" ng-model="message.text" ng-change="messages.$save(message)" aria-label="Message text entry"></textarea>
-                          <button ng-click="isEditing = false;saveMessage(message);">DONE</button>
+                          <button ng-click="isEditing = false;saveMessage(message); updateEditingMessage(message, false);">DONE</button>
                           <a class="delete-link" href="javascript:void(0)" ng-click="modalService.openDeleteCard(this)" aria-label="Delete message"><i class="fa fa-trash"></i></a>
                       </div>
                   </div>

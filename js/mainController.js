@@ -89,6 +89,11 @@ angular
         });
       };
 
+      $scope.updateEditingMessage = function(message, value) {
+        message.creating = value;
+        $scope.messages.$save(message);
+      };
+
       $scope.getSortFields = function() {
         return $scope.sortField === 'votes' ? ['-votes', 'date_created'] : 'date_created';
       };
