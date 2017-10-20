@@ -75,10 +75,16 @@ angular
       $scope.messageTypes = utils.messageTypes;
       $scope.utils = utils;
       $scope.newBoard = {
-        name: ''
+        name: '',
+        text_editing_is_private: true
       };
       $scope.userId = $window.location.hash.substring(1) || '';
-      $scope.sortField = 'date_created';
+      $scope.searchParams = {};
+      $window.location.search.substr(1).split('&').forEach(function(pair){
+        var keyValue = pair.split('=');
+        $scope.searchParams[keyValue[0]] = keyValue[1];
+      });
+      $scope.sortField = $scope.searchParams.sort || 'date_created';
       $scope.selectedType = 1;
       $scope.import = {
         data : [],
@@ -104,6 +110,8 @@ angular
 
         var messagesRef = firebaseService.getMessagesRef($scope.userId);
         var board = firebaseService.getBoardRef($scope.userId);
+
+        $scope.boardObject = firebaseService.getBoardObjectRef($scope.userId);
 
         board.on('value', function(board) {
           if (board.val() === null) {
@@ -133,6 +141,21 @@ angular
 
       $scope.isColumnSelected = function(type) {
         return parseInt($scope.selectedType) === parseInt(type);
+      };
+
+      $scope.isCensored = function(message, privateWritingOn) {
+        return message.creating && privateWritingOn;
+      };
+
+      $scope.updatePrivateWritingToggle = function(privateWritingOn) {
+        $scope.boardRef.update({
+          text_editing_is_private: privateWritingOn
+        });
+      };
+
+      $scope.updateEditingMessage = function(message, value) {
+        message.creating = value;
+        $scope.messages.$save(message);
       };
 
       $scope.getSortFields = function() {
@@ -169,7 +192,8 @@ angular
             date_created: new Date().toString(),
             columns: $scope.messageTypes,
             user_id: userData.uid,
-            max_votes: $scope.newBoard.max_votes || 6
+            max_votes: $scope.newBoard.max_votes || 6,
+            text_editing_is_private : $scope.newBoard.text_editing_is_private
           }, function(error) {
              if (error) {
                 $scope.loading = false;
@@ -196,6 +220,11 @@ angular
         });
 
         modalService.closeAll();
+      };
+
+      $scope.updateSortOrder = function() {
+        var updatedFilter = $window.location.origin + '?sort=' + $scope.sortField + $window.location.hash;
+        $window.history.pushState({ path: updatedFilter }, '', updatedFilter);
       };
 
       $scope.addNewColumn = function(name) {
@@ -540,7 +569,7 @@ angular.module('fireideaz').directive('spinner', [function() {
 
 angular
   .module('fireideaz')
-  .service('FirebaseService', ['firebase', '$firebaseArray', function (firebase, $firebaseArray) {
+  .service('FirebaseService', ['firebase', '$firebaseArray', '$firebaseObject', function (firebase, $firebaseArray, $firebaseObject) {
     function newFirebaseArray(messagesRef) {
       return $firebaseArray(messagesRef);
     }
@@ -561,6 +590,10 @@ angular
       return firebase.database().ref('/boards/' + userId);
     }
 
+    function getBoardObjectRef(userId) {
+      return $firebaseObject(firebase.database().ref('/boards/' + userId));
+    }
+
     function getBoardColumns(userId) {
       return firebase.database().ref('/boards/' + userId + '/columns');
     }
@@ -571,6 +604,7 @@ angular
       getMessagesRef: getMessagesRef,
       getMessageRef: getMessageRef,
       getBoardRef: getBoardRef,
+      getBoardObjectRef: getBoardObjectRef,
       getBoardColumns: getBoardColumns
     };
   }]);
@@ -807,6 +841,13 @@ angular
       openVoteSettings: function(scope) {
         ngDialog.open({
           template: 'voteSettings',
+          className: 'ngdialog-theme-plain',
+          scope: scope
+        });
+      },
+      openCardSettings: function(scope) {
+        ngDialog.open({
+          template: 'cardSettings',
           className: 'ngdialog-theme-plain',
           scope: scope
         });
