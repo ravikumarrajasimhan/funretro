@@ -2,7 +2,7 @@
 
 angular
   .module('fireideaz')
-  .service('FirebaseService', ['firebase', '$firebaseArray', function (firebase, $firebaseArray) {
+  .service('FirebaseService', ['firebase', '$firebaseArray', '$firebaseObject', function (firebase, $firebaseArray, $firebaseObject) {
     function newFirebaseArray(messagesRef) {
       return $firebaseArray(messagesRef);
     }
@@ -23,6 +23,10 @@ angular
       return firebase.database().ref('/boards/' + userId);
     }
 
+    function getBoardObjectRef(userId) {
+      return $firebaseObject(firebase.database().ref('/boards/' + userId));
+    }
+
     function getBoardColumns(userId) {
       return firebase.database().ref('/boards/' + userId + '/columns');
     }
@@ -33,6 +37,7 @@ angular
       getMessagesRef: getMessagesRef,
       getMessageRef: getMessageRef,
       getBoardRef: getBoardRef,
+      getBoardObjectRef: getBoardObjectRef,
       getBoardColumns: getBoardColumns
     };
   }]);
