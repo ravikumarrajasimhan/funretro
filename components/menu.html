@@ -9,7 +9,7 @@
     <a class="blue" ng-click="editingBoardName=false;">Cancel</a>
   </span>
   <label for="sortField" class="menu-controls">Sort by</label>
-  <select id="sortField" title="sort fields by" ng-model="sortField">
+  <select id="sortField" title="sort fields by" ng-model="sortField" ng-change="updateSortOrder()">
     <option value="date_created">Created date</option>
     <option value="votes">Votes</option>
   </select>
