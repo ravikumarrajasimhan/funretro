@@ -159,7 +159,7 @@ angular
       };
 
       $scope.updateSortOrder = function() {
-        var updatedFilter = $window.location.origin + '?sort=' + $scope.sortField + $window.location.hash;
+        var updatedFilter = $window.location.origin + $window.location.pathname + '?sort=' + $scope.sortField + $window.location.hash;
         $window.history.pushState({ path: updatedFilter }, '', updatedFilter);
       };
 
