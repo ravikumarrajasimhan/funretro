@@ -11,7 +11,7 @@ angular
       $scope.messageTypes = utils.messageTypes;
       $scope.utils = utils;
       $scope.newBoard = {
-        name: '', 
+        name: '',
         text_editing_is_private: true
       };
       $scope.userId = $window.location.hash.substring(1) || '';
@@ -42,6 +42,8 @@ angular
         var messagesRef = firebaseService.getMessagesRef($scope.userId);
         var board = firebaseService.getBoardRef($scope.userId);
 
+        $scope.boardObject = firebaseService.getBoardObjectRef($scope.userId);
+
         board.on('value', function(board) {
           if (board.val() === null) {
             window.location.hash = '';
@@ -50,7 +52,6 @@ angular
 
           $scope.board = board.val();
           $scope.maxVotes = board.val().max_votes ? board.val().max_votes : 6;
-          $scope.privateWritingOn = board.val().text_editing_is_private;
           $scope.boardId = $rootScope.boardId = board.val().boardId;
           $scope.boardContext = $rootScope.boardContext = board.val().boardContext;
           $scope.loading = false;

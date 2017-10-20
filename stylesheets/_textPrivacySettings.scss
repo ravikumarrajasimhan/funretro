@@ -1,0 +1,13 @@
+.ngdialog-content .labeled-checkbox {
+  label {
+    cursor: pointer;
+  }
+
+  input.toggle-checkbox {
+    display: inline;
+    width: 20px;
+    height: 60px;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+}
