@@ -62,5 +62,8 @@
     "type": "opencollective",
     "url": "https://opencollective.com/distributed",
     "logo": "https://opencollective.com/opencollective/logo.txt"
+  },
+  "engines": {
+    "node": ">=8.6.0"
   }
 }
