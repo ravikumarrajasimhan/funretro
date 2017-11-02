@@ -19,6 +19,7 @@
     <span class="settings" ng-click="modalService.openVoteSettings(this)"><i class='fa fa-pencil fa-md'></i></span>
   </span>
   <span class="pull-right menu-controls">
+    <button class="hide-vote" ng-click="hidevote=true">hide vote</button>
     <a class="header-icon" href="javascript:void(0)" ng-click="sidebarOpened = true;" aria-label="Open settings sidebar"><i class="fa fa-gear"></i> <span class="header-icon-desc">settings</span></a>
     <button class="pull-right new-column" ng-show="board.columns.length < 6" ng-click="modalService.openAddNewColumn(this)">New column</button>
   </span>
