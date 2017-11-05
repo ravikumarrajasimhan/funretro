@@ -19,7 +19,7 @@
       font-size: 1.3em;
       color: $purple;
     }
-  }
+  }    
 
   h2 {
     margin-top: 0;
@@ -43,11 +43,6 @@
     select {
       margin: 0;
       flex-grow: 2;
-    }
-
-    .hide-vote {
-      display: none;
-      min-width: 80px;
     }
 
     .new-column {
@@ -103,4 +98,8 @@
     width: 170px;
     margin-left: 5px;
   }
+}
+
+.hide-vote {
+  min-width: 80px;
 }
