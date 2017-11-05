@@ -136,5 +136,12 @@ angular
       }
     };
 
+    voteService.hideVote = function(userId, hideVote) {
+      var boardRef = firebaseService.getBoardRef(userId);
+      boardRef.update({
+        hide_vote: hideVote
+      });
+    }
+
     return voteService;
   }]);
