@@ -141,7 +141,7 @@ angular
       boardRef.update({
         hide_vote: hideVote
       });
-    }
+    };
 
     return voteService;
   }]);
