@@ -45,6 +45,11 @@
       flex-grow: 2;
     }
 
+    .hide-vote {
+      display: none;
+      min-width: 80px;
+    }
+
     .new-column {
       display: none;
       min-width: 80px;
