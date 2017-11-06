@@ -44,7 +44,7 @@
                         <a ng-class="{'disabled': !voteService.isAbleToVote(userId, maxVotes, messages)}" href="javascript:void(0)" ng-click="voteService.vote(userId, maxVotes, messages, message.$id, message.votes)" aria-label="Vote">
                             <i class="fa fa-thumbs-o-up"></i>
                         </a>
-                        <span ng-style="{'visibility' : hidevote ? 'visible' : 'hidden'}">
+                        <span ng-style="{'visibility' : !hidevote ? 'visible' : 'hidden'}">
                           {{ message.votes }}                         
                         </span>
                       </strong>
