@@ -402,3 +402,35 @@ blockquote {
     text-align: right;
   }
 }
+
+.home .funretro-pro {
+  display: flex;
+  padding: 15px;
+  color: white;
+  justify-content: space-around;
+  align-items: center;
+  background: $light-green;
+
+  p {
+    display: flex;
+    align-items: center;
+  }
+
+  p,
+  .button {
+    width: auto;
+    margin: 0;
+  }
+
+  strong {
+    margin: 0;
+    margin-right: 10px;
+  }
+
+  .button {
+    display: inline-block;
+    height: 30px;
+    margin-left: 20px;
+    color: white;
+  }
+}
