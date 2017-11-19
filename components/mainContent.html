@@ -30,18 +30,18 @@
 
               <div class="front" ng-class="{'filter': isCensored(message, boardObject.text_editing_is_private)}">
                   <div class="message-body">
-                      <div class="text">{{message.text}}</div>
-                      <a href="javascript:void(0)" class="pencil" ng-click="isEditing = true; utils.focusElement(message.$id); updateEditingMessage(message, true);" aria-label="Edit message"><i class="fa fa-pencil"></i></a>
+                      <div class="text" ng-bind-html="message.text | linky:'_blank'"></div>
+                      <a href="javascript:void(0)" class="pencil message-body-link" ng-click="isEditing = true; utils.focusElement(message.$id); updateEditingMessage(message, true);" aria-label="Edit message"><i class="fa fa-pencil"></i></a>
                   </div>
                   <div class="votes">
-                      <a ng-show="voteService.canUnvoteMessage(userId, message.$id)" href="javascript:void(0)" ng-click="voteService.unvote(userId, message.$id, message.votes)" aria-label="Unvote">
+                      <a class="message-body-link" ng-show="voteService.canUnvoteMessage(userId, message.$id)" href="javascript:void(0)" ng-click="voteService.unvote(userId, message.$id, message.votes)" aria-label="Unvote">
                         <i class="fa fa-times"></i>
                       </a>
                       <ul class='message-votes'>
                         <li ng-repeat="votes in voteService.getNumberOfVotesOnMessage(userId, message.$id) track by $index"></li>
                       </ul>
                       <strong class="vote-area">
-                        <a ng-class="{'disabled': !voteService.isAbleToVote(userId, maxVotes, messages)}" href="javascript:void(0)" ng-click="voteService.vote(userId, maxVotes, messages, message.$id, message.votes)" aria-label="Vote">
+                        <a ng-class="{'disabled': !voteService.isAbleToVote(userId, maxVotes, messages), 'message-body-link': true}" href="javascript:void(0)" ng-click="voteService.vote(userId, maxVotes, messages, message.$id, message.votes)" aria-label="Vote">
                             <i class="fa fa-thumbs-o-up"></i>
                         </a>
                         {{ message.votes }}
@@ -53,7 +53,7 @@
                       <div class="editing">
                           <textarea data-emoji-picker="true" ng-model="message.text" ng-change="messages.$save(message)" aria-label="Message text entry"></textarea>
                           <button ng-click="isEditing = false;saveMessage(message); updateEditingMessage(message, false);">DONE</button>
-                          <a class="delete-link" href="javascript:void(0)" ng-click="modalService.openDeleteCard(this)" aria-label="Delete message"><i class="fa fa-trash"></i></a>
+                          <a class="delete-link message-body-link" href="javascript:void(0)" ng-click="modalService.openDeleteCard(this)" aria-label="Delete message"><i class="fa fa-trash"></i></a>
                       </div>
                   </div>
               </div>

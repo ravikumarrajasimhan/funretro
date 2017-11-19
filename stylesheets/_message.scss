@@ -51,23 +51,27 @@
   font-size: 14.3px;
   word-break: break-word;
   white-space: pre-line;
+
+  a {
+    text-decoration: underline;
+  }
 }
 
 .message-body {
   padding: 0.5em;
 
-  a {
+  .message-body-link {
     position: absolute;
     top: 0.4em;
     right: 0.5em;
+  }
 
-    &.delete-link {
-      top: auto;
-      right: 12px;
-      bottom: 12px;
-      left: auto;
-      font-size: 1em;
-    }
+  .delete-link {
+    top: auto;
+    right: 12px;
+    bottom: 12px;
+    left: auto;
+    font-size: 1em;
   }
 }
 
