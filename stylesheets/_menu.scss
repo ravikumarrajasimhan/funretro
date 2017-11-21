@@ -100,6 +100,9 @@
   }
 }
 
-.hide-vote {
+.ngdialog.ngdialog-theme-plain .ngdialog-content button.hide-vote {
   min-width: 80px;
+  margin-left: 0;
+  border-radius: 3px;
+  margin-top: 0;
 }

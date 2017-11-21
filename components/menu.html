@@ -20,7 +20,6 @@
   </span>
   <span class="pull-right menu-controls">
     <a class="header-icon" href="javascript:void(0)" ng-click="sidebarOpened = true;" aria-label="Open settings sidebar"><i class="fa fa-gear"></i> <span class="header-icon-desc">settings</span></a>
-    <button class="pull-right hide-vote" ng-click="hideVote = !hideVote; voteService.hideVote(userId, hideVote)"><span ng-if="!hideVote">Hide vote</span><span ng-if="hideVote">Show vote</span></button>
     <button class="pull-right new-column" ng-show="board.columns.length < 6" ng-click="modalService.openAddNewColumn(this)">New column</button>
   </span>
 </div>
