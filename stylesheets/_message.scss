@@ -25,6 +25,14 @@
   }
 }
 
+.hide-vote-count {
+  display: none;
+}
+
+.show-vote-count {
+  display: inline;
+}
+
 .message-list {
   padding-bottom: 15px;
   margin-left: 15px;
