@@ -84,7 +84,7 @@
       <span><button class="increment-button" ng-click="voteService.incrementMaxVotes(userId, maxVotes);"><i class="fa fa-plus fa-md increment-button" aria-hidden="true"></i></button></span>
       <span><button class="increment-button" ng-click="voteService.decrementMaxVotes(userId, maxVotes);"><i class="fa fa-minus fa-md decrement-button" aria-hidden="true"></i></button></span>
     </p>
-    <button class="hide-vote" ng-click="hideVote = !hideVote; voteService.hideVote(userId, hideVote)"><span ng-if="!hideVote">Hide vote counts</span><span ng-if="hideVote">Show vote counts</span></button>
+    <button class="hide-vote" ng-click="hideVote = !hideVote; voteService.hideVote(userId, hideVote)"><span ng-if="!hideVote">Show vote counts</span><span ng-if="hideVote">Hide vote counts</span></button>
   </div>
 </script>
 <script type="text/ng-template" id="cardSettings">
