@@ -60,6 +60,7 @@ angular
           $scope.boardId = $rootScope.boardId = board.val().boardId;
           $scope.boardContext = $rootScope.boardContext = board.val().boardContext;
           $scope.loading = false;
+          $scope.hideVote = board.val().hide_vote;
           setTimeout(function() {new EmojiPicker();}, 100);
         });
 
