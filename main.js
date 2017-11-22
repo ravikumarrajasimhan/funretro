@@ -124,6 +124,7 @@ angular
           $scope.boardId = $rootScope.boardId = board.val().boardId;
           $scope.boardContext = $rootScope.boardContext = board.val().boardContext;
           $scope.loading = false;
+          $scope.hideVote = board.val().hide_vote;
           setTimeout(function() {new EmojiPicker();}, 100);
         });
 
@@ -994,6 +995,13 @@ angular
 
         voteService.decreaseMessageVotes(userId, messageKey);
       }
+    };
+
+    voteService.hideVote = function(userId, hideVote) {
+      var boardRef = firebaseService.getBoardRef(userId);
+      boardRef.update({
+        hide_vote: hideVote
+      });
     };
 
     return voteService;
