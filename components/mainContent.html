@@ -44,8 +44,8 @@
                         <a ng-class="{'disabled': !voteService.isAbleToVote(userId, maxVotes, messages), 'message-body-link': true}" href="javascript:void(0)" ng-click="voteService.vote(userId, maxVotes, messages, message.$id, message.votes)" aria-label="Vote">
                             <i class="fa fa-thumbs-o-up"></i>
                         </a>
-                        <span ng-class="hideVote ? 'show-vote-count' : 'hide-vote-count'">
-                          {{ message.votes }}                         
+                        <span ng-class="hideVote ? 'hide-vote-count' : 'show-vote-count'">
+                          {{ message.votes }}
                         </span>
                       </strong>
                   </div>
