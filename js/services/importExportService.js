@@ -160,5 +160,73 @@ angular
       pdf.save(board.boardId + '.pdf');
     };
 
+    importExportService.generateCsv = function(board, messages, sortField) {
+
+      var longestColumn = 0;
+      var columns = board.columns.map(function(column, columnIndex) {
+        // Using index + 1 because column IDs start from 1
+        var columnMessages = $filter('filter')(messages, getColumnFieldObject(columnIndex + 1));
+        var sortedColumnMessages = $filter('orderBy')(columnMessages, importExportService.getSortFields(sortField));
+        
+        if(columnMessages.length > longestColumn) {
+          longestColumn = columnMessages.length;
+        }
+
+        var messagesText = sortedColumnMessages.map(function(message) { 
+          return message.text;
+        });
+
+        var columnArray = [column.value].concat(messagesText);
+
+        return columnArray;
+      });
+
+      var csvText = buildCsvText(columns, longestColumn);
+      showCsvFileDownload(csvText);
+    };
+
+    var getColumnFieldObject = function(columnId) {
+      return {
+        type: {
+          id: columnId
+        }
+      };
+    };
+
+    var buildCsvText = function(columnsArray, longestColumn) {
+      var csvText ='';
+      
+      // Going by row because CVS are ordered by rows
+      for(var rowIndex = 0; rowIndex <= longestColumn; rowIndex++) {
+        for(var columnIndex = 0; columnIndex < columnsArray.length; columnIndex++) {
+        
+          var nextValue = columnsArray[columnIndex][rowIndex];
+          if(isEmptyCell(nextValue)) {
+            nextValue = '';
+          }
+          csvText += nextValue + ',';
+        }
+
+        csvText += '\r\n';
+      }
+
+      return csvText;
+    };
+
+    var isEmptyCell = function(nextValue) {
+      return nextValue === undefined;
+    };
+
+    var showCsvFileDownload = function(csvText) {
+      var blob = new Blob([csvText]);
+      var downloadLink = document.createElement('a');
+      downloadLink.href = window.URL.createObjectURL(blob, {type: 'text/csv'});
+      downloadLink.download = 'data.csv';
+      
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+    };
+
     return importExportService;
   }]);
