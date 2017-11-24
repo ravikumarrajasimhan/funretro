@@ -108,8 +108,3 @@ Become a sponsor and get your logo on our README on Github with a link to your s
 <a href="https://opencollective.com/distributed/sponsor/7/website" target="_blank"><img src="https://opencollective.com/distributed/sponsor/7/avatar.svg"></a>
 <a href="https://opencollective.com/distributed/sponsor/8/website" target="_blank"><img src="https://opencollective.com/distributed/sponsor/8/avatar.svg"></a>
 <a href="https://opencollective.com/distributed/sponsor/9/website" target="_blank"><img src="https://opencollective.com/distributed/sponsor/9/avatar.svg"></a>
-
-<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/EQaP6SWGWbPUiULfCBc8FV7D/funretro/distributed'>
-  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/EQaP6SWGWbPUiULfCBc8FV7D/funretro/distributed.svg' />
-</a>
-
