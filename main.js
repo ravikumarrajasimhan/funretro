@@ -455,6 +455,169 @@ angular
 
 'use strict';
 
+angular.module('fireideaz').directive('about', [function() {
+    return {
+      templateUrl : 'components/about.html'
+    };
+  }]
+);
+
+'use strict';
+
+angular.module('fireideaz').directive('focus', function($timeout) {
+    return function(scope, element) {
+       scope.$watch('editing',
+         function () {
+            $timeout(function() {
+                element[0].focus();
+            }, 0, false);
+         });
+      };
+});
+
+'use strict';
+
+angular.module('fireideaz').directive('boardContext', [function() {
+    return {
+      restrict: 'E',
+      templateUrl : 'components/boardContext.html'
+    };
+  }]
+);
+
+'use strict';
+
+angular.module('fireideaz').directive('dialogs', ['ImportExportService', function(importExportService) {
+    return {
+      restrict: 'E',
+      templateUrl : 'components/dialogs.html',
+      link: function($scope) {
+        $scope.importExportService = importExportService;
+      }
+    };
+  }]
+);
+
+'use strict';
+
+angular.module('fireideaz').directive('pageHeader', ['ModalService', function(modalService) {
+    return {
+      templateUrl : 'components/header.html',
+      link: function($scope) {
+        $scope.modalService = modalService;
+      }
+    };
+  }]
+);
+
+'use strict';
+
+angular.module('fireideaz').directive('mainContent', [function() {
+    return {
+      templateUrl : 'components/mainContent.html'
+    };
+  }]
+);
+
+'use strict';
+
+angular.module('fireideaz').directive('mainPage', ['ModalService', function(modalService) {
+    return {
+      restrict: 'E',
+      templateUrl : 'components/mainPage.html',
+      link: function($scope) {
+        $scope.modalService = modalService;
+      }
+    };
+  }]
+);
+
+'use strict';
+
+angular.module('fireideaz').directive('menu', ['VoteService', function(voteService) {
+    return {
+      templateUrl : 'components/menu.html',
+      link: function($scope) {
+        $scope.voteService = voteService;
+      }
+    };
+  }]
+);
+
+'use strict';
+
+angular.module('fireideaz').directive('sidebar', ['ModalService', function(modalService) {
+    return {
+      templateUrl : 'components/sidebar.html',
+      link: function($scope) {
+        $scope.modalService = modalService;
+      }
+    };
+  }]
+);
+
+'use strict';
+
+angular.module('fireideaz').directive('spinner', [function() {
+    return {
+      restrict: 'E',
+      templateUrl : 'components/spinner.html'
+    };
+  }]
+);
+
+'use strict';
+
+angular
+  .module('fireideaz')
+  .service('CsvService', [function () {
+    var csvService = {};
+
+    var arrayExists = function(array) {
+      return array !== undefined;
+    };
+
+    var isEmptyCell = function(nextValue) {
+      return nextValue === undefined;
+    };
+
+    csvService.buildCsvText = function(doubleArray) {
+        var csvText ='';
+        
+        var longestColumn = csvService.determineLongestColumn(doubleArray);
+
+        // Going by row because CVS are ordered by rows
+        for(var rowIndex = 0; rowIndex < longestColumn; rowIndex++) {
+          for(var columnIndex = 0; columnIndex < longestColumn; columnIndex++) {
+            var column = doubleArray[columnIndex];
+            if(!arrayExists(column)) {
+              break;
+            }
+
+            var nextValue = column[rowIndex];
+            if(isEmptyCell(nextValue)) {
+              nextValue = '';
+            }
+            csvText += nextValue + ',';
+          }
+  
+          csvText += '\r\n';
+        }
+  
+        return csvText;
+      };
+
+      csvService.determineLongestColumn = function(doubleArray) {
+        return doubleArray.reduce(function(prev, next) {
+          return next.length > prev ? next.length: prev;
+        }, doubleArray.length);
+      };
+
+    return csvService;
+  }]);
+
+'use strict';
+
 angular
   .module('fireideaz')
   .service('FirebaseService', ['firebase', '$firebaseArray', '$firebaseObject', function (firebase, $firebaseArray, $firebaseObject) {
@@ -501,7 +664,9 @@ angular
 
 angular
   .module('fireideaz')
-  .service('ImportExportService', ['FirebaseService', 'ModalService', '$filter', function (firebaseService, modalService, $filter) {
+  .service('ImportExportService', 
+          ['FirebaseService', 'ModalService', 'CsvService', '$filter', 
+          function (firebaseService, modalService, CsvService, $filter) {
     var importExportService = {};
 
     importExportService.importMessages = function (userUid, importObject, messages) {
@@ -657,6 +822,45 @@ angular
       });
 
       pdf.save(board.boardId + '.pdf');
+    };
+
+    var getColumnFieldObject = function(columnId) {
+      return {
+        type: {
+          id: columnId
+        }
+      };
+    };
+
+    var showCsvFileDownload = function(csvText) {
+      var blob = new Blob([csvText]);
+      var downloadLink = document.createElement('a');
+      downloadLink.href = window.URL.createObjectURL(blob, {type: 'text/csv'});
+      downloadLink.download = 'data.csv';
+      
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+    };
+
+    importExportService.generateCsv = function(board, messages, sortField) {
+
+      var columns = board.columns.map(function(column, columnIndex) {
+        // Using index + 1 because column IDs start from 1
+        var columnMessages = $filter('filter')(messages, getColumnFieldObject(columnIndex + 1));
+        var sortedColumnMessages = $filter('orderBy')(columnMessages, importExportService.getSortFields(sortField));
+        
+        var messagesText = sortedColumnMessages.map(function(message) { 
+          return message.text;
+        });
+
+        var columnArray = [column.value].concat(messagesText);
+
+        return columnArray;
+      });
+
+      var csvText = CsvService.buildCsvText(columns);
+      showCsvFileDownload(csvText);
     };
 
     return importExportService;
@@ -893,116 +1097,3 @@ angular
 
     return voteService;
   }]);
-
-'use strict';
-
-angular.module('fireideaz').directive('about', [function() {
-    return {
-      templateUrl : 'components/about.html'
-    };
-  }]
-);
-
-'use strict';
-
-angular.module('fireideaz').directive('focus', function($timeout) {
-    return function(scope, element) {
-       scope.$watch('editing',
-         function () {
-            $timeout(function() {
-                element[0].focus();
-            }, 0, false);
-         });
-      };
-});
-
-'use strict';
-
-angular.module('fireideaz').directive('boardContext', [function() {
-    return {
-      restrict: 'E',
-      templateUrl : 'components/boardContext.html'
-    };
-  }]
-);
-
-'use strict';
-
-angular.module('fireideaz').directive('dialogs', ['ImportExportService', function(importExportService) {
-    return {
-      restrict: 'E',
-      templateUrl : 'components/dialogs.html',
-      link: function($scope) {
-        $scope.importExportService = importExportService;
-      }
-    };
-  }]
-);
-
-'use strict';
-
-angular.module('fireideaz').directive('pageHeader', ['ModalService', function(modalService) {
-    return {
-      templateUrl : 'components/header.html',
-      link: function($scope) {
-        $scope.modalService = modalService;
-      }
-    };
-  }]
-);
-
-'use strict';
-
-angular.module('fireideaz').directive('mainContent', [function() {
-    return {
-      templateUrl : 'components/mainContent.html'
-    };
-  }]
-);
-
-'use strict';
-
-angular.module('fireideaz').directive('mainPage', ['ModalService', function(modalService) {
-    return {
-      restrict: 'E',
-      templateUrl : 'components/mainPage.html',
-      link: function($scope) {
-        $scope.modalService = modalService;
-      }
-    };
-  }]
-);
-
-'use strict';
-
-angular.module('fireideaz').directive('menu', ['VoteService', function(voteService) {
-    return {
-      templateUrl : 'components/menu.html',
-      link: function($scope) {
-        $scope.voteService = voteService;
-      }
-    };
-  }]
-);
-
-'use strict';
-
-angular.module('fireideaz').directive('sidebar', ['ModalService', function(modalService) {
-    return {
-      templateUrl : 'components/sidebar.html',
-      link: function($scope) {
-        $scope.modalService = modalService;
-      }
-    };
-  }]
-);
-
-'use strict';
-
-angular.module('fireideaz').directive('spinner', [function() {
-    return {
-      restrict: 'E',
-      templateUrl : 'components/spinner.html'
-    };
-  }]
-);
