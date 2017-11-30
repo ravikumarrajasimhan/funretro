@@ -170,11 +170,11 @@ angular
       };
     };
 
-    var showCsvFileDownload = function(csvText) {
+    var showCsvFileDownload = function(csvText, fileName) {
       var blob = new Blob([csvText]);
       var downloadLink = document.createElement('a');
       downloadLink.href = window.URL.createObjectURL(blob, {type: 'text/csv'});
-      downloadLink.download = 'data.csv';
+      downloadLink.download = fileName;
       
       document.body.appendChild(downloadLink);
       downloadLink.click();
@@ -198,7 +198,7 @@ angular
       });
 
       var csvText = CsvService.buildCsvText(columns);
-      showCsvFileDownload(csvText);
+      showCsvFileDownload(csvText, board.boardId + '.csv');
     };
 
     return importExportService;

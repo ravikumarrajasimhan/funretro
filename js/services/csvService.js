@@ -13,6 +13,22 @@ angular
       return nextValue === undefined;
     };
 
+    var isString = function(stringValue) {
+      return typeof stringValue === 'string' || stringValue instanceof String;
+    };
+
+    var endodeForCsv = function(stringToEncode) {
+      // Enocde " characters
+      stringToEncode = stringToEncode.replace(/"/g, '""');
+
+      // Surround string with " characters if " , or \n are present
+      if (stringToEncode.search(/("|,|\n)/g) >= 0) {
+        stringToEncode = '"' + stringToEncode + '"';
+      }
+
+      return stringToEncode;
+    };
+
     csvService.buildCsvText = function(doubleArray) {
         var csvText ='';
         
@@ -30,6 +46,11 @@ angular
             if(isEmptyCell(nextValue)) {
               nextValue = '';
             }
+
+            if(isString(nextValue)) {
+              nextValue = endodeForCsv(nextValue);
+            }
+
             csvText += nextValue + ',';
           }
   
