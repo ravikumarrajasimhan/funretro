@@ -15,11 +15,11 @@ angular
 
     var isString = function(stringValue) {
       return typeof stringValue === 'string' || stringValue instanceof String;
-    }
+    };
 
     var endodeForCsv = function(stringToEncode) {
       // Enocde " characters
-      var stringToEncode = stringToEncode.replace(/"/g, '""');
+      stringToEncode = stringToEncode.replace(/"/g, '""');
 
       // Surround string with " characters if " , or \n are present
       if (stringToEncode.search(/("|,|\n)/g) >= 0) {
