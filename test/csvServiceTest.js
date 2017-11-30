@@ -20,6 +20,10 @@ describe('CsvService: ', function() {
     [6]
   ];
 
+  var specialCharacters = [
+    ['"Quotes"', 'Wait, a comma?', 'Newline\nCinema', '"Hey",\nall together']
+  ];
+
   beforeEach(angular.mock.module('fireideaz'));
 
   beforeEach(inject(function($injector){
@@ -55,6 +59,11 @@ describe('CsvService: ', function() {
     it('should return square board when grid is few rows and many columns', function() {
       var csvText = csvService.buildCsvText(fewRowsManyColumns);
       expect(csvText).to.equal('1,3,5,6,\r\n2,4,,,\r\n,,,,\r\n,,,,\r\n');
+    });
+
+    it('should encode special characters', function() {
+      var csvText = csvService.buildCsvText(specialCharacters);
+      expect(csvText).to.equal('"""Quotes""",\r\n"Wait, a comma?",\r\n"Newline\nCinema",\r\n"""Hey"",\nall together",\r\n');
     });
   });
 
